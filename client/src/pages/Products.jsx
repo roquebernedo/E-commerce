@@ -19,14 +19,14 @@ const Products = () => {
     fetchAllProducts()
   }, [])
 
-  const handleDelete = async (id) =>{
-    try{
-        await axios.delete("https://ecommerce-vv1c.onrender.com/products/"+id)
-        window.location.reload()
-    }catch(err){
-        console.log(err)
-    }
-  }
+//   const handleDelete = async (id) =>{
+//     try{
+//         await axios.delete("https://ecommerce-vv1c.onrender.com/products/"+id)
+//         window.location.reload()
+//     }catch(err){
+//         console.log(err)
+//     }
+//   }
   //<button className='delete' onClick={() => handleDelete(book.id)}>Delete</button>
   return (
     <div className='main-products'>

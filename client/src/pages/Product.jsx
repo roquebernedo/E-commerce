@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import '../styles/Product.scss'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 
 const Product = () => {
 
@@ -42,7 +42,7 @@ const Product = () => {
         </div>
         <div className='bottom-product'>
             <div className='left-product'>
-                <img className='product-image' src={product.image} />
+                <img className='product-image' alt='' src={product.image} />
             </div>
             <div className='right-product'>
               <div className='right-top'>
