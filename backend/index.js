@@ -6,7 +6,7 @@ import { Sequelize } from 'sequelize';
 const app = express()
 
 const db = mysql.createConnection({
-    host: "localhost",
+    host: "https://ecommerce-vv1c.onrender.com",
     user: "root",
     password: "gunbonud123",
     database: "commerce"
