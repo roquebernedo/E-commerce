@@ -28,7 +28,7 @@ const Update = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get("http://localhost:8802/products/" + productId);
+        const response = await axios.get("https://ecommerce-vv1c.onrender.com/products/" + productId);
         setProductData(response.data);
         setProduct(response.data)
         
@@ -48,7 +48,7 @@ const Update = () => {
   const handleClick = async e => { // si se hace api request se usa "async"
     e.preventDefault() // previene que se actualice
     try{
-        await axios.put("http://localhost:8802/products/"+ productId, product)
+        await axios.put("https://ecommerce-vv1c.onrender.com/products/"+ productId, product)
         navigate("/")// sirve para navegar por el homepage
     }catch(err){
         console.log(err)

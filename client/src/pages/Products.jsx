@@ -10,7 +10,7 @@ const Products = () => {
   useEffect(() => {
     const fetchAllProducts = async () => {
         try{
-            const res = await axios.get("http://localhost:8802/products")
+            const res = await axios.get("https://ecommerce-vv1c.onrender.com/products")
             setProducts(res.data)
         }catch(err){
             console.log(err)
@@ -21,7 +21,7 @@ const Products = () => {
 
   const handleDelete = async (id) =>{
     try{
-        await axios.delete("http://localhost:8802/products/"+id)
+        await axios.delete("https://ecommerce-vv1c.onrender.com/products/"+id)
         window.location.reload()
     }catch(err){
         console.log(err)

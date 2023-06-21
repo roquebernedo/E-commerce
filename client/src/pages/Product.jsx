@@ -23,7 +23,7 @@ const Product = () => {
   useEffect(() => {
     const fetchProduct = async () => {
         try {
-            const response = await axios.get("http://localhost:8802/product/" + productId);
+            const response = await axios.get("https://ecommerce-vv1c.onrender.com/product/" + productId);
             setProduct(response.data)
             console.log(response.data)
         } catch (error) {
