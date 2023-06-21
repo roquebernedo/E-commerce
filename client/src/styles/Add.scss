@@ -1,0 +1,167 @@
+.form{
+    font-family: "Nunito Sans", sans-serif;
+    background-color: #F3F0F5;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    
+    .menu-add{
+        display: flex;
+        flex-direction: column;
+        width: 60%;
+       
+        .div-product{
+            display: flex;
+            justify-content: flex-start;
+            margin-left: 50px;
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        .new-product{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 30%;
+            margin-left: 50px;
+            opacity: 0.8;
+        }
+
+        .title-product{
+            width: 50%;
+            margin-left: 50px;
+            padding: 10px;
+            margin-bottom: 15px;
+            outline: none; 
+            border: 1px solid #ccc; 
+            border-radius: 8px;
+        }
+
+        .title-product:hover{
+            border-color: rgba(86, 132, 253, 0.5);
+        }
+
+        .description-product{
+            width: 50%;
+            margin-left: 50px;
+            padding: 10px;
+            margin-bottom: 15px;
+            outline: none; 
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        .description-product:hover{
+            border-color: rgba(86, 132, 253, 0.5);
+        }
+
+        .image-product{
+            width: 50%;
+            margin-left: 50px;
+            padding: 10px;
+            margin-bottom: 15px;
+            outline: none; 
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        .image-product:hover{
+            border-color: rgba(86, 132, 253, 0.5);
+        }
+
+        .divURL{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+            border-radius: 15px;
+            width: 300px;
+            height: 300px;
+            margin-left: 50px;
+            box-shadow: 5px 10px 15px -3px rgba(0,0,0,0.1);
+            margin-bottom: 15px;
+
+            .imgURL{
+                width: 200px;
+                height: 200px;
+            }
+        }
+
+        .color-product{
+            width: 10%;
+            margin-left: 50px;
+            padding: 10px;
+            margin-bottom: 15px;
+            outline: none; 
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        .color-product:hover{
+            border-color: rgba(86, 132, 253, 0.5);
+        }
+
+        .size-product{
+            width: 10%;
+            margin-left: 50px;
+            padding: 10px;
+            margin-bottom: 15px;
+            outline: none; 
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        .size-product:hover{
+            border-color: rgba(86, 132, 253, 0.5);
+        }
+
+        .material-product{
+            width: 496px;
+            height: 50px;
+            margin-left: 50px;
+            margin-bottom: 15px;
+            outline: none; 
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        .material-product:hover{
+            border-color: rgba(86, 132, 253, 0.5);
+        }
+
+        .instructions-product{
+            width: 496px;
+            height: 50px;
+            margin-left: 50px;
+            margin-bottom: 15px;
+            outline: none; 
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        .instructions-product:hover{
+            border-color: rgba(86, 132, 253, 0.5);
+        }
+
+        .price-product{
+            width: 10%;
+            margin-left: 50px;
+            padding: 10px;
+            margin-bottom: 15px;
+            outline: none; 
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        .price-product:hover{
+            border-color: rgba(86, 132, 253, 0.5);
+        }
+
+        .formButton{
+            width: 10%;
+            margin-left: 50px;
+            padding: 10px;
+            margin-bottom: 15px;
+        }
+    }
+}
