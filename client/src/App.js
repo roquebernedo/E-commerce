@@ -10,11 +10,20 @@ import './style.css'
 import Navbar from "./Navbar/Navbar";
 import Footer from "./Footer/Footer";
 import Product from "./pages/Product";
+import Login from "./pages/Login";
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import Register from "./pages/Register";
+import Profile from "./pages/Profile";
+import PrivateRoute from "./components/PrivateRoute";
+import Cart from "./pages/Cart.jsx"
+import CheckoutSuccess from "./pages/CheckoutSuccess";
 
 const Layout = () => {
   return (
     <>
       <Navbar/>
+      <ToastContainer/>
       <Outlet/>
       <Footer/>
     </>
@@ -31,6 +40,10 @@ const router = createBrowserRouter([
         element: <Products/>
       },
       {
+        path: "/cart",
+        element: <Cart/>
+      },
+      {
         path: "/add",
         element: <Add/>
       },
@@ -41,8 +54,29 @@ const router = createBrowserRouter([
       {
         path: "/product/:id",
         element: <Product/>
+      },
+      {
+        path: "/login",
+        element: <Login/>
+      },
+      {
+        path: "/register",
+        element: <Register/>
+      },
+      {
+        path: "/checkout-success",
+        element: <CheckoutSuccess/>
+      },
+      {
+        path: "",
+        element: <PrivateRoute />,
+        children: [
+          {
+            path: "/profile",
+            element: <Profile />
+          }
+        ]
       }
-      
     ]
   }
 ])

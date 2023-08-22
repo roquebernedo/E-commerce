@@ -5,18 +5,36 @@
     justify-content: center;
     align-items: center;
     font-family: "Nunito Sans", sans-serif;
+    padding-bottom: 60px;
 
     .top-product{
         display: flex;
         justify-content: flex-start;    
         flex-direction: row;
+        align-items: center;
         width: 72%;
         margin: 1rem 0 1rem 0;
+        gap: 10px;
 
         .product-title{
+            display: flex;
+            align-items: center;
             font-size: 2.1rem;
             opacity: 0.9;
             font-weight: 500;
+            padding-left: 10px;
+            height: 40px;
+            border-left: 2px solid #000000;
+        }
+
+        .link-arrow{
+            text-decoration: none;
+            
+            .arrow-left{
+                display: flex;
+                font-size: 25px;
+                color: #000000;
+            }
         }
     }
 
@@ -25,6 +43,7 @@
         width: 72%;
         background-color: white;
         border-radius: 15px;
+
 
         .left-product{
             display: flex;
@@ -116,7 +135,42 @@
                     list-style-type: none;
                     gap: 1rem;
                     margin-bottom: 1rem;
+                    
+                }
+            }
 
+            .adition{
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: end;
+
+                .quantity{
+                    padding-right: 15px;
+                    .but{
+                        padding: 5px 8px;
+                        border: 1px solid #5684FD;
+                        border-radius: 5px;
+                    }
+
+                    .left{
+                        margin-right: 5px;
+                    }
+
+                    .right{
+                        margin-left: 5px;
+                    }
+                }
+
+                .add{
+                    border-radius: 30px;
+                    background-color: #5684FD;
+                    border: none;
+                    padding: 12px 20px;
+                    color: white;
+                    font-family: "Nunito Sans", sans-serif;
+                    font-weight: bold;
+                    letter-spacing: 1px;
                 }
             }
         }

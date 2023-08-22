@@ -19,11 +19,10 @@ const Update = () => {
     price:"",
   })
   console.log(productData)
-
   const navigate = useNavigate()
   const location = useLocation()
   const productId = location.pathname.split("/")[2]
-  console.log(setImageUrl)
+
   
 
   useEffect(() => {
@@ -56,9 +55,10 @@ const Update = () => {
     }
   }
 
-  // const handleUrlChange = (e) => {
-  //   setImageUrl(e.target.value);
-  // };
+  const handleUrlChange = (e) => {
+    setImageUrl(e.target.value);
+  };
+  console.log(handleUrlChange)
 
   return (
     <div className='form'>

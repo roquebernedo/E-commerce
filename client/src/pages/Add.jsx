@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import '../styles/Add.scss'
+import { useCookies } from 'react-cookie'
+import { useGetUserID } from '../Hooks/useGetUserID'
 
 const Add = () => {
 
@@ -16,6 +18,9 @@ const Add = () => {
     instructions:"",
     price:"",
   })
+  const [savedRecipes, setSavedRecipes] = useState([])
+  const userID = useGetUserID()
+  const [cookies, _] = useCookies(["access_token"])
 
   const navigate = useNavigate()
 
@@ -26,7 +31,7 @@ const Add = () => {
   const handleClick = async e => {
     e.preventDefault()
     try{
-        await axios.post("https://ecommerce-vv1c.onrender.com/products", product)
+        await axios.post("http://localhost:8000/products", product)
         navigate('/')
       } catch (error) {
         console.log(error);
@@ -36,6 +41,19 @@ const Add = () => {
   const handleUrlChange = (e) => {
     setImageUrl(e.target.value);
   };
+
+  const saveRecipe = async (productID) => {
+    try{
+      const response = await axios.put("https://react-recipe-afru.onrender.com/recipes", { 
+        productID, userID}, 
+        { headers: { authorization : cookies.access_token}})
+      setSavedRecipes(response.data.savedRecipes)
+    }catch(err){
+      console.error(err)
+    }
+  }
+
+  const isRecipeSaved = (id) => savedRecipes.includes(id) 
 
   return (
     <div className='form'>

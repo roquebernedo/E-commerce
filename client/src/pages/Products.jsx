@@ -3,14 +3,16 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 import '../styles/Products.scss'
 
+
 const Products = () => {
 
   const [products, setProducts] = useState([])
 
+
   useEffect(() => {
     const fetchAllProducts = async () => {
         try{
-            const res = await axios.get("https://ecommerce-vv1c.onrender.com/products")
+            const res = await axios.get("http://localhost:8000/")
             setProducts(res.data)
         }catch(err){
             console.log(err)
@@ -19,9 +21,10 @@ const Products = () => {
     fetchAllProducts()
   }, [])
 
+
 //   const handleDelete = async (id) =>{
 //     try{
-//         await axios.delete("https://ecommerce-vv1c.onrender.com/products/"+id)
+//         await axios.delete("http://localhost:8000/products/"+id)
 //         window.location.reload()
 //     }catch(err){
 //         console.log(err)
@@ -40,8 +43,8 @@ const Products = () => {
             </div>
         </div>
         <div className='products'>
-            {products.map(product => (
-                <Link to={`/product/${product.id}`} className='product' key={product.id} >
+            {products && products.map(product => (
+                <Link to={`/product/${product._id}`} className='product' key={product._id} >
                     <img className='img-product' src={product.image} alt=''/>
                     <div className='title'>{product.title}</div>
                     <span className='price'>${parseFloat(product.price).toFixed(2)}</span>
