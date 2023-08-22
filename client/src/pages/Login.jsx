@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useLoginMutation } from '../slices/usersApiSlice.js';
 import { setCredentials } from '../slices/authSlice.js';
 import { toast } from 'react-toastify';
-import Loader from '../components/Loader.jsx';
 import '../styles/Login.scss'
 
 const Login = () => {

@@ -4,7 +4,6 @@ import { useLocation, Link} from "react-router-dom";
 import '../styles/Product.scss'
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../redux/cartReducer';
-import { useSelector } from 'react-redux'
 import { useCookies } from 'react-cookie'
 import { useGetUserID } from '../Hooks/useGetUserID'
 import { AiOutlineArrowLeft } from "react-icons/ai"
@@ -27,12 +26,13 @@ const Product = () => {
   const location = useLocation();
   const productID = location.pathname.split("/")[2];
   const dispatch = useDispatch()
-  const products = useSelector(state => state.cart.products)
+
   const [quantity, setQuantity] = useState(1)
   const [savedProducts, setSavedProducts] = useState([])
   //const products = useSelector(state => state.cart.products)
   //console.log(products.title)
   const userID = useGetUserID()
+  // eslint-disable-next-line no-unused-vars
   const [cookies, _] = useCookies(["access_token"])
 
   useEffect(() => {

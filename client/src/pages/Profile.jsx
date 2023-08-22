@@ -21,6 +21,7 @@ const Profile = () => {
   useEffect(() => {
     setName(userInfo.name)
     setEmail(userInfo.email)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userInfo.setName, userInfo.setEmail])
 
   const submitHandler = async (e) => {

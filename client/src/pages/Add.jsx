@@ -20,6 +20,7 @@ const Add = () => {
   })
   const [savedRecipes, setSavedRecipes] = useState([])
   const userID = useGetUserID()
+  // eslint-disable-next-line no-unused-vars
   const [cookies, _] = useCookies(["access_token"])
 
   const navigate = useNavigate()
@@ -52,8 +53,10 @@ const Add = () => {
       console.error(err)
     }
   }
+  console.log(saveRecipe)
 
   const isRecipeSaved = (id) => savedRecipes.includes(id) 
+  console.log(isRecipeSaved)
 
   return (
     <div className='form'>
