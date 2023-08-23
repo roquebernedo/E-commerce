@@ -38,7 +38,7 @@ const Product = () => {
   useEffect(() => {
     const fetchProduct = async () => {
         try {
-            const response = await axios.get(`http://localhost:8000/product/${productID}`);
+            const response = await axios.get(`https://ecommerce-moez.onrender.com/product/${productID}`);
             setProduct(response.data)
             console.log("holi")
         } catch (error) {
@@ -51,7 +51,7 @@ const Product = () => {
 
   const saveProduct = async (productID) => {
     try{
-      const response = await axios.put("http://localhost:8000/saved", { 
+      const response = await axios.put("https://ecommerce-moez.onrender.com/saved", { 
         productID, userID}, 
         { headers: { authorization : cookies.access_token}})
       setSavedProducts(response.data.savedRecipes)

@@ -32,7 +32,7 @@ const Add = () => {
   const handleClick = async e => {
     e.preventDefault()
     try{
-        await axios.post("http://localhost:8000/products", product)
+        await axios.post("https://ecommerce-moez.onrender.com/products", product)
         navigate('/')
       } catch (error) {
         console.log(error);
