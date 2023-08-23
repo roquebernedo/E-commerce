@@ -4,7 +4,7 @@ import axios from "axios"
 
 const ButtonPay = ({ cartItems }) => {
 
-    const url = 'https://ecommerce-moez.onrender.com/'
+    const url = 'https://ecommerce-moez.onrender.com'
 
     const handlecheckout = () => {
         axios.post(`${url}/api/stripe/create-checkout-session`, {
