@@ -1,7 +1,5 @@
 import axios from "axios"
 
-
-
 const ButtonPay = ({ cartItems }) => {
 
     const url = 'https://ecommerce-moez.onrender.com'
@@ -18,7 +16,7 @@ const ButtonPay = ({ cartItems }) => {
 
     return ( 
         <>
-            <button onClick={() => handlecheckout()}>Check Out</button>
+            <button className="button-check" onClick={() => handlecheckout()}>Check Out</button>
         </>
     );
 }

@@ -18,6 +18,7 @@ import Profile from "./pages/Profile";
 import PrivateRoute from "./components/PrivateRoute";
 import Cart from "./pages/Cart.jsx"
 import CheckoutSuccess from "./pages/CheckoutSuccess";
+import ShoppingCart from "./pages/ShoppingCart";
 
 const Layout = () => {
   return (
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
       {
         path: "/add",
         element: <Add/>
+      },
+      {
+        path: "/shopping",
+        element: <ShoppingCart/>
       },
       {
         path: "/update/:id",

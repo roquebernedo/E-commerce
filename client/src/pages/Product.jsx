@@ -110,6 +110,8 @@ const Product = () => {
                     id: product._id,
                     title: product.title,
                     desc: product.description,
+                    color: product.color,
+                    size: product.size,
                     price: product.price,
                     img: product.image,
                     quantity,

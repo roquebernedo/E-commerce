@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
 import { AiFillDelete } from "react-icons/ai"
 import { removeItem, resetCart } from '../redux/cartReducer'
@@ -28,7 +29,7 @@ function Cart() {
               <div>{product.desc.substring(0, 22)}</div>
               <div className='price'>{product.quantity} x ${product.price}</div>
               <div>${totalPrice()}</div>  
-              <AiFillDelete className='delete' onClick={() => dispatch(removeItem(product.id))}/>
+              <AiFillDelete className='delete' onClic k={() => dispatch(removeItem(product.id))}/>
               <ButtonPay cartItems={products}/>
             </div>
           </div>
@@ -39,6 +40,7 @@ function Cart() {
       </div>
       
       <div onClick={() => dispatch(resetCart())} className='reset'>Reset Cart</div>
+      <Link className='link-arrow' to="/shopping">View Cart</Link>
     </div>
   )
 }
