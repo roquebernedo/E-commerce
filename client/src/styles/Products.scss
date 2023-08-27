@@ -7,12 +7,15 @@
         justify-content: space-between;
         gap: 0.3rem;
         width: 97%;
-        margin: 0 28px 25px 25px;
+        margin: auto;
+        margin-bottom: 20px;
         text-align: center;
         align-items: center;
         font-size: 14px;
         font-family: "Nunito Sans", sans-serif;
         height: 45px;
+        max-width: 95%;
+        
 
         .type-left{
 
@@ -55,7 +58,7 @@
                 color: #5684FD;
                 font-weight: bold;
                 outline: 1px solid transparent;
-                outline-color: rgba(86, 132, 253, 0.5);
+                outline-color: rgba(86, 132, 253, 0.5);   
             }
 
             .addnew:hover{
@@ -84,12 +87,16 @@
             cursor: pointer;
             transition: box-shadow 1s ease;
             text-decoration: none;
+            @media (max-width: 375px) {
+                max-width: 90%;
+            }
             
             .img-product{
                 height: 65%;
                 width: 85%;
-                object-fit: cover;
+                
                 margin: auto;
+                
             }
 
             .title{

@@ -25,6 +25,18 @@
             padding-left: 10px;
             height: 40px;
             border-left: 2px solid #000000;
+            @media (max-width: 540px) {
+                font-size: 1.5rem;
+                height: 30px;
+            }
+            @media (max-width: 425px) {
+                font-size: 1.2rem;
+                height: 25px;
+            }
+            @media (max-width: 375px) {
+                font-size: 1rem;
+                height: 20px;
+            }
         }
 
         .link-arrow{
@@ -34,6 +46,15 @@
                 display: flex;
                 font-size: 25px;
                 color: #000000;
+                @media (max-width: 540px) {
+                    font-size: 20px;
+                }
+                @media (max-width: 425px) {
+                    font-size: 17px;
+                }
+                @media (max-width: 375px) {
+                    font-size: 14px;
+                }
             }
         }
     }
@@ -43,7 +64,9 @@
         width: 72%;
         background-color: white;
         border-radius: 15px;
-
+        @media (max-width: 768px) {
+            flex-direction: column;
+        }
 
         .left-product{
             display: flex;
@@ -51,10 +74,29 @@
             background-color: #F3F0F5;
             justify-content: center;
             margin: 25px;
+            @media (max-width: 768px) {
+                margin: auto;
+                margin-top: 25px;
+                margin-bottom: 25px;
+                width: 90%;
+            }
+            @media (max-width: 540px) {
+                margin-top: 20px;
+                margin-bottom: 20px;
+            }
+            @media (max-width: 425px) {
+                margin-top: 17px;
+                margin-bottom: 17px;
+            }
+            @media (max-width: 375px) {
+                margin-top: 12px;
+                margin-bottom: 12px;
+            }
 
             .product-image{
-                width: 500px;
-                height: 500px;
+                height: 90%;
+                width: 85%;
+                margin: auto;
             }
         }
 
@@ -65,7 +107,10 @@
             margin-top: 25px;
             margin-right: 25px;
             gap: 1rem;
-
+            @media (max-width: 768px) {
+                margin: auto;
+                width: 90%;
+            }
 
             .right-top{
                 display: flex;
@@ -147,10 +192,16 @@
 
                 .quantity{
                     padding-right: 15px;
+                    @media (max-width: 320px) {
+                        font-size: 13px;
+                    }
                     .but{
                         padding: 5px 8px;
                         border: 1px solid #5684FD;
                         border-radius: 5px;
+                        @media (max-width: 320px) {
+                            padding: 3px 5px;
+                        }
                     }
 
                     .left{
@@ -171,6 +222,9 @@
                     font-family: "Nunito Sans", sans-serif;
                     font-weight: bold;
                     letter-spacing: 1px;
+                    @media (max-width: 320px) {
+                        font-size: 10px;
+                    }
                 }
             }
         }

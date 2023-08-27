@@ -84,13 +84,14 @@ const ShoppingCart = () => {
                 <div className='color-size'>{product.color} / {product.size}</div>
                 <Link className='delete' onClick={() => dispatch(removeItem(product.id))}>Remove</Link>
               </div>
-              <div className='quantity'>
-                  <button className='left but' onClick={LessQuantity}>-</button>
-                  {product.quantity}
-                  <button className='right but' onClick={MoreQuantity}>+</button>
-                
+              <div className='quantity-price'>
+                <div className='quantity'>
+                    <button className='left but' onClick={LessQuantity}>-</button>
+                    {product.quantity}
+                    <button className='right but' onClick={MoreQuantity}>+</button>
+                </div>
+                <div className='price'>${totalPrice()}</div>
               </div>
-              <div className='price'>${totalPrice()}</div>
             </div>
           </div>
         ))}

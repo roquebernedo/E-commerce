@@ -29,7 +29,7 @@ function Cart() {
               <div>{product.desc.substring(0, 22)}</div>
               <div className='price'>{product.quantity} x ${product.price}</div>
               <div>${totalPrice()}</div>  
-              <AiFillDelete className='delete' onClic k={() => dispatch(removeItem(product.id))}/>
+              <AiFillDelete className='delete' onClick={() => dispatch(removeItem(product.id))}/>
               <ButtonPay cartItems={products}/>
             </div>
           </div>
