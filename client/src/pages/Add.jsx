@@ -2,12 +2,9 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import '../styles/Add.scss'
-import { useCookies } from 'react-cookie'
-import { useGetUserID } from '../Hooks/useGetUserID'
 
 const Add = () => {
 
-  const [imageUrl, setImageUrl] = useState('');
   const [product, setProduct] = useState({
     title:"",
     description:"",
@@ -29,16 +26,12 @@ const Add = () => {
     e.preventDefault()
     try{
         await axios.post("https://ecommerce-moez.onrender.com/add", product)
-        alert("Product added")
-        
+        navigate("/")
       } catch (error) {
         console.log(error);
     }
   }
 
-  const handleUrlChange = (e) => {
-    setImageUrl(e.target.value);
-  };
 
   //<input className='image-product' type="text" onChange={handleUrlChange} value={imageUrl} name='image'/>
   //{imageUrl && <div className='divURL'><img className='imgURL' src={imageUrl} alt="Selected" /></div>}

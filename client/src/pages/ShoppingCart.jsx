@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
-import { useLocation, Link} from "react-router-dom";
+import React, { useState } from 'react'
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
 import { AiOutlineArrowLeft } from "react-icons/ai"
 import '../styles/ShoppingCart.scss'
@@ -10,11 +9,11 @@ import ButtonPay from './ButtonPay';
 
 const ShoppingCart = () => {
 
-
-  const [product, setProduct] = useState([])
+  // eslint-disable-next-line no-unused-vars
+  const [product, _] = useState([])
   const [quantity, setQuantity] = useState(1)
-  const location = useLocation();
-  const productID = location.pathname.split("/")[2];
+  //const location = useLocation();
+  //const productID = location.pathname.split("/")[2];
   const products = useSelector(state => state.cart.products)
   
   const totalPrice = () => {
