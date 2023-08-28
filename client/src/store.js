@@ -28,8 +28,8 @@ export const store = configureStore({
         [apiSlice.reducerPath]: apiSlice.reducer,
         cart: persistedReducer
     },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiSlice.middleware),
-    middleware2: (getDefaultMiddleware) =>
+    middlewaree: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiSlice.middleware),
+    middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],

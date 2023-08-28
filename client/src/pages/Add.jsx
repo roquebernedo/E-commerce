@@ -18,10 +18,6 @@ const Add = () => {
     instructions:"",
     price:"",
   })
-  const [savedRecipes, setSavedRecipes] = useState([])
-  const userID = useGetUserID()
-  // eslint-disable-next-line no-unused-vars
-  const [cookies, _] = useCookies(["access_token"])
 
   const navigate = useNavigate()
 
@@ -29,11 +25,12 @@ const Add = () => {
     setProduct(prev => ({...prev, [e.target.name]: e.target.value}))
   }
 
-  const handleClick = async e => {
+  const onSubmit = async e => {
     e.preventDefault()
     try{
-        await axios.post("https://ecommerce-moez.onrender.com/products", product)
-        navigate('/')
+        await axios.post("https://ecommerce-moez.onrender.com/add", product)
+        alert("Product added")
+        
       } catch (error) {
         console.log(error);
     }
@@ -43,32 +40,19 @@ const Add = () => {
     setImageUrl(e.target.value);
   };
 
-  const saveRecipe = async (productID) => {
-    try{
-      const response = await axios.put("https://react-recipe-afru.onrender.com/recipes", { 
-        productID, userID}, 
-        { headers: { authorization : cookies.access_token}})
-      setSavedRecipes(response.data.savedRecipes)
-    }catch(err){
-      console.error(err)
-    }
-  }
-  console.log(saveRecipe)
-
-  const isRecipeSaved = (id) => savedRecipes.includes(id) 
-  console.log(isRecipeSaved)
+  //<input className='image-product' type="text" onChange={handleUrlChange} value={imageUrl} name='image'/>
+  //{imageUrl && <div className='divURL'><img className='imgURL' src={imageUrl} alt="Selected" /></div>}
 
   return (
     <div className='form'>
-      <div className='menu-add'>
+      <form className='menu-add' onSubmit={onSubmit}>
         <h1 className='new-product'>Add New Product</h1>
         <div className='div-product'>Title: </div>
         <input className='title-product' type='text' onChange={handleChange} name='title'/>
         <div className='div-product'>Description: </div>
         <input className='description-product' type='text' onChange={handleChange} name='description'/>
         <div className='div-product'>Image: </div>
-        <input className='image-product' type="text" onChange={handleUrlChange} value={imageUrl} name='image'/>
-        {imageUrl && <div className='divURL'><img className='imgURL' src={imageUrl} alt="Selected" /></div>}
+        <input className='image-product' type='text' name='image' onChange={handleChange}/>
         <div className='div-product'>Color: </div>
         <input className='color-product' onChange={handleChange} name='color'/>
         <div className='div-product'>Size: </div>
@@ -79,9 +63,9 @@ const Add = () => {
         <textarea className='instructions-product' onChange={handleChange} name='instructions'/>
         <div className='div-product'>Price: </div>
         <input className='price-product' type='number' onChange={handleChange} name='price'/>
-        <button className='formButton' onClick={handleClick}>Add</button>
+        <button className='formButton' type='submit'>Add</button>
         
-      </div>
+      </form>
     </div>
   )
 }

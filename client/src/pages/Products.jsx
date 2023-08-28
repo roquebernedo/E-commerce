@@ -21,6 +21,7 @@ const Products = () => {
     fetchAllProducts()
   }, [])
 
+  //<Link className='newp' to={`/update/${product.id}`}>Update</Link>
 
 //   const handleDelete = async (id) =>{
 //     try{
@@ -48,7 +49,7 @@ const Products = () => {
                     <img className='img-product' src={product.image} alt=''/>
                     <div className='title'>{product.title}</div>
                     <span className='price'>${parseFloat(product.price).toFixed(2)}</span>
-                    <Link className='newp' to={`/update/${product.id}`}>Update</Link>
+                    
                 </Link>
             ))}
         </div>

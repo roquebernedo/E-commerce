@@ -33,11 +33,7 @@ const productSchema = mongoose.Schema({
         type: Number,
         required: true
     },
-    userOwner: { 
-        type: mongoose.Schema.Types.ObjectId, 
-        ref: "userModel", 
-        required: true 
-    },
+    
 }, {
     timestamps: true
 })

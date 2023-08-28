@@ -25,19 +25,7 @@ const ShoppingCart = () => {
 
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    const fetchProduct = async () => {
-        try {
-            const response = await axios.get(`https://ecommerce-moez.onrender.com/product/${productID}`);
-            setProduct(response.data)
-            console.log("holi")
-        } catch (error) {
-            console.log(error);
-        }
-    };
-    
-    fetchProduct();
-  }, [productID]);
+ 
 
   const LessQuantity = () => {
     setQuantity((prev) => (prev===1 ? 1 : prev - 1))
@@ -74,10 +62,9 @@ const ShoppingCart = () => {
             <div className='product-title'>Cart</div>
       </div>
       <div className='items'>
-      {products?.map(product => 
-        (
-          <div className='items-info'>
-            <div key={product._id} className='item'>
+      {products?.map(product =>(
+          <div key={product._id} className='items-info'>
+            <div className='item'>
               <img src={product.img} alt='' className='image'/>
               <div className='details'>
                 <h1>{product.title}</h1>

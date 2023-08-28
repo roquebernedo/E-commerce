@@ -8,21 +8,22 @@ import ButtonPay from './ButtonPay'
 
 
 function Cart() {
-  console.log("hola")
+  
   const products = useSelector(state => state.cart.products)
+  console.log(products)
   
   const totalPrice = () => {
     let total = 0
-    products.forEach(item => total = total + (item.quantity*item.price))
+    products.forEach((item) => (total+=item.quantity*item.price))
     return total.toFixed(2)
   }
   const dispatch = useDispatch()
 
   return (
     <div className='cart'>
-      {products?.map(product => 
+      {products.map(product => 
         (
-          <div key={product._id} className='item'>
+          <div key={product.id} className='item'>
             <img style={{ width: '100px', height: '100px'}} src={product.img} alt='' className='image'/>
             <div className='details'>
               <h1>{product.title}</h1>
