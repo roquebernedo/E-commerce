@@ -1,4 +1,5 @@
 import axios from "axios"
+import { Link } from "react-router-dom"
 
 const ButtonPay = ({ cartItems }) => {
 
@@ -16,7 +17,7 @@ const ButtonPay = ({ cartItems }) => {
 
     return ( 
         <>
-            <button className="button-check" onClick={() => handlecheckout()}>Check Out</button>
+            <Link className="button-check" onClick={() => handlecheckout()}>PROCEED TO CHECK</Link>
         </>
     );
 }

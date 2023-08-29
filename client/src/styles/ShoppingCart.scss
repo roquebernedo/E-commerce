@@ -1,42 +1,52 @@
 .main-product{
-    .top-product{
-        
-    }
+    display: flex;
+    flex-direction: column;
 
     .items{
        display: flex;
        width: 72%;
        border-radius: 15px;
+       flex-direction: column;
        @media (max-width: 880px) {
         flex-direction: column;
        }
        
+       
         .items-info{
             display: flex;
             width: 65%;
+            flex-direction: column;
             background-color: white;
             border-radius: 15px;
-            @media (max-width: 880px) {
+            margin-bottom: 10px;
+            @media (max-width: 1280px) {
+                
+            }
+            @media (max-width: 1024px) {
                 width: 100%;
             }
+
 
             .item{
                 display: flex;
                 flex-direction: row;
                 height: 150px;
                 width: 100%;
-                
                 align-items: center;
                 justify-content: center;
-                margin: 0 25px;
-                border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+                @media (max-width: 768px) {
+                   
+                }
+                
                 @media (max-width: 880px) {
                     border: none;
                 }          
                 @media (max-width: 648px) {
                     margin-right: 50px;
                 }         
-                 
+                @media (max-width: 568px) {
+                    
+                }  
                 @media (max-width: 475px) {
                     
                 }
@@ -45,10 +55,22 @@
                     width: 100px;
                     height: 100px;
                     padding: 35px 15px 20px 0;  
-                    @media (max-width: 648px) {
+                    @media (max-width: 1450px) {
+                        padding: 35px 15px 20px 30px;
+                    }  
+                    @media (max-width: 768px) {
                         width: 90px;
                         height: 90px;
+                        padding: 25px 15px 20px 40px;
+                    }
+                    @media (max-width: 648px) {
+                        width: 80px;
+                        height: 80px;
+                        padding: 25px 15px 20px 70px;
                     }    
+                    @media (max-width: 568px) {
+                        
+                    } 
                     @media (max-width: 475px) {
                         width: 80px;
                         height: 80px;
@@ -57,15 +79,21 @@
                         width: 70px;
                         height: 70px;
                     }
+                    @media (max-width: 320px) {
+                        padding: 25px 15px 20px 80px;
+                    }
                 }
     
                 .details{
-                    display: flex;
+                    display: flex; 
+                    width: 430px; 
                     flex-direction: column;
-                    @media (max-width: 1523px) {
-                        width: 100%;
+                    @media (max-width: 1490px) {
+                        width: 380px;
                     }
-                    
+                    @media (max-width: 1460px) {
+                        width: 300px;
+                    }
 
                     h1{
                         font-size: 16px;
@@ -111,37 +139,49 @@
                 }
                 .quantity-price{
                     display: flex;
+                    
                     @media (max-width: 1024px) {
-                        flex-direction: column;
-                        gap: 5px;
+                       
                     }
                     @media (max-width: 880px) {
                         flex-direction: row;
+                    }
+                    @media (max-width: 768px) {
+                        
                     }
                     @media (max-width: 648px) {
                         margin-right: 50px;
                     }
                     @media (max-width: 568px) {
                         flex-direction: column;
+                        margin-left: 0px;
                     } 
                     .quantity{
-                        display: flex;
-                        margin-left: 250px;
+                        display: flex;                   
                         gap: 2px;
+                        color: #5684FD;
+                        @media (max-width: 1460px) {
+                           
+                            width: 70px;
+                        }
                         @media (max-width: 1360px) {
-                            margin-left: 170px;
+                            
                         }
                         @media (max-width: 1180px) {
-                            margin-left: 140px;
+                            
                         }
                         @media (max-width: 1110px) {
-                            margin-left: 100px;
+                            
                         }
                         @media (max-width: 1024px) {
-                            margin-left: 80px;
+                            margin-left: 150px;
+                        }
+                        @media (max-width: 768px) {
+                            margin-left: 130px;
                         }
                         @media (max-width: 648px) {
                             font-size: 15px;
+                            margin-left: 70px;
                         } 
                          
                         @media (max-width: 475px) {
@@ -155,41 +195,27 @@
                             margin-left: 20px;
                             font-size: 11px;
                         }
-                        
     
-                        .but{
-                            padding: 4px 8px;
-                            border: 1px solid #5684FD;
-                            border-radius: 5px;
-                            @media (max-width: 648px) {
-                                padding: 3px 6px;
-                            } 
-                            @media (max-width: 475px) {
-                                padding: 2px 4px;
-                            }
-                            @media (max-width: 375px) {
-                                padding: 0px 3px;
-                            }
-                            
-                        }
-    
-                        .right{
-                            margin-left: 5px;
-                        }
-    
-                        .left{
-                            margin-right: 5px;
+                        .quantity-blue{
+                            color: #5684FD;
                         }
                     }
         
                     .price{
-                        padding-left: 20px;
-                        opacity: 0.87;
+                        padding-left: 50px;
+                        font-weight: 600;
+                        opacity: 0.8;
+                        @media (max-width: 1450px) {
+                            padding-right: 40px;
+                        }  
                         @media (max-width: 1024px) {
-                            margin-left: 80px;
+                            margin-left: 0px;
                         }
                         @media (max-width: 880px) {
                             margin-left: 0px;
+                        }
+                        @media (max-width: 768px) {
+                            padding-left: 30px;
                         }
                         @media (max-width: 648px) {
                             font-size: 15px;
@@ -212,22 +238,26 @@
                 }
             }
         }
+    
 
        
 
         .subtotal{
             width: 30%;
-            margin-left: 40px;
+            margin-top: 30px;
             background-color: white;
             border-radius: 15px;
+            @media (max-width: 1240px) {
+                width: 35%;
+            }
             @media (max-width: 880px) {
                 margin-top: 20px;
                 margin-left: 0px;
-                width: 35%;
+                width: 50%;
                 max-width: 100%;
             }
             @media (max-width: 648px) {
-                width: 50%;
+                width: 60%;
             }
             @media (max-width: 375px) {
                 width: 100%;
@@ -302,20 +332,37 @@
                     border-radius: 30px;
                     background-color: #5684FD;
                     border: none;
+                    text-decoration: none;
                     padding: 12px 70px;
                     color: white;
                     font-family: "Nunito Sans", sans-serif;
                     font-weight: bold;
                     letter-spacing: 1px;
                     margin: 15px 0;
-                    @media (max-width: 1024px) {
+                    @media (max-width: 1480px) {
+                        
+                        font-size: 15px;
+                        padding: 12px 50px;
+                    }
+                    @media (max-width: 1240px) {
+                       
+                        font-size: 13px;
+                        padding: 12px 45px;
+                        letter-spacing: 0.8px;
+                    }
+                    @media (max-width: 1060px) {
+                      
                         padding: 12px 40px;
                     }
                     @media (max-width: 880px) {
                         padding: 12px 30px;
                     }
                     @media (max-width: 475px) {
-                        padding: 10px 25px;
+                        padding: 12px 20px;
+                        font-size: 12px;
+                    }
+                    @media (max-width: 475px) {
+                        
                     }
                 }
             }

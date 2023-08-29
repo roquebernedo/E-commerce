@@ -4,11 +4,15 @@
     display: flex;
     justify-content: center;
     width: 100%;
+    @media (max-width: 768px) {
+        justify-content: flex-start;
+    }
     
     .menu-add{
         display: flex;
         flex-direction: column;
         width: 60%;
+        
        
         .div-product{
             display: flex;
@@ -16,6 +20,9 @@
             margin-left: 50px;
             font-size: 1.2rem;
             font-weight: 500;
+            @media (max-width: 475px) {
+                margin-left: 20px;
+            }
         }
 
         .new-product{
@@ -25,6 +32,14 @@
             width: 30%;
             margin-left: 50px;
             opacity: 0.8;
+            @media (max-width: 768px) {
+                width: 100%;
+                justify-content: flex-start;
+            }
+            @media (max-width: 475px) {
+                margin-left: 20px;
+            }
+            
         }
 
         .title-product{
@@ -35,6 +50,12 @@
             outline: none; 
             border: 1px solid #ccc; 
             border-radius: 8px;
+            @media (max-width: 768px) {
+                width: 90%;
+            }
+            @media (max-width: 475px) {
+                margin-left: 20px;
+            }
         }
 
         .title-product:hover{
@@ -49,6 +70,12 @@
             outline: none; 
             border: 1px solid #ccc;
             border-radius: 8px;
+            @media (max-width: 768px) {
+                width: 90%;
+            }
+            @media (max-width: 475px) {
+                margin-left: 20px;
+            }
         }
 
         .description-product:hover{
@@ -63,6 +90,12 @@
             outline: none; 
             border: 1px solid #ccc;
             border-radius: 8px;
+            @media (max-width: 768px) {
+                width: 90%;
+            }
+            @media (max-width: 475px) {
+                margin-left: 20px;
+            }
         }
 
         .image-product:hover{
@@ -80,6 +113,7 @@
             margin-left: 50px;
             box-shadow: 5px 10px 15px -3px rgba(0,0,0,0.1);
             margin-bottom: 15px;
+            
 
             .imgURL{
                 width: 200px;
@@ -95,6 +129,12 @@
             outline: none; 
             border: 1px solid #ccc;
             border-radius: 8px;
+            @media (max-width: 768px) {
+                width: 20%;
+            }
+            @media (max-width: 475px) {
+                margin-left: 20px;
+            }
         }
 
         .color-product:hover{
@@ -109,6 +149,12 @@
             outline: none; 
             border: 1px solid #ccc;
             border-radius: 8px;
+            @media (max-width: 768px) {
+                width: 20%;
+            }
+            @media (max-width: 475px) {
+                margin-left: 20px;
+            }
         }
 
         .size-product:hover{
@@ -123,6 +169,16 @@
             outline: none; 
             border: 1px solid #ccc;
             border-radius: 8px;
+            @media (max-width: 768px) {
+                width: 400px;
+            }
+            @media (max-width: 475px) {
+                margin-left: 20px;
+                width: 300px;
+            }
+            @media (max-width: 375px) {
+                width: 250px;
+            }
         }
 
         .material-product:hover{
@@ -137,6 +193,20 @@
             outline: none; 
             border: 1px solid #ccc;
             border-radius: 8px;
+            @media (max-width: 768px) {
+                width: 400px;
+            }
+            @media (max-width: 475px) {
+                margin-left: 20px;
+                width: 300px;
+            }
+            @media (max-width: 475px) {
+                margin-left: 20px;
+                width: 300px;
+            }
+            @media (max-width: 375px) {
+                width: 250px;
+            }
         }
 
         .instructions-product:hover{
@@ -151,6 +221,12 @@
             outline: none; 
             border: 1px solid #ccc;
             border-radius: 8px;
+            @media (max-width: 768px) {
+                width: 20%;
+            }
+            @media (max-width: 475px) {
+                margin-left: 20px;
+            }
         }
 
         .price-product:hover{
@@ -162,6 +238,12 @@
             margin-left: 50px;
             padding: 10px;
             margin-bottom: 15px;
+            @media (max-width: 768px) {
+                width: 20%;
+            }
+            @media (max-width: 475px) {
+                margin-left: 20px;
+            }
         }
     }
 }

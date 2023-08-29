@@ -19,29 +19,36 @@ function Cart() {
   }
   const dispatch = useDispatch()
 
+  
+
   return (
     <div className='cart'>
-      {products.map(product => 
+      {products?.map(product => 
         (
-          <div key={product.id} className='item'>
+          <div key={product.id} className='itemcart'>
             <img style={{ width: '100px', height: '100px'}} src={product.img} alt='' className='image'/>
             <div className='details'>
               <h1>{product.title}</h1>
-              <div>{product.desc.substring(0, 22)}</div>
+              <div>{product.desc?.substring(0, 22)}</div>
               <div className='price'>{product.quantity} x ${product.price}</div>
-              <div>${totalPrice()}</div>  
-              <AiFillDelete className='delete' onClick={() => dispatch(removeItem(product.id))}/>
-              <ButtonPay cartItems={products}/>
+              <div className='between'>
+                <div>${product.quantity * product.price}</div>  
+                <AiFillDelete className='delete' onClick={() => dispatch(removeItem(product.id))}/>
+              </div>   
             </div>
           </div>
         ))}
         
       <div className='total'>
-        <div>Subtotal: ${totalPrice()}</div>
+        <div className='total-sub'>Subtotal: </div>
+        <div className='total-sub'>${totalPrice()}</div>
       </div>
       
-      <div onClick={() => dispatch(resetCart())} className='reset'>Reset Cart</div>
-      <Link className='link-arrow' to="/shopping">View Cart</Link>
+      <div className='buttons-cart'>
+        <Link onClick={() => dispatch(resetCart())} className='reset'>RESET CART</Link>
+        <ButtonPay cartItems={products}/>
+        <Link className='link-arrow' to="/shopping">VIEW CART</Link>
+      </div>
     </div>
   )
 }
