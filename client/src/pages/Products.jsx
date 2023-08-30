@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import '../styles/Products.scss'
-
+import { useSelector } from 'react-redux';
 
 const Products = () => {
 
   const [products, setProducts] = useState([])
-
+  const { userInfo } = useSelector((state) => state.auth)
 
   useEffect(() => {
     const fetchAllProducts = async () => {
@@ -40,7 +40,13 @@ const Products = () => {
                 <Link className='hoodies'>Hoodies</Link>
             </div>
             <div className='type-right'>
-                <Link className='addnew' to="/add">Add new Product</Link>
+                {
+                    userInfo ? (
+                        <Link className='addnew' to="/add">Add new Product</Link>
+                    ):(
+                        <div></div>
+                    )
+                }
             </div>
         </div>
         <div className='products'>

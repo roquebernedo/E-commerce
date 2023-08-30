@@ -28,7 +28,7 @@ function Cart() {
           <div key={product.id} className='itemcart'>
             <img style={{ width: '100px', height: '100px'}} src={product.img} alt='' className='image'/>
             <div className='details'>
-              <h1>{product.title}</h1>
+              <h1>{product.title.substring(0,16)}</h1>
               <div>{product.desc?.substring(0, 22)}</div>
               <div className='price'>{product.quantity} x ${product.price}</div>
               <div className='between'>

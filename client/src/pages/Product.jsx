@@ -35,6 +35,8 @@ const Product = () => {
   // eslint-disable-next-line no-unused-vars
   const [cookies, _] = useCookies(["access_token"])
 
+  
+
   useEffect(() => {
     const fetchProduct = async () => {
         try {
