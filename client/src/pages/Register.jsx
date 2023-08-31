@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 
 import { useRegisterMutation } from '../slices/usersApiSlice';
 import { setCredentials } from '../slices/authSlice';
-import '../styles/Register.scss'
+import '../styles/Regis.scss'
 
 const Register = () => {
   const [name, setName] = useState('');
@@ -40,7 +40,7 @@ const Register = () => {
       }
     }
   };
-  console.log(name)
+
   return (
     <div className='register'>
       <h1>Sign Up</h1>
