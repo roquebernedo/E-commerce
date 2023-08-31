@@ -43,10 +43,10 @@ const Register = () => {
 
   return (
     <div className='register'>
-      <h1>Sign Up</h1>
+      <h1 className='title-register'>Sign Up</h1>
 
-      <form onSubmit={submitHandler}>
-        <div className='log'>
+      <form className='form-reg' onSubmit={submitHandler}>
+        <div className='login-reg'>
           <div>Name</div>
           <input
             type='name inp'
@@ -54,7 +54,7 @@ const Register = () => {
             onChange={(e) => setName(e.target.value)}
           />
         </div>
-        <div className='log'>
+        <div className='login-reg'>
           <div>Email Address</div>
           <input
             type='email inp'
@@ -63,7 +63,7 @@ const Register = () => {
           />
         </div>
 
-        <div className='log'>
+        <div className='login-reg'>
           <div>Password</div>
           <input
             type='password inp'
@@ -72,7 +72,7 @@ const Register = () => {
           />
         </div>
 
-        <div className='log'>
+        <div className='login-reg'>
           <div>Confirm Password</div>
           <input
             type='password inp'
