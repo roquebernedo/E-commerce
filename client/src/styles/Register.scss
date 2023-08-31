@@ -10,20 +10,23 @@
     border: 1px solid #ccc;
     font-family: "Nunito Sans", sans-serif;
     @media (max-width: 540px) {
-        max-width: 100%;
+        max-width: 24%;
         width: 130px;
     }
     @media (max-width: 450px) {
+        max-width: 13.5%;
         width: 60px;
     }
     @media (max-width: 375px) {
+        max-width: 8%;
         width: 30px;
     }
     @media (max-width: 320px) {
+        max-width: 3%;
         width: 10px;
     }
 
-    h1{
+    .title-register{
         font-size: 26px;
         @media (max-width: 450px) {
             display: flex;
@@ -36,12 +39,12 @@
         }
     }
 
-    form{
+    .form-reg{
         display: flex;
         flex-direction: column;
         align-items: center;
 
-        .log{
+        .login-reg{
             margin-bottom: 30px;
             color: #404040;
         }
