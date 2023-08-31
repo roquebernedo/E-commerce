@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 
 import { useRegisterMutation } from '../slices/usersApiSlice';
 import { setCredentials } from '../slices/authSlice';
-import '../styles/Register.scss'
+
 
 const Register = () => {
   const [name, setName] = useState('');
