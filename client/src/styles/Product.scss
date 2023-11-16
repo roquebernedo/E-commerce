@@ -57,6 +57,24 @@
                 }
             }
         }
+
+        .product{
+            display: flex;
+            border-radius: 30px;
+            background-color: #5684FD;
+            border: none;
+            padding: 9px 18px;
+            color: white;
+            font-family: "Nunito Sans", sans-serif;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-decoration: none;
+            text-transform: uppercase;
+        }
+
+        .product:hover{
+            opacity: 0.8;
+        }
     }
 
     .bottom-product{
@@ -225,6 +243,10 @@
                     @media (max-width: 320px) {
                         font-size: 10px;
                     }
+                }
+
+                .add:hover{
+                    opacity: 0.8;
                 }
             }
         }

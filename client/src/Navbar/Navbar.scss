@@ -1,21 +1,25 @@
 .navbar{
     width: 100%;
-    background-color: #35363C;
-    height: 50px;
+    background-color: #F3F0F5;
     display: flex;
+    flex-direction: column;
+    font-family: "Nunito Sans", sans-serif;
 
     .menu{
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         align-items: center;
-        width: 100%;
+        height: 130px;
 
         .log-reg{
             display: flex;
             flex-direction: row;
+            justify-content: center;
             align-items: center;
             padding-left: 20px;
             gap: 15px;
+            width: 20%;
+            
 
             .link-arrow{
                 display: flex;
@@ -26,54 +30,131 @@
                 .arrow-left{
                     display: flex;
                     font-size: 16px;
-                    color: white;
+                    color: #213547;
                 }
             }
             
             .sign{
-                display: flex;
-                flex-direction: row;
                 text-decoration: none;
-                color: white;
+                color: #213547;
+                border: 1px solid #213547;
+                border-radius: 10px;
+                padding: 6px;
                 align-items: center;
-                gap: 5px;
+                
+            }
+
+            .up{
+                background-color: #213547;
+                color: #fff;
+            }
+
+            .in:hover{
+                border: 1px solid #5684FD;
+                color: #5684FD;
+            }
+
+            .up:hover{
+                color: #5684FD;
+                background-color: #fff;
+                border: 1px solid #5684FD;
+            }
+
+            .sign:hover{
+                border: 1px solid #5684FD;
+                color: #5684FD;
             }
 
             .profile{
-                padding-left: 10px;
-                border-left: 2px solid white;
+             
+                
             }
 
             .logout{
                 border-radius: 5px;
                 padding: 4px 8px;
                 border: none;
-                font-size: 14px;
+                font-size: 14px;  
+            }
+
+            .logout:hover{
+                color: #5684FD;
+                border: 1px solid #5684FD;
             }
         }
 
-        .cartIcon{
+        .title{
+            width: 60%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+            .mainTitle{
+                font-size: 2.5rem;
+                font-family: Agbalumo;
+                margin: 0;
+                color: #213547;
+            }
+            .secondaryTitle{
+                margin: 0;
+                color: #213547;
+                font-size: 1.3rem;
+            }
+        }
+
+        .button-icon{
             display: flex;
             justify-content: center;
-            color: white;
-            margin-right: 40px;
-            align-items: center;
-            font-size: 18px;
-            position: relative;
-
-            .number{
-                font-size: 12px;
-                width: 20px;
-                height: 20px;
-                border-radius: 50%;
-                background-color: #2879fe;
-                
-                position: absolute;
-                right: -15px;
-                top: -10px;
+            gap: 20px;
+            width: 20%;
+       
+            .buttons{
                 display: flex;
-                align-items: center;
+                gap: 20px;
+                
+                .itemsMenu{
+                    text-decoration: none;
+                    color: #213547;
+                    border-radius: 10px;
+                    padding: 6px;
+                    align-items: center;
+                    border: 1px solid transparent;
+                }
+
+                .itemsMenu:hover{
+                    color: #5684FD;
+                    border: 1px solid #5684FD;
+                }
+            }
+            .cartIcon{
+                display: flex;
                 justify-content: center;
+                color: #213547;
+                margin-right: 40px;
+                align-items: center;
+                font-size: 18px;
+                position: relative;
+    
+                .number{
+                    font-size: 12px;
+                    width: 20px;
+                    height: 20px;
+                    border-radius: 50%;
+                    background-color: #2879fe;
+                    color: #fff;
+                    position: absolute;
+                    right: -15px;
+                    top: -3px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+                .car:hover{
+                    color: #2879fe;
+                }
             }
         }
     }

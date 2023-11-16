@@ -11,11 +11,8 @@ const Profile = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-
   const dispatch = useDispatch()
-
   const { userInfo } = useSelector((state) => state.auth)
-
   const [updateProfile, { isLoading}] = useUpdateUserMutation()
 
   useEffect(() => {
@@ -43,6 +40,7 @@ const Profile = () => {
       }
     }
   };
+  
   return (
     <div className='register'>
       <h1>Update Profile</h1>

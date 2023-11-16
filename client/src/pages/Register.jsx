@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-
 import { useRegisterMutation } from '../slices/usersApiSlice';
 import { setCredentials } from '../slices/authSlice';
 import '../styles/Register.scss'
+import FormInfo from '../components/FormInfo';
 
 const Register = () => {
   const [name, setName] = useState('');
@@ -46,40 +46,37 @@ const Register = () => {
       <h1 className='title-register'>Sign Up</h1>
 
       <form className='form-reg' onSubmit={submitHandler}>
-        <div className='login-reg'>
-          <div>Name</div>
-          <input
-            type='name inp'
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </div>
-        <div className='login-reg'>
-          <div>Email Address</div>
-          <input
-            type='email inp'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
+        <FormInfo
+          classForm={'login-reg'}
+          title={'Name'}
+          type={'text'}
+          value={name}
+          setEmail={setName}
+        />
 
-        <div className='login-reg'>
-          <div>Password</div>
-          <input
-            type='password inp'
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-
-        <div className='login-reg'>
-          <div>Confirm Password</div>
-          <input
-            type='password inp'
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
-        </div>
+        <FormInfo 
+          classForm={'login-reg'}
+          title={'Email Address'}
+          type={'email'}
+          value={email}
+          setEmail={setEmail}
+        />
+        
+        <FormInfo 
+          classForm={'login-reg'}
+          title={'Password'}
+          type={'password'}
+          value={password}
+          setEmail={setPassword}
+        />
+        
+        <FormInfo 
+          classForm={'login-reg'}
+          title={'Confirm Password'}
+          type={'password'}
+          value={confirmPassword}
+          setEmail={setConfirmPassword}
+        />
 
         { isLoading && <h2>Loading..</h2>}
 
@@ -89,7 +86,6 @@ const Register = () => {
         </button>
       </form>
 
-      
       <div className='new'>
           Already have an Account? <Link className='log-link' to='/login'>Login</Link>
       </div>

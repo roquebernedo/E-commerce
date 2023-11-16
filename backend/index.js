@@ -7,6 +7,7 @@ import userRoutes from './routes/userRoutes.js'
 import productRoutes from './routes/productRoutes.js'
 import cors from 'cors'
 import stripeRoutes from "./routes/stripeRoutes.js"
+import { userExtractor, tokenExtractor } from "./middleware/authMiddleware.js"
 
 import cookieParser from 'cookie-parser'
 import connectDB from "./config/db.js"
@@ -19,6 +20,7 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 app.use(express.urlencoded({ extended: true }))
+//app.use(tokenExtractor)
 app.use("/api/stripe", stripeRoutes)
 
 app.use(cookieParser())
@@ -132,3 +134,5 @@ app.listen(port, () => console.log(`Server started on port ${port}`))
     //         return res.json("Product has been updated")
     //     })
     // })
+
+    

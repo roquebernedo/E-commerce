@@ -6,20 +6,17 @@ import { removeItem, resetCart } from '../redux/cartReducer'
 import '../styles/Cart.scss'
 import ButtonPay from './ButtonPay'
 
-
 function Cart() {
   
   const products = useSelector(state => state.cart.products)
-  console.log(products)
   
   const totalPrice = () => {
     let total = 0
     products.forEach((item) => (total+=item.quantity*item.price))
     return total.toFixed(2)
   }
-  const dispatch = useDispatch()
-
   
+  const dispatch = useDispatch()
 
   return (
     <div className='cart'>

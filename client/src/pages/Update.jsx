@@ -5,9 +5,8 @@ import '../styles/Add.scss'
 
 
 const Update = () => {
-
-  const [imageUrl, setImageUrl] = useState('');
-  const [productData, setProductData] = useState(null);
+   // eslint-disable-next-line no-unused-vars
+  const [productData, setProductData] = useState([]);
   const [product, setProduct] = useState({
     title:"",
     description:"",
@@ -18,17 +17,17 @@ const Update = () => {
     instructions:"",
     price:"",
   })
-  console.log(productData)
+  
+
   const navigate = useNavigate()
   const location = useLocation()
   const productId = location.pathname.split("/")[2]
-
-  
-
+ 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get("https://ecommerce-vv1c.onrender.com/products/" + productId);
+        //const response = await axios.get("https://ecommerce-vv1c.onrender.com/products/" + productId);
+        const response = await axios.get("https://ecommerce-vv1c.onrender.com/product/" + productId);
         setProductData(response.data);
         setProduct(response.data)
         
@@ -40,7 +39,6 @@ const Update = () => {
     fetchProduct();
   }, [productId]);
 
-
   const handleChange = (e) => {
     setProduct(prev=>({...prev, [e.target.name]: e.target.value}))
   } 
@@ -48,17 +46,13 @@ const Update = () => {
   const handleClick = async e => { // si se hace api request se usa "async"
     e.preventDefault() // previene que se actualice
     try{
+        //await axios.put("https://ecommerce-vv1c.onrender.com/products/"+ productId, product)
         await axios.put("https://ecommerce-vv1c.onrender.com/products/"+ productId, product)
         navigate("/")// sirve para navegar por el homepage
     }catch(err){
         console.log(err)
     }
   }
-
-  const handleUrlChange = (e) => {
-    setImageUrl(e.target.value);
-  };
-  console.log(handleUrlChange)
 
   return (
     <div className='form'>
@@ -70,7 +64,6 @@ const Update = () => {
         <input className='description-product' type='text' onChange={handleChange} name='description' value={product.description}/>
         <div className='div-product'>Image: </div>
         <input className='image-product' type="text" onChange={handleChange} name='image' value={product.image}/>
-        {imageUrl && <div className='divURL'><img className='imgURL' src={product.image} alt="Selected" /></div>}
         <div className='div-product'>Color: </div>
         <input className='color-product' onChange={handleChange} name='color' value={product.color}/>
         <div className='div-product'>Size: </div>

@@ -5,6 +5,7 @@ import { useLoginMutation } from '../slices/usersApiSlice.js';
 import { setCredentials } from '../slices/authSlice.js';
 import { toast } from 'react-toastify';
 import '../styles/Login.scss'
+import FormInfo from '../components/FormInfo.jsx';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -39,30 +40,24 @@ const Login = () => {
       <h1>Sign In</h1>
 
       <form onSubmit={submitHandler}>
-
-        <div className='email log'>
-            <div>Email Address</div>
-            <input
-                type='email'
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-            />
-        </div>
-
-        <div className='pass log'>
-            <div>Password</div>
-            <input
-                type='password'
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-            />
-        </div>
+        <FormInfo 
+          classForm={'email log'}
+          title={'Email Address'}
+          type={'email'}
+          value={email}
+          setEmail={setEmail}
+        />
+        <FormInfo 
+          classForm={'pass log'}
+          title={'Password'}
+          type={'password'}
+          value={password}
+          setEmail={setPassword}
+        />
 
         { isLoading && <h2>Loading..</h2> }
 
-        <button
-          className='sign log' type='submit'
-        >
+        <button className='sign log' type='submit'>
           Sign In
         </button>
       </form>

@@ -1,20 +1,13 @@
 import React from 'react'
 import { Link} from "react-router-dom";
-
 import { useDispatch, useSelector } from 'react-redux'
 import { AiOutlineArrowLeft } from "react-icons/ai"
 import '../styles/ShoppingCart.scss'
 import { removeItem } from '../redux/cartReducer'
-// import { addToCart } from '../redux/cartReducer';
 import ButtonPay from './ButtonPay';
 
 const ShoppingCart = () => {
 
-  // eslint-disable-next-line no-unused-vars
-  // const [product, setProduct] = useState([])
-  // const [quantity, setQuantity] = useState(1)
-  // const location = useLocation();
-  //const productID = location.pathname.split("/")[2];
   const products = useSelector(state => state.cart.products)
   
   const totalPrice = () => {
@@ -24,18 +17,6 @@ const ShoppingCart = () => {
   }
 
   const dispatch = useDispatch()
-
-  // const LessQuantity = (prev) => {
-  //   setQuantity(prev - 1)
-  // };
-
-  // const MoreQuantity = (prev) => {
-  //   setQuantity((prev) => (prev===1 ? 1 : prev + 1))
-  // }
-
-  
-
-  
 
   return (
     <div className='main-product'>
@@ -55,10 +36,8 @@ const ShoppingCart = () => {
               </div>
               <div className='quantity-price' key={product.id}>
                 <div className='quantity'>
-                    
                   Items -
                   <div className='quantity-blue'>{product.quantity}</div>
-                  
                 </div>
                 <div className='price'>${product.quantity * product.price}</div>
               </div>
@@ -79,7 +58,6 @@ const ShoppingCart = () => {
               <div className='tot-price'>${totalPrice()}</div>
             </div>
             <div className='checkout-tot'>
-              
               <ButtonPay cartItems={products}/>
             </div>
           </div>
