@@ -57,10 +57,6 @@ const Add = () => {
     }
   }
 
-
-  //<input className='image-product' type="text" onChange={handleUrlChange} value={imageUrl} name='image'/>
-  //{imageUrl && <div className='divURL'><img className='imgURL' src={imageUrl} alt="Selected" /></div>}
-
   return (
     <div className='form'>
       <Form handle={handleChange} submit={onSubmit} />

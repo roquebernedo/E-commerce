@@ -45,14 +45,14 @@ const Login = () => {
           title={'Email Address'}
           type={'email'}
           value={email}
-          setEmail={setEmail}
+          setItem={setEmail}
         />
         <FormInfo 
           classForm={'pass log'}
           title={'Password'}
           type={'password'}
           value={password}
-          setEmail={setPassword}
+          setItem={setPassword}
         />
 
         { isLoading && <h2>Loading..</h2> }

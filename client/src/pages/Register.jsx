@@ -51,7 +51,7 @@ const Register = () => {
           title={'Name'}
           type={'text'}
           value={name}
-          setEmail={setName}
+          setItem={setName}
         />
 
         <FormInfo 
@@ -59,7 +59,7 @@ const Register = () => {
           title={'Email Address'}
           type={'email'}
           value={email}
-          setEmail={setEmail}
+          setItem={setEmail}
         />
         
         <FormInfo 
@@ -67,7 +67,7 @@ const Register = () => {
           title={'Password'}
           type={'password'}
           value={password}
-          setEmail={setPassword}
+          setItem={setPassword}
         />
         
         <FormInfo 
@@ -75,13 +75,12 @@ const Register = () => {
           title={'Confirm Password'}
           type={'password'}
           value={confirmPassword}
-          setEmail={setConfirmPassword}
+          setItem={setConfirmPassword}
         />
 
         { isLoading && <h2>Loading..</h2>}
 
-        <button
-        className='sign log'>
+        <button className='sign log'>
           Sign Up
         </button>
       </form>

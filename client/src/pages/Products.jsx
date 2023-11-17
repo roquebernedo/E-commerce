@@ -21,17 +21,6 @@ const Products = () => {
     fetchAllProducts()
   }, [])
 
-  //<Link className='newp' to={`/update/${product.id}`}>Update</Link>
-
-//   const handleDelete = async (id) =>{
-//     try{
-//         await axios.delete("http://localhost:8000/products/"+id)
-//         window.location.reload()
-//     }catch(err){
-//         console.log(err)
-//     }
-//   }
-  //<button className='delete' onClick={() => handleDelete(book.id)}>Delete</button>
   console.log(products)
   return (
     <div className='main-products'>

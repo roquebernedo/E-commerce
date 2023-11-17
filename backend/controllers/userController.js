@@ -4,9 +4,7 @@ import User from "../models/userModel.js"
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 
-//@desc Auth user/set token
 //route POST /api/users/auth
-//@access Public
 
 const getUser = async (req, res) => {
     const users = await User.find({}).populate('products', { title: 1, description: 1 })
@@ -16,14 +14,10 @@ const getUser = async (req, res) => {
 
 const authUser = async (req, res) => {
     const body = req.body
-    console.log(body.password)
     const user = await User.findOne({ email: body.email })
-    console.log(user.passwordHash)
-    console.log("hola")
     const passwordCorrect = user === null
         ? false
         : await bcrypt.compare(body.password, user.passwordHash)
-    console.log(passwordCorrect)
     if (!(user && passwordCorrect)) {
         return res.status(401).json({
         error: 'invalid username or password'
@@ -48,9 +42,8 @@ const authUser = async (req, res) => {
   console.log(token)
 }
 
-//@desc Register a new user
 //route POST /api/users
-//@access Public
+
 const registerUser = async (req, res) => {
     // const { name, email, password } = req.body
 
@@ -79,16 +72,11 @@ const registerUser = async (req, res) => {
     // }
     
     const body = req.body
-    console.log(body.passwordHash)
     const saltRounds = 10
     const passwordHash = await bcrypt.hash(body.passwordHash, saltRounds)
-    console.log(passwordHash)
-    console.log("hola")
-    console.log(body.email)
     if (body.email.length < 3 || body.passwordHash.length < 3) {
         return res.status(400).json({ error: 'Username or Password must be more than 3 characters' })
     }
-    console.log("hola")
     const user = new User({
         email: body.email,
         name: body.name,
@@ -102,9 +90,8 @@ const registerUser = async (req, res) => {
     res.json(savedUser)
 }
 
-//@desc Logout user
 //route POST /api/users/logout
-//@access Public
+
 const logoutUser = asyncHandler(async (req, res) => {
     res.cookie('jwt', '', {
         httpOnly: true,
@@ -114,9 +101,8 @@ const logoutUser = asyncHandler(async (req, res) => {
     res.status(200).json({ message: 'Logout User'})
 })
 
-//@desc Get user profile
 //route GET /api/users/profile
-//@access Private
+
 const getUserProfile = asyncHandler(async (req, res) => {
     const user = {
         _id: req.user._id,
@@ -127,9 +113,8 @@ const getUserProfile = asyncHandler(async (req, res) => {
     res.status(200).json(user)
 })
 
-//@desc Update user profile
 //route PUT /api/users/profile
-//@access Private
+
 const updateUserProfile = asyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id)
 

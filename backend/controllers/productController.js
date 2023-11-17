@@ -13,45 +13,45 @@ const gettingProducts = asyncHandler(async (req, res) => {
 
 })
 
-const getTokenFrom = request => {
-    const authorization = request.get('authorization')
-    if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
-      console.log("hola")
-      return authorization.substring(7)
-    }
-    return null
+const addingProducts = asyncHandler(async (req, res) => {
+  const recipe = new Product(req.body)
+  try{
+      const response = await recipe.save()
+      res.json(response)
+  } catch (err){
+      res.json(err)
   }
+})
 
-const addingProducts =  async (req, res) => {
-    const body = req.body
-    const token = getTokenFrom(req)
-    console.log(token)
-    const decodedToken = jwt.verify(token, process.env.JWT_SECRET)
-    if (!token || !decodedToken.id) {
-        return res.status(401).json({ error: 'token missing or invalid' })
-    }
-    const user = await User.findById(decodedToken.id)
+// const addingProducts =  async (req, res) => {
+//     const body = req.body
+//     const token = getTokenFrom(req)
+//     const decodedToken = jwt.verify(token, process.env.JWT_SECRET)
+//     if (!token || !decodedToken.id) {
+//         return res.status(401).json({ error: 'token missing or invalid' })
+//     }
+//     const user = await User.findById(decodedToken.id)
 
-    const product = new Product({
-        title: body.title,
-        description: body.description,
-        image: body.image,
-        color: body.color,
-        size: body.size,
-        material: body.material,
-        instructions: body.instructions,
-        price: body.price,
-        user: user._id
-    })
+//     const product = new Product({
+//         title: body.title,
+//         description: body.description,
+//         image: body.image,
+//         color: body.color,
+//         size: body.size,
+//         material: body.material,
+//         instructions: body.instructions,
+//         price: body.price,
+//         user: user._id
+//     })
 
-    const savedProduct = await product.save()
-    user.products = user.products.concat(savedProduct._id)
-    await user.save()
+//     const savedProduct = await product.save()
+//     user.products = user.products.concat(savedProduct._id)
+//     await user.save()
     
-    res.json(savedProduct)
-}
+//     res.json(savedProduct)
+// }
 
-const gettingUniqueProducts = asyncHandler(async (req, res) => {
+const gettingUniqueProducts = async (req, res) => {
     try {
         const product = await Product.findById(req.params.id);
         if (!product) {
@@ -61,7 +61,7 @@ const gettingUniqueProducts = asyncHandler(async (req, res) => {
     } catch (err) {
         res.status(500).json({ error: 'Server error' });
     }
-});
+};
 
 const saveProducts = asyncHandler(async (req, res) => {
     try{

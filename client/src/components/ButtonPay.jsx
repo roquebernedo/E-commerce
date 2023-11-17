@@ -4,7 +4,6 @@ import { Link } from "react-router-dom"
 const ButtonPay = ({ cartItems }) => {
 
     const url = 'https://ecommerce-moez.onrender.com'
-
     const handlecheckout = () => {
         axios.post(`${url}/api/stripe/create-checkout-session`, {
             cartItems
@@ -17,7 +16,7 @@ const ButtonPay = ({ cartItems }) => {
 
     return ( 
         <>
-            <Link className="button-check" onClick={() => handlecheckout()}>PROCEED TO CHECK</Link>
+            <Link className="button-check common-button-styles" onClick={() => handlecheckout()}>PROCEED TO CHECK</Link>
         </>
     );
 }

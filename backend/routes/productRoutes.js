@@ -1,6 +1,5 @@
 import express from 'express'
 import { addingProducts, gettingProducts, gettingUniqueProducts, saveProducts, updateProduct } from '../controllers/productController.js'
-import { userExtractor, tokenExtractor } from "../middleware/authMiddleware.js"
 
 const router = express.Router()
 

@@ -18,7 +18,6 @@ const Product = () => {
   const [quantity, setQuantity] = useState(1)
    // eslint-disable-next-line no-unused-vars
   const [savedProducts, setSavedProducts] = useState([])
-  //const products = useSelector(state => state.cart.products)
   // eslint-disable-next-line no-unused-vars
   const userID = useGetUserID()
   // eslint-disable-next-line no-unused-vars
@@ -33,10 +32,9 @@ const Product = () => {
         } catch (error) {
             console.log(error);
         } finally {
-          // Establecer el estado de carga como falso después de 2 segundos
           setTimeout(() => {
             setLoading(false);
-          }, );
+          }, 0);
         }
     };
     
@@ -44,13 +42,11 @@ const Product = () => {
   }, [productID]);
 
   if (loading) {
-    // Mostrar un mensaje de carga o componente de carga
     return <p>Cargando...</p>;
   }
 
   return (
     <div className='main-product'>
-      
       <div className='top-product'>
             <Link className='link-arrow' to="/"><AiOutlineArrowLeft className='arrow-left' /></Link>
             <div className='product-title'>{product.title}</div>
@@ -104,10 +100,8 @@ const Product = () => {
                     price: product.price,
                     img: product.image,
                     quantity,
-                  }))}>ADD TO CART</button>
-              </div>
-              <div>
-                
+                    }))}>ADD TO CART
+                  </button>
               </div>
             </div>
         </div>

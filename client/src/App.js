@@ -6,7 +6,6 @@ import {
 import Products from './pages/Products';
 import Add from './pages/Add';
 import Update from './pages/Update';
-import './style.css'
 import Navbar from "./Navbar/Navbar";
 import Footer from "./Footer/Footer";
 import Product from "./pages/Product";

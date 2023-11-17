@@ -2,10 +2,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 250px;
-    margin: 0 auto;
-    margin-top: 89px;
-    margin-bottom: 89px;
+    width: 14%;
+    margin: 89% auto;
     padding: 20px 135px 30px 135px;
     border: 1px solid #ccc;
     font-family: "Nunito Sans", sans-serif;
@@ -67,18 +65,23 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 250px;
-            height: 40px;
+            width: 65%;
+            padding: 12px 0;
             border: none;
             background-color: #2879fe;
             color: white;
             border-radius: 5px;
+            cursor: pointer;
             @media (max-width: 450px) {
                 width: 180px;
             }
             @media (max-width: 375px) {
                 width: 150px;
             }
+        }
+
+        .sign:hover{
+            opacity: 0.8;
         }
     }
 

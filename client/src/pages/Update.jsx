@@ -26,8 +26,8 @@ const Update = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        //const response = await axios.get("https://ecommerce-vv1c.onrender.com/products/" + productId);
-        const response = await axios.get("https://ecommerce-vv1c.onrender.com/product/" + productId);
+
+        const response = await axios.get("http://localhost:8000/product/" + productId);
         setProductData(response.data);
         setProduct(response.data)
         
@@ -46,8 +46,7 @@ const Update = () => {
   const handleClick = async e => { // si se hace api request se usa "async"
     e.preventDefault() // previene que se actualice
     try{
-        //await axios.put("https://ecommerce-vv1c.onrender.com/products/"+ productId, product)
-        await axios.put("https://ecommerce-vv1c.onrender.com/products/"+ productId, product)
+        await axios.put("https://ecommerce-moez.onrender.com/products/"+ productId, product)
         navigate("/")// sirve para navegar por el homepage
     }catch(err){
         console.log(err)
@@ -57,7 +56,7 @@ const Update = () => {
   return (
     <div className='form'>
       <div className='menu-add'>
-        <h1 className='new-product'>Add New Product</h1>
+        <h1 className='new-product'>Eddit Product</h1>
         <div className='div-product'>Title: </div>
         <input className='title-product' type='text' onChange={handleChange} name='title' value={product.title}/>
         <div className='div-product'>Description: </div>
@@ -74,7 +73,7 @@ const Update = () => {
         <textarea className='instructions-product' onChange={handleChange} name='instructions' value={product.instructions}/>
         <div className='div-product'>Price: </div>
         <input className='price-product' type='number' onChange={handleChange} name='price' value={product.price}/>
-        <button className='formButton' onClick={handleClick}>Add</button>
+        <button className='formButton' onClick={handleClick}>Edit</button>
       </div>
     </div>
   )

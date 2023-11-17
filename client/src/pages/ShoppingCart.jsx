@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { AiOutlineArrowLeft } from "react-icons/ai"
 import '../styles/ShoppingCart.scss'
 import { removeItem } from '../redux/cartReducer'
-import ButtonPay from './ButtonPay';
+import ButtonPay from '../components/ButtonPay';
 
 const ShoppingCart = () => {
 

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { AiFillDelete } from "react-icons/ai"
 import { removeItem, resetCart } from '../redux/cartReducer'
 import '../styles/Cart.scss'
-import ButtonPay from './ButtonPay'
+import ButtonPay from '../components/ButtonPay'
 
 function Cart() {
   
@@ -23,7 +23,7 @@ function Cart() {
       {products?.map(product => 
         (
           <div key={product.id} className='itemcart'>
-            <img style={{ width: '100px', height: '100px'}} src={product.img} alt='' className='image'/>
+            <img src={product.img} alt='' className='image'/>
             <div className='details'>
               <h1>{product.title.substring(0,16)}</h1>
               <div>{product.desc?.substring(0, 22)}</div>
@@ -42,9 +42,9 @@ function Cart() {
       </div>
       
       <div className='buttons-cart'>
-        <Link onClick={() => dispatch(resetCart())} className='reset'>RESET CART</Link>
+        <Link onClick={() => dispatch(resetCart())} className='reset common-button-styles'>RESET CART</Link>
         <ButtonPay cartItems={products}/>
-        <Link className='link-arrow' to="/shopping">VIEW CART</Link>
+        <Link className='link-arrow common-button-styles' to="/shopping">VIEW CART</Link>
       </div>
     </div>
   )
