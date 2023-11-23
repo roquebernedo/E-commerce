@@ -12,13 +12,20 @@ body{
 
     .menu{
         display: flex;
-        justify-content: space-between;
         align-items: center;
         width: 80%;
+
+        @media (max-width: 1000px) {
+            width: 100%;
+        }
 
         .log-reg{
             display: flex;  
             gap: 15px;
+            flex: 1;
+            @media (max-width: 1000px) {
+                display: none;
+            }
             
             .sign{
                 text-decoration: none;
@@ -66,9 +73,13 @@ body{
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding-left: 90px;
             line-height: 1;
             color: #213547;
+            flex: 1;
+            @media (max-width: 1000px) {
+                align-items: flex-start;
+                margin-left: 30px;
+            }
 
             .mainTitle{
                 font-size: 2.5rem;
@@ -79,12 +90,17 @@ body{
             .secondaryTitle{
                 margin: 0;
                 font-size: 1.3rem;
+                @media (max-width: 1000px) {
+                    margin-left: 30px;
+                }
             }
         }
 
         .button-icon{
             display: flex;
             gap: 20px;
+            justify-content: flex-end;
+            flex: 1;
             
             .buttons{
                 display: flex;
@@ -96,11 +112,23 @@ body{
                     border-radius: 10px;
                     padding: 6px;
                     border: 1px solid transparent;
+
+                    @media (max-width: 1000px) {
+                        display: none;
+                    }
                 }
 
                 .itemsMenu:hover{
                     color: #5684FD;
                     border: 1px solid #5684FD;
+                }
+
+                .menu-responsive{
+                    display: none;
+                    @media (max-width: 1000px) {
+                        display: flex;
+                        font-size: 1.5rem;
+                    }
                 }
             }
             .cartIcon{
@@ -110,6 +138,7 @@ body{
                 align-items: center;
                 font-size: 18px;
                 position: relative;
+                cursor: pointer;
     
                 .number{
                     display: flex;
@@ -124,6 +153,9 @@ body{
                     position: absolute;
                     right: -11px;
                     top: 0px;
+                    @media (max-width: 1000px) {
+                        top: -5px;
+                    }
                 }
 
                 .car:hover{

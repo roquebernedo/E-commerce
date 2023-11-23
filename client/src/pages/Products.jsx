@@ -32,7 +32,7 @@ const Products = () => {
         <div className='subTitle'>
             <div className='subMidle'>
                 <div className='collection first'>
-                    Collection <img alt='imagenquecata' className='icon' src='//store.figma.com/cdn/shop/t/9/assets/word-symbol-hourglass.static.svg?v=133626873782927219541678219731' /> of T-shirts <img className='icon' alt='imagenquecata' src='//store.figma.com/cdn/shop/t/9/assets/word-symbol-zag.static.svg?v=102718930007740203771678219731'/>
+                    <span>Collection</span><img alt='imagenquecata' className='icon' src='//store.figma.com/cdn/shop/t/9/assets/word-symbol-hourglass.static.svg?v=133626873782927219541678219731' /> of T-shirts <img className='icon' alt='imagenquecata' src='//store.figma.com/cdn/shop/t/9/assets/word-symbol-zag.static.svg?v=102718930007740203771678219731'/>
                 </div>
                 <div className='collection second'>
                     and <img className='icon' alt='imagenquecata' src='//store.figma.com/cdn/shop/t/9/assets/word-symbol-dots.static.svg?v=39142388321885661271678219731' /> components 

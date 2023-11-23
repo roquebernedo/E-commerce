@@ -7,6 +7,7 @@ import { useLogoutMutation } from '../slices/usersApiSlice';
 import { logout } from '../slices/authSlice';
 import { AiOutlineShoppingCart } from "react-icons/ai"
 import Cart from '../pages/Cart';
+import { AiOutlineMenu } from "react-icons/ai"
 
 const Navbar = () => {
 
@@ -68,6 +69,7 @@ const Navbar = () => {
                 <Link className='itemsMenu' to='/'><div>Home</div></Link>
                 <Link className='itemsMenu' onClick={() => handleScroll('footer')}><div>About</div></Link>
                 <Link className='itemsMenu' onClick={() => handleScroll('type-products')}><div>Shop</div></Link>
+                <Link className='menu-responsive'><AiOutlineMenu /></Link>
               </div>
               <div className='cartIcon' onClick={() => setOpen(!open)}>
                   <AiOutlineShoppingCart className='car'/>
