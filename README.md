@@ -27,7 +27,8 @@ Checkout with Stripe
 ![image](https://github.com/roquebernedo/E-commerce/assets/128245208/6dcca973-94d4-4c5f-9445-0ffc2f249edd)
 
 Responsive Design
-![image](https://github.com/roquebernedo/E-commerce/assets/128245208/0ac9ddf5-3fb2-45fe-b747-6b248ddd86bc)
+![image](https://github.com/roquebernedo/E-commerce/assets/128245208/5b03d104-fda4-402a-afe8-1e01bff704ae)
+
 
 
 
