@@ -41,7 +41,7 @@ If you want to play around with YoDaddy, feel free to clone our repo. To start, 
   <p>cd backend -> npm install -> npm start</p>
 </div>
 
-## Thanks for trying this ecommerce!
+## THANKS FOR TRYING THIS ECOMMERCE!
 
 
 
