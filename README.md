@@ -34,10 +34,12 @@ Checkout with Stripe
 ## Setup
 If you want to play around with YoDaddy, feel free to clone our repo. To start, please enter the following commands on your terminal:
 
-git clone https://github.com/roquebernedo/E-commerce.git
-cd E-commerce
-cd client -> npm install -> npm start
-cd backend -> npm install -> npm start
+<div>
+  <p>git clone https://github.com/roquebernedo/E-commerce.git</p>
+  <p>cd E-commerce</p>
+  <p>cd client -> npm install -> npm start</p>
+  <p>cd backend -> npm install -> npm start</p>
+</div>
 
 ## Thanks for trying this ecommerce!
 
