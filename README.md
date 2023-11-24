@@ -28,8 +28,9 @@ Checkout with Stripe
 
 <div styles="display: flex, flex-direction: column;">
   <div>Responsive Design</div>
-  <div>![image](https://github.com/roquebernedo/E-commerce/assets/128245208/5b03d104-fda4-402a-afe8-1e01bff704ae</div>
+  ![image](https://github.com/roquebernedo/E-commerce/assets/128245208/57e1197a-32dc-4fe4-ae3e-5a93a10be983)
 </div>
+
 
 
 
