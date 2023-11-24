@@ -28,8 +28,8 @@ Checkout with Stripe
 
 
 <div>Responsive Design</div>
-
 ![image](https://github.com/roquebernedo/E-commerce/assets/128245208/57e1197a-32dc-4fe4-ae3e-5a93a10be983)
+
 
 
 
