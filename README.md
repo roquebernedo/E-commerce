@@ -20,3 +20,15 @@ Here is a view of the [e-commerce](https://ecommerce-rq.netlify.app/)
 Single Product Page
 ![image](https://github.com/roquebernedo/E-commerce/assets/128245208/f184dc26-17a0-4070-ad7e-9c5eb47beca5)
 
+View Cart
+![image](https://github.com/roquebernedo/E-commerce/assets/128245208/98755326-776c-4ef9-80c3-b896b04d06b7)
+
+Checkout with Stripe
+![image](https://github.com/roquebernedo/E-commerce/assets/128245208/6dcca973-94d4-4c5f-9445-0ffc2f249edd)
+
+Responsive Design
+![image](https://github.com/roquebernedo/E-commerce/assets/128245208/0ac9ddf5-3fb2-45fe-b747-6b248ddd86bc)
+
+
+
+
