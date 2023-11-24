@@ -12,3 +12,6 @@ Among the highlighted features, you'll find:
   <li>Fully functioning checkout enabled with Stripe API</li>
   <li>T-shirts on sale!</li>
 </ul>
+
+## Deployed on Netlify(Front-End) and Render(Back-End)
+Here is a view of the [e-commerce](https://ecommerce-rq.netlify.app/)
