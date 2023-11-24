@@ -31,6 +31,9 @@ Checkout with Stripe
 
 ![image](https://github.com/roquebernedo/E-commerce/assets/128245208/57e1197a-32dc-4fe4-ae3e-5a93a10be983)
 
+## Setup
+If you want to play around with YoDaddy, feel free to clone our repo. To start, please enter the following commands on your terminal:
+
 
 
 
