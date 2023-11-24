@@ -26,7 +26,7 @@ View Cart
 Checkout with Stripe
 ![image](https://github.com/roquebernedo/E-commerce/assets/128245208/6dcca973-94d4-4c5f-9445-0ffc2f249edd)
 
-<div>
+<div styles="display: flex, flex-direction: column;">
   <div>Responsive Design</div>
   <div>![image](https://github.com/roquebernedo/E-commerce/assets/128245208/5b03d104-fda4-402a-afe8-1e01bff704ae</div>
 </div>
