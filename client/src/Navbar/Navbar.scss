@@ -101,6 +101,9 @@ body{
             gap: 20px;
             justify-content: flex-end;
             flex: 1;
+            @media (max-width: 1000px) {
+                margin-right: 25px;
+            }
             
             .buttons{
                 display: flex;

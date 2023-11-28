@@ -76,10 +76,8 @@ const Navbar = () => {
                   <span className='number'>{products.length}</span>
               </div>
             </div>
-            
       </div>
       {open && <Cart/>}
-      
     </div>
   )
 }
