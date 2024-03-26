@@ -68,7 +68,7 @@ const Navbar = ({ filter, setFilter }) => {
   console.log(filter)
 
   function recargarPagina() {
-    window.location.reload();
+    window.location.href = '/results'
   }
 
   const handleMenu = () => {
