@@ -68,7 +68,7 @@ const Navbar = ({ filter, setFilter }) => {
   console.log(filter)
 
   function recargarPagina() {
-    window.location.href = '/results'
+    window.location.reload();
   }
 
   const handleMenu = () => {
@@ -130,7 +130,7 @@ const Navbar = ({ filter, setFilter }) => {
           <Link onClick={() =>  setTimeout(recargarPagina, 100)} className='submenu home' to='/'>
             <div>Home</div>
           </Link>
-          <Link to='/results' onClick={() =>  setTimeout(recargarPagina, 100)} className='submenu shop'>
+          <Link to='/results' className='submenu shop'>
             <div>Tienda</div>
           </Link>
           <Link to='/us' onClick={() =>  setTimeout(recargarPagina, 100)} className='submenu us' >
