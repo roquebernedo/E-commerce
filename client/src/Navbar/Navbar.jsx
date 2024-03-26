@@ -127,16 +127,16 @@ const Navbar = ({ filter, setFilter }) => {
       {open && <Cart/>}
       <div className='menu-buttons-container'>
         <div className='menu-buttons'>
-          <Link className='submenu home' to='/'>
+          <Link onClick={() =>  setTimeout(recargarPagina, 100)} className='submenu home' to='/'>
             <div>Home</div>
           </Link>
-          <Link onClick={() =>  setTimeout(recargarPagina, 100)} className='submenu shop' to='/results'>
+          <Link to='/results' onClick={() =>  setTimeout(recargarPagina, 100)} className='submenu shop'>
             <div>Tienda</div>
           </Link>
-          <Link onClick={() =>  setTimeout(recargarPagina, 100)} className='submenu us' to='/us'>
+          <Link to='/us' onClick={() =>  setTimeout(recargarPagina, 100)} className='submenu us' >
             <div>Nosotros</div>
           </Link>
-          <Link onClick={() =>  setTimeout(recargarPagina, 100)} className='submenu questions' to='/questions'>
+          <Link to='/questions' onClick={() =>  setTimeout(recargarPagina, 100)} className='submenu questions'>
             <div>Preguntas Frecuentes</div>
           </Link>
         </div>
