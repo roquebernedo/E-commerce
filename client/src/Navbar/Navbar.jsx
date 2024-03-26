@@ -127,7 +127,7 @@ const Navbar = ({ filter, setFilter }) => {
       {open && <Cart/>}
       <div className='menu-buttons-container'>
         <div className='menu-buttons'>
-          <Link onClick={() =>  setTimeout(recargarPagina, 100)} className='submenu home' to='/'>
+          <Link className='submenu home' to='/'>
             <div>Home</div>
           </Link>
           <Link onClick={() =>  setTimeout(recargarPagina, 100)} className='submenu shop' to='/results'>
