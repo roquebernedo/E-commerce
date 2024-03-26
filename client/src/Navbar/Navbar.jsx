@@ -95,7 +95,7 @@ const Navbar = ({ filter, setFilter }) => {
         </div>
         { userInfo ? (
           <div className='log-reg'>
-            <Link onClick={() =>  setTimeout(recargarPagina, 100)} className='sign profile' to='/profile'>
+            <Link onClick={() =>  setTimeout(recargarPagina, 1000)} className='sign profile' to='/profile'>
               <svg className='svg' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="18" role="presentation" alt="" data-testid="UserIcon" size="18" color="currentColor"><path d="M16.22 19.41A9.71 9.71 0 1 1 26 9.7a9.74 9.74 0 0 1-9.8 9.71M1.84 32a10.88 10.88 0 0 1 10.94-10.74h6.57A10.88 10.88 0 0 1 30.29 32H1.84" fill="currentColor"></path></svg>
               <div className='userinfo'>{userInfo.name}</div>
             </Link>
@@ -133,10 +133,10 @@ const Navbar = ({ filter, setFilter }) => {
           <Link to='/results' className='submenu shop'>
             <div>Tienda</div>
           </Link>
-          <Link to='/us' onClick={() =>  setTimeout(recargarPagina, 100)} className='submenu us' >
+          <Link to='/us' className='submenu us' >
             <div>Nosotros</div>
           </Link>
-          <Link to='/questions' onClick={() =>  setTimeout(recargarPagina, 100)} className='submenu questions'>
+          <Link to='/questions' className='submenu questions'>
             <div>Preguntas Frecuentes</div>
           </Link>
         </div>
