@@ -1,36 +1,26 @@
 import {
   RouterProvider,
-  Outlet,
   createBrowserRouter
 } from "react-router-dom"
 import Products from './pages/Products';
 import Add from './pages/Add';
 import Update from './pages/Update';
-import Navbar from "./Navbar/Navbar";
-import Footer from "./Footer/Footer";
 import Product from "./pages/Product";
 import Login from "./pages/Login";
-import { ToastContainer } from 'react-toastify'
-import 'react-toastify/dist/ReactToastify.css'
 import Register from "./pages/Register";
 import Profile from "./pages/Profile";
 import PrivateRoute from "./components/PrivateRoute";
 import Cart from "./pages/Cart.jsx"
 import CheckoutSuccess from "./pages/CheckoutSuccess";
 import ShoppingCart from "./pages/ShoppingCart";
-
-const Layout = () => {
-  return (
-    <>
-      <Navbar/>
-      <ToastContainer/>
-      <Outlet/>
-      <Footer/>
-    </>
-  )
-}
+import React from 'react'
+import Layout from "./Layout.js";
+import Items from "./pages/Items.jsx";
+import Us from "./pages/Us.jsx";
+import Faqs from "./pages/Faqs.jsx";
 
 const router = createBrowserRouter([
+  
   {
     path: "/",
     element: <Layout/>,
@@ -38,6 +28,18 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <Products/>
+      },
+      {
+        path: "/results",
+        element: <Items/>
+      },
+      {
+        path: "/questions",
+        element: <Faqs />
+      },
+      {
+        path: "/us",
+        element: <Us/>
       },
       {
         path: "/cart",

@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { useRegisterMutation } from '../slices/usersApiSlice';
 import { setCredentials } from '../slices/authSlice';
 import '../styles/Register.scss'
-import FormInfo from '../components/FormInfo';
+import RegisterInfo from '../components/RegisterInfo';
 
 const Register = () => {
   const [name, setName] = useState('');
@@ -42,52 +42,16 @@ const Register = () => {
   };
 
   return (
-    <div className='register'>
-      <h1 className='title-register'>Sign Up</h1>
-
+    <div className='register-in'>
       <form className='form-reg' onSubmit={submitHandler}>
-        <FormInfo
-          classForm={'login-reg'}
-          title={'Name'}
-          type={'text'}
-          value={name}
-          setItem={setName}
+        <RegisterInfo
+          setName={setName}
+          setEmail={setEmail}
+          setPassword={setPassword}
+          setConfirmPassword={setConfirmPassword}
         />
-
-        <FormInfo 
-          classForm={'login-reg'}
-          title={'Email Address'}
-          type={'email'}
-          value={email}
-          setItem={setEmail}
-        />
-        
-        <FormInfo 
-          classForm={'login-reg'}
-          title={'Password'}
-          type={'password'}
-          value={password}
-          setItem={setPassword}
-        />
-        
-        <FormInfo 
-          classForm={'login-reg'}
-          title={'Confirm Password'}
-          type={'password'}
-          value={confirmPassword}
-          setItem={setConfirmPassword}
-        />
-
         { isLoading && <h2>Loading..</h2>}
-
-        <button className='sign log'>
-          Sign Up
-        </button>
       </form>
-
-      <div className='new'>
-          Already have an Account? <Link className='log-link' to='/login'>Login</Link>
-      </div>
     </div>
   );
 };

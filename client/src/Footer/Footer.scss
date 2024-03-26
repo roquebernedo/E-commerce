@@ -1,10 +1,11 @@
 .footer{
     display: flex;
     justify-content: center;
-    background-color: rgb(199, 185, 255);
+    background-color: #131212;
     font-family: "Nunito Sans", sans-serif;
     padding: 25px 0;
-
+    position: absolute;
+    
     .box-footer{
         display: flex;
         width: 88%;
@@ -29,7 +30,7 @@
             }
             
             .name-footer{
-                color: #000000;
+                color: #ffffff;
                 font-size: 2rem;
                 text-transform: uppercase;
                 font-weight: 700;
@@ -40,15 +41,43 @@
             }
 
             .text{
-                color: #000000;
+                color: #ffffff;
                 margin: 0;
+            }
+        }
+        
+        .middle{
+            width: 25%;
+            @media (max-width: 766px) {
+                width: 50%;
+            }
+            @media (max-width: 425px) {
+                width: 75%;
+            }
+            
+            .middle-subscribe{
+                display: inline;
+                width: 100%;
+
+                .label-subscribe{
+                    color: #ffffff;
+                    font-size: 1rem;
+                    .input-subscribe{
+                        padding: 5px 0;
+                        width: 70%;
+                        @media (max-width: 766px) {
+                            width: 100%;
+                        }
+                    }
+                }
             }
         }
 
         .right{
             display: flex;
-            color: #000000;
+            color: #ffffff;
             gap: 1rem;
+            width: 25%;
 
             .option{
                 font-size: 0.9rem;

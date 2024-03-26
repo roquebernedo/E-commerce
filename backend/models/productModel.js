@@ -9,28 +9,33 @@ const productSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    image: {
+    brand: {
         type: String,
         required: true
     },
-    color: {
+    category: {
         type: String,
-        required: true
+        required:true
     },
-    size: {
-        type: String,
+    stock:{
+        type: Number,
         required: true
-    },
-    material: {
-        type: String,
-        required: true
-    },
-    instructions: {
-        type: String,
-        required: true
-    },
+    },  
+    main_features: [String],
     price: {
         type: Number,
+        required: true
+    },
+    discount: {
+        type: Number,
+        required: true
+    },
+    date: {
+        type: String,
+        required: true
+    },
+    image: {
+        type: String,
         required: true
     },
     user: [
@@ -39,7 +44,6 @@ const productSchema = mongoose.Schema({
           ref: 'User'
         }
     ]
-    
 }, {
     timestamps: true
 })

@@ -1,0 +1,31 @@
+.menuResponsive{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    right: 0;
+    top: 50px;
+    z-index: 999;
+    background-color: #000000;
+    padding: 20px;
+    color: azure;
+    @media (max-width: 475px) {
+        width: 100%;
+    }
+
+    .buttonsResponsive{
+        
+        .buttonResponsive{
+            color: #ffffff;
+            padding: 20px;
+            div{
+                padding: 5px 0;
+            }
+        }
+
+        .hide{
+            @media (min-width: 476px) {
+                display: none;
+            }
+        }
+    }
+}

@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken"
 
 const gettingProducts = asyncHandler(async (req, res) => {
     try{
+        console.log("hola")
         const response = await Product.find({}).populate('user', { name: 1, email: 1 })
         res.json(response)
     } catch (err){

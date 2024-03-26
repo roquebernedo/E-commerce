@@ -27,7 +27,7 @@ const Update = () => {
     const fetchProduct = async () => {
       try {
 
-        const response = await axios.get("http://localhost:8000/product/" + productId);
+        const response = await axios.get("https://ecommerce-moez.onrender.com/product/" + productId);
         setProductData(response.data);
         setProduct(response.data)
         

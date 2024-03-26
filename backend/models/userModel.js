@@ -1,5 +1,4 @@
 import mongoose from "mongoose"
-import mongooseUniqueValidator from "mongoose-unique-validator"
 
 const userSchema = new mongoose.Schema({
     name: {
@@ -25,7 +24,6 @@ const userSchema = new mongoose.Schema({
     timestamps: true
 })
 
-userSchema.plugin(mongooseUniqueValidator)
 
 userSchema.set('toJSON', {
     transform: (document, returnedObject) => {

@@ -1,11 +1,19 @@
 import { useState, useEffect} from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import { useLoginMutation } from '../slices/usersApiSlice.js';
 import { setCredentials } from '../slices/authSlice.js';
 import { toast } from 'react-toastify';
 import '../styles/Login.scss'
 import FormInfo from '../components/FormInfo.jsx';
+import { css } from '@emotion/react';
+import { CircleLoader } from 'react-spinners';
+
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+`;
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -26,46 +34,31 @@ const Login = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
+    
     try{
       const res = await login({ email, password }).unwrap()
       dispatch(setCredentials({...res}))
       navigate('/')
+      toast.success('Logeado exitosamente!')
     }catch(err){
       toast.error(err?.data?.message || err.error)
     }
   };
 
   return (
-    <div className='login'>
-      <h1>Sign In</h1>
-
-      <form onSubmit={submitHandler}>
-        <FormInfo 
-          classForm={'email log'}
-          title={'Email Address'}
-          type={'email'}
-          value={email}
-          setItem={setEmail}
-        />
-        <FormInfo 
-          classForm={'pass log'}
-          title={'Password'}
-          type={'password'}
-          value={password}
-          setItem={setPassword}
-        />
-
-        { isLoading && <h2>Loading..</h2> }
-
-        <button className='sign log' type='submit'>
-          Sign In
-        </button>
-      </form>
-
-        <div className='new'>
-          New Customer? <Link className='reg-link' to='/register'>Register</Link>
-        </div>
-      
+    <div className='login-in'>
+      {isLoading ? (
+          <div className='loader'>
+            <CircleLoader color={'#157dc2'} loading={true} css={override} size={75} />
+          </div>
+        ):
+        <form onSubmit={submitHandler}>
+          <FormInfo 
+            setPassword={setPassword}
+            setEmail={setEmail}
+          />
+        </form>
+        }
     </div>
   );
 };

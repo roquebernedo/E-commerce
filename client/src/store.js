@@ -19,8 +19,10 @@ const persistConfig = {
     version: 1,
     storage,
 }
+console.log(persistConfig)
 
 const persistedReducer = persistReducer(persistConfig, cartReducer)
+
 
 export const store = configureStore({
     reducer: {
