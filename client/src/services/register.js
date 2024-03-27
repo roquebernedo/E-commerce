@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = '/api/users'
+const baseUrl = 'https://ecommerce-moez.onrender.com/api/users'
 
 // const register = async (newObject) => {
 //     const response = await axios.post(baseUrl, newObject)
