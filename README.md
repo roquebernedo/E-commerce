@@ -15,8 +15,7 @@ Among the highlighted features, you'll find:
 
 ## Deployed on Netlify(Front-End) and Render(Back-End)
 Here is a view of the [e-commerce](https://ecommerce-rq.netlify.app/)
-![image](![image](https://github.com/roquebernedo/E-commerce/assets/128245208/ba4fea07-8b9f-4a32-8304-dee16f905bd0)
-)
+![image](https://github.com/roquebernedo/E-commerce/assets/128245208/ba4fea07-8b9f-4a32-8304-dee16f905bd0)
 
 Single Product Page
 ![image](https://github.com/roquebernedo/E-commerce/assets/128245208/f184dc26-17a0-4070-ad7e-9c5eb47beca5)
