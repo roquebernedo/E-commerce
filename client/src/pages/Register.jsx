@@ -1,23 +1,30 @@
-import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { useRegisterMutation } from '../slices/usersApiSlice';
-import { setCredentials } from '../slices/authSlice';
 import '../styles/Register.scss'
-import RegisterInfo from '../components/RegisterInfo';
-import FormInfo from '../components/FormInfo';
+import { css } from '@emotion/react';
 import { register as registerService} from '../services/register'
-import axios from 'axios';
+import { CircleLoader } from 'react-spinners';
+import RegisterInfo from '../components/RegisterInfo';
+
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+`;
 
 const Register = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  // eslint-disable-next-line no-unused-vars
   const [confirmPassword, setConfirmPassword] = useState('');
   const navigate = useNavigate()
-  const dispatch = useDispatch()
+// eslint-disable-next-line no-unused-vars
   const { userInfo } = useSelector((state) => state.auth)
+  // eslint-disable-next-line no-unused-vars
   const [register, { isLoading }] = useRegisterMutation()
   const [users, setUsers] = useState([])
 
@@ -58,48 +65,22 @@ const Register = () => {
   }
 
   return (
-    <div className='register'>
-      <h1 className='title-register'>Sign Up</h1>
+    <div className='register-in'>
+      { isLoading ?
+        <div className='loader'>
+          <CircleLoader color={'#157dc2'} loading={true} css={override} size={75} />
+        </div>  
+        :
       <form className='form-reg' onSubmit={addBlog}>
-        <FormInfo
-            classForm={'login-reg'}
-            title={'Name'}
-            type={'text'}
-            value={name}
-            setItem={setName}
-          />
-
-          <FormInfo 
-            classForm={'login-reg'}
-            title={'Email Address'}
-            type={'email'}
-            value={email}
-            setItem={setEmail}
-          />
-
-          <FormInfo 
-            classForm={'login-reg'}
-            title={'Password'}
-            type={'password'}
-            value={password}
-            setItem={setPassword}
-            />
-            <FormInfo 
-            classForm={'login-reg'}
-            title={'Confirm Password'}
-            type={'password'}
-            value={confirmPassword}
-            setItem={setConfirmPassword}
-          />
-          { isLoading && <h2>Loading..</h2>}
-          <button className='sign log'>
-            Sign Up
-          </button>
+        <RegisterInfo
+            setName={setName}
+            setEmail={setEmail}
+            setPassword={setPassword}
+            setConfirmPassword={setConfirmPassword}
+          /> 
       </form>
-      <div className='new'>
-        Already have an Account? <Link className='log-link' to='/login'>Login</Link>
-      </div>
-      </div>
+      }
+    </div>
   );
 };
 

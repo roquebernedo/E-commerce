@@ -1,9 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const RegisterInfo = ({ setEmail, setPassword, setName, setConfirmPassword, submitHandler }) => {
+const RegisterInfo = ({ setEmail, setPassword, setName, setConfirmPassword }) => {
     return(
-        <form className='form-reg' onSubmit={submitHandler}>
+        <div className="login">
             <section className='login-container'> 
             <div className='login-title'>
                 <h1 className='title'>Sign up</h1>
@@ -31,7 +31,7 @@ const RegisterInfo = ({ setEmail, setPassword, setName, setConfirmPassword, subm
                 <Link className='login-create' to='/login'>regresar</Link>
             </div>
             </section>
-        </form>
+        </div>
     )
 }
 
