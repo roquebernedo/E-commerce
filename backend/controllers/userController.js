@@ -13,11 +13,15 @@ const getUser = async (req, res) => {
 }
 
 const authUser = async (req, res) => {
-    const body = req.body
-    const user = await User.findOne({ email: body.email })
-    const passwordCorrect = user === null
+    const { email, password } = req.body
+    const user = await User.findOne({ email })
+    console.log(user)
+    console.log(user.passwordHash)
+    console.log(password)
+    console.log(email)
+    const passwordCorrect = user === null   
         ? false
-        : await bcrypt.compare(body.password, user.passwordHash)
+        : await bcrypt.compare(password, user.passwordHash)
     if (!(user && passwordCorrect)) {
         return res.status(401).json({
         error: 'invalid username or password'
@@ -45,31 +49,7 @@ const authUser = async (req, res) => {
 //route POST /api/users
 
 const registerUser = async (req, res) => {
-    // const { name, email, password } = req.body
-
-    // const userExists = await User.findOne({ email })
-
-    // if(userExists){
-    //     res.status(400).json({ message: "User already exists" })
-    //     return
-    // }
-
-    // const user = await User.create({
-    //     name,
-    //     email,
-    //     password
-    // })
-
-    // if(user){
-    //     generateToken(res, user._id)
-    //     res.status(201).json({
-    //         _id: user._id,
-    //         name: user.name,
-    //         email: user.email
-    //     })
-    // }else{
-    //     res.status(400).json({ message: "Invalid user data" })
-    // }
+    
     
     const body = req.body
     const saltRounds = 10
@@ -80,7 +60,7 @@ const registerUser = async (req, res) => {
     const user = new User({
         email: body.email,
         name: body.name,
-        passwordHash: passwordHash
+        passwordHash
     })
 
     console.log(user.password)
