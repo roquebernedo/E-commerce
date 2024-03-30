@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import '../styles/Filter.scss'
+
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'

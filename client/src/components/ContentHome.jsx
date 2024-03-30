@@ -6,9 +6,11 @@ import { MdOutlineComputer } from "react-icons/md";
 import { IoMdTabletLandscape } from "react-icons/io";
 import { SlEarphones } from "react-icons/sl";
 import { CiShop } from "react-icons/ci";
-import { Link } from 'react-router-dom';    
+import { Link, useNavigate } from 'react-router-dom';  
+import axios from 'axios';
 
-const ContentHome = () => {
+const ContentHome = ({ buttonsFromHome, setButtonsFromHome }) => {
+    const navigate = useNavigate()
     const countries = [
         {
           image: "../images/join.jpg",
@@ -39,7 +41,18 @@ const ContentHome = () => {
 
     const [current, setCurrent] = useState(0)
     const [autoPlay, setAutoPlay] = useState(true)
+    const [rates, setRates] = useState([])
     let timeout = null
+
+    useEffect(() => {
+        axios
+          .get("http://localhost:8000")
+          .then(response => {
+            setRates(response.data)
+          })
+      
+      }, [])
+  
 
     const slideRight = () => {
         setCurrent(current === countries.length - 1 ? 0 : current + 1)
@@ -66,6 +79,25 @@ const ContentHome = () => {
         // Retrasar la redirección por 500 milisegundos (medio segundo)
         setTimeout(scrollToTop, 500);
     }
+
+    const filtering = (category) => {
+            const filtered = rates.filter(person => 
+                category === 'Videojuegos' 
+                    ? person.category === 'Videojuegos' 
+                    : category === 'Celulares'
+                        ? person.category === 'Celulares'
+                        : category === 'Computadoras'
+                            ? person.category === 'Computadoras'
+                            : category === 'Tablets'
+                                ? person.category === 'Tablets'
+                                : category === 'Audio'
+                                    ? person.category === 'Audio'
+                                    : ''
+            );
+            console.log(filtered);
+            setButtonsFromHome(filtered);
+            navigate('/results')
+      }
 
   return (
     <>
@@ -95,26 +127,26 @@ const ContentHome = () => {
             </div>  
         </div>
         <section className='carousel-category'>
-            <Link className='list' to='/results' onClick={() => setTimeout(handleLinkClick, 0)}>
+            <Link className='list' to='/results' onClick={() => filtering('Videojuegos')}>
                 <div className='top-list videojuegos'><IoGameControllerOutline /></div>
-                <div className='bottom-list'>Video Juegos</div>
+                <div className='bottom-list'>VideoJuegos</div>
             </Link>
-            <Link className='list' to='/results'>
+            <Link className='list' to='/results' onClick={() => filtering('Celulares')}>
                 <div className='top-list celulares'><FiSmartphone /></div>
                 <div className='bottom-list'>Celulares</div>
             </Link>
-            <div className='list'>
+            <Link className='list' to='/results' onClick={() => filtering('Computadoras')}>
                 <div className='top-list computadoras'><MdOutlineComputer /></div>
                 <div className='bottom-list'>Computadoras</div>
-            </div>
-            <div className='list'>
+            </Link>
+            <Link className='list' to='/results' onClick={() => filtering('Tablets')}>
                 <div className='top-list tablets'><IoMdTabletLandscape /></div>
                 <div className='bottom-list'>Tablets</div>
-            </div>
-            <div className='list'>
+            </Link>
+            <Link className='list' to='/results' onClick={() => filtering('Audio')}>
                 <div className='top-list tablets'><SlEarphones /></div>
                 <div className='bottom-list'>Audio</div>
-            </div>
+            </Link>
         </section>
         <section className='news'>
             <div className='news-div'>
@@ -191,7 +223,7 @@ const ContentHome = () => {
                         </div>
                     </div>
                     <div className='news-list-games'>
-                        <div className='news-img'><img alt='' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNtssL9HzyFGr_M-4xw6ZPH7UBOdfoXEUiLg&usqp=CAU' /></div>
+                        <div className='news-img'><img alt='' src='https://static1.srcdn.com/wordpress/wp-content/uploads/2020/10/Crash-Bandicoot-4-Featured-Image.jpg' /></div>
                         <div className='news-info'>
                             <div className='news-info-main'>
                                 <div className='news-description'>

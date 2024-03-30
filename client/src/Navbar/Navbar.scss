@@ -248,6 +248,20 @@ body{
                     display: none;
                 }
             }
+
+            .iniciarsesion{
+                display: none;
+                @media (max-width: 1076px) {
+                    display: flex;
+                }
+            }
+
+            .iniciar-registrar{
+                display: flex;
+                @media (max-width: 1076px) {
+                    display: none;
+                }
+            }
         }
     }
 

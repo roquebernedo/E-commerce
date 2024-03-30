@@ -1,6 +1,7 @@
 import {
-  RouterProvider,
-  createBrowserRouter
+  Routes,
+  Route,
+  Navigate
 } from "react-router-dom"
 import Products from './pages/Products';
 import Add from './pages/Add';
@@ -9,88 +10,39 @@ import Product from "./pages/Product";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Profile from "./pages/Profile";
-import PrivateRoute from "./components/PrivateRoute";
-import Cart from "./pages/Cart.jsx"
-import CheckoutSuccess from "./pages/CheckoutSuccess";
 import ShoppingCart from "./pages/ShoppingCart";
-import React from 'react'
-import Layout from "./Layout.js";
+import React, { useState } from 'react'
 import Items from "./pages/Items.jsx";
 import Us from "./pages/Us.jsx";
 import Faqs from "./pages/Faqs.jsx";
-
-const router = createBrowserRouter([
-  
-  {
-    path: "/",
-    element: <Layout/>,
-    children: [
-      {
-        path: "/",
-        element: <Products/>
-      },
-      {
-        path: "/results",
-        element: <Items/>
-      },
-      {
-        path: "/questions",
-        element: <Faqs />
-      },
-      {
-        path: "/us",
-        element: <Us/>
-      },
-      {
-        path: "/cart",
-        element: <Cart/>
-      },
-      {
-        path: "/add",
-        element: <Add/>
-      },
-      {
-        path: "/shopping",
-        element: <ShoppingCart/>
-      },
-      {
-        path: "/update/:id",
-        element: <Update/>
-      },
-      {
-        path: "/product/:id",
-        element: <Product/>
-      },
-      {
-        path: "/login",
-        element: <Login/>
-      },
-      {
-        path: "/register",
-        element: <Register/>
-      },
-      {
-        path: "/checkout-success",
-        element: <CheckoutSuccess/>
-      },
-      {
-        path: "",
-        element: <PrivateRoute />,
-        children: [
-          {
-            path: "/profile",
-            element: <Profile />
-          }
-        ]
-      }
-    ]
-  }
-])
+import Footer from "./Footer/Footer.jsx";
+import Navbar from "./Navbar/Navbar.jsx";
+import { useSelector } from "react-redux";
 
 function App() {
+  const { userInfo } = useSelector((state) => state.auth)
+  const [filter, setFilter] = useState([])
+  const [buttonsFromHome, setButtonsFromHome] = useState([])
+  // eslint-disable-next-line no-unused-vars
+  console.log(buttonsFromHome)
+
   return (
     <div>
-      <RouterProvider router={router} />
+      <Navbar filter={filter} setFilter={setFilter} />
+      <Routes>
+        <Route path="/" element={<Products buttonsFromHome={buttonsFromHome} setButtonsFromHome={setButtonsFromHome}/>} />
+        <Route path="/results" element={<Items filterProducts={filter} buttonsMain={buttonsFromHome} />} />
+        <Route path="/us" element={<Us />} />
+        <Route path="/questions" element={<Faqs />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/profile" element={userInfo ? <Profile /> : <Navigate replace to='/login' /> } />
+        <Route path="/add" element={<Add />} />
+        <Route path="/cart" element={<ShoppingCart />} />
+        <Route path="/product/:id" element={<Product />} />
+        <Route path="/update/:id" element={<Update />} />
+      </Routes>
+      <Footer />
     </div>
   );
 }

@@ -28,8 +28,6 @@ const Register = () => {
   const [register, { isLoading }] = useRegisterMutation()
   const [users, setUsers] = useState([])
 
- 
-  console.log(registerService)
   const addBlog = async (event) => {
     event.preventDefault()
     const noteObject = {
@@ -46,17 +44,20 @@ const Register = () => {
     //     setUsers(users.concat(noteObject))
     //   })
     // console.log(noteObject)
-    try {
-      const returnedBlog = await registerService(noteObject);
-      console.log(returnedBlog);
-      setUsers(users.concat(noteObject));
-      toast.success('Creada exitosamente!')
-      // Puedes realizar otras acciones después del registro, como redirigir al usuario
-      navigate('/'); // Ejemplo de redirección a la página principal después del registro exitoso
-    } catch (error) {
-      console.error('Error registering user:', error);
-      // Puedes manejar el error como desees, por ejemplo, mostrando un mensaje al usuario
-      toast.error(error.message || 'Error registering user');
+    if(password !== confirmPassword){
+      toast.error('Passwords do not match')
+    }else{
+      try {
+        const returnedBlog = await registerService(noteObject);
+        console.log(returnedBlog);
+        setUsers(users.concat(noteObject));
+        toast.success('Creada exitosamente!')
+        navigate('/');
+      } catch (error) {
+        console.log("error")
+        console.error('Error registering user:', error);
+        toast.error(error.message || 'Error registering user');
+      }
     }
 
     setName('')

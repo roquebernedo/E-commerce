@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
 import './Navbar.scss'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import { useState, useEffect } from 'react';
 import { AiOutlineShoppingCart } from "react-icons/ai"
@@ -21,6 +21,7 @@ const Navbar = ({ filter, setFilter }) => {
   const totalProducts = products.reduce((a,b) => a + b.quantity, 0)
   const [open, setOpen] = useState(false)
   const [openMenu, setOpenMenu] = useState(false)
+  const navigate = useNavigate()
 
   const logoutHanlder =  () => {
       window.localStorage.clear()
@@ -50,7 +51,7 @@ const Navbar = ({ filter, setFilter }) => {
 
   const filtering = (event) => {
     event.preventDefault()
-    console.log(value)
+    
     if (rates.length > 0) { 
       if(value === ''){
         console.log("funciona")
@@ -61,6 +62,7 @@ const Navbar = ({ filter, setFilter }) => {
         const filtered = rates.filter(person => person.title.toLowerCase().includes(value));
         console.log(filtered);
         setFilter(filtered);
+        navigate('/results')
       }
     }
     setValue('')
@@ -89,7 +91,7 @@ const Navbar = ({ filter, setFilter }) => {
           <div className='button-icon-container'>
             <form className='form' onSubmit={filtering}>
               <input type='text' className='button-input' placeholder='Buscar un producto' value={value} onChange={(event) => setValue(event.target.value)}/>
-              <button className='button-submit' type='submit'><FaSearch /></button>
+             <button className='button-submit' type='submit'><FaSearch /></button>
             </form>
           </div>
         </div>
@@ -115,8 +117,12 @@ const Navbar = ({ filter, setFilter }) => {
           <div className='log-reg'>
             <Link className='sign in' to='/login'>
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="18" role="presentation" alt="" data-testid="UserIcon" size="18" color="currentColor"><path d="M16.22 19.41A9.71 9.71 0 1 1 26 9.7a9.74 9.74 0 0 1-9.8 9.71M1.84 32a10.88 10.88 0 0 1 10.94-10.74h6.57A10.88 10.88 0 0 1 30.29 32H1.84" fill="currentColor"></path></svg>
-              <div>Iniciar sesion / Registrate</div>
+              <div className='iniciarsesion'>Iniciar sesion</div>
+              <div className='iniciar-registrar'>Iniciar sesion / Registrarse</div>
             </Link>
+            <div className='buttons' onClick={handleMenu}>
+              <AiOutlineMenu className='menu-responsive' />
+            </div>
             {/* <Link className='sign up' to='/register'>
               <div>Sign Up</div>
             </Link>     */}
@@ -127,7 +133,7 @@ const Navbar = ({ filter, setFilter }) => {
       {open && <Cart/>}
       <div className='menu-buttons-container'>
         <div className='menu-buttons'>
-          <Link onClick={() =>  setTimeout(recargarPagina, 100)} className='submenu home' to='/'>
+          <Link className='submenu home' onClick={() =>  setTimeout(recargarPagina, 100)} to='/'>
             <div>Home</div>
           </Link>
           <Link to='/results' className='submenu shop'>

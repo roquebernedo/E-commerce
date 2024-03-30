@@ -4,12 +4,12 @@ import '../styles/Products.scss'
 import { useSelector } from 'react-redux';
 import ContentHome from '../components/ContentHome';
 
-const Products = ({ trade }) => {
-  console.log(trade)
+const Products = ({ buttonsFromHome, setButtonsFromHome }) => {
   // eslint-disable-next-line no-unused-vars
   const [products, setProducts] = useState([])
   // eslint-disable-next-line no-unused-vars
   const { userInfo } = useSelector((state) => state.auth)
+  
     // https://ecommerce-moez.onrender.com/ -> ESTE ES EL SERVER
   useEffect(() => {
     const fetchAllProducts = async () => {
@@ -27,7 +27,7 @@ const Products = ({ trade }) => {
   return (
     <>
     <div className='main-products'>
-        <ContentHome />
+        <ContentHome buttonsFromHome={buttonsFromHome} setButtonsFromHome={setButtonsFromHome} />
     </div>
     </>
   )

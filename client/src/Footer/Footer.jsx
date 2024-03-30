@@ -1,13 +1,13 @@
 import React from 'react'
 import './Footer.scss'
-import { toast } from 'react-toastify'
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Footer = () => {
 
   const handleKeyDown = (event) => {
     if (event.keyCode === 13) {
-      toast.error('Es broma XD');
+      toast('Es Broma! XD')
     }
   };
 
@@ -24,6 +24,7 @@ const Footer = () => {
             <section className='middle'>
               <div className='middle-subscribe'>
                 <label className='label-subscribe' >Suscribete <input onKeyDown={handleKeyDown} className='input-subscribe' /></label>
+                <ToastContainer /> {/* Modificado */}
               </div>
             </section>
             <div className='right'>

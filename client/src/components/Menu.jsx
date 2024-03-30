@@ -7,10 +7,6 @@ const Menu = () => {
 
     const { userInfo } = useSelector((state) => state.auth)
 
-    function recargarPagina() {
-        window.location.reload();
-      }
-
     const logoutHanlder =  () => {
         window.localStorage.clear()
         window.location.reload();
@@ -19,31 +15,29 @@ const Menu = () => {
   return (
     <div className='menuResponsive'>
         <div className='buttonsResponsive'>
-          <Link onClick={() =>  setTimeout(recargarPagina, 100)} className='buttonResponsive' to='/'>
+          <Link className='buttonResponsive' to='/'>
             <div>Home</div>
           </Link>
-          <Link onClick={() =>  setTimeout(recargarPagina, 100)} className='buttonResponsive' to='/results'>
+          <Link className='buttonResponsive' to='/results'>
             <div>Tienda</div>
           </Link>
-          <Link onClick={() =>  setTimeout(recargarPagina, 100)} className='buttonResponsive' to='/us'>
+          <Link className='buttonResponsive' to='/us'>
             <div>Nosotros</div>
           </Link>
-          <Link onClick={() =>  setTimeout(recargarPagina, 100)} className='buttonResponsive' to='/questions'>
+          <Link className='buttonResponsive' to='/questions'>
             <div>Preguntas Frecuentes</div>
           </Link>
-          {userInfo ?
+          {userInfo &&  
             <>
-                <Link onClick={() =>  setTimeout(recargarPagina, 100)} className='buttonResponsive hide' to='/profile'>
+                <Link className='buttonResponsive hide' to='/profile'>
                     <div>Profile</div>
                 </Link>
                 <Link onClick={logoutHanlder} className='buttonResponsive hide' to='/'>
                     <div>Logout</div>
                 </Link>
             </>
-           : 
-            <Link onClick={() =>  setTimeout(recargarPagina, 100)} className='buttonResponsive' to='/questions'>
-                <div>Iniciar sesion</div>
-            </Link>
+           
+            
           }
         </div>
     </div>
