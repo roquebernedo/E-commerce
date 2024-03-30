@@ -247,6 +247,7 @@
                 height: 99%; //280
                 border: #c5cbd5 solid 0.1px;
                 border-radius: 15px;
+                text-decoration: none;
                 box-sizing: border-box;
                 flex-wrap: wrap;
                 @media (max-width: 1280px) {
@@ -484,8 +485,12 @@
                             border: #0068BD solid 1px;
                             background-color: #0068BD;
                             border-radius: 8px;
-                            color: #ffffff;
                             padding: 10px;
+
+                            .link-product{
+                                color: #ffffff;
+                                text-decoration: none;
+                            }
                         }
                     }
                 }

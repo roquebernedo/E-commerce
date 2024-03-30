@@ -2,6 +2,7 @@ import React from 'react'
 import './Footer.scss'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
 
@@ -28,9 +29,9 @@ const Footer = () => {
               </div>
             </section>
             <div className='right'>
-                <div className='option'>Contacto</div>
-                <div className='option'>Quienes Somos?</div>
-                <div className='rights'>Preguntas Frecuentes</div>
+                <Link to='/us' className='option'>Contacto</Link>
+                <Link to='/us' className='option'>Quienes Somos?</Link>
+                <Link to='/questions' className='option'>Preguntas Frecuentes</Link>
             </div>
         </div>
     </div>

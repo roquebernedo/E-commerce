@@ -42,18 +42,36 @@ const ContentHome = ({ buttonsFromHome, setButtonsFromHome }) => {
     const [current, setCurrent] = useState(0)
     const [autoPlay, setAutoPlay] = useState(true)
     const [rates, setRates] = useState([])
+    const [featured, setFeatured] = useState([])
+    const [portal, setPortal] = useState([])
     let timeout = null
 
     useEffect(() => {
         axios
-          .get("http://localhost:8000")
+          .get("https://ecommerce-moez.onrender.com/") // https://ecommerce-moez.onrender.com/
           .then(response => {
             setRates(response.data)
           })
       
       }, [])
-  
+    console.log(rates)
 
+    useEffect(() => {
+        const featuredProducts = rates.filter(product => 
+            product.title === 'Fortnite' || 
+            product.title === 'Mario vs. Donkey Kong' ||
+            product.title === 'Pokemon Scarlet and Violet' ||
+            product.title === 'Hogwarts Legacy' ||
+            product.title === "Crash Bandicoot 4: It's About Time"
+        )
+        setFeatured(featuredProducts)
+
+        const playStationPortal = rates.find(product => product.title === 'Play Station Portal')
+        setPortal(playStationPortal)
+    }, [rates])
+
+    console.log(portal)
+  
     const slideRight = () => {
         setCurrent(current === countries.length - 1 ? 0 : current + 1)
     }
@@ -154,92 +172,27 @@ const ContentHome = ({ buttonsFromHome, setButtonsFromHome }) => {
             </div>
             <div className='news-list'>
                 <div className='news-list-main'>
-                    <div className='news-list-games'>
-                        <div className='news-img'><img alt='' src='https://assets.nintendo.com/image/upload/ar_16:9,b_auto:border,c_lpad/b_white/f_auto/q_auto/dpr_1.0/c_scale,w_300/ncom/en_US/merchandising/Merch%20banners/Fortnite/FNBR_29-00_C5S2_KeyArt_MOTD_1920x1080' /></div>
-                        <div className='news-info'>
-                            <div className='news-info-main'>
-                                <div className='news-description'>
-                                    <div className='description'>Capitulo 5 - Temporada 2 de Batalla campal de Fortnite:...</div>
+                    {featured.length > 0 &&
+                        featured.map(item => 
+                            <Link to={`/product/${item._id}`} className='news-list-games' key={item._id}>
+                                <div className='news-img'><img alt='' src={item.image} /></div>
+                                <div className='news-info'>
+                                    <div className='news-info-main'>
+                                        <div className='news-description'>
+                                            <div className='description'>{item.title}</div>
+                                        </div>
+                                        <div className='available'>
+                                            <div className='available-main'>Disponible</div>
+                                        </div>
+                                        <div className='brand'>
+                                            <div className='brand-blank'></div>
+                                            <div className='brand-main'>{item.brand}</div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className='available'>
-                                    <div className='available-main'>Disponible</div>
-                                </div>
-                                <div className='brand'>
-                                    <div className='brand-blank'></div>
-                                    <div className='brand-main'>Nintendo Switch</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='news-list-games'>
-                        <div className='news-img'><img alt='' src='https://assets.nintendo.com/image/upload/ar_16:9,b_auto:border,c_lpad/b_white/f_auto/q_auto/dpr_1.0/c_scale,w_300/ncom/en_US/merchandising/feature-banner/N531KN2tQZ/i7a6mlD0xI3/Switch_16x9_MarioVsDonkeyKong_KeyArt' /></div>
-                        <div className='news-info'>
-                            <div className='news-info-main'>
-                                <div className='news-description'>
-                                    <div className='description'>Mario vs. Donkey Kong</div>
-                                </div>
-                                <div className='available'>
-                                    <div className='available-main free'>Version de prueba gratuita</div>
-                                </div>
-                                <div className='brand'>
-                                    <div className='brand-blank'></div>
-                                    <div className='brand-main'>Nintendo Switch</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='news-list-games'>
-                        <div className='news-img'><img alt='' src='https://assets.nintendo.com/image/upload/ar_16:9,b_auto:border,c_lpad/b_white/f_auto/q_auto/dpr_1.0/c_scale,w_300/ncom/en_US/merchandising/feature-banner/2023/4_PokSV_ExPa_EN' /></div>
-                        <div className='news-info'>
-                            <div className='news-info-main'>
-                                <div className='news-description'>
-                                    <div className='description'>The Hidden Treasure of Area Zero</div>
-                                </div>
-                                <div className='available'>
-                                    <div className='available-main'>Disponible</div>
-                                </div>
-                                <div className='brand'>
-                                    <div className='brand-blank'></div>
-                                    <div className='brand-main'>Nintendo Switch</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='news-list-games'>
-                        <div className='news-img'><img alt='' src='https://assets.nintendo.com/image/upload/ar_16:9,c_lpad,w_1240/b_white/f_auto/q_auto/ncom/software/switch/70010000014724/72ce0a17215521a167c3da579db4cc48a2f7a52eacc81ad985ba20fd6817fdc2' /></div>
-                        <div className='news-info'>
-                            <div className='news-info-main'>
-                                <div className='news-description'>
-                                    <div className='description'>Hogwarts Legacy</div>
-                                </div>
-                                <div className='available'>
-                                    <div className='available-main'>Disponible</div>
-                                </div>
-                                <div className='brand'>
-                                    <div className='brand-blank'></div>
-                                    <div className='brand-main'>Play Station 5</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='news-list-games'>
-                        <div className='news-img'><img alt='' src='https://static1.srcdn.com/wordpress/wp-content/uploads/2020/10/Crash-Bandicoot-4-Featured-Image.jpg' /></div>
-                        <div className='news-info'>
-                            <div className='news-info-main'>
-                                <div className='news-description'>
-                                    <div className='description'>Crash Bandicoot 4: It's About Time</div>
-                                </div>
-                                <div className='available'>
-                                    <div className='available-main'>Disponible</div>
-                                </div>
-                                <div className='brand'>
-                                    <div className='brand-blank'></div>
-                                    <div className='brand-main'>Play Station 4 & 5</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
+                            </Link>
+                        )
+                    }
                 </div>
             </div>
         </section>
@@ -259,26 +212,32 @@ const ContentHome = ({ buttonsFromHome, setButtonsFromHome }) => {
         </div>
 
         <section className='playStation'>
-            <div className='portatil'>
-                <div className='portatil-container'>
-                    <img className='portatil-img' alt='' src='https://i.ytimg.com/vi_webp/NmgOWKQj5-Y/maxresdefault.webp'/>
-                </div>
-                <div className='portatil-info'>
-                    <div className='portatil-info-top'>
-                        <h2 className='portatil-info-top-title'>PlayStation Portatil para consola PS5</h2>
-                    </div>
-                    <div className='portatil-info-bottom'>
-                        <div className='portatil-info-bottom-container'>
-                            <div className='portatil-description'>
-                                <p className='portatil-p'>La emocion de tener en tus manos el portal a los juegos de ps5 en el lugar menos pensado</p>
-                            </div>
-                            <div className='portatil-button'>
-                                <button className='button-product'>Ver producto</button>
+            {portal &&
+                <div className='portatil'>
+                    <Link to={`/product/${portal._id}`} key={portal._id} className='portatil-container'>
+                        <img className='portatil-img' alt='' src='https://i.ytimg.com/vi_webp/NmgOWKQj5-Y/maxresdefault.webp'/>
+                    </Link>
+                    <div className='portatil-info'>
+                        <div className='portatil-info-top'>
+                            <h2 className='portatil-info-top-title'>PlayStation Portatil para consola PS5</h2>
+                        </div>
+                        <div className='portatil-info-bottom'>
+                            <div className='portatil-info-bottom-container'>
+                                <div className='portatil-description'>
+                                    <p className='portatil-p'>La emocion de tener en tus manos el portal a los juegos de ps5 en el lugar menos pensado</p>
+                                </div>
+                                <div className='portatil-button'>
+                                    <div className='button-product'>
+                                        <Link className='link-product' to={`/product/${portal._id}`} key={portal._id}>
+                                            Ver producto
+                                        </Link>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            }
         </section>
 
         <section id='top' className='shop-store'>
