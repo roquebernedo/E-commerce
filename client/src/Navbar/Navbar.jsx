@@ -37,18 +37,6 @@ const Navbar = ({ filter, setFilter }) => {
   
   }, [])
 
-  // useEffect(() => {
-  //   if (rates.length > 0) {
-  //     if(currency === ''){
-  //       setFilter([])
-  //     }else{
-  //       const filtered = rates.filter(person => person.title.toLowerCase().includes(currency));
-  //       console.log(filtered);
-  //       setFilter(filtered);
-  //     }
-  //   }
-  // }, [rates, currency]);
-
   const filtering = (event) => {
     event.preventDefault()
     
@@ -67,7 +55,6 @@ const Navbar = ({ filter, setFilter }) => {
     }
     setValue('')
   }
-  console.log(filter)
 
   function recargarPagina() {
     window.location.reload();
@@ -129,8 +116,8 @@ const Navbar = ({ filter, setFilter }) => {
           </div>
         )}
       </div>
-      {openMenu && <Menu />}
-      {open && <Cart/>}
+      {openMenu && <Menu handle={() => setOpenMenu(false)} />}
+      {open && <Cart setOpen={setOpen} open={open} />}
       <div className='menu-buttons-container'>
         <div className='menu-buttons'>
           <Link className='submenu home' onClick={() =>  setTimeout(recargarPagina, 100)} to='/'>

@@ -6,7 +6,7 @@ import { removeItem, resetCart } from '../redux/cartReducer'
 import '../styles/Cart.scss'
 import ButtonPay from '../components/ButtonPay'
 
-function Cart() {
+function Cart({ setOpen, open }) {
   
   const products = useSelector(state => state.cart.products)
   console.log(products)
@@ -43,9 +43,9 @@ function Cart() {
       </div>
       
       <div className='buttons-cart'>
-        <Link onClick={() => dispatch(resetCart())} className='reset common-button-styles'>RESET CART</Link>
+        <Link onClick={() => {dispatch(resetCart()); setOpen(!open)}} className='reset common-button-styles'>RESET CART</Link>
         <ButtonPay cartItems={products}/>
-        <Link className='link-arrow common-button-styles' to="/shopping">VIEW CART</Link>
+        <Link onClick={() => setOpen(!open)} className='link-arrow common-button-styles' to="/cart">VIEW CART</Link>
       </div>
     </div>
   )

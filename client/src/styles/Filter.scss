@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: #F3F0F5;
+    background-color: #eee7e7;
     width: 100%;
     gap: 1%;
     //height: 700px; ** Cuando quieras hacer que el tamaño de tu lista sea predeterminado por la cantidad de productos o items, no poner height
@@ -185,6 +185,10 @@
                             .icon-cancel:hover{
                                 opacity: 1;
                             }
+
+                            .shadow{
+                                margin-left: 12px;
+                            }
                         }
                     }
 
@@ -327,6 +331,7 @@
                         box-sizing: border-box;
                         margin-bottom: 45px;
                         text-decoration: none;
+                        background-color: #ffffff;
                         @media (max-width: 1500px) {
                             width: 31%;
                         }
@@ -369,6 +374,7 @@
                         .news-info{
                             width: 100%;
                             height: 55%;
+                            
                             @media (max-width: 475px) {
                                 width: 64%;
                                 display: flex;
@@ -382,6 +388,7 @@
                                 flex-direction: column;
                                 justify-content: center;
                                 align-items: center;
+                                background-color: #ffffff;
                                 gap: 3%;
                                 height: 100%;
         

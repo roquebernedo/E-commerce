@@ -54,7 +54,7 @@ const Items = ({ filterProducts, buttonsMain }) => {
     const [isLoading, setIsLoading ] = useState(false)
     const [newName, setNewName] = useState(buttonsMain)
     const [openMenu, setOpenMenu] = useState(false)
-    console.log(isLoading)
+
     useEffect(() => {
         const fetchAllProducts = async () => {
             try{
@@ -66,8 +66,6 @@ const Items = ({ filterProducts, buttonsMain }) => {
         }
         fetchAllProducts()
     }, [])
-
-    console.log(newName)  
    
     // Sirve para mostrar los items que se obtienen por las categorias
     useEffect(() => {
@@ -86,7 +84,6 @@ const Items = ({ filterProducts, buttonsMain }) => {
                                     : person.category === 'Consolas'
             );
             setFilter(filtered)
-            console.log(name)
         }
 
         
@@ -100,8 +97,6 @@ const Items = ({ filterProducts, buttonsMain }) => {
         }
     }, [filterProducts])
     
-
-    console.log(filterBar)
     const handleFilter = (category) => {
         console.log(category)
         setNewName([])
@@ -111,7 +106,6 @@ const Items = ({ filterProducts, buttonsMain }) => {
         setName(category)
     }
 
-    console.log(filterBar)
     const handleMenu = () => {
         if(openMenu === true){
           setOpenMenu(false)
@@ -145,7 +139,7 @@ const Items = ({ filterProducts, buttonsMain }) => {
                             <div className='container-category'>
                                 <div className='container-filtered-word'>
                                     <div className='name-word'>
-                                        {name && 
+                                        {name ?
                                             <>
                                                 <svg viewBox="0 0 16 16" focusable="false" className='icon-cancel'>
                                                     <path d="M9.41 8l2.29-2.29c.19-.18.3-.43.3-.71a1.003 1.003 0 0 0-1.71-.71L8 6.59l-2.29-2.3a1.003 1.003 0 0 0-1.42 1.42L6.59 8 4.3 10.29c-.19.18-.3.43-.3.71a1.003 1.003 0 0 0 1.71.71L8 9.41l2.29 2.29c.18.19.43.3.71.3a1.003 1.003 0 0 0 .71-1.71L9.41 8z" fill-rule="evenodd" fill="currentColor"></path>
@@ -156,6 +150,7 @@ const Items = ({ filterProducts, buttonsMain }) => {
                                                     Testing
                                                 </div>
                                             </>
+                                            : <div className='shadow'>Categorias</div>
                                         }
                                     </div>
                                 </div>
@@ -175,7 +170,7 @@ const Items = ({ filterProducts, buttonsMain }) => {
                             </div>
                         </div>
                     </section>
-                    {openMenu && <MenuFilter handleFilter={handleFilter} />}
+                    {openMenu && <MenuFilter handleFilter={handleFilter} setOpenMenu={setOpenMenu}/>}
                     <section className='container-items'>
                         <div className='container-items-list'>
                             <div className='container-items-main'>

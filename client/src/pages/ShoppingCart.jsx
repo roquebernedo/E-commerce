@@ -12,7 +12,7 @@ const ShoppingCart = () => {
   console.log(products)
 
   const totalPrice = () => {
-    let total = 0
+    let total = 0 
     products.forEach((item) => (total+=item.quantity*item.price))
     return total.toFixed(2)
   }
@@ -20,7 +20,7 @@ const ShoppingCart = () => {
   const dispatch = useDispatch()
 
   return (
-    <div className='main-product'>
+    <div className='main-product-cart'>
       <div className='top-product'>
             <Link className='link-arrow' to="/"><AiOutlineArrowLeft className='arrow-left' /></Link>
             <div className='product-title'>Cart</div>

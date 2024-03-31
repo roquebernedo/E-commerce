@@ -24,7 +24,6 @@ function App() {
   const [filter, setFilter] = useState([])
   const [buttonsFromHome, setButtonsFromHome] = useState([])
   // eslint-disable-next-line no-unused-vars
-  console.log(buttonsFromHome)
 
   return (
     <div>

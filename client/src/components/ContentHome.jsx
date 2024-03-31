@@ -54,7 +54,6 @@ const ContentHome = ({ buttonsFromHome, setButtonsFromHome }) => {
           })
       
       }, [])
-    console.log(rates)
 
     useEffect(() => {
         const featuredProducts = rates.filter(product => 
@@ -69,8 +68,6 @@ const ContentHome = ({ buttonsFromHome, setButtonsFromHome }) => {
         const playStationPortal = rates.find(product => product.title === 'Play Station Portal')
         setPortal(playStationPortal)
     }, [rates])
-
-    console.log(portal)
   
     const slideRight = () => {
         setCurrent(current === countries.length - 1 ? 0 : current + 1)
@@ -112,7 +109,6 @@ const ContentHome = ({ buttonsFromHome, setButtonsFromHome }) => {
                                     ? person.category === 'Audio'
                                     : ''
             );
-            console.log(filtered);
             setButtonsFromHome(filtered);
             navigate('/results')
       }
