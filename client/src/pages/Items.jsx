@@ -5,6 +5,9 @@ import { useSelector } from 'react-redux'
 import '../styles/Filter.scss'
 import { css } from '@emotion/react';
 import { CircleLoader } from 'react-spinners';
+import { MdKeyboardDoubleArrowRight } from "react-icons/md";
+import { BiMenuAltRight } from "react-icons/bi";
+import MenuFilter from '../components/MenuFilter'
 
 const override = css`
   display: block;
@@ -50,6 +53,7 @@ const Items = ({ filterProducts, buttonsMain }) => {
     // eslint-disable-next-line no-unused-vars
     const [isLoading, setIsLoading ] = useState(false)
     const [newName, setNewName] = useState(buttonsMain)
+    const [openMenu, setOpenMenu] = useState(false)
     console.log(isLoading)
     useEffect(() => {
         const fetchAllProducts = async () => {
@@ -108,21 +112,26 @@ const Items = ({ filterProducts, buttonsMain }) => {
     }
 
     console.log(filterBar)
-
+    const handleMenu = () => {
+        if(openMenu === true){
+          setOpenMenu(false)
+        }else{
+          setOpenMenu(true)
+        }
+        console.log("hola")
+    }
   
     return (
         <section className='container-filter'>
-            <div className='type-products' id='type-products'>
-                <div className='type-right'>
-                    {
-                        userInfo ? (
+            {
+                userInfo && (
+                    <div className='type-products' id='type-products'>
+                        <div className='type-right'> 
                             <Link className='addnew' to="/add">Add new Product</Link>
-                        ):(
-                            <div></div>
-                        )
-                    }
-                </div>
-            </div>
+                        </div>
+                    </div>
+                )
+            }
 
             <div className='container-main-filter'>
                 {products.length === 0 ?
@@ -135,16 +144,38 @@ const Items = ({ filterProducts, buttonsMain }) => {
                         <div className='container-categories'>
                             <div className='container-category'>
                                 <div className='container-filtered-word'>
-                                    <div className='name-word'>{name && name + ' ->'}</div>
+                                    <div className='name-word'>
+                                        {name && 
+                                            <>
+                                                <svg viewBox="0 0 16 16" focusable="false" className='icon-cancel'>
+                                                    <path d="M9.41 8l2.29-2.29c.19-.18.3-.43.3-.71a1.003 1.003 0 0 0-1.71-.71L8 6.59l-2.29-2.3a1.003 1.003 0 0 0-1.42 1.42L6.59 8 4.3 10.29c-.19.18-.3.43-.3.71a1.003 1.003 0 0 0 1.71.71L8 9.41l2.29 2.29c.18.19.43.3.71.3a1.003 1.003 0 0 0 .71-1.71L9.41 8z" fill-rule="evenodd" fill="currentColor"></path>
+                                                </svg>
+                                                <div className='icon-container'>
+                                                    <div className='icon-name-container'>{name}</div>
+                                                    <MdKeyboardDoubleArrowRight className='icon-arrow' />
+                                                    Testing
+                                                </div>
+                                            </>
+                                        }
+                                    </div>
                                 </div>
                                 <div className='container-category-inside'>
                                     {categories.map(category => 
-                                        <div key={category.id} className='category-items' onClick={() => handleFilter(category.name)}>{category.name}</div>
+                                        <div key={category.id} className='category-items' onClick={() => handleFilter(category.name)}>
+                                            <div className='category-name'>{category.name}</div>
+                                            <div className='arrow-container'>
+                                                <svg viewBox="0 0 24 24" focusable="false" className='category-arrow'><path fill="currentColor" d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg>
+                                            </div>
+                                        </div>
                                     )}
+                                </div>
+                                <div className='buttons' onClick={handleMenu}>
+                                    <BiMenuAltRight className='menu-responsive'/>
                                 </div>
                             </div>
                         </div>
                     </section>
+                    {openMenu && <MenuFilter handleFilter={handleFilter} />}
                     <section className='container-items'>
                         <div className='container-items-list'>
                             <div className='container-items-main'>
