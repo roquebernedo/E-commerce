@@ -139,7 +139,21 @@ body{
                 border-radius: 10px;
                 padding: 6px;
                 align-items: center;
+                @media (max-width: 475px) {
+                    display: none;
+                }
                 
+                .log{
+                    @media (max-width: 475px) {
+                        display: none;
+                    }
+                }
+
+                .profile{
+                    @media (max-width: 475px) {
+                        display: none;
+                    }
+                }
 
                 .userinfo{
                     @media (max-width: 1076px) {
@@ -168,7 +182,11 @@ body{
                 }
             }
 
-            .in{
+            .sign-in{
+                display: flex;
+                text-decoration: none;
+                color: #ffffff;
+                gap: 10px;
                 div{
                     @media (max-width: 930px) {
                       
