@@ -59,7 +59,7 @@ const Product = () => {
   height: 600px;
 `;
   return (
-    <div className='main-product'>
+    <div className='main-product-container'>
       {loading ? (
           <div className='loader' css={containerStyles}>
             <CircleLoader color={'#157dc2'} loading={true} css={override} size={75} />
