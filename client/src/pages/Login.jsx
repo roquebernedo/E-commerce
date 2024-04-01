@@ -52,7 +52,7 @@ const Login = () => {
             <CircleLoader color={'#157dc2'} loading={true} css={override} size={75} />
           </div>
         ):
-        <form onSubmit={submitHandler}>
+        <form className='form-login' onSubmit={submitHandler}>
           <FormInfo 
             setPassword={setPassword}
             setEmail={setEmail}

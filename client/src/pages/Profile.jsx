@@ -42,22 +42,24 @@ const Profile = () => {
   };
   
   return (
-    <div className='register'>
-      <h1>Update Profile</h1>
+    <div className='profile'>
+      <h1 className='update-profile'>Update Profile</h1>
       
-      <form onSubmit={submitHandler}>
-        <div className='log'>
+      <form className='form-profile' onSubmit={submitHandler}>
+        <div className='log-profile'>
           <div>Name</div>
           <input
+            className='input-profile'
             type='name'
             placeholder='Enter name'
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
         </div>
-        <div className='log'>
+        <div className='log-profile'>
           <div>Email Address</div>
           <input
+            className='input-profile'
             type='email'
             placeholder='Enter email'
             value={email}
@@ -65,9 +67,10 @@ const Profile = () => {
           />
         </div>
 
-        <div className='log'>
+        <div className='log-profile'>
           <div>Password</div>
           <input
+            className='input-profile'
             type='password'
             placeholder='Enter password'
             value={password}
@@ -75,9 +78,10 @@ const Profile = () => {
           />
         </div>
 
-        <div className='log'>
+        <div className='log-profile'>
           <div>Confirm Password</div>
           <input
+            className='input-profile'
             type='password'
             placeholder='Confirm password'
             value={confirmPassword}

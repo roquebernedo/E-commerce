@@ -45,6 +45,8 @@ body{
                 font-family: Agbalumo;
                 margin: 0;
                 padding: 0;
+                text-decoration: none;
+                color: #ffffff;
             }
         }
 
@@ -135,7 +137,7 @@ body{
                 display: flex;
                 gap: 5px;
                 text-decoration: none;
-                color: #ffffff;
+                color: #ffffff; 
                 border-radius: 10px;
                 padding: 6px;
                 align-items: center;
@@ -149,7 +151,7 @@ body{
                     }
                 }
 
-                .profile{
+                .profile-navbar{
                     @media (max-width: 475px) {
                         display: none;
                     }

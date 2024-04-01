@@ -6,7 +6,9 @@ import '../styles/Add.scss'
 const Form = ({handle, submit, product, handleIngredientChange, handleAddIngredient}) => {
   return (
     <form className='menu-add' onSubmit={submit}>
-      <h1 className='new-product'>Add New Product</h1>
+      <div className='new-product-div'>
+        <h1 className='new-product'>Add New Product</h1>
+      </div>
       <div className='div-product'>Title: </div>
       <input className='title-product' type='text' onChange={handle} name='title'/>
 
@@ -17,14 +19,15 @@ const Form = ({handle, submit, product, handleIngredientChange, handleAddIngredi
       <input className='brand-product' type='text' name='brand' onChange={handle}/>
 
       <div className='div-product'>Category: </div>
-      <input className='Category-product' onChange={handle} name='category'/>
+      <input className='category-product' onChange={handle} name='category'/>
 
       <div className='div-product'>Stock: </div>
       <input className='color-product' onChange={handle} name='stock'/>
 
-      <label htmlFor="main_features">Main Features</label>
+      <div className='div-product' htmlFor="main_features">Main Features</div>
         {product.main_features.map((ingredient, index) => (
           <input
+            className='input-main-features'
             key={index}
             type="text"
             name="main_features"
@@ -32,7 +35,7 @@ const Form = ({handle, submit, product, handleIngredientChange, handleAddIngredi
             onChange={(event) => handleIngredientChange(event, index)}
           />
         ))}
-        <button type="button" onClick={handleAddIngredient}>
+        <button className='button-main' type="button" onClick={handleAddIngredient}>
           Add Ingredient
         </button>
 
