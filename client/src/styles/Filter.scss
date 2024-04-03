@@ -5,6 +5,7 @@
     background-color: #eee7e7;
     width: 100%;
     gap: 1%;
+    //color: #ada9a9;
     //height: 700px; ** Cuando quieras hacer que el tamaño de tu lista sea predeterminado por la cantidad de productos o items, no poner height
 
     .type-products{
@@ -159,6 +160,11 @@
                                 display: flex;
                                 gap: 10px;
                                 opacity: 0.8;
+                             
+                                @media (max-width: 375px) {
+                                    gap: 2px;
+                                    font-size: 13.5px;
+                                }
 
                                 .icon-arrow{
                                     color: #484848;
@@ -167,6 +173,11 @@
 
                                 .second-testing{
                                     height: 100%;
+                                }
+
+                                .icon-nameMain-container{
+                                    
+                                    white-space: nowrap;
                                 }
                             }
 
@@ -189,6 +200,14 @@
                             .shadow{
                                 margin-left: 12px;
                             }
+                        }
+                    }
+
+                    .buttons{
+                        display: none;
+                        margin-right: 12px;
+                        @media (max-width: 1120px) {
+                            display: flex;
                         }
                     }
 
@@ -217,7 +236,9 @@
                         
                         .category-items{
                             display: flex;
+                            flex-direction: column;
                             width: 100%;
+                    
                             font-size: 1.25rem;
                             margin: 5px 20px;
                             gap: 2px;
@@ -249,31 +270,57 @@
                                 margin: 10px 5px;
                             }
 
-                            .arrow-container{
+                            .container-name-arrow{
                                 display: flex;
-                                justify-content: center;
-                                align-items: center;
 
-                                .category-arrow{
-                                    height: 20px;
-                                    width: 20px;
+                                .arrow-container{
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                               
+    
+                                    .category-arrow{
+                                        height: 20px;
+                                        width: 20px;
+                                    }
+                                }
+    
+                                .category-name{
+                                    text-transform: uppercase;
+                             
                                 }
                             }
 
-                            .category-name{
-                                text-transform: uppercase;
-                                margin-left: 5px;
+                            .sub-category-items{
+            
+                                max-height: 0;
+                                overflow: hidden;
+                                transition: all 0.5s cubic-bezier(0, 1, 0, 1);
+
+                                .mini-category{
+                                    font-size: 1rem;
+                                    width: 90%;
+                                    margin-left: 10px;
+                                }
                             }
-                        }
 
-                        .category-items:hover{
-                            color: #000;
-                            background-color: #dbd8dd;
-                        }
-                    }
+                            .sub-category-items-show{
+                                height: auto;
+                                max-height: 999px;
+                                transition: all 0.5s cubic-bezier(1, 0, 1, 0);
 
-                    .buttons{
-                        margin-right: 12px;
+                                .mini-category{
+                                    font-size: 1rem;
+                                    width: 90%;
+                                    margin-left: 10px;
+                                }
+
+                                .mini-category:hover{
+                                    background-color: #c9c3c3;
+                                }
+                            }
+
+                        }
                     }
                 }
             }

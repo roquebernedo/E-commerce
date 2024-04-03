@@ -18,35 +18,38 @@ const override = css`
 const Items = ({ filterProducts, buttonsMain }) => {
     const categories = [
         {
-            name: "Videojuegos",
-            id: 0
+            name: "Juegos",
+            id: 0,
+            categories: ["Consolas", "Videojuegos", "Accesorios para Consolas"]
         },
         {
             name: "Celulares",
-            id: 1
+            id: 1,
+            categories: ["Samsung", "Iphone", "Xiaomi", "Huawei"]
         },
         {
             name: "Computadoras",
-            id: 2
+            id: 2,
+            categories: ["Notebooks", "PC", "Cables", "Componentes de PC", "Mouse", "Teclado"]
         },
         {
             name: "Tablets",
-            id: 3
+            id: 3,
+            categories: ["Ipad", "Xiaomi", "Lenovo", "Samsung"]
         },
         {
             name: "Audio",
-            id: 4
-        },
-        {
-            name: "Consolas",
-            id: 5
+            id: 4,
+            categories: ["Televisores", "Audio"]
         }
     ]
     
     const [products, setProducts] = useState([])
     const [show, setShow] = useState(false)
     const [name, setName] = useState()  
+    const [nameMain, setNameMain] = useState()
     const [filter, setFilter] = useState([])
+    const [filterMain, setFilterMain] = useState([])
     const { userInfo } = useSelector((state) => state.auth)
     const [filterBar, setFilterBar] = useState(filterProducts)
     // color eslint cuando antes, pendiente *****
@@ -54,6 +57,7 @@ const Items = ({ filterProducts, buttonsMain }) => {
     const [isLoading, setIsLoading ] = useState(false)
     const [newName, setNewName] = useState(buttonsMain)
     const [openMenu, setOpenMenu] = useState(false)
+    const [selected, setSelected] = useState(null)
 
     useEffect(() => {
         const fetchAllProducts = async () => {
@@ -71,8 +75,8 @@ const Items = ({ filterProducts, buttonsMain }) => {
     useEffect(() => {
         if(products.length > 0){ // Sale error sino se usa un condicional, porque al momento de devolver los valores, se demora un poco y es por eso el error
             const filtered = products.filter(person => 
-                name === 'Videojuegos' 
-                    ? person.category === 'Videojuegos'
+                name === 'Juegos' 
+                    ? person.category === 'Consolas y Videojuegos'
                     : name === 'Celulares'
                         ? person.category === 'Celulares'
                         : name === 'Computadoras'
@@ -82,12 +86,30 @@ const Items = ({ filterProducts, buttonsMain }) => {
                                 : name === 'Audio'
                                     ? person.category === 'Audio'
                                     : person.category === 'Consolas'
-            );
+            );  
             setFilter(filtered)
         }
-
+        
         
     }, [products, name]);
+    
+    useEffect(() => {
+ 
+        if(products.length > 0){
+                //const filteredProducts = productsMain.filter(person => person.category === 'Consolas y Videojuegos')
+                const filteredMain = filter.filter(person => (
+                    nameMain === 'Consolas' 
+                        ? person.mainCategory === 'Consolas'
+                        : nameMain === 'Videojuegos'
+                            ? person.mainCategory === 'Videojuegos'
+                            : nameMain === 'Accesorios para Consolas'
+                                && person.mainCategory === 'Accesorios para Consolas'
+                                
+                ))
+                setFilterMain(filteredMain)
+            
+        }
+    }, [nameMain, products, filter])
 
     // Sirve para mostrar los productos provenientes del buscador del header
     useEffect(() => {
@@ -97,22 +119,30 @@ const Items = ({ filterProducts, buttonsMain }) => {
         }
     }, [filterProducts])
     
-    const handleFilter = (category) => {
-        console.log(category)
+    const handleFilter = (category, i) => {
         setNewName([])
+        setNameMain([])
         setFilterBar([])
-     
+        setFilterMain([])
         setShow(true)
         setName(category)
+        if(selected === i){
+            return setSelected(null)
+        }
+        setSelected(i)
     }
 
+    const handleMain = (category) => {
+        setNameMain(category)
+    }
+  
+   
     const handleMenu = () => {
         if(openMenu === true){
           setOpenMenu(false)
         }else{
           setOpenMenu(true)
         }
-        console.log("hola")
     }
   
     return (
@@ -143,11 +173,13 @@ const Items = ({ filterProducts, buttonsMain }) => {
                                             <>
                                                 <svg viewBox="0 0 16 16" focusable="false" className='icon-cancel'>
                                                     <path d="M9.41 8l2.29-2.29c.19-.18.3-.43.3-.71a1.003 1.003 0 0 0-1.71-.71L8 6.59l-2.29-2.3a1.003 1.003 0 0 0-1.42 1.42L6.59 8 4.3 10.29c-.19.18-.3.43-.3.71a1.003 1.003 0 0 0 1.71.71L8 9.41l2.29 2.29c.18.19.43.3.71.3a1.003 1.003 0 0 0 .71-1.71L9.41 8z" fill-rule="evenodd" fill="currentColor"></path>
-                                                </svg>
+                                                </svg>  
                                                 <div className='icon-container'>
                                                     <div className='icon-name-container'>{name}</div>
                                                     <MdKeyboardDoubleArrowRight className='icon-arrow' />
-                                                    Testing
+                                                    <div className='icon-nameMain-container'>
+                                                        <div>{nameMain}</div>
+                                                    </div>
                                                 </div>
                                             </>
                                             : <div className='shadow'>Categorias</div>
@@ -156,10 +188,17 @@ const Items = ({ filterProducts, buttonsMain }) => {
                                 </div>
                                 <div className='container-category-inside'>
                                     {categories.map(category => 
-                                        <div key={category.id} className='category-items' onClick={() => handleFilter(category.name)}>
-                                            <div className='category-name'>{category.name}</div>
-                                            <div className='arrow-container'>
-                                                <svg viewBox="0 0 24 24" focusable="false" className='category-arrow'><path fill="currentColor" d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg>
+                                        <div key={category.id} className='category-items'>
+                                            <div className='container-name-arrow'>
+                                                <div className='category-name' onClick={() => handleFilter(category.name, category.id)}>{category.name}</div>
+                                                    <div className='arrow-container'>
+                                                        <svg viewBox="0 0 24 24" focusable="false" className='category-arrow'><path fill="currentColor" d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg>
+                                                    </div>
+                                            </div>
+                                            <div className={selected === category.id ? 'sub-category-items-show' : 'sub-category-items'}>
+                                                {category.categories.map((category, id) => 
+                                                    <div key={id} className='mini-category' onClick={() => handleMain(category)}>{category}</div>
+                                                )}
                                             </div>
                                         </div>
                                     )}
@@ -170,7 +209,7 @@ const Items = ({ filterProducts, buttonsMain }) => {
                             </div>
                         </div>
                     </section>
-                    {openMenu && <MenuFilter handleFilter={handleFilter} setOpenMenu={setOpenMenu}/>}
+                    {openMenu && <MenuFilter handleFilter={handleFilter} setOpenMenu={setOpenMenu} categories={categories} selected={selected} handleMain={handleMain}/>}
                     <section className='container-items'>
                         <div className='container-items-list'>
                             <div className='container-items-main'>
@@ -255,9 +294,7 @@ const Items = ({ filterProducts, buttonsMain }) => {
                                             </div>
                                         </Link> 
                                     ))
-                                :  filter.length > 0 ?
-                                    
-                                        
+                                :  filter.length > 0 && filterMain.length === 0 ?
                                 (filter.map(product => 
                                         <Link to={`/product/${product._id}`} className='news-list-games' key={product._id}>
                                             <div className='news-img'><img alt='' src={product.image} /></div>
@@ -282,7 +319,33 @@ const Items = ({ filterProducts, buttonsMain }) => {
                                                 </div>
                                             </div>
                                         </Link> 
-                                    )) : filter.length === 0 ?
+                                    )) :filter.length > 0 && filterMain.length > 0 ? 
+                                    (filterMain.map(product => 
+                                        <Link to={`/product/${product._id}`} className='news-list-games' key={product._id}>
+                                            <div className='news-img'><img alt='' src={product.image} /></div>
+                                            <div className='news-info'>
+                                                <div className='news-info-main'>
+                                                    <div className='news-description'>
+                                                        <div className='description'>{product.title.substring(0,25) + "..."}</div>
+                                                    </div>
+                                                    <div className='news-date'>
+                                                        <div className='date'>{product.date}</div>
+                                                    </div>
+                                                    <div className='available'>
+                                                        <div className='available-main'>Disponible</div>
+                                                    </div>
+                                                    <div className='price'>
+                                                        <div className='price-main'>$ {parseFloat(product.price).toFixed(2)}</div>
+                                                    </div>
+                                                    <div className='brand'>
+                                                        <div className='brand-blank'></div>
+                                                        <div className='brand-main'>{product.brand}</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </Link> 
+                                    )) 
+                                    : filter.length === 0 ?
                                     <div>No se encontraron resultados</div> : ""
                                 )
                             }
