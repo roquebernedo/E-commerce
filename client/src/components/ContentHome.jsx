@@ -8,6 +8,14 @@ import { SlEarphones } from "react-icons/sl";
 import { CiShop } from "react-icons/ci";
 import { Link, useNavigate } from 'react-router-dom';  
 import axios from 'axios';
+import { css } from '@emotion/react';
+import { CircleLoader } from 'react-spinners';
+
+const override = css`
+  display: block;
+  margin: 0 auto;
+  border-color: red;
+`;
 
 const ContentHome = ({ buttonsFromHome, setButtonsFromHome }) => {
     const navigate = useNavigate()
@@ -164,11 +172,11 @@ const ContentHome = ({ buttonsFromHome, setButtonsFromHome }) => {
         </section>
         <section className='news'>
             <div className='news-div'>
-                <h2>Destacados</h2>
+                <h2 className='achedos'>Destacados</h2>
             </div>
             <div className='news-list'>
                 <div className='news-list-main'>
-                    {featured.length > 0 &&
+                    {featured.length > 0 ?
                         featured.map(item => 
                             <Link to={`/product/${item._id}`} className='news-list-games' key={item._id}>
                                 <div className='news-img'><img alt='' src={item.image} /></div>
@@ -187,14 +195,17 @@ const ContentHome = ({ buttonsFromHome, setButtonsFromHome }) => {
                                     </div>
                                 </div>
                             </Link>
-                        )
+                        ) :
+                        <div className='loader'>
+                            <CircleLoader color={'#157dc2'} loading={true} css={override} size={75} />
+                        </div> 
                     }
                 </div>
             </div>
         </section>
 
         <div className='subTitle'>
-            <div className='subMidle'>
+            <div className='subMiddle'>
                 <div className='collection first'>
                     <span>Coleccion de portatiles</span>
                 </div>
@@ -208,7 +219,7 @@ const ContentHome = ({ buttonsFromHome, setButtonsFromHome }) => {
         </div>
 
         <section className='playStation'>
-            {portal &&
+            {portal ?
                 <div className='portatil'>
                     <Link to={`/product/${portal._id}`} key={portal._id} className='portatil-container'>
                         <img className='portatil-img' alt='' src='https://i.ytimg.com/vi_webp/NmgOWKQj5-Y/maxresdefault.webp'/>
@@ -232,7 +243,10 @@ const ContentHome = ({ buttonsFromHome, setButtonsFromHome }) => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> :
+                <div className='loader'>
+                    <CircleLoader color={'#157dc2'} loading={true} css={override} size={75} />
+                </div> 
             }
         </section>
 

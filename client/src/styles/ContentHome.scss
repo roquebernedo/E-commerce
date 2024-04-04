@@ -186,10 +186,9 @@
     }
     @media (max-width: 768px) {
         gap: 3%;
-        height: 1150px;
     }
-    @media (max-width: 586px) {
-        height: 1500px;
+    @media (max-width: 375px) {
+        height: 1150px;
     }
     
 
@@ -209,6 +208,9 @@
         @media (max-width: 586px) {
             height: 5%;
         }
+        @media (max-width: 375px) {
+            width: 80%;
+        }   
     }
 
     .news-list{
@@ -238,7 +240,12 @@
                 height: 30%;
             }
             @media (max-width: 586px) {
-                height: 18%;
+                
+            }
+            @media (max-width: 375px) {
+                justify-content: center;
+                height: 19%;
+                gap: 10px;
             }
             
                 
@@ -256,8 +263,8 @@
                 @media (max-width: 768px) {
                     width: 48%;
                 }
-                @media (max-width: 586px) {
-                    width: 100%;
+                @media (max-width: 375px) {
+                    width: 80%;
                 }
                 
 
@@ -344,6 +351,49 @@
                     }
                 }
             }
+
+            .loader{
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 99%;
+            }
+        }
+    }
+}
+
+.subTitle{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 15px 0;
+
+    .subMiddle{
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        @media (max-width: 686px) {
+            width: 90%;
+        }
+        @media (max-width: 475px) {
+            width: 100%;
+        }
+
+        .collection{
+            color: #0068BD;
+            font-size: 3rem;
+            @media (max-width: 686px) {
+                font-size: 2.25rem;
+            }
+            @media (max-width: 475px) {
+                font-size: 2rem;
+            }
+            @media (max-width: 375px) {
+                font-size: 1.725rem;
+            }
         }
     }
 }
@@ -356,7 +406,7 @@
     height: 400px;
     //background-color: #5684FD;
     @media (max-width: 768px) {
-        height: 500px;
+        height: 600px;
     }
 
     .portatil{
@@ -375,6 +425,7 @@
                 width: 55%;
             }
             @media (max-width: 768px) {
+                height: 60%;
                 width: 100%;
             }
 
@@ -382,6 +433,9 @@
                 border-radius: 15px;
                 width: 100%;
                 height: 100%;
+                @media (max-width: 768px) {
+                    
+                }
             }
         }
 
@@ -393,9 +447,11 @@
             }
             @media (max-width: 768px) {
                 display: flex;
+                flex-direction: column;
                 width: 100%;
+                height: 40%;
                 margin-top: 20px;
-                height: fit-content ;
+               
             }
            
 
@@ -407,8 +463,8 @@
                 width: 100%;
                 height: 40%;
                 @media (max-width: 768px) {
-                    height: 100%;
-                    width: 30%;
+                    height: 50%;
+                    width: 100%;
                 }
 
                 .portatil-info-top-title{
@@ -422,10 +478,10 @@
                     @media (max-width: 768px) {
                         height: 100%;
                         width: 100%;
-                        font-size: 1rem;
+                        font-size: 1.5rem;
                     }
                     @media (max-width: 586px) {
-                        font-size: 0.65rem;
+                        
                     }
                 }
             }
@@ -434,14 +490,13 @@
                 width: 100%;
                 height: 70%;
                 @media (max-width: 768px) {
-                    height: 100%;
-                    width: 70%;
+                    height: 50%;
+                    width: 100%;
                 }
 
                 .portatil-info-bottom-container{
                     width: 100%;
                     height: 100%;
-                    
 
                     .portatil-description{
                         display: flex;
@@ -462,10 +517,13 @@
                             width: 80%;
                             color: #6B6B6B;
                             @media (max-width: 768px) {
-                                font-size: 0.85rem;
+                                font-size: 1.5rem;
                             }
                             @media (max-width: 586px) {
-                                font-size: 0.65rem;
+                               font-size: 1.3rem;
+                            }
+                            @media (max-width: 425px) {
+                                font-size: 1.1rem;
                             }
                         }
                     }
@@ -496,6 +554,14 @@
                 }
             }
         }
+    }
+
+    .loader{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 90%;
     }
 }
 

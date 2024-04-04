@@ -88,6 +88,12 @@
         @media (max-width: 868px) {
             
         }
+
+        .loader{
+            display: flex;
+            align-items: center;
+            height: 300px;
+        }
     
         .container-filterer{
             width: 20%;
@@ -364,11 +370,7 @@
                         justify-content: center;
                     }
 
-                    .loader{
-                        display: flex;
-                        width: 100%;
-                        background-color: #5684FD;
-                    }
+                    
     
                     .news-list-games{
                         width: 23.5%;
@@ -450,7 +452,7 @@
                                         color: rgb(72, 72, 72);
                                         font-weight: 700;
                                         @media (max-width: 475px) {
-                                            
+                                            font-size: 0.78rem;
                                         }
                                     }
                                 }
@@ -494,6 +496,9 @@
                                         font-size: 1rem;
                                         color: rgb(72, 72, 72);
                                         font-weight: 700;
+                                        @media (max-width: 475px) {
+                                            font-size: 0.78rem;
+                                        }
                                     }
                                 }
         
