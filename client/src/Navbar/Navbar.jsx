@@ -44,14 +44,17 @@ const Navbar = ({ filter, setFilter }) => {
       if(value === ''){
         setFilter([])
       }else{
-        const filtered = rates.filter(person => person.title.toLowerCase().includes(value.toLowerCase()));
-        console.log(filtered);
+        const filtered = rates.filter(person => 
+          person.title.toLowerCase().includes(value.toLowerCase())
+          || person.brand.toLowerCase().includes(value.toLowerCase())
+        ); 
         setFilter(filtered);
         navigate('/results')
       }
     }
     setValue('')
   }
+
 
   function recargarPagina() {
     window.location.reload();
@@ -69,7 +72,7 @@ const Navbar = ({ filter, setFilter }) => {
     <header className='navbar'>
       <div className='menu'>
         <div className='title'>
-          <Link className='mainTitle' to='/' >DirStore</Link>
+          <Link className='mainTitle' onClick={() =>  setTimeout(recargarPagina, 100)} to='/' >DirStore</Link>
         </div>
         <div className='button-icon'>
           <div className='button-icon-container'>

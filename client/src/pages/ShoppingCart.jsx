@@ -9,7 +9,6 @@ import ButtonPay from '../components/ButtonPay';
 const ShoppingCart = () => {
 
   const products = useSelector(state => state.cart.products)
-  console.log(products)
 
   const totalPrice = () => {
     let total = 0 

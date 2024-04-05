@@ -12,10 +12,14 @@ const Menu = ({ handle }) => {
         window.location.reload();
     }
 
+    function recargarPagina() {
+      window.location.reload();
+    }
+
   return (
     <div className='menuResponsive'>
         <div className='buttonsResponsive'>
-          <Link className='buttonResponsive' to='/'>
+          <Link className='buttonResponsive' onClick={() =>  setTimeout(recargarPagina, 100)} to='/'>
             <div onClick={handle}>Home</div>
           </Link>
           <Link className='buttonResponsive' to='/results'>
