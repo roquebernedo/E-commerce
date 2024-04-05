@@ -67,7 +67,7 @@ const Product = () => {
         ):(
           <>
         <div className='top-product'>
-              <Link className='link-arrow' to="/"><AiOutlineArrowLeft className='arrow-left' /></Link>
+              <Link className='link-arrow' to="/results"><AiOutlineArrowLeft className='arrow-left' /></Link>
               <div className='product-title'>{product.title}</div>
               {userInfo && 
                 <Link to={`/update/${product._id}`} className='product' key={product._id} >Edit</Link>

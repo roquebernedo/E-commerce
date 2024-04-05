@@ -42,12 +42,9 @@ const Navbar = ({ filter, setFilter }) => {
     
     if (rates.length > 0) { 
       if(value === ''){
-        console.log("funciona")
         setFilter([])
-        
       }else{
-        console.log("aca tambien")
-        const filtered = rates.filter(person => person.title.toLowerCase().includes(value));
+        const filtered = rates.filter(person => person.title.toLowerCase().includes(value.toLowerCase()));
         console.log(filtered);
         setFilter(filtered);
         navigate('/results')

@@ -349,7 +349,7 @@ const Items = ({ filterProducts, buttonsMain }) => {
                                             <div className='news-info'>
                                                 <div className='news-info-main'>
                                                     <div className='news-description'>
-                                                        <div className='description'>{product.title.substring(0,25) + "..."}</div>
+                                                        <div className='description'>{product.title}</div>
                                                     </div>
                                                     <div className='news-date'>
                                                         <div className='date'>{product.date}</div>
