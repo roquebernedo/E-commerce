@@ -9,6 +9,12 @@
     @media (max-width: 375px) {
         height: 980px;
     }
+
+    .loader{
+        display: flex;
+        align-items: center;
+        height: 521px;
+    }
     
     .top-product{
         display: flex;

@@ -25,17 +25,17 @@ const Items = ({ filterProducts, buttonsMain }) => {
         {
             name: "Celulares",
             id: 1,
-            categories: ["Samsung", "Iphone", "Xiaomi", "Huawei"]
+            categories: ["Samsung", "Apple", "Xiaomi", "Huawei"]
         },
         {
             name: "Computadoras",
             id: 2,
-            categories: ["Notebooks", "PC", "Cables", "Componentes de PC", "Mouse", "Teclado"]
+            categories: ["Notebooks", "PC", "Mouse", "Teclado"]
         },
         {
             name: "Tablets",
             id: 3,
-            categories: ["Ipad", "Xiaomi", "Lenovo", "Samsung"]
+            categories: ["Apple", "Xiaomi", "Lenovo", "Samsung"]
         },
         {
             name: "Audio",
@@ -103,7 +103,30 @@ const Items = ({ filterProducts, buttonsMain }) => {
                         : nameMain === 'Videojuegos'
                             ? person.mainCategory === 'Videojuegos'
                             : nameMain === 'Accesorios para Consolas'
-                                && person.mainCategory === 'Accesorios para Consolas'
+                                ? person.mainCategory === 'Accesorios para Consolas'
+                                : nameMain === 'Samsung'
+                                    ? person.mainCategory === 'Samsung'
+                                    : nameMain === 'Apple'
+                                        ? person.mainCategory === 'Apple'
+                                        : nameMain === 'Xiaomi'
+                                            ? person.mainCategory === 'Xiaomi'
+                                            : nameMain === 'Huawei'
+                                                ? person.mainCategory === 'Huawei'
+                                                : nameMain === 'Lenovo'
+                                                    ? person.mainCategory === 'Lenovo'
+                                                    : nameMain === 'Televisores'
+                                                        ? person.mainCategory === 'Televisores'
+                                                        : nameMain === 'Audio'
+                                                            ? person.mainCategory === 'Audio'
+                                                            : nameMain === 'Notebooks'
+                                                                ? person.mainCategory === 'Notebooks'
+                                                                : nameMain === 'PC'
+                                                                    ? person.mainCategory === 'PC'
+                                                                    : nameMain === 'Mouse'
+                                                                        ? person.mainCategory === 'Mouse'
+                                                                        : nameMain === 'Teclado'
+                                                                            ? person.mainCategory === 'Teclado'
+                                                                            : ""
                                 
                 ))
                 setFilterMain(filteredMain)
@@ -189,11 +212,11 @@ const Items = ({ filterProducts, buttonsMain }) => {
                                 <div className='container-category-inside'>
                                     {categories.map(category => 
                                         <div key={category.id} className='category-items'>
-                                            <div className='container-name-arrow'>
-                                                <div className='category-name' onClick={() => handleFilter(category.name, category.id)}>{category.name}</div>
-                                                    <div className='arrow-container'>
-                                                        <svg viewBox="0 0 24 24" focusable="false" className='category-arrow'><path fill="currentColor" d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg>
-                                                    </div>
+                                            <div className='container-name-arrow' onClick={() => handleFilter(category.name, category.id)}>
+                                                <div className='category-name'>{category.name}</div>
+                                                <div className='arrow-container'>
+                                                    <svg viewBox="0 0 24 24" focusable="false" className='category-arrow'><path fill="currentColor" d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"></path></svg>
+                                                </div>
                                             </div>
                                             <div className={selected === category.id ? 'sub-category-items-show' : 'sub-category-items'}>
                                                 {category.categories.map((category, id) => 
