@@ -11,7 +11,7 @@ const gettingProducts = asyncHandler(async (req, res) => {
     } catch (err){
         res.json(err)
     }
-
+  console.log("hola")
 })
 
 const addingProducts = asyncHandler(async (req, res) => {

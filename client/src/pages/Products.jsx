@@ -12,6 +12,7 @@ const Products = ({ buttonsFromHome, setButtonsFromHome }) => {
   // eslint-disable-next-line no-unused-vars
   const { userInfo } = useSelector((state) => state.auth)
   console.log(userInfo)
+  console.log("hola")
   
     // https://ecommerce-moez.onrender.com/ -> ESTE ES EL SERVER
   useEffect(() => {
