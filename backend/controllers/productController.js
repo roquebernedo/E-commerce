@@ -24,6 +24,24 @@ const addingProducts = asyncHandler(async (req, res) => {
   }
 })
 
+const addingProductsToCart = asyncHandler(async (req, res) => {
+  const body = req.body
+  const user = req.user
+  console.log(user)
+  //const product2 = await Product.find()
+  //console.log(product2)
+  const usercito = await User.findById("6614620e031f441b99c1c6dd")
+  console.log(usercito.productsOnCart)
+  const product = await Product.findById(usercito.productsOnCart)
+  console.log(product)
+  const savedProduct = await product.save()
+
+  usercito.productsOnCart = user.productsOnCart.concat(savedProduct)
+  await usercito.save()
+  
+  response.status(201).json(savedProduct)
+})
+
 // const addingProducts =  async (req, res) => {
 //     const body = req.body
 //     const token = getTokenFrom(req)
@@ -121,5 +139,6 @@ export {
     addingProducts,
     gettingUniqueProducts,
     saveProducts,
-    updateProduct
+    updateProduct,
+    addingProductsToCart
 }

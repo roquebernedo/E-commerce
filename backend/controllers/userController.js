@@ -5,16 +5,15 @@ import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 
 //route POST /api/users/auth
-
 const getUser = async (req, res) => {
-    const users = await User.find({}).populate('products', { title: 1, description: 1 })
+    const users = await User.find({}).populate('productsOnCart')
   
   res.json(users) 
 }
 
 const authUser = async (req, res) => {
     const { email, password } = req.body
-    const user = await User.findOne({ email })
+    const user = await User.findOne({ email }).populate('productsOnCart')
     console.log(user)
     console.log(user.passwordHash)
     console.log(password)
@@ -42,15 +41,13 @@ const authUser = async (req, res) => {
 
   res
     .status(200)
-    .send({ token, name: user.name, email: user.email })
+    .send({ token, name: user.name, email: user.email, productsOnCart: user.productsOnCart })
   console.log(token)
 }
 
 //route POST /api/users
 
 const registerUser = async (req, res) => {
-    
-    
     const body = req.body
     const saltRounds = 10
     const passwordHash = await bcrypt.hash(body.passwordHash, saltRounds)
@@ -64,40 +61,32 @@ const registerUser = async (req, res) => {
     })
 
     console.log(user.password)
-
     const savedUser = await user.save()
-
     res.json(savedUser)
 }
 
 //route POST /api/users/logout
-
 const logoutUser = asyncHandler(async (req, res) => {
     res.cookie('jwt', '', {
         httpOnly: true,
         expires: new Date(0),
     })
-
     res.status(200).json({ message: 'Logout User'})
 })
 
 //route GET /api/users/profile
-
 const getUserProfile = asyncHandler(async (req, res) => {
     const user = {
         _id: req.user._id,
         name: req.user.name,
         email: req.user.email
     }
-
     res.status(200).json(user)
 })
 
 //route PUT /api/users/profile
-
 const updateUserProfile = asyncHandler(async (req, res) => {
     const user = await User.findById(req.user._id)
-
     if(user){
         user.name = req.body.name || user.name
         user.email = req.body.email || user.email

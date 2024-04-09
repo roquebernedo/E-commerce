@@ -8,7 +8,10 @@ const Products = ({ buttonsFromHome, setButtonsFromHome }) => {
   // eslint-disable-next-line no-unused-vars
   const [products, setProducts] = useState([])
   // eslint-disable-next-line no-unused-vars
+  const [users, setUsers] = useState([])
+  // eslint-disable-next-line no-unused-vars
   const { userInfo } = useSelector((state) => state.auth)
+  console.log(userInfo)
   
     // https://ecommerce-moez.onrender.com/ -> ESTE ES EL SERVER
   useEffect(() => {
@@ -17,13 +20,24 @@ const Products = ({ buttonsFromHome, setButtonsFromHome }) => {
             const res = await axios.get("https://ecommerce-moez.onrender.com/")
             setProducts(res.data)
         }catch(err){
+            console.log(err)  
+        }
+    }
+    fetchAllProducts()
+  }, [])
+
+  useEffect(() => {
+    const fetchAllProducts = async () => {
+        try{
+            const res = await axios.get("http://localhost:8000/api/users")
+            setUsers(res.data)
+        }catch(err){
             console.log(err)
         }
     }
     fetchAllProducts()
   }, [])
 
- 
   return (
     <>
     <div className='main-products'>

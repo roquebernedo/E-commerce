@@ -20,6 +20,10 @@ const userSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId, 
         ref: "Product"
     }],
+    productsOnCart: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Product",
+    }]
 }, {
     timestamps: true
 })
