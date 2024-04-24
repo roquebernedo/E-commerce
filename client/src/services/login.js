@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = 'http://localhost:3000/api/users/auth'
+const baseUrl = 'https://ecommerce-moez.onrender.com/api/users/auth'
 
 const login = async credentials => {
   const response = await axios.post(baseUrl, credentials)
