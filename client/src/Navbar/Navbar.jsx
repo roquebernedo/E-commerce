@@ -17,12 +17,34 @@ const Navbar = ({ filter, setFilter }) => {
   const [value, setValue] = useState('')
   const [rates, setRates] = useState({})
   const { userInfo } = useSelector((state) => state.auth)
-  const products = useSelector(state => state.cart.products)
-  const totalProducts = products.reduce((a,b) => a + b.quantity, 0)
+  //console.log(userInfo)
+  const [totalProducts, setTotalProducts] = useState()
+  //const totProducts = userInfo.productsOnCart.reduce((a,b) => a + b.quantity, 0)
+  //const products = useSelector(state => state.cart.products) Este es para el principal, pero el que usare
+  // es para el backend, osea el que si deberia de ser
+  //console.log(userInfo.productsOnCart.length)
+  // const products = useSelector(state => 
+  //   {
+  //     if(state.cart.products){
+  //       return state.cart.products
+  //     }
+  //   })
+
+  // console.log(products)
+  //const totalProducts = products.reduce((a,b) => a + b.quantity, 0)
   const [open, setOpen] = useState(false)
   const [openMenu, setOpenMenu] = useState(false)
   const navigate = useNavigate()
 
+  useEffect(() => {
+    if(userInfo){
+      const totProducts = userInfo.productsOnCart.reduce((a,b) => a + b.quantity, 0)
+      setTotalProducts(totProducts)
+      //console.log(totalProducts)
+    }
+    
+  }, [userInfo])
+  //console.log(totalProducts)
   const logoutHanlder =  () => {
       window.localStorage.clear()
       window.location.reload();
@@ -94,7 +116,7 @@ const Navbar = ({ filter, setFilter }) => {
             </Link>
             <div className='cartIcon' onClick={() => setOpen(!open)}>
               <AiOutlineShoppingCart className='car'/>
-              <span className='number'>{totalProducts}</span>
+              <span className='number'>{totalProducts && totalProducts}</span>
             </div>
             <div className='buttons' onClick={handleMenu}>
               <AiOutlineMenu className='menu-responsive' />

@@ -1,4 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit"
+import { combineReducers, configureStore } from "@reduxjs/toolkit"
 import authReducer from './slices/authSlice'
 import { apiSlice } from "./slices/apiSlice"
 import cartReducer from "./redux/cartReducer"
@@ -20,25 +20,39 @@ const persistConfig = {
     storage,
 }
 
-const persistedReducer = persistReducer(persistConfig, cartReducer)
-
+//const persistedReducer = persistReducer(persistConfig, cartReducer)
+const persistedReducer = persistReducer(persistConfig, combineReducers({
+  auth: authReducer, 
+  [apiSlice.reducerPath]: apiSlice.reducer,
+  cart: cartReducer
+}))
 
 export const store = configureStore({
-    reducer: {
-        auth: authReducer, 
-        [apiSlice.reducerPath]: apiSlice.reducer,
-        cart: persistedReducer
-    },
-    middlewaree: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiSlice.middleware),
-    middleware: (getDefaultMiddleware) =>
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     }),
-    devTools: true,
-    
+  devTools: true,
 })
+// export const store = configureStore({
+//     reducer: {
+//         auth: authReducer, 
+//         [apiSlice.reducerPath]: apiSlice.reducer,
+//         cart: cartReducer
+//     },
+//     //middlewaree: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiSlice.middleware),
+//     // middleware: (getDefaultMiddleware) =>
+//     // getDefaultMiddleware({
+//     //   serializableCheck: {
+//     //     ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+//     //   },
+//     // }),
+//     // devTools: true,
+    
+// })
 
 export let persistor = persistStore(store)
 

@@ -28,7 +28,9 @@ const Login = () => {
 
   useEffect(() => {
     if(userInfo){
-      navigate('/')
+      //window.location.reload();
+      //navigate('/')
+      
     }
   }, [navigate, userInfo])
 
@@ -39,6 +41,11 @@ const Login = () => {
       const res = await login({ email, password }).unwrap()
       dispatch(setCredentials({...res}))
       navigate('/')
+      setTimeout(() => {
+        window.location.reload()
+      }, 1000);
+      
+      
       toast.success('Logeado exitosamente!')
     }catch(err){
       toast.error(err?.data?.message || err.error)

@@ -11,19 +11,66 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Profile from "./pages/Profile";
 import ShoppingCart from "./pages/ShoppingCart";
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Items from "./pages/Items.jsx";
 import Us from "./pages/Us.jsx";
 import Faqs from "./pages/Faqs.jsx";
 import Footer from "./Footer/Footer.jsx";
 import Navbar from "./Navbar/Navbar.jsx";
 import { useSelector } from "react-redux";
+import productService from "./services/product.js";
 
 function App() {
   const { userInfo } = useSelector((state) => state.auth)
   const [filter, setFilter] = useState([])
   const [buttonsFromHome, setButtonsFromHome] = useState([])
+  const [user, setUser] = useState(null)
   // eslint-disable-next-line no-unused-vars
+
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem('userInfo')
+    //console.log(loggedUserJSON)
+    if(loggedUserJSON){
+      const user = JSON.parse(loggedUserJSON)
+      setUser(user)
+      productService.setToken(user.token)
+    }
+  }, [])
+ 
+  useEffect(() => {
+    // const token = localStorage.getItem('loggedBlogappUser');
+    // console.log(token)
+    // const parseredToken = JSON.parse(token)
+    if(user){
+      const token = localStorage.getItem('userInfo');
+      //console.log(token)
+      const parseredToken = JSON.parse(token)
+      const expirationTime = parseredToken.expirationTimeMilliseconds
+    
+      if (token && expirationTime) {
+        const currentTime = new Date().getTime();
+        const timeRemaining = parseInt(expirationTime) - currentTime;
+        
+        if (timeRemaining > 0) {
+          // El token aún no ha expirado
+          const expirationTimer = setTimeout(() => {
+            // Token expirado, actualiza el estado del usuario
+            window.localStorage.clear()
+            setUser(null);
+            window.location.reload();
+          }, timeRemaining);
+  
+          // Limpia el temporizador cuando el componente se desmonta o cuando el token se renueva
+          return () => clearTimeout(expirationTimer);
+        } else {
+          // El token ha expirado, actualiza el estado del usuario
+          window.localStorage.clear()
+          setUser(null);
+          window.location.reload();
+        }
+      }
+    }
+  }, [user])
 
   return (
     <div>

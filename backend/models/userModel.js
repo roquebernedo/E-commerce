@@ -21,8 +21,12 @@ const userSchema = new mongoose.Schema({
         ref: "Product"
     }],
     productsOnCart: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Product",
+        id: String,
+        title: String,
+        description: String,
+        image: String,
+        price: Number,
+        quantity: Number,
     }]
 }, {
     timestamps: true

@@ -27,7 +27,7 @@ const Register = () => {
   // eslint-disable-next-line no-unused-vars
   const [register, { isLoading }] = useRegisterMutation()
   const [users, setUsers] = useState([])
-
+  console.log(users)
   const addBlog = async (event) => {
     event.preventDefault()
     const noteObject = {

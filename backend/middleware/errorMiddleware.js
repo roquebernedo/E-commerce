@@ -5,18 +5,22 @@ const notFound = (req, res, next) => {
 }
 
 const errorHandler = (err, req, res, next) => {
-    let statusCode = res.statusCode === 200 ? 500 : res.statusCode
-    let message = err.message
+    // let statusCode = res.statusCode === 200 ? 500 : res.statusCode
+    // let message = err.message
 
-    if(err.name === 'CastError' && err.kind === 'ObjectId'){
-        statusCode = 404
-        message = 'Resource not found'
+    // if(err.name === 'CastError' && err.kind === 'ObjectId'){
+    //     statusCode = 404
+    //     message = 'Resource not found'
+    // } else
+     if (err.name === 'TokenExpiredError') {
+        console.log("aqui va el token")
+        return res.status(401).json({ err: 'token expired' })
     }
 
-    res.status(statusCode).json({
-        message,
-        stack: process.env.NODE_ENV === 'production' ? null : err.stack
-    })
+    // res.status(statusCode).json({
+    //     message,
+    //     stack: process.env.NODE_ENV === 'production' ? null : err.stack
+    // })
 }
 
 export { notFound, errorHandler }

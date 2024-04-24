@@ -3,12 +3,13 @@ import axios from 'axios'
 import { useLocation, Link} from "react-router-dom";
 import '../styles/Product.scss'
 import { useDispatch, useSelector } from 'react-redux';
-import { addToCart } from '../redux/cartReducer';
+//import { addToCart, createProduct, createProductCart } from '../redux/cartReducer';
 import { useCookies } from 'react-cookie'
 import { useGetUserID } from '../Hooks/useGetUserID'
 import { AiOutlineArrowLeft } from "react-icons/ai"
 import { css } from '@emotion/react';
 import { CircleLoader } from 'react-spinners';
+import { createProductCart, updateQuantityy } from '../slices/authSlice';
 
 const override = css`
   display: flex;
@@ -34,7 +35,6 @@ const Product = () => {
   // eslint-disable-next-line no-unused-vars
   const [cookies, _] = useCookies(["access_token"])
   const { userInfo } = useSelector((state) => state.auth)
-  console.log(userInfo)
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -52,13 +52,67 @@ const Product = () => {
     
     fetchProduct()
   }, [productID]);
-
+  //console.log(product)
   const containerStyles = css`
   display: flex;
   justify-content: center;
   align-items: center;
   height: 600px;
 `;
+  
+  //console.log(userUpdate)
+  // const addingOrIncreasing = (id) => {
+  //   const userUpdate = userInfo.productsOnCart.find(find => find.id === id)
+  //   console.log(userUpdate)
+  //   console.log(id)
+  //   console.log(quantity)
+  //   if(userUpdate){
+  //     const quantityAdd = userUpdate.quantity + quantity
+  //     console.log("Despachando updateQuantity con:", id, quantity);
+  //     console.log("si entra al quantity")
+  //     console.log(quantityAdd)
+  //     dispatch(updateQuantity(id, quantity))
+  //     console.log("llego aqui")
+  //   }else{
+  //     dispatch(createProductCart({
+  //       id: product._id,
+  //       title: product.title,
+  //       description: product.description,
+  //       price: product.price,
+  //       image: product.image,
+  //       quantity
+  //     }))
+  //   }
+  // }
+
+  const addingOrIncreasingg = (product) => {
+    //console.log(product)
+    const userUpdate = userInfo.productsOnCart.find(find => find.id === product._id)
+    //console.log(userUpdate)
+    //console.log(id)
+    //console.log(quantity)
+    if(userUpdate){
+      //console.log("entra a actualizar")
+      dispatch(updateQuantityy({
+        id: product._id,
+        title: product.title,
+        description: product.description,
+        price: product.price,
+        image: product.image,
+        quantity
+      }))
+    }else{
+      dispatch(createProductCart({
+        id: product._id,
+        title: product.title,
+        description: product.description,
+        price: product.price,
+        image: product.image,
+        quantity
+      }))
+    }
+  }
+  
   return (
     <div className='main-product-container'>
       {loading ? (
@@ -118,20 +172,7 @@ const Product = () => {
                       {quantity}
                       <button className='right but' onClick={()=>setQuantity((prev) => prev + 1)}>+</button>
                     </div>
-                    <button className='add' disabled={userInfo === null} onClick={() => dispatch(addToCart({
-                      id: product._id,
-                      title: product.title,
-                      desc: product.description,
-                      brand: product.brand,
-                      category: product.category,
-                      stock: product.stock,
-                      price: product.price,
-                      discount: product.discount,
-                      date: product.date,
-                      img: product.image,
-                      main_features: product.main_features,
-                      quantity,
-                      }))}>ADD TO CART
+                    <button className='add' disabled={userInfo === null} onClick={() => addingOrIncreasingg(product)} >ADD TO CART
                     </button>
                 </div>
               </div>

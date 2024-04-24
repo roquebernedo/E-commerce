@@ -1,7 +1,11 @@
-import React, { useState } from 'react'
-import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+
+//import { useNavigate } from 'react-router-dom'
 import '../styles/Add.scss'
+import productService from '../services/product'
+import { useDispatch } from 'react-redux'
+import { createProduct } from '../slices/authSlice'
+//import { createProduct } from '../redux/cartReducer'
 
 const Form = ({handle, submit, product, handleIngredientChange, handleAddIngredient}) => {
   return (
@@ -20,6 +24,9 @@ const Form = ({handle, submit, product, handleIngredientChange, handleAddIngredi
 
       <div className='div-product'>Category: </div>
       <input className='category-product' onChange={handle} name='category'/>
+
+      <div className='div-product'>MainCategory: </div>
+      <input className='category-product' onChange={handle} name='mainCategory'/>
 
       <div className='div-product'>Stock: </div>
       <input className='color-product' onChange={handle} name='stock'/>
@@ -57,11 +64,13 @@ const Form = ({handle, submit, product, handleIngredientChange, handleAddIngredi
 
 const Add = () => {
 
+  const dispatch = useDispatch()
   const [product, setProduct] = useState({
     title:"",
     description:"",
     brand:"",
     category:"",
+    mainCategory: "",
     stock:"",
     main_features: [],
     price: "",
@@ -69,24 +78,75 @@ const Add = () => {
     date: "",
     image:"",
   })
+  // const [user, setUser] = useState(null)
+  // eslint-disable-next-line no-unused-vars
+  const [products, setProducts] = useState([])
 
+  useEffect(() => {
+    productService.getAll().then(products =>
+      setProducts(products)
+    )  
+  }, [])
+  //console.log(products)
   
+  // useEffect(() => {
+  //   const loggedUserJSON = window.localStorage.getItem('userInfo')
+  //   if(loggedUserJSON){
+  //     const user = JSON.parse(loggedUserJSON)
+  //     //console.log(user)
+  //     productService.setToken(user.token)
+  //   }
+  // })
 
-  const navigate = useNavigate()
+  //const navigate = useNavigate()
+
+  const addProduct = async (event) => {
+    event.preventDefault()
+    // const [title, setTitle] = useState('');
+    // const [description, setDescription] = useState('');
+    // const [password, setPassword] = useState('');
+    // const productObject = {
+    //   title: title,
+    //   description: description,
+    //   brand: brand,
+    //   category: category,
+    //   mainCategory: mainCategory,
+    //   stock: stock,
+    //   main_features: main_features,
+    //   price: price,
+    //   discount: discount,
+    //   date: date,
+    //   image: image,
+    // }
+
+    // productService
+    //   .create(product)
+    //   .then(returnedProduct => {
+    //     setProducts(products.concat(product))
+    //   })
+
+    dispatch(createProduct(product))
+
+    // console.log(returnedBlog);
+    // setUsers(users.concat(noteObject));
+    // toast.success('Creada exitosamente!')
+    // navigate('/');
+    
+  }
 
   const handleChange = (e) => {
     setProduct(prev => ({...prev, [e.target.name]: e.target.value}))
   }
 
-  const onSubmit = async e => {
-    e.preventDefault()
-    try{
-        await axios.post("https://ecommerce-moez.onrender.com/add", product)
-        navigate("/")
-      } catch (error) {
-        console.log(error);
-    }
-  }
+  // const onSubmit = async e => {
+  //   e.preventDefault()
+  //   try{
+  //       await axios.post("https://ecommerce-moez.onrender.com/add", product)
+  //       navigate("/")
+  //     } catch (error) {
+  //       console.log(error);
+  //   }
+  // }
 
   const handleIngredientChange = (event, index) => {
     const { value } = event.target;
@@ -102,7 +162,7 @@ const Add = () => {
 
   return (
     <div className='form'>
-      <Form handle={handleChange} submit={onSubmit} product={product} handleAddIngredient={handleAddIngredient} handleIngredientChange={handleIngredientChange}/>
+      <Form handle={handleChange} submit={addProduct} product={product} handleAddIngredient={handleAddIngredient} handleIngredientChange={handleIngredientChange}/>
     </div>
   )
 }

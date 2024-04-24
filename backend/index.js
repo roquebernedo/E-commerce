@@ -1,7 +1,9 @@
 import express from "express"
 import dotenv from 'dotenv'
 import { notFound, errorHandler } from "./middleware/errorMiddleware.js"
-dotenv.config()
+import { userExtractor, tokenExtractor } from "./middleware/authMiddleware.js"
+dotenv.config() 
+import 'express-async-errors'
 import userRoutes from './routes/userRoutes.js'
 import productRoutes from './routes/productRoutes.js'
 import cors from 'cors'
@@ -17,9 +19,13 @@ const app = express()
 app.use(express.json())
 app.use(cors())
 app.use(express.urlencoded({ extended: true }))
+
+app.use(tokenExtractor)
 app.use("/api/stripe", stripeRoutes)
 app.use(cookieParser())
 app.use('/api/users', userRoutes)
 app.use('/', productRoutes)
+
+app.use(errorHandler)
 
 app.listen(port, () => console.log(`Server started on port ${port}`))

@@ -15,7 +15,7 @@ root.render(
         <Router>
           <App />
         </Router>
-      </PersistGate>
+      </PersistGate> 
     </Provider>
   </React.StrictMode>
   

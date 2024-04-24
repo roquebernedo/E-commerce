@@ -3,17 +3,21 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
 import { AiOutlineArrowLeft } from "react-icons/ai"
 import '../styles/ShoppingCart.scss'
-import { decreaseItem, removeItem, increaseItem } from '../redux/cartReducer'
+//import { decreaseItem, removeItem, increaseItem } from '../redux/cartReducer'
 import ButtonPay from '../components/ButtonPay';
+import { decreaseQuantityProduct, increaseQuantityProduct, removeSingleProductUser } from '../slices/authSlice';
 
 const ShoppingCart = () => {
 
-  const products = useSelector(state => state.cart.products)
-
+  const { userInfo } = useSelector((state) => state.auth)
+  //console.log(userInfo)
+  
   const totalPrice = () => {
     let total = 0 
-    products.forEach((item) => (total+=item.quantity*item.price))
-    return total.toFixed(2)
+    if(userInfo){
+      userInfo.productsOnCart.forEach((item) => (total+=item.quantity*item.price))
+      return total.toFixed(2)
+    }
   }
 
   const dispatch = useDispatch()
@@ -27,29 +31,30 @@ const ShoppingCart = () => {
       <div className='items'>
         
           <div className='items-container'>
-            {products.length > 0 ? products?.map(product =>(
+            {userInfo ? (
+            userInfo.productsOnCart.length > 0 ? userInfo.productsOnCart?.map(product =>(
                 <div key={product.id} className='items-info'>
                   <div className='item'>
-                    <img src={product.img} alt='' className='image'/>
+                    <img src={product.image} alt='' className='image'/>
 
                     <div className='details'>
                       <h1>{product.title}</h1>
                       <div className='color-size'>{product.brand}</div>
-                      <Link className='delete' onClick={() => dispatch(removeItem(product.id))}>Remove</Link>
+                      <Link className='delete' onClick={() => dispatch(removeSingleProductUser(product.id))}>Remove</Link>
                     </div>
 
                     <div className='quantity-price' key={product.id}>
                       <div className='quantity'>
-                        <button className='left but' onClick={() => dispatch(decreaseItem({id: product.id,}))}>-</button>
+                        <button className='left but' onClick={() => dispatch(decreaseQuantityProduct(product))}>-</button>
                         <div className='quan'>{product.quantity}</div>
-                        <button className='right but' onClick={() => dispatch(increaseItem({id: product.id,}))}>+</button>
+                        <button className='right but' onClick={() => dispatch(increaseQuantityProduct(product))}>+</button>
                       </div>
                       <div className='price'>${product.quantity * product.price}</div>
                     </div>
                   </div>
                 </div>
             )) : <div className='blank'></div>
-            }
+           ) : <div className='blank'></div>}
           </div>
       
 
@@ -66,7 +71,7 @@ const ShoppingCart = () => {
             <div className='tot-price'>${totalPrice()}</div>
           </div>
           <div className='checkout-tot'>
-            <ButtonPay cartItems={products}/>
+            <ButtonPay cartItems={userInfo && userInfo.productsOnCart}/>
           </div>
           <div className='address'>Añade una direccion para continuar!</div>
         </div>

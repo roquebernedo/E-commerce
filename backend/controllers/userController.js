@@ -4,16 +4,17 @@ import User from "../models/userModel.js"
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 
-//route POST /api/users/auth
+//route POST /api/users
 const getUser = async (req, res) => {
     const users = await User.find({}).populate('productsOnCart')
   
   res.json(users) 
 }
 
+//route POST /api/users/auth
 const authUser = async (req, res) => {
     const { email, password } = req.body
-    const user = await User.findOne({ email }).populate('productsOnCart')
+    const user = await User.findOne({ email }).populate('products')
     console.log(user)
     console.log(user.passwordHash)
     console.log(password)
@@ -35,13 +36,23 @@ const authUser = async (req, res) => {
     // token expires in 60*60 seconds, that is, in one hour
   const token = jwt.sign(
     userForToken, 
-    process.env.JWT_SECRET,
+    process.env.SECRET,
     { expiresIn: 60*60 }
   )
 
+  const decodedToken = jwt.decode(token);
+  const expirationTimeMilliseconds = decodedToken.exp * 1000
+
   res
     .status(200)
-    .send({ token, name: user.name, email: user.email, productsOnCart: user.productsOnCart })
+    .send({ token, 
+            expirationTimeMilliseconds, 
+            name: user.name, 
+            email: user.email, 
+            productsOnCart: user.productsOnCart, 
+            products: user.products,
+            id: user._id
+        })
   console.log(token)
 }
 
