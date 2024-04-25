@@ -8,7 +8,8 @@ import '../styles/Login.scss'
 import FormInfo from '../components/FormInfo.jsx';
 import { css } from '@emotion/react';
 import { CircleLoader } from 'react-spinners';
-import loginService from '../services/login'
+//import loginService from '../services/login'
+import { login as loginService } from '../services/login'
 //import productService from '../services/product'
 
 const override = css`
@@ -65,7 +66,7 @@ const Login = () => {
     console.log(email)
     try {
       console.log("tamos en try")
-      const user = await loginService.login({
+      const user = await loginService({
         email, password,
       })
       dispatch(setCredentials({...user}))
