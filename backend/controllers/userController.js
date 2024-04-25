@@ -3,6 +3,7 @@ import generateToken from "../utils/generateToken.js"
 import User from "../models/userModel.js"
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
+import bcryptjs from 'bcryptjs'
 
 //route POST /api/users
 const getUser = async (req, res) => {
@@ -21,7 +22,7 @@ const authUser = asyncHandler(async (req, res) => {
     console.log(email)
     const passwordCorrect = user === null   
         ? false
-        : await bcrypt.compare(password, user.passwordHash)
+        : await bcryptjs.compare(password, user.passwordHash)
     if (!(user && passwordCorrect)) {
         return res.status(401).json({
         error: 'invalid username or password'
