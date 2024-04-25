@@ -8,6 +8,8 @@ import '../styles/Login.scss'
 import FormInfo from '../components/FormInfo.jsx';
 import { css } from '@emotion/react';
 import { CircleLoader } from 'react-spinners';
+import loginService from '../services/login'
+//import productService from '../services/product'
 
 const override = css`
   display: block;
@@ -17,11 +19,16 @@ const override = css`
 
 const Login = () => {
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  //const [password, setPassword] = useState('');
+  // eslint-disable-next-line no-unused-vars
+  const [username, setUsername] = useState('') 
+  const [password, setPassword] = useState('') 
+  // eslint-disable-next-line no-unused-vars
+  const [user, setUser] = useState(null)
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
-
+  // eslint-disable-next-line no-unused-vars
   const [login, { isLoading }] = useLoginMutation()
 
   const { userInfo } = useSelector((state) => state.auth)
@@ -34,23 +41,52 @@ const Login = () => {
     }
   }, [navigate, userInfo])
 
-  const submitHandler = async (e) => {
-    e.preventDefault();
+  // const submitHandler = async (e) => {
+  //   e.preventDefault();
     
-    try{
-      const res = await login({ email, password }).unwrap()
-      dispatch(setCredentials({...res}))
+  //   try{
+  //     const res = await login({ email, password }).unwrap()
+  //     dispatch(setCredentials({...res}))
+  //     navigate('/')
+  //     setTimeout(() => {
+  //       window.location.reload()
+  //     }, 1000);
+      
+      
+  //     toast.success('Logeado exitosamente!')
+  //   }catch(err){
+  //     toast.error(err?.data?.message || err.error)
+  //   }
+  // };
+
+  const handleLogin = async (event) => {
+    event.preventDefault()
+    console.log("entro al handle")
+    console.log(email)
+    try {
+      console.log("tamos en try")
+      const user = await loginService.login({
+        email, password,
+      })
+      dispatch(setCredentials({...user}))
+      console.log(user)
       navigate('/')
       setTimeout(() => {
         window.location.reload()
       }, 1000);
-      
-      
       toast.success('Logeado exitosamente!')
-    }catch(err){
-      toast.error(err?.data?.message || err.error)
+      // window.localStorage.setItem(
+      //   'userInfo', JSON.stringify(user)
+      // ) 
+      // console.log("entra aca")
+      // productService.setToken(user.token)
+      // setUser(user)
+      // setEmail('')
+      // setPassword('')
+    } catch (exception) {
+      console.log("error")
     }
-  };
+  }
 
   return (
     <div className='login-in'>
@@ -59,7 +95,7 @@ const Login = () => {
             <CircleLoader color={'#157dc2'} loading={true} css={override} size={75} />
           </div>
         ):
-        <form className='form-login' onSubmit={submitHandler}>
+        <form className='form-login' onSubmit={handleLogin}>
           <FormInfo 
             setPassword={setPassword}
             setEmail={setEmail}

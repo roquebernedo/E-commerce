@@ -7,3 +7,18 @@ export const apiSlice = createApi({
     tagTypes: ['User'],
     endpoints: (builder) => ({})
 })
+
+// const baseQuery = fetchBaseQuery({
+//     baseUrl: 'https://ecommerce-moez.onrender.com',
+//     prepareHeaders: (headers, { getState }) => {
+//       headers.set('Content-Type', 'application/json');
+//       // Añade aquí cualquier otro header que necesites
+//       return headers;
+//     }
+// });
+
+// export const apiSlice = createApi({
+//     baseQuery,
+//     tagTypes: ['User'],
+//     endpoints: (builder) => ({})
+// })

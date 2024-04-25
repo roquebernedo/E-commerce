@@ -5,7 +5,7 @@ export const initialState = {
     userInfo: localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem
         ('userInfo')) : null
 }
-//console.log(initialState)
+console.log(initialState)
 // const ids = initialState.userInfo.productsOnCart.map(pro => pro.id)
 // console.log(ids)
 const authSlice = createSlice({
