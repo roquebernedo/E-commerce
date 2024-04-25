@@ -16,21 +16,14 @@ connectDB()
 
 const app = express()
 
-const allowedOrigins = ['https://main--ecommerce-rq.netlify.app', 'http://localhost:3000']; // Asegúrate de incluir aquí todos tus orígenes permitidos
-
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  optionsSuccessStatus: 200
-};
-
-app.use(cors(corsOptions))
-
+app.use(cors())
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', '*');
+    res.setHeader('Access-Control-Allow-Headers', '*');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    next();
+});
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
