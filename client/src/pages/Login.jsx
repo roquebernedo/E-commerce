@@ -72,9 +72,9 @@ const Login = () => {
       dispatch(setCredentials({...user}))
       console.log(user)
       navigate('/')
-      setTimeout(() => {
-        window.location.reload()
-      }, 1000);
+      // setTimeout(() => {
+      //   window.location.reload()
+      // }, 1000);
       toast.success('Logeado exitosamente!')
       // window.localStorage.setItem(
       //   'userInfo', JSON.stringify(user)
