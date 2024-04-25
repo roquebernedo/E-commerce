@@ -2,7 +2,6 @@ import asyncHandler from "express-async-handler"
 import generateToken from "../utils/generateToken.js"
 import User from "../models/userModel.js"
 import jwt from 'jsonwebtoken'
-import bcrypt from 'bcrypt'
 import bcryptjs from 'bcryptjs'
 
 //route POST /api/users
@@ -62,7 +61,7 @@ const authUser = asyncHandler(async (req, res) => {
 const registerUser = async (req, res) => {
     const body = req.body
     const saltRounds = 10
-    const passwordHash = await bcrypt.hash(body.passwordHash, saltRounds)
+    const passwordHash = await bcryptjs.hash(body.passwordHash, saltRounds)
     if (body.email.length < 3 || body.passwordHash.length < 3) {
         return res.status(400).json({ error: 'Username or Password must be more than 3 characters' })
     }
