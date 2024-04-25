@@ -11,7 +11,7 @@ import stripeRoutes from "./routes/stripeRoutes.js"
 import cookieParser from 'cookie-parser'
 import connectDB from "./config/db.js"
 
-const port = process.env.PORT || 5000
+const port = process.env.PORT
 connectDB()
 
 const app = express()

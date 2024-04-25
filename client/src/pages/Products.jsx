@@ -27,18 +27,6 @@ const Products = ({ buttonsFromHome, setButtonsFromHome }) => {
     fetchAllProducts()
   }, [])
 
-  useEffect(() => {
-    const fetchAllProducts = async () => {
-        try{
-            const res = await axios.get("http://localhost:8000/api/users")
-            setUsers(res.data)
-        }catch(err){
-            console.log(err)
-        }
-    }
-    fetchAllProducts()
-  }, [])
-
   return (
     <>
     <div className='main-products'>
