@@ -18,7 +18,7 @@ const Products = ({ buttonsFromHome, setButtonsFromHome }) => {
   useEffect(() => {
     const fetchAllProducts = async () => {
         try{
-            const res = await axios.get("https://ecommerce-moez.onrender.com/")
+            const res = await axios.get("https://e-commerce-f1fr.onrender.com")
             setProducts(res.data)
         }catch(err){
             console.log(err)  

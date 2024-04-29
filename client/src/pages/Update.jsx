@@ -27,7 +27,7 @@ const Update = () => {
     const fetchProduct = async () => {
       try {
 
-        const response = await axios.get("https://ecommerce-moez.onrender.com/product/" + productId);
+        const response = await axios.get("https://e-commerce-f1fr.onrender.com/product/" + productId);
         setProductData(response.data);
         setProduct(response.data)
         
@@ -46,7 +46,7 @@ const Update = () => {
   const handleClick = async e => { // si se hace api request se usa "async"
     e.preventDefault() // previene que se actualice
     try{
-        await axios.put("https://ecommerce-moez.onrender.com/products/"+ productId, product)
+        await axios.put("https://e-commerce-f1fr.onrender.com/products/"+ productId, product)
         navigate("/")// sirve para navegar por el homepage
     }catch(err){
         console.log(err)

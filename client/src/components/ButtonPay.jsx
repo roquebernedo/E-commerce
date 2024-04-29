@@ -3,7 +3,7 @@ import { Link } from "react-router-dom"
 
 const ButtonPay = ({ cartItems }) => {
 
-    const url = 'https://ecommerce-moez.onrender.com'
+    const url = 'https://e-commerce-f1fr.onrender.com'
     const handlecheckout = () => {
         axios.post(`${url}/api/stripe/create-checkout-session`, {
             cartItems

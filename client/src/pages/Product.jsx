@@ -39,7 +39,7 @@ const Product = () => {
   useEffect(() => {
     const fetchProduct = async () => {
         try {
-            const response = await axios.get(`https://ecommerce-moez.onrender.com/product/${productID}`);
+            const response = await axios.get(`https://e-commerce-f1fr.onrender.com/product/${productID}`);
             setProduct(response.data)
         } catch (error) {
             console.log(error);

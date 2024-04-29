@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = 'https://ecommerce-moez.onrender.com' //http://localhost:8000
+const baseUrl = 'https://e-commerce-f1fr.onrender.com' //http://localhost:8000
 
 let token = null
 //console.log(token)
