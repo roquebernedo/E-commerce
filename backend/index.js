@@ -35,8 +35,8 @@ app.use(express.urlencoded({ extended: true }))
 //   });
 
 app.use(tokenExtractor)
-app.use("/api/stripe", stripeRoutes)
 app.use(cookieParser())
+app.use('/api/stripe', stripeRoutes)
 app.use('/api/users', userRoutes)
 app.use('/', productRoutes)
 

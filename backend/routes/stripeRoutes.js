@@ -9,15 +9,14 @@ const stripe = new Stripe(process.env.STRIPE_KEY)
 const router = express.Router()
 
 router.post('/create-checkout-session', async (req, res) => {
-  console.log("entro al stripe")
   const line_items = req.body.cartItems.map(item => {
-    console.log(item)
+    //console.log(item)
       return{
         price_data: {
           currency: "usd",
           product_data: {
             name: item.title,
-            image: [item.image],
+            images: [item.image],
             description: item.description,
             metadata: {
               id: item.id,
@@ -28,6 +27,8 @@ router.post('/create-checkout-session', async (req, res) => {
         quantity: item.quantity,
       }
   })
+
+  console.log(line_items)
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ['card'],
     shipping_address_collection: {

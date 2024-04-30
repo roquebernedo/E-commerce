@@ -56,7 +56,7 @@ const ContentHome = ({ buttonsFromHome, setButtonsFromHome }) => {
 
     useEffect(() => {
         axios
-          .get("https://ecommerce-moez.onrender.com/") // https://ecommerce-moez.onrender.com/
+          .get("https://e-commerce-f1fr.onrender.com") // https://ecommerce-moez.onrender.com/
           .then(response => {
             setRates(response.data)
           })

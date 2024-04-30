@@ -19,6 +19,7 @@ function Cart({ setOpen, open }) {
   //     }
   //   })
   const { userInfo } = useSelector((state) => state.auth)
+  console.log(userInfo.productsOnCart)
   const totalPrice = () => {
     let total = 0
     if(userInfo){
@@ -64,7 +65,7 @@ function Cart({ setOpen, open }) {
       
       <div className='buttons-cart'>
         <Link onClick={() => {dispatch(deletingCart(userInfo)); setOpen(!open)}} className='reset common-button-styles'>RESET CART</Link>
-        <ButtonPay cartItems={userInfo && userInfo.productsOnCart}/>
+        <ButtonPay cartItems={userInfo.productsOnCart}/>
         <Link onClick={() => setOpen(!open)} className='link-arrow common-button-styles' to="/cart">VIEW CART</Link>
       </div>
     </div>
