@@ -5,7 +5,6 @@ import '../styles/Product.scss'
 import { useDispatch, useSelector } from 'react-redux';
 //import { addToCart, createProduct, createProductCart } from '../redux/cartReducer';
 import { useCookies } from 'react-cookie'
-import { useGetUserID } from '../Hooks/useGetUserID'
 import { AiOutlineArrowLeft } from "react-icons/ai"
 import { css } from '@emotion/react';
 import { CircleLoader } from 'react-spinners';
@@ -30,8 +29,6 @@ const Product = () => {
   const [quantity, setQuantity] = useState(1)
    // eslint-disable-next-line no-unused-vars
   const [savedProducts, setSavedProducts] = useState([])
-  // eslint-disable-next-line no-unused-vars
-  const userID = useGetUserID()
   // eslint-disable-next-line no-unused-vars
   const [cookies, _] = useCookies(["access_token"])
   const { userInfo } = useSelector((state) => state.auth)
@@ -88,11 +85,8 @@ const Product = () => {
   const addingOrIncreasingg = (product) => {
     //console.log(product)
     const userUpdate = userInfo.productsOnCart.find(find => find.id === product._id)
-    //console.log(userUpdate)
-    //console.log(id)
-    //console.log(quantity)
+   
     if(userUpdate){
-      //console.log("entra a actualizar")
       dispatch(updateQuantityy({
         id: product._id,
         title: product.title,
@@ -115,7 +109,8 @@ const Product = () => {
   
   return (
     <div className='main-product-container'>
-      {loading ? (
+      {loading ? 
+        (
           <div className='loader' css={containerStyles}>
             <CircleLoader color={'#157dc2'} loading={true} css={override} size={75} />
           </div>
@@ -178,7 +173,8 @@ const Product = () => {
               </div>
           </div>
           </>
-        )}
+        )
+      }
     </div>
   )
 }

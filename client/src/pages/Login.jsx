@@ -8,9 +8,7 @@ import '../styles/Login.scss'
 import FormInfo from '../components/FormInfo.jsx';
 import { css } from '@emotion/react';
 import { CircleLoader } from 'react-spinners';
-//import loginService from '../services/login'
 import { login as loginService } from '../services/login'
-//import productService from '../services/product'
 
 const override = css`
   display: block;

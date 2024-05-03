@@ -89,12 +89,9 @@ const Items = ({ filterProducts, buttonsMain }) => {
             );  
             setFilter(filtered)
         }
-        
-        
     }, [products, name]);
     
     useEffect(() => {
- 
         if(products.length > 0){
                 //const filteredProducts = productsMain.filter(person => person.category === 'Consolas y Videojuegos')
                 const filteredMain = filter.filter(person => (
@@ -130,7 +127,6 @@ const Items = ({ filterProducts, buttonsMain }) => {
                                 
                 ))
                 setFilterMain(filteredMain)
-            
         }
     }, [nameMain, products, filter])
 
@@ -159,7 +155,6 @@ const Items = ({ filterProducts, buttonsMain }) => {
         setNameMain(category)
     }
   
-   
     const handleMenu = () => {
         if(openMenu === true){
           setOpenMenu(false)

@@ -110,14 +110,8 @@ const decreaseQuantity = async (id, content) => {
   const config = {
     headers: { Authorization: token },
   }
-  //const newObject = { quantity }
-  //console.log("aqui va el quantity")
-  //console.log(id)
-  //console.log(content)
-  //console.log(quantity)
-  //console.log(newObject)
+ 
   const request = await axios.put(`${baseUrl}/decreaseProduct/${id}`, content, config)
-  //console.log(request)
   return request.data
 }
 

@@ -18,7 +18,6 @@ const Update = () => {
     main_features: [],
   })
   
-
   const navigate = useNavigate()
   const location = useLocation()
   const productId = location.pathname.split("/")[2]
@@ -26,11 +25,9 @@ const Update = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-
         const response = await axios.get("https://e-commerce-f1fr.onrender.com/product/" + productId);
         setProductData(response.data);
         setProduct(response.data)
-        
       } catch (error) {
         console.log(error);
       }

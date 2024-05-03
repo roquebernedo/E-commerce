@@ -3,11 +3,11 @@
     justify-content: center;
     align-items: center;
     width: 100vw;
-    height: 100vh;
+    height: 110vh;
     background-color: #ffffff;
 
     .accordion{
-        width: 500px;
+        width: 650px;
 
         .item-container{
             background-color: #ddd9cf;
@@ -33,6 +33,116 @@
                 height: auto;
                 max-height: 999px;
                 transition: all 0.5s cubic-bezier(1, 0, 1, 0);
+                @keyframes animate{
+                    0%{
+                        background-position: 0%;
+                    }
+                    100%{
+                        background-position: 400%;
+                    }
+                }
+
+                .main-services{
+                    padding: 10px 0;
+                    .services{
+                        display: flex;
+                        flex-direction: column;
+                        gap: 10px;
+                        .top-services{
+                            display: flex;
+                        }
+
+                        .bottom-services{
+                            .main-features{
+                                .features{
+                                    display: flex;
+                                    flex-direction: column;
+                                    padding-left: 25px;
+                                    width: 70%;
+                                    gap: 10px;
+
+                                    span{
+                                        background: linear-gradient(90deg, #ff0000,#ff00f3, #0033ff, #17c2ce, #ff00c4, #ff0000);
+                                        background-size: 400%;
+                                        -webkit-text-fill-color: transparent;
+                                        -webkit-background-clip: text;
+                                        animation: animate 10s linear infinite;
+                                        font-weight: 600;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                .development-section{
+                    padding: 10px 0;
+                    .development{
+                        span{
+                            background: linear-gradient(90deg, #ff0000,#ff00f3, #0033ff, #17c2ce, #ff00c4, #ff0000);
+                            background-size: 400%;
+                            -webkit-text-fill-color: transparent;
+                            -webkit-background-clip: text;
+                            animation: animate 10s linear infinite;
+                            font-weight: 600;
+                        }
+                    }
+
+                    .materials-main{
+                        display: flex;
+                        justify-content: center;
+                        padding: 15px 0 0 0;
+                    
+                        .materials{
+                            display: flex;
+                            gap: 12px;
+
+                            .faq-icons{
+                                display: flex;
+                                font-size: 35px;
+                            }
+                        }
+                    }
+                }
+
+                .dirstore{
+                    padding: 10px 0;
+
+                    span{
+                        background: linear-gradient(90deg, #ff0000, #ff00f3, #0033ff, #17c2ce, #ff00c4, #ff0000);
+                        background-size: 400%;
+                        -webkit-text-fill-color: transparent;
+                        -webkit-background-clip: text;
+                        animation: animate 15s linear infinite;
+                        font-weight: 600;
+                    }
+                }
+
+                .me{
+                    padding: 10px 0;
+
+                    span{
+                        background: linear-gradient(90deg, #ff0000, #ff00f3, #0033ff, #17c2ce, #ff00c4, #ff0000);
+                        background-size: 400%;
+                        -webkit-text-fill-color: transparent;
+                        -webkit-background-clip: text;
+                        animation: animate 15s linear infinite;
+                        font-weight: 600;
+                    }
+                }
+
+                .payment-section{
+                    display: flex;
+                    flex-direction: column;
+                    padding: 10px 0;
+                    gap: 10px;
+
+                    .payment-bottom{
+                        .stripe{
+                            padding-left: 25px;
+                        }
+                    }
+                }
             }
         }
     }

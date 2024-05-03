@@ -11,10 +11,8 @@ const Products = ({ buttonsFromHome, setButtonsFromHome }) => {
   const [users, setUsers] = useState([])
   // eslint-disable-next-line no-unused-vars
   const { userInfo } = useSelector((state) => state.auth)
-  //console.log(userInfo)
-  //console.log("hola")
   
-    // https://ecommerce-moez.onrender.com/ -> ESTE ES EL SERVER
+  // https://ecommerce-moez.onrender.com/ -> ESTE ES EL SERVER
   useEffect(() => {
     const fetchAllProducts = async () => {
         try{

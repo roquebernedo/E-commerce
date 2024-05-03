@@ -2,22 +2,12 @@ import React from 'react'
 import {Link} from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
 import { AiFillDelete } from "react-icons/ai"
-//import { removeItem } from '../redux/cartReducer'
 import '../styles/Cart.scss'
 import ButtonPay from '../components/ButtonPay'
 import { deletingCart, removeSingleProductUser } from '../slices/authSlice';
-//import productService from '../services/product';
 
 function Cart({ setOpen, open }) {
-  
   //const products = useSelector(state => state.cart.products) igual aca, igual que en el Product.jsx
-  //const products = useSelector(state => state.cart.userInfo)
-  // const products = useSelector(state => 
-  //   {
-  //     if(state.userInfo.productsOnCart){
-  //       return state.userInfo.productsOnCart
-  //     }
-  //   })
   const { userInfo } = useSelector((state) => state.auth)
   console.log(userInfo.productsOnCart)
   const totalPrice = () => {
@@ -27,7 +17,6 @@ function Cart({ setOpen, open }) {
       return total.toFixed(2)
     }
   }
-  
   // const deleteCarrito = (user) => {
   //   console.log("aca el carrito")
 
@@ -37,7 +26,6 @@ function Cart({ setOpen, open }) {
   //       console.log("entra al deleteCarrito")
   //     })
   // }
-
   const dispatch = useDispatch()
 
   return (

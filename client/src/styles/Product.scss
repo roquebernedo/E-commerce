@@ -117,10 +117,10 @@
             margin-bottom: 50px;
             gap: 10px;
         }
-        @media (max-width: 425px) {
+        @media (max-width: 605px) {
             height: 820px;
         }
-        @media (max-width: 385px) {
+        @media (max-width: 438px) {
             height: 840px;
         }
         @media (max-width: 357px) {
@@ -156,10 +156,6 @@
                     @media (max-width: 768px) {
                         width: 90%;
                     }
-                }
-
-                @media (max-width: 320px) {
-                 
                 }
             }
 
@@ -239,8 +235,6 @@
                     flex-direction: column;
                     gap: 1rem;
 
-                    
-
                     .sizeitem{
                         margin-bottom: 1rem;
                     }
@@ -279,7 +273,6 @@
                     list-style-type: none;
                     gap: 1rem;
                     margin-bottom: 1rem;
-                    
                 }
             }
 

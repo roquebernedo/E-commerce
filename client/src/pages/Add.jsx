@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from 'react'
-
-//import { useNavigate } from 'react-router-dom'
 import '../styles/Add.scss'
 import productService from '../services/product'
 import { useDispatch } from 'react-redux'
 import { createProduct } from '../slices/authSlice'
-//import { createProduct } from '../redux/cartReducer'
 
 const Form = ({handle, submit, product, handleIngredientChange, handleAddIngredient}) => {
   return (
@@ -63,7 +60,6 @@ const Form = ({handle, submit, product, handleIngredientChange, handleAddIngredi
 }
 
 const Add = () => {
-
   const dispatch = useDispatch()
   const [product, setProduct] = useState({
     title:"",
@@ -78,7 +74,6 @@ const Add = () => {
     date: "",
     image:"",
   })
-  // const [user, setUser] = useState(null)
   // eslint-disable-next-line no-unused-vars
   const [products, setProducts] = useState([])
 
@@ -88,65 +83,15 @@ const Add = () => {
     )  
   }, [])
   //console.log(products)
-  
-  // useEffect(() => {
-  //   const loggedUserJSON = window.localStorage.getItem('userInfo')
-  //   if(loggedUserJSON){
-  //     const user = JSON.parse(loggedUserJSON)
-  //     //console.log(user)
-  //     productService.setToken(user.token)
-  //   }
-  // })
-
-  //const navigate = useNavigate()
 
   const addProduct = async (event) => {
     event.preventDefault()
-    // const [title, setTitle] = useState('');
-    // const [description, setDescription] = useState('');
-    // const [password, setPassword] = useState('');
-    // const productObject = {
-    //   title: title,
-    //   description: description,
-    //   brand: brand,
-    //   category: category,
-    //   mainCategory: mainCategory,
-    //   stock: stock,
-    //   main_features: main_features,
-    //   price: price,
-    //   discount: discount,
-    //   date: date,
-    //   image: image,
-    // }
-
-    // productService
-    //   .create(product)
-    //   .then(returnedProduct => {
-    //     setProducts(products.concat(product))
-    //   })
-
     dispatch(createProduct(product))
-
-    // console.log(returnedBlog);
-    // setUsers(users.concat(noteObject));
-    // toast.success('Creada exitosamente!')
-    // navigate('/');
-    
   }
 
   const handleChange = (e) => {
     setProduct(prev => ({...prev, [e.target.name]: e.target.value}))
   }
-
-  // const onSubmit = async e => {
-  //   e.preventDefault()
-  //   try{
-  //       await axios.post("https://ecommerce-moez.onrender.com/add", product)
-  //       navigate("/")
-  //     } catch (error) {
-  //       console.log(error);
-  //   }
-  // }
 
   const handleIngredientChange = (event, index) => {
     const { value } = event.target;

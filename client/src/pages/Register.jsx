@@ -35,7 +35,6 @@ const Register = () => {
       email: email,
       passwordHash: password
     }
-    
     // console.log(noteObject)
     // registerService
     //   .register(noteObject)
@@ -59,7 +58,6 @@ const Register = () => {
         toast.error(error.message || 'Error registering user');
       }
     }
-
     setName('')
     setEmail('')
     setPassword('')
