@@ -104,11 +104,17 @@
         background-color: white;
         border-radius: 15px;
         margin-bottom: 20px;
+        @media (max-width: 1400px) {
+            height: 460px;
+        }
         @media (max-width: 1024px) {
             width: 85%;
         }
         @media (max-width: 868px) {
             width: 90%;
+        }
+        @media (max-width: 816px) {
+            height: 475px;
         }
         @media (max-width: 768px) {
             height: 770px;
