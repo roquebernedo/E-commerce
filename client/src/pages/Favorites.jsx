@@ -40,7 +40,7 @@ const Favorites = () => {
     useEffect(() => {
         setLoading(true)
         axios
-          .get("http://localhost:8000/api/wishlist/list") // https://ecommerce-moez.onrender.com/
+          .get("https://e-commerce-f1fr.onrender.com/api/wishlist/list") 
           .then(response => {
             setProducts(response.data)
             setLoading(false)

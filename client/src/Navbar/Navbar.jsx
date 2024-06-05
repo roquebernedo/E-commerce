@@ -121,7 +121,7 @@ const Navbar = ({ filter, setFilter }) => {
           if(productsUserInfo){
               console.log(productsUserInfo)
               //console.log(productUserList)
-              const productUserWishList = userInfo.wishlist.find(list => list._id === productsUserInfo._id)
+              const productUserWishList = userInfo.wishlist?.find(list => list._id === productsUserInfo._id)
               console.log(productUserWishList)
               setProductUserList(productUserWishList)
           }

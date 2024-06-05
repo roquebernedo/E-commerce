@@ -81,7 +81,7 @@ const Items = ({ filterProducts, buttonsMain }) => {
     useEffect(() => {
         const fetchAllProducts = async () => {
             try{
-                const res = await axios.get("http://localhost:8000/api/wishlist/list")
+                const res = await axios.get("https://e-commerce-f1fr.onrender.com/api/wishlist/list")
                 setList(res.data)
             }catch(err){
                 console.log(err)
