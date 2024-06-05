@@ -93,8 +93,8 @@ const Items = ({ filterProducts, buttonsMain }) => {
     //const userList = list.find(item => item.user.find(user => user.id === userInfo.id));
 
     useEffect(() => {
-        if(userInfo){
-            const userListProducts = userInfo.wishlist.map(item => item.products.map(pro => pro._id))
+        if(userInfo && userInfo.wishlist){
+            const userListProducts = userInfo.wishlist?.map(item => item.products.map(pro => pro._id))
             const flatUserList = userListProducts.flat()
             setUserWishList(flatUserList)
             console.log(userListProducts)
