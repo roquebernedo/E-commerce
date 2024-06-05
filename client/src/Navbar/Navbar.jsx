@@ -151,7 +151,7 @@ const Navbar = ({ filter, setFilter }) => {
               <div className='userinfo'>{userInfo.name}</div>
               <div className='div-menu-profile'>
                 <div className='buttonsResponsive-profile'>
-                  <Link className='buttonResponsive-profile' onClick={() =>  setTimeout(recargarPagina, 100)} to='/profile/details'>
+                  <Link className='buttonResponsive-profile' to='/profile/details'>
                     <div >Perfil</div>
                   </Link>
                   <Link className='buttonResponsive-profile' to='/profile/notifications'>

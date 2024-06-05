@@ -88,7 +88,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         {/* <Route path="/profile/detalles" element={userInfo ? <Profile /> : <Navigate replace to='/login' /> } /> */}
         <Route path="/profile" element={<Profile />}>
-          <Route index element={<Navigate replace to="details" />} />
+          <Route index element={<Navigate replace to="/details" />} />
           <Route path="details" element={userInfo ? <Details /> : <Navigate replace to="/login" />} />
           <Route path="publications" element={userInfo ? <Publications/> : <Navigate replace to="/login" />} />
           <Route path="favorites" element={userInfo ? <Favorites/> : <Navigate replace to="/login" />} />
