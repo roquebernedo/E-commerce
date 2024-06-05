@@ -2,13 +2,12 @@ import { useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import { useLoginMutation } from '../slices/usersApiSlice.js';
-import { loginUser, setCredentials } from '../slices/authSlice.js';
+import { loginUser } from '../slices/authSlice.js';
 import { toast } from 'react-toastify';
 import '../styles/Login.scss'
 import FormInfo from '../components/FormInfo.jsx';
 import { css } from '@emotion/react';
 import { CircleLoader } from 'react-spinners';
-import { login as loginService } from '../services/login'
 
 const override = css`
   display: block;

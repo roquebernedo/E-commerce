@@ -1,14 +1,11 @@
-import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { CiHeart } from "react-icons/ci";
+import React from 'react'
+//import { useSelector } from 'react-redux'
 import '../styles/Notifications.scss'
-import { IoCartOutline } from "react-icons/io5";
 import { TbPointFilled } from "react-icons/tb";
 
 const Notifications = () => {
-    const { userInfo } = useSelector((state) => state.auth)
-    const [productsUserInfo, setProductsUserInfo] = useState([])
+    //const { userInfo } = useSelector((state) => state.auth)
+
     return (
         <div className='notifications'>
             <div className='main-notifications'>

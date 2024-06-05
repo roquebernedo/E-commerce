@@ -13,6 +13,7 @@ const Details = () => {
     const [confirmPassword, setConfirmPassword] = useState('');
     const dispatch = useDispatch()
     const { userInfo } = useSelector((state) => state.auth)
+    // eslint-disable-next-line no-unused-vars
     const [updateProfile, { isLoading }] = useUpdateUserMutation()
 
     useEffect(() => {
@@ -21,10 +22,10 @@ const Details = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [userInfo.setName, userInfo.setEmail])
     
-      const logoutHanlder =  () => {
-        window.localStorage.clear()
-        window.location.reload();
-      }
+      // const logoutHanlder =  () => {
+      //   window.localStorage.clear()
+      //   window.location.reload();
+      // }
     
       const submitHandler = async (e) => {
         e.preventDefault();

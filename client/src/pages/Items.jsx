@@ -48,6 +48,7 @@ const Items = ({ filterProducts, buttonsMain }) => {
     ]
     
     const [products, setProducts] = useState([])
+    // eslint-disable-next-line no-unused-vars
     const [list, setList] = useState([])
     const [userWishList, setUserWishList] = useState([]) 
     const [show, setShow] = useState(false)

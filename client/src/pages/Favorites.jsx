@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { CiHeart } from "react-icons/ci";
 import { IoCartOutline } from "react-icons/io5";
 import '../styles/Favorites.scss'
 import axios from 'axios';
-import { addingToList, initializeWishList, removeFavorite } from '../slices/authSlice';
+import { addingToList, removeFavorite } from '../slices/authSlice';
 import { FaRegHeart } from "react-icons/fa6";
 import { css } from '@emotion/react';
 import { CircleLoader } from 'react-spinners';
@@ -25,7 +24,7 @@ const Favorites = () => {
     const { userInfo } = useSelector((state) => state.auth)
     const [productsUserInfo, setProductsUserInfo] = useState([])
     const [productUserList, setProductUserList] = useState([])
-    const [list, setList] = useState()
+    // const [list, setList] = useState()
     const [userWishList, setUserWishList] = useState([]) 
     const dispatch = useDispatch()
     const [loading, setLoading] = useState(true)
@@ -66,7 +65,6 @@ const Favorites = () => {
         if(userInfo){
             if(productsUserInfo){
                 console.log(productsUserInfo)
-                console.log(productUserList)
                 const productUserWishList = userInfo.wishlist.find(list => list._id === productsUserInfo._id)
                 console.log(productUserWishList)
                 setProductUserList(productUserWishList)
@@ -123,7 +121,7 @@ const Favorites = () => {
                                         <div className='products-favorites-main-profile'>
                                             <div className='product-favorites-img'>
                                                 <div className='img-favorites-div'>
-                                                    <img className='image-favorites-item' src={products.image} />
+                                                    <img alt='favorite-product' className='image-favorites-item' src={products.image} />
                                                 </div>
                                             </div>
                                             <div className='product-favorites-info-profile'>

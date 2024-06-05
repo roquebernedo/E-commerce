@@ -9,7 +9,7 @@ import Cart from '../pages/Cart';
 import { AiOutlineMenu } from "react-icons/ai"
 import '../styles/ContentHome.scss'
 import { FaSearch } from "react-icons/fa";
-import { MdLogout } from "react-icons/md";
+// import { MdLogout } from "react-icons/md";
 import Menu from '../components/Menu';
 import { CiHeart } from "react-icons/ci";
 import { IoIosNotificationsOutline } from "react-icons/io";

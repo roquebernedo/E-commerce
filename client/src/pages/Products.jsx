@@ -3,13 +3,14 @@ import axios from 'axios'
 import '../styles/Products.scss'
 import { useDispatch, useSelector } from 'react-redux';
 import ContentHome from '../components/ContentHome';
-import wishlistService from '../services/wishlist';
-import productService from '../services/product';
+// import wishlistService from '../services/wishlist';
+// import productService from '../services/product';
 import { initializeUsers } from '../slices/authSlice';
 
 const Products = ({ buttonsFromHome, setButtonsFromHome }) => {
   // eslint-disable-next-line no-unused-vars
   const [products, setProducts] = useState([])
+  // eslint-disable-next-line no-unused-vars
   const [wishlist, setWishlist] = useState()
   // eslint-disable-next-line no-unused-vars
   const [users, setUsers] = useState([])

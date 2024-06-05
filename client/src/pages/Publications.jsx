@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { CiHeart } from "react-icons/ci";
-import { IoCartOutline } from "react-icons/io5";
 import axios from 'axios';
 import '../styles/Publications.scss'
 import { IoIosArrowDown } from "react-icons/io";
@@ -11,6 +9,7 @@ import { MdOutlineRocketLaunch } from "react-icons/md";
 const Publications = () => {
     const [products, setProducts] = useState([])
     const { userInfo } = useSelector((state) => state.auth)
+    // eslint-disable-next-line no-unused-vars
     const [productsUserInfo, setProductsUserInfo] = useState()
 
     useEffect(() => {
@@ -50,7 +49,7 @@ const Publications = () => {
                                     <div className='products-main-profile'>
                                         <div className='product-img'>
                                             <div className='img-div'>
-                                                <img className='image-item' src={products.image} />
+                                                <img alt='alt-item' className='image-item' src={products.image} />
                                             </div>
                                         </div>
                                         <div className='product-info-profile'>
