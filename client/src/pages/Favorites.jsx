@@ -65,7 +65,7 @@ const Favorites = () => {
         if(userInfo){
             if(productsUserInfo){
                 console.log(productsUserInfo)
-                const productUserWishList = userInfo.wishlist.find(list => list._id === productsUserInfo._id)
+                const productUserWishList = userInfo.wishlist?.find(list => list._id === productsUserInfo._id)
                 console.log(productUserWishList)
                 setProductUserList(productUserWishList)
             }

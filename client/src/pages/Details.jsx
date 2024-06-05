@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import Loader from '../components/Loader';
 import { updatingUserInfo } from '../slices/authSlice';
-import { useUpdateUserMutation } from '../slices/usersApiSlice';
+
 import '../styles/Profile.scss'
 
 const Details = () => {
@@ -14,7 +14,8 @@ const Details = () => {
     const dispatch = useDispatch()
     const { userInfo } = useSelector((state) => state.auth)
     // eslint-disable-next-line no-unused-vars
-    const [updateProfile, { isLoading }] = useUpdateUserMutation()
+    const [isLoading, setIsLoading] = useState(true)
+
 
     useEffect(() => {
         setName(userInfo.name)
@@ -38,7 +39,6 @@ const Details = () => {
             console.log("si")
             //userService.setToken(userInfo.token)
             dispatch(updatingUserInfo({
-                id: userInfo.id,
                 name,
                 email,
                 password,
