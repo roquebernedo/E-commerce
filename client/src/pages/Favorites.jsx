@@ -75,9 +75,9 @@ const Favorites = () => {
     console.log(productUserList)
     console.log(productsUserInfo)
     useEffect(() => {
-        if(userInfo){
+        if(userInfo && userInfo.wishlist){
             const userListProducts = userInfo.wishlist?.map(item => item.products.map(pro => pro._id) || [])
-            const flatUserList = userListProducts.reduce((acc, val) => acc.concat(val), []);
+            const flatUserList = userListProducts.flat()
             setUserWishList(flatUserList)
             console.log(userListProducts)
             //console.log(userWishList)
