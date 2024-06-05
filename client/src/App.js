@@ -19,6 +19,10 @@ import Footer from "./Footer/Footer.jsx";
 import Navbar from "./Navbar/Navbar.jsx";
 import { useSelector } from "react-redux";
 import productService from "./services/product.js";
+import Publications from "./pages/Publications.jsx";
+import Details from "./pages/Details.jsx";
+import Favorites from "./pages/Favorites.jsx";
+import Notifications from "./pages/Notifications.jsx";
 
 function App() {
   const { userInfo } = useSelector((state) => state.auth)
@@ -82,7 +86,14 @@ function App() {
         <Route path="/questions" element={<Faqs />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/profile" element={userInfo ? <Profile /> : <Navigate replace to='/login' /> } />
+        {/* <Route path="/profile/detalles" element={userInfo ? <Profile /> : <Navigate replace to='/login' /> } /> */}
+        <Route path="/profile" element={<Profile />}>
+          <Route index element={<Navigate replace to="details" />} />
+          <Route path="details" element={userInfo ? <Details /> : <Navigate replace to="/login" />} />
+          <Route path="publications" element={userInfo ? <Publications/> : <Navigate replace to="/login" />} />
+          <Route path="favorites" element={userInfo ? <Favorites/> : <Navigate replace to="/login" />} />
+          <Route path="notifications" element={userInfo ? <Notifications/> : <Navigate replace to="/login" />} />
+        </Route> 
         <Route path="/add" element={<Add />} />
         <Route path="/cart" element={<ShoppingCart />} />
         <Route path="/product/:id" element={<Product />} />

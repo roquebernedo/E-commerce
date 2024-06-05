@@ -1,10 +1,13 @@
 import mongoose from "mongoose"
 
 const userSchema = new mongoose.Schema({
+    // user: {
+    //     type: String,
+    //     required: true,
+    //     unique: true
+    // },
     name: {
         type: String,
-        required: true,
-        unique: true,
         min: 3
     },
     email: {
@@ -27,6 +30,10 @@ const userSchema = new mongoose.Schema({
         image: String,
         price: Number,
         quantity: Number,
+    }],
+    wishlist: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Wishlist"
     }]
 }, {
     timestamps: true

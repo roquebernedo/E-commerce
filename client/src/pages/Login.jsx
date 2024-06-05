@@ -2,7 +2,7 @@ import { useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'
 import { useLoginMutation } from '../slices/usersApiSlice.js';
-import { setCredentials } from '../slices/authSlice.js';
+import { loginUser, setCredentials } from '../slices/authSlice.js';
 import { toast } from 'react-toastify';
 import '../styles/Login.scss'
 import FormInfo from '../components/FormInfo.jsx';
@@ -64,11 +64,11 @@ const Login = () => {
     console.log(email)
     try {
       console.log("tamos en try")
-      const user = await loginService({
-        email, password,
-      })
-      dispatch(setCredentials({...user}))
-      console.log(user)
+      // const user = await loginService({
+      //   email, password,
+      // })
+      dispatch(loginUser({ email, password}))
+      //console.log(user)
       navigate('/')
       // setTimeout(() => {
       //   window.location.reload()

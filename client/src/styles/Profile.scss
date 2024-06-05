@@ -1,66 +1,223 @@
 .profile{
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 400px;
-    margin: 0 auto;
-    margin-top: 89px;
-    margin-bottom: 89px;
-    padding: 20px 135px 30px 135px;
-    border: 1px solid #ccc;
     font-family: "Nunito Sans", sans-serif;
-    @media (max-width: 425px) {
-        width: 360px;
+    background-color: #eee7e7;
+
+    .profile-left{
+        width: 15%;
+        border-right: 1px solid black;
+        @media (max-width: 1100px) {
+            width: 4.5%;
+            display: flex;
+            justify-content: center;
+        }
+        @media (max-width: 628px) {
+            width: 7.5%;
+        }
+
+        .profile-menu{
+            display: flex;
+            flex-direction: column;
+            @media (max-width: 1100px) {
+                align-items: center;
+                width: 100%;
+            }
+
+            .profile-options{
+                display: flex;
+                align-items: center;
+                padding: 10px 0;
+                font-size: 1rem;
+                text-decoration: none;
+                gap: 15px;
+                color: black;
+                @media (max-width: 1100px) {
+                    width: 100%;
+                    justify-content: center;
+                }
+                
+                .profile-icon{
+                    margin-left: 10px;
+                    font-size: 25px;
+                    @media (max-width: 1100px) {
+                        margin-left: 0;
+                    }
+                    @media (max-width: 425px) {
+                        font-size: 22px;
+                    }
+                    @media (max-width: 375px) {
+                        font-size: 20px;
+                    }
+                    @media (max-width: 320px) {
+                        font-size: 18px;
+                    }
+                }
+
+                .icon-text{ 
+                    transition: transform 0.1s ease;
+                    @media (max-width: 1200px) {
+                        font-size: 0.85rem;
+                    }
+                    @media (max-width: 1100px) {
+                        display: none;
+                    }
+                }
+            }
+
+            .profile-options:hover{
+                background-color: #dfcdcd;
+                cursor: pointer;
+
+                .icon-text{
+                    transform: translateX(10px);
+                    transition: transform 0.1s ease;
+                }
+            }
+        }
     }
-    @media (max-width: 375px) {
-        width: 310px;
-    }
-    @media (max-width: 320px) {
-        width: 300px;
+
+    .profile-right{
+        display: flex;
+        flex-direction: column;
+        width: 85%;
+        // border-left: 1px black solid;
+        @media (max-width: 1100px) {
+            width: 95.5%;
+        }
+        @media (max-width: 628px) {
+            width: 92.5%;
+        }
+
+        .profile-details{
+            display: flex;
+            justify-content: center;
+
+            .details{
+                display: flex;
+                margin: 15px 0;
+                align-items: center;
+                font-size: 1.85rem;
+            }
+        }
+
+        .form-profile{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .profile-details-main{
+                display: flex;
+                margin: 20px 0;
+                flex-direction: column;
+                align-items: center;
+                gap: 12px;
+                .log-profile{
+                    display: flex;
+                    align-items: center;
+                    width: 900px;
+                    padding: 0 7px;
+                    justify-content: space-between;
+                    background-color: #404040;
+                    color: #ffffff;
+                    height: 60px;
+                    @media (max-width: 1280px) {
+                        width: 800px;
+                    }
+                    @media (max-width: 1076px) {
+                        width: 725px;
+                    }
+                    @media (max-width: 980px) {
+                        width: 700px;
+                    }
+                    @media (max-width: 900px) {
+                        width: 625px;
+                    }
+                    @media (max-width: 800px) {
+                        width: 575px;
+                    }
+                    @media (max-width: 725px) {
+                        width: 500px;
+                    }
+                    @media (max-width: 625px) {
+                        width: 420px;
+                    }
+                    @media (max-width: 510px) {
+                        width: 370px;
+                    }
+                    @media (max-width: 475px) {
+                        width: 350px;
+                    }
+                    @media (max-width: 425px) {
+                        width: 300px;
+                    }
+                    @media (max-width: 375px) {
+                        width: 275px;
+                    }
+                    @media (max-width: 320px) {
+                        width: 250px;
+                    }
+                    
+                    .div-input{
+                        @media (max-width: 425px) {
+                            font-size: 12px;
+                        }
+                        @media (max-width: 375px) {
+                            font-size: 12px;
+                            width: 50%;
+                        }
+                    }
+
+                    .input-profile{
+                        display: flex;
+                        align-items: center;
+                        text-align: right;
+                        border: none;
+                        background-color: #404040;
+                        color: #ffffff;
+                        @media (max-width: 425px) {
+                            font-size: 12px;
+                        }
+                        @media (max-width: 375px) {
+                            width: 50%;
+                        }
+                        
+                    }
+
+                    .input-profile:focus{
+                        outline: none;
+                    }
+                }
+        
+                .update{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 250px;
+                    height: 40px;
+                    border: none;
+                    background-color: #2879fe;
+                    color: white;
+                    border-radius: 5px;
+                    cursor: pointer;
+                    @media (max-width: 425px) {
+                        width: 200px;
+                    }
+                    @media (max-width: 320px) {
+                        width: 175px;
+                    }
+                }
+
+                .update:hover{
+                    background-color: #1960d1;
+                }
+            }
+        }
+
+        
     }
 
     .update-profile{
         text-align: center;
         font-size: 26px;
-    }
-
-    .form-profile{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
-        .log-profile{
-            margin-bottom: 30px;
-            color: #404040;
-        }
-
-        .input-profile{
-            width: 325px;
-            height: 35px;
-            border: 1px solid #c1d0d9;
-            border-radius: 8px;
-            @media (max-width: 425px) {
-                width: 300px;
-            }
-            @media (max-width: 375px) {
-                width: 280px;
-            }
-            @media (max-width: 320px) {
-                width: 260px;
-            }
-        }
-
-        .update{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 250px;
-            height: 40px;
-            border: none;
-            background-color: #2879fe;
-            color: white;
-            border-radius: 5px;
-        }
-        
     }
 }

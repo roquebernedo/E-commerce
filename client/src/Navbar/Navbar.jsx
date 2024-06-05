@@ -11,12 +11,18 @@ import '../styles/ContentHome.scss'
 import { FaSearch } from "react-icons/fa";
 import { MdLogout } from "react-icons/md";
 import Menu from '../components/Menu';
+import { CiHeart } from "react-icons/ci";
+import { IoIosNotificationsOutline } from "react-icons/io";
+import { TbPointFilled } from "react-icons/tb";
 
 const Navbar = ({ filter, setFilter }) => {
   // const [filter, setFilter] = useState([])
   const [value, setValue] = useState('')
   const [rates, setRates] = useState({})
   const { userInfo } = useSelector((state) => state.auth)
+  const [products, setProducts] = useState([])
+  const [productUserList, setProductUserList] = useState([])
+  const [productsUserInfo, setProductsUserInfo] = useState([])
   //console.log(userInfo)
   const [totalProducts, setTotalProducts] = useState()
   //const totProducts = userInfo.productsOnCart.reduce((a,b) => a + b.quantity, 0)
@@ -38,9 +44,12 @@ const Navbar = ({ filter, setFilter }) => {
 
   useEffect(() => {
     if(userInfo){
-      const totProducts = userInfo.productsOnCart.reduce((a,b) => a + b.quantity, 0)
-      setTotalProducts(totProducts)
-      //console.log(totalProducts)
+      if(userInfo.productsOnCart){
+        const totProducts = userInfo.productsOnCart.reduce((a,b) => a + b.quantity, 0)
+        setTotalProducts(totProducts)
+        //console.log(totalProducts)
+      }
+
     }
     
   }, [userInfo])
@@ -90,6 +99,37 @@ const Navbar = ({ filter, setFilter }) => {
     }
   }
 
+  useEffect(() => {
+    axios
+      .get("http://localhost:8000/api/wishlist/list") // https://ecommerce-moez.onrender.com/
+      .then(response => {
+        setProducts(response.data)
+      })
+  
+}, [])
+
+  useEffect(() => {
+    if(userInfo){
+        const productsUser = products.find(products => products.user.find(u => u.id === userInfo.id))
+        setProductsUserInfo(productsUser)
+    }
+    
+  }, [products, setProductsUserInfo, userInfo])
+
+  useEffect(() => {
+      if(userInfo){
+          if(productsUserInfo){
+              console.log(productsUserInfo)
+              //console.log(productUserList)
+              const productUserWishList = userInfo.wishlist.find(list => list._id === productsUserInfo._id)
+              console.log(productUserWishList)
+              setProductUserList(productUserWishList)
+          }
+      }
+      
+  }, [products, productsUserInfo, userInfo])
+  console.log(productUserList)
+
   return (
     <header className='navbar'>
       <div className='menu'>
@@ -106,13 +146,87 @@ const Navbar = ({ filter, setFilter }) => {
         </div>
         { userInfo ? (
           <div className='log-reg'>
-            <Link className='sign profile-navbar' to='/profile'>
+            <Link className='sign profile-navbar'>
               <svg className='svg' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="18" role="presentation" alt="" data-testid="UserIcon" size="18" color="currentColor"><path d="M16.22 19.41A9.71 9.71 0 1 1 26 9.7a9.74 9.74 0 0 1-9.8 9.71M1.84 32a10.88 10.88 0 0 1 10.94-10.74h6.57A10.88 10.88 0 0 1 30.29 32H1.84" fill="currentColor"></path></svg>
               <div className='userinfo'>{userInfo.name}</div>
+              <div className='div-menu-profile'>
+                <div className='buttonsResponsive-profile'>
+                  <Link className='buttonResponsive-profile' onClick={() =>  setTimeout(recargarPagina, 100)} to='/profile/details'>
+                    <div >Perfil</div>
+                  </Link>
+                  <Link className='buttonResponsive-profile' to='/profile/notifications'>
+                    <div >Notificaciones</div>
+                  </Link>
+                  <Link className='buttonResponsive-profile' to='/profile/favorites'>
+                    <div >Favoritos</div>
+                  </Link>
+                  <Link className='buttonResponsive-profile' to='/profile/publications'>
+                    <div>Publicaciones</div>
+                  </Link>
+                  <Link className='buttonResponsive-profile'>
+                    <div>Ventas</div>
+                  </Link>
+                  <Link className='buttonResponsive-profile'>
+                    <div>Publicar</div>
+                  </Link>
+                  <Link className='buttonResponsive-profile'>
+                    <div>Compras</div>
+                  </Link>
+                  <Link onClick={logoutHanlder} className='buttonResponsive-profile'>
+                    <div>Salir</div>
+                  </Link>
+                </div>
+              </div>
             </Link>
-            <Link className='sign log' onClick={logoutHanlder}>
-              <MdLogout className='logout'/>
-              <div className='logoutuser'>Logout</div>
+            <Link className='sign log sign-favorites-heart'>
+              <CiHeart className="sign-heart" />
+              <div className='sign-favorites-menu'>
+                <div className='div-products-favorites-menu'>
+                  
+                        <div className='title-favorites-menu'>Favoritos</div>
+                        <div className='section-favorites'>
+                          {productUserList && productUserList.products && productUserList.products.length > 0
+                            ? productUserList.products.map(products =>
+                                <Link to={`/product/${products._id}`} className='products-favorites-menu'>
+                                  <div className='div-products-items'>
+                                    <div className='div-img-product-item'>
+                                      <img src={products.image} alt='favoriteProduct' className='img-favorite-product-item'/>
+                                    </div>
+                                    <div className='div-img-product-info'>
+                                      <div>{products.title}</div>
+                                      <div>${products.price}.00</div>
+                                    </div>
+                                  </div>
+                                </Link>)
+                            : <div className='no-exist'>Aun no existe ningun producto favorito</div>
+                          }
+                        </div>
+                        <div className='title-footer-menu'><Link to="/profile/favorites" className='link-favorites'>Ver todos los productos deseados</Link></div>
+                      
+                  
+                </div>
+              </div>
+            </Link>
+            <Link className='sign log noti'>
+              <IoIosNotificationsOutline className='icon-noti' />
+              <div className='sign-noti-menu'>
+                <div className='div-noti-menu'>
+                  <>
+                    <div className='title-noti-menu'>Notificaciones</div>
+                    <div className='section-notifications'>
+                      <Link to={`/product/${products._id}`} className='items-noti-menu'>
+                        <div className='div-noti-items'>
+                          <TbPointFilled className='point-noti' />
+                          <div className='welcome'>Dirstore te da la bienvenida!</div>
+                        </div>
+                      </Link>
+                    </div>
+                    <div className='title-footer-noti-menu'>
+                      <Link to="/profile/notifications" className='link-noti'>Ver todas las notificaciones</Link>
+                    </div>
+                  </>
+                </div>
+              </div>
             </Link>
             <div className='cartIcon' onClick={() => setOpen(!open)}>
               <AiOutlineShoppingCart className='car'/>

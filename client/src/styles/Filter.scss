@@ -426,7 +426,7 @@
                             @media (max-width: 475px) {
                                 width: 64%;
                                 display: flex;
-                                background-color: #ffffff;
+                             
                                 height: 150px;
                             }
         
@@ -436,7 +436,7 @@
                                 flex-direction: column;
                                 justify-content: center;
                                 align-items: center;
-                                background-color: #ffffff;
+                                
                                 gap: 3%;
                                 height: 100%;
         
@@ -509,32 +509,85 @@
                                     align-items: center;
                                     width: 90%;
                                     height: 15%;
-                                    
-                                    .brand-blank{
-                                        display: block;
-                                        height: 75%;
-                                        width: 2px;
-                                        background-color: red;
+                                    justify-content: space-between;
+
+                                    .brand-left-blankmain{
+                                        display: flex;
+                                        height: 100%;
+                                        align-items: center;
+                                        width: 100%;
+
+                                        .brand-blank{
+                                            display: block;
+                                            height: 75%;
+                                            width: 2px;
+                                            background-color: red;
+                                        }
+            
+                                        .brand-main{
+                                            display: flex;
+                                            align-items: center;
+                                            height: 75%;
+                                            width: fit-content;
+                                            padding: 0 5px;
+                                            color: #383737;
+                                            font-size: 0.875rem;
+                                            font-weight: 400;
+                                        }
                                     }
-        
-                                    .brand-main{
+
+                                    .heart-pick{
                                         display: flex;
                                         align-items: center;
-                                        height: 75%;
-                                        width: fit-content;
-                                        padding: 0 5px;
-                                        color: #484848;
-                                        font-size: 0.875rem;
-                                        font-weight: 300;
+
+                                        .heart-products-div{
+                                            display: flex;
+                                            
+                                            .heart-products{
+                                                color: black;
+                                                opacity: 0.6;
+                                                font-size: 1.5rem;
+    
+                                                &:hover{
+                                                    color: rgb(218, 68, 68);
+                                                }
+                                            }
+    
+                                        }
+
+                                        .heart-broken-div{
+                                            display: flex;
+
+                                            .icon-broken{
+                                                display: none;
+                                            }
+                                            
+                                            .heart-broken{
+                                                font-size: 1.5rem;
+                                                color: rgb(218, 68, 68);
+                                            }
+
+                                            &:hover{
+                                                .heart-broken{
+                                                    display: none;
+                                                }
+
+                                                .icon-broken{
+                                                    display: block;
+                                                    font-size: 1.5rem;
+                                                    color: rgb(218, 68, 68);
+                                                }
+                                            }
+                                        }
                                     }
                                 }
                             }
                         }
                     }
 
-                    .news-list-games:hover .news-info-main .news-description .description {
-                        color: rgb(238, 68, 68);
-                    }
+                    // .news-list-games:hover .news-info-main .news-description .description {
+                    //     color: rgb(238, 68, 68);
+                    // }
                 }
             }
         }

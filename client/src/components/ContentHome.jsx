@@ -10,6 +10,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { css } from '@emotion/react';
 import { CircleLoader } from 'react-spinners';
+import { useSelector } from 'react-redux';
 
 const override = css`
   display: block;
@@ -52,7 +53,15 @@ const ContentHome = ({ buttonsFromHome, setButtonsFromHome }) => {
     const [rates, setRates] = useState([])
     const [featured, setFeatured] = useState([])
     const [portal, setPortal] = useState([])
+    const { userInfo } = useSelector((state) => state.auth)
+    //console.log(userInfo)
     let timeout = null
+
+    useEffect(() => {
+        if (userInfo && userInfo.token) {
+            console.log('Token is available:', userInfo.token);
+        }
+      }, [userInfo]);
 
     useEffect(() => {
         axios

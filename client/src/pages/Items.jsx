@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import '../styles/Filter.scss'
 import { css } from '@emotion/react';
 import { CircleLoader } from 'react-spinners';
 import { MdKeyboardDoubleArrowRight } from "react-icons/md";
 import { BiMenuAltRight } from "react-icons/bi";
 import MenuFilter from '../components/MenuFilter'
+import { addingToList, removeFavorite } from '../slices/authSlice'
+import { FaRegHeart } from "react-icons/fa6";
+import { FaHeart, FaHeartBroken } from "react-icons/fa";
 
 const override = css`
   display: block;
@@ -45,6 +48,8 @@ const Items = ({ filterProducts, buttonsMain }) => {
     ]
     
     const [products, setProducts] = useState([])
+    const [list, setList] = useState([])
+    const [userWishList, setUserWishList] = useState([]) 
     const [show, setShow] = useState(false)
     const [name, setName] = useState()  
     const [nameMain, setNameMain] = useState()
@@ -58,6 +63,7 @@ const Items = ({ filterProducts, buttonsMain }) => {
     const [newName, setNewName] = useState(buttonsMain)
     const [openMenu, setOpenMenu] = useState(false)
     const [selected, setSelected] = useState(null)
+    const dispatch = useDispatch()
 
     useEffect(() => {
         const fetchAllProducts = async () => {
@@ -70,7 +76,40 @@ const Items = ({ filterProducts, buttonsMain }) => {
         }
         fetchAllProducts()
     }, [])
-   
+
+    useEffect(() => {
+        const fetchAllProducts = async () => {
+            try{
+                const res = await axios.get("http://localhost:8000/api/wishlist/list")
+                setList(res.data)
+            }catch(err){
+                console.log(err)
+            }
+        }
+        fetchAllProducts()
+    }, [])
+    //console.log(list)
+    //const userList = list.find(item => item.user.find(user => user.id === userInfo.id));
+
+    useEffect(() => {
+        if(userInfo){
+            const userListProducts = userInfo.wishlist.map(item => item.products.map(pro => pro._id))
+            const flatUserList = userListProducts.flat()
+            setUserWishList(flatUserList)
+            console.log(userListProducts)
+            //console.log(userWishList)
+            
+            // const userList = list.find(item => item.user.find(user => user.id === userInfo.id));
+            // if (userList) {
+            //     setUserWishList(userList)
+            //     console.log('Usuario encontrado:', userList);
+            // } else {
+            //     console.log('Usuario no encontrado');
+            // }
+        }
+    }, [userInfo])
+    console.log(userWishList)
+    //console.log(userInfo.id)
     // Sirve para mostrar los items que se obtienen por las categorias
     useEffect(() => {
         if(products.length > 0){ // Sale error sino se usa un condicional, porque al momento de devolver los valores, se demora un poco y es por eso el error
@@ -161,6 +200,21 @@ const Items = ({ filterProducts, buttonsMain }) => {
         }else{
           setOpenMenu(true)
         }
+    }
+
+    const favorites = (e, id, content) => {
+        e.preventDefault()
+        //e.stopPropagation()
+        console.log(id, content)
+        dispatch(addingToList(id, content))
+        
+    }
+
+    const removeFavoritee = (e, id, content) => {
+        e.preventDefault()
+        console.log(id)
+        console.log(content)
+        dispatch(removeFavorite(id, content))
     }
   
     return (
@@ -288,6 +342,7 @@ const Items = ({ filterProducts, buttonsMain }) => {
                                     ))
                                 : !show  ? 
                                     (products.map(product => 
+                                        // onClick={() => favorites(product._id, product)} 
                                         <Link to={`/product/${product._id}`} className='news-list-games' key={product._id}>
                                             <div className='news-img'><img alt='' src={product.image} /></div>
                                             <div className='news-info'>
@@ -304,10 +359,21 @@ const Items = ({ filterProducts, buttonsMain }) => {
                                                     <div className='price'>
                                                         <div className='price-main'>$ {parseFloat(product.price).toFixed(2)}</div>
                                                     </div>
-                                                    <div className='brand'>
-                                                        <div className='brand-blank'></div>
-                                                        <div className='brand-main'>{product.brand}</div>
+                                                    <div className='brand'> 
+                                                        <div className='brand-left-blankmain'>
+                                                            <div className='brand-blank'></div>
+                                                            <div className='brand-main'>{product.brand}</div>
+                                                        </div>
+                                                        {userInfo && 
+                                                            <div className='heart-pick'>
+                                                                {userWishList.includes(product._id) 
+                                                                    ?   <div onClick={(e) => removeFavoritee(e, product._id, product)} className='heart-broken-div'><FaHeartBroken className='icon-broken'/><FaHeart className='heart-broken'/></div>
+                                                                    :   <div onClick={(e) => favorites(e, product._id, product)} className='heart-products-div'><FaRegHeart className='heart-products' /></div>
+                                                                }
+                                                            </div>
+                                                        }                                                     
                                                     </div>
+                                                    {/* <button onClick={() => removeFavoritee(product._id, product)}  >eliminar</button> */}
                                                 </div>
                                             </div>
                                         </Link> 

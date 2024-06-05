@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import productService from "../services/product";
+import userService from "../services/user";
 
 export const initialState = {
     userInfo: localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem
@@ -15,8 +16,14 @@ const authSlice = createSlice({
         setCredentials: (state, action) => {
             console.log(action)
             state.userInfo = action.payload
-            console.log(initialState)
+            console.log(state.userInfo)
             localStorage.setItem('userInfo', JSON.stringify(action.payload))
+            if(state.userInfo){
+              console.log("entro al userinfo")
+              //productService.setToken(state.userInfo.token); // Establece el token aquí
+              localStorage.setItem('userInfo', JSON.stringify(state.userInfo));
+            }
+            //localStorage.setItem('userInfo', JSON.stringify(state.userInfo));
         },
         logout: (state, action) => {
             state.userInfo = null;
@@ -90,6 +97,53 @@ const authSlice = createSlice({
           //console.log(action)
           state.userInfo.productsOnCart = state.userInfo.productsOnCart.filter(item => item.id !== action.payload)
         },
+        setNotes: (state, action) => {
+          //console.log(state)
+          //console.log("between")
+          console.log(action)
+          console.log(state.userInfo.wishlist.length)
+          if(!state.userInfo.wishlist){
+            state.userInfo.wishlist = []
+          }  
+          state.userInfo.wishlist.push(action.payload)
+          localStorage.setItem('userInfo', JSON.stringify(state.userInfo))
+        },
+        addToListUser: (state, action) => {
+          console.log(action)
+          console.log(action.payload)
+          console.log("gaaa")
+          if(action.payload.list){
+            const item = state.userInfo.wishlist.find(item => item._id === action.payload.list._id)
+            console.log(item)
+            if(item){
+              item.products.push(action.payload.product)
+              localStorage.setItem('userInfo', JSON.stringify(state.userInfo))
+            }
+          }else{
+            console.log(action.payload.message)
+          }
+          // const item = state.userInfo.wishlist.find(item => item._id === action.payload.list._id)
+          // console.log(item)
+          // if(item){
+          //   item.products.push(action.payload.product)
+          //   localStorage.setItem('userInfo', JSON.stringify(state.userInfo))
+          // }else{
+          //   console.log("item no existe")
+          // }
+          //state.userInfo.wishlist[0].products = state.userInfo.wishlist[0].products.push(action.payload)
+        },
+        removeFavoriteProduct: (state, action) => {
+          console.log("entra al authslice aqui p")
+          console.log(action)
+          const item = state.userInfo.wishlist.find(item => item._id === action.payload.wishlist)
+          console.log(item)
+          if(item){
+            item.products = item.products.filter(item => item._id !== action.payload.product._id)
+            localStorage.setItem('userInfo', JSON.stringify(state.userInfo))
+          }else{
+            console.log("producto no estaba en favoritos")
+          }
+        }
     }
 })
 
@@ -196,6 +250,51 @@ export const decreaseQuantityProduct = (content) => {
   }
 }
 
+export const updatingUserInfo = (content) => {
+  return async dispatch => {
+    console.log(content)
+    const newUserInfo = await productService.updatingUser(content)
+    dispatch(setCredentials(newUserInfo))
+  }
+}
+
+export const initializeUsers = () => {
+  return async dispatch => {
+    const anecdotes = await productService.getAllList()
+    dispatch(setNotes(anecdotes))
+  }
+}
+
+export const addingToList = (id, content) => {
+  return async dispatch => {
+    console.log(content)
+    console.log("aca arriba esta el content de addingtolist")
+    console.log(id)
+    const anecdotes = await productService.addToList(id, content)
+    dispatch(addToListUser(anecdotes))
+  }
+}
+
+export const removeFavorite = (id, user) => {
+  console.log("aca esta desde el authSlice")
+  console.log(id)
+  console.log(user)
+  return async dispatch => {
+    //console.log("aca entra")
+    const deleting = await productService.removeFavorite(id, user)
+    //console.log(deleting)
+    dispatch(removeFavoriteProduct(deleting))
+  }
+}
+
+export const loginUser = (content) => {
+  return async dispatch => {
+    console.log(content)
+    const anecdotes = await productService.login(content)
+    dispatch(setCredentials(anecdotes))
+  }
+}
+
 export const { 
   appendProduct, 
   addToCart, 
@@ -205,7 +304,10 @@ export const {
   increaseItem, 
   decreaseItem, 
   resetCart,
-  removeSingleProduct 
+  removeSingleProduct,
+  setNotes,
+  addToListUser,
+  removeFavoriteProduct
 } = authSlice.actions
 
 export default authSlice.reducer        

@@ -6,6 +6,7 @@ dotenv.config()
 import 'express-async-errors'
 import userRoutes from './routes/userRoutes.js'
 import productRoutes from './routes/productRoutes.js'
+import wishlistRoutes from './routes/wishlistRoutes.js'
 import cors from 'cors'
 import stripeRoutes from "./routes/stripeRoutes.js"
 import cookieParser from 'cookie-parser'
@@ -39,6 +40,7 @@ app.use(cookieParser())
 app.use('/api/stripe', stripeRoutes)
 app.use('/api/users', userRoutes)
 app.use('/', productRoutes)
+app.use('/api/wishlist', wishlistRoutes)
 
 app.use(errorHandler)
 

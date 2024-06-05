@@ -1,5 +1,6 @@
 import axios from 'axios'
-const baseUrl = 'https://e-commerce-f1fr.onrender.com' //http://localhost:8000
+const baseUrl = 'http://localhost:8000' //http://localhost:8000
+// https://e-commerce-f1fr.onrender.com
 
 let token = null
 //console.log(token)
@@ -30,7 +31,7 @@ const productsOnCart = async newObject => {
     headers: { Authorization: token },
   }
   //console.log("este es el objeto nuevo")
-  //console.log(newObject)
+  console.log(config)
 
   const response = await axios.post(`${baseUrl}/adding`, newObject, config)
   return response.data
@@ -110,9 +111,74 @@ const decreaseQuantity = async (id, content) => {
   const config = {
     headers: { Authorization: token },
   }
- 
+  console.log(config)
   const request = await axios.put(`${baseUrl}/decreaseProduct/${id}`, content, config)
   return request.data
+}
+
+// Usuario - tiene que ir en user.js pero el token no se reconoce
+
+const updatingUser = async content => {
+  const config = {
+    headers: { Authorization: token },
+  }
+  console.log(content)
+  console.log(config)
+  //console.log(newObject)
+  const request = await axios.put(`${baseUrl}/api/users/update`, content, config)
+  console.log(request)
+  return request.data
+}
+
+// Wishlist - tiene que ir en wishlist.js pero el token no se reconoce
+
+const getAllList = () => {
+  const config = {
+    headers: { Authorization: token },
+  }
+  console.log("entra al getalllist")
+  console.log(config)
+  const request = axios.get(`${baseUrl}/api/wishlist`, config)
+  return request.then(response => response.data)
+}
+
+const addToList = async (id, content) => {
+  const config = {
+    headers: { Authorization: token },
+  }
+  console.log(config)
+  console.log(content)
+  const response = await axios.post(`${baseUrl}/api/wishlist/${id}`, content, config)
+  return response.data
+}
+
+const removeFavorite = async (id) => {
+  console.log("hola")
+  console.log(id)
+  const config = {
+    headers: { Authorization: token },
+  }
+  console.log(config)
+
+  //console.log("entra al try")
+  const request = await axios.delete(`${baseUrl}/api/wishlist/remove/${id}`, config)
+  console.log(request)
+  //console.log(request)
+  return request.data
+}
+
+const login = async credentials => {
+  console.log(credentials)
+  const response = await axios.post(`${baseUrl}/api/users/auth`, credentials)
+  setToken(response.data.token);
+  console.log(token)
+  console.log(setToken.token)
+  return response.data
+}
+
+const getAllWishList = () => {
+  const request = axios.get(`${baseUrl}/api/wishlist/list`)
+  return request.then(response => response.data)
 }
 
 const productService = {
@@ -125,7 +191,13 @@ const productService = {
   deleteCart, 
   removeSingleProduct,
   increaseQuantity,
-  decreaseQuantity
+  decreaseQuantity,
+  updatingUser,
+  getAllList,
+  addToList,
+  removeFavorite,
+  login,
+  getAllWishList
 }
 
 export default productService

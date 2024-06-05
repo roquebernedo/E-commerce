@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import '../styles/Products.scss'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import ContentHome from '../components/ContentHome';
+import wishlistService from '../services/wishlist';
+import productService from '../services/product';
+import { initializeUsers } from '../slices/authSlice';
 
 const Products = ({ buttonsFromHome, setButtonsFromHome }) => {
   // eslint-disable-next-line no-unused-vars
   const [products, setProducts] = useState([])
+  const [wishlist, setWishlist] = useState()
   // eslint-disable-next-line no-unused-vars
   const [users, setUsers] = useState([])
   // eslint-disable-next-line no-unused-vars
   const { userInfo } = useSelector((state) => state.auth)
+  const dispatch = useDispatch()
   
   // https://ecommerce-moez.onrender.com/ -> ESTE ES EL SERVER
   useEffect(() => {
@@ -24,6 +29,17 @@ const Products = ({ buttonsFromHome, setButtonsFromHome }) => {
     }
     fetchAllProducts()
   }, [])
+  
+  useEffect(() => {
+    
+          dispatch(initializeUsers());  // Suponiendo que devuelve una Promise
+          // Recargar la página solo después de que el dispatch se resuelva
+         
+      
+    
+  }, [dispatch])
+
+  console.log(wishlist)
 
   return (
     <>

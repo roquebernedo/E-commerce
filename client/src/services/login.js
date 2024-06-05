@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = 'https://e-commerce-f1fr.onrender.com/api/users/auth' //https://ecommerce-moez.onrender.com
+const baseUrl = 'http://localhost:8000/api/users/auth' //https://ecommerce-moez.onrender.com
 //http://localhost:8000
 //https://e-commerce-f1fr.onrender.com
 // const login = async credentials => {

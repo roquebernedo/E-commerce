@@ -6,15 +6,23 @@ import bcryptjs from 'bcryptjs'
 
 //route POST /api/users
 const getUser = async (req, res) => {
-    const users = await User.find({}).populate('productsOnCart')
+    const users = await User.find({}).populate('wishlist')
   
   res.json(users) 
 }
 
 //route POST /api/users/auth
-const authUser = asyncHandler(async (req, res) => {
+const authUser = async (req, res) => {
     const { email, password } = req.body
-    const user = await User.findOne({ email }).populate('products')
+    const user = await User.findOne({ email })
+        .populate('products')
+        .populate({
+            path: 'wishlist',
+            populate: {
+                path: 'products',
+                model: 'Product'
+            }
+        })
     console.log(user)
     console.log(user.passwordHash)
     console.log(password)
@@ -51,10 +59,11 @@ const authUser = asyncHandler(async (req, res) => {
             email: user.email, 
             productsOnCart: user.productsOnCart, 
             products: user.products,
-            id: user._id
+            id: user._id,
+            wishlist: user.wishlist
         })
   console.log(token)
-})
+}
 
 //route POST /api/users
 
@@ -77,13 +86,13 @@ const registerUser = async (req, res) => {
 }
 
 //route POST /api/users/logout
-const logoutUser = asyncHandler(async (req, res) => {
-    res.cookie('jwt', '', {
-        httpOnly: true,
-        expires: new Date(0),
-    })
-    res.status(200).json({ message: 'Logout User'})
-})
+// const logoutUser = asyncHandler(async (req, res) => {
+//     res.cookie('jwt', '', {
+//         httpOnly: true,
+//         expires: new Date(0),
+//     })
+//     res.status(200).json({ message: 'Logout User'})
+// })
 
 //route GET /api/users/profile
 const getUserProfile = asyncHandler(async (req, res) => {
@@ -94,6 +103,54 @@ const getUserProfile = asyncHandler(async (req, res) => {
     }
     res.status(200).json(user)
 })
+
+const updateProfile = async(req, res) => {
+    const user = req.user
+    console.log("hola update profile")
+    console.log(user)
+    if(user){
+        user.name = req.body.name || user.name
+        user.email = req.body.email || user.email
+
+        const saltRounds = 10
+
+        if(req.body.password){
+            user.passwordHash = await bcryptjs.hash(req.body.password, saltRounds)
+        }
+        console.log("aca va el token")
+
+        const userForToken = {
+            name: user.name,
+            id: user.id,
+        }
+    
+        // token expires in 60*60 seconds, that is, in one hour
+        const token = jwt.sign(
+            userForToken, 
+            process.env.SECRET,
+            { expiresIn: 60*60 }
+        )
+        
+        const decodedToken = jwt.decode(token);
+        const expirationTimeMilliseconds = decodedToken.exp * 1000
+        
+        
+        const updatedUser = await user.save()
+        console.log("aca entra el usuario actualizado")
+        console.log(user)
+        res.status(200).json({
+            id: updatedUser.id, 
+            name: updatedUser.name,
+            email: updatedUser.email,
+            //password: updatedUser.passwordHash,
+            products: updatedUser.products,
+            productsOnCart: updatedUser.productsOnCart,
+            expirationTimeMilliseconds,
+            token
+        })
+    }
+
+}
 
 //route PUT /api/users/profile
 const updateUserProfile = asyncHandler(async (req, res) => {
@@ -123,7 +180,7 @@ export {
     getUser,
     authUser,
     registerUser,
-    logoutUser,
     getUserProfile,
-    updateUserProfile
+    updateUserProfile,
+    updateProfile
 }

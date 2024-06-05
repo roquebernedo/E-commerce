@@ -1,0 +1,250 @@
+.favorites{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 600px;
+    height: auto;
+
+    .main-favorites{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        width: 100%;
+        gap: 20px;
+
+        .favorites-options{
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 1000px;
+          
+
+            .title-favorites{
+                font-size: 2rem;
+            }
+
+            .create-product{
+                position: absolute;
+                background-color: #2879fe;
+                padding: 10px 40px;
+                right: 0;
+                text-decoration: none;
+                color: #ffffff;
+
+                &:hover{
+                    background-color: #1960d1;
+                }
+            }
+        }
+
+        .no-favorites-publications{
+            @media (max-width: 375px) {
+                font-size: 14px;
+            }
+        }
+
+        .loader{
+            display: flex;
+            align-items: center;
+     
+        }
+
+        .products-favorites-profile{
+            background-color: #ffffff;
+            margin: 15px 0;
+            text-decoration: none;
+
+            .products-favorites-main-profile{
+                display: flex;
+                width: 1000px;
+                height: 215px;
+                color: black;
+
+                .product-favorites-img{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 30%;
+                    
+                    .img-favorites-div{
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        width: 70%;
+                        height: 170px;  
+                        background-color: #ffffff;
+
+                        .image-favorites-item{
+                            width: 90%;
+                            height: 145px;
+                        }
+                    }
+                }
+
+                .product-favorites-info-profile{
+                    width: 70%;
+                    display: flex;
+                    align-items: center;
+
+                    .product-favorites-info-profile-item{
+                        display: flex;
+                        width: 100%;
+                        justify-content: space-between;
+                        height: 170px;
+
+                        .product-favorites-info-left{
+                            height: 100%;
+                            width: 350px;
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: space-between;
+                            
+                            .product-favorites-info-left-top{
+                                .product-favorites-info-name{
+                                    font-size: 1.2rem;
+                                }
+                            }
+
+                            .product-favorites-info-left-center{
+                                .not-favorites-price{
+                                    font-size: 0.9rem;
+                                    text-decoration: line-through;
+                                }
+
+                                .product-favorites-priceoff{
+                                    display: flex;
+                                    gap: 10px;
+                                    align-items: center;
+
+                                    .real-favorites-price{
+                                        font-size: 1.2rem;
+                                    }
+
+                                    .off-favorites{
+                                        color: #c06011;
+                                        font-weight: 600;
+                                    }
+                                }
+                            }
+
+                            .product-favorites-info-left-bottom{
+                                .product-favorites-delivery{
+                                    font-weight: 600;
+                                    color: #238b34;
+                                }
+                            }
+                        }
+
+                        .product-favorites-info-right{
+                            height: 60%;
+                            display: flex;
+                            margin-right: 10px;
+
+                            .product-favorites-info-right-main{
+                                display: flex;
+                                flex-direction: column;
+                                align-items: flex-end;
+                                justify-content: space-between;
+                                position: relative;
+
+                                .div-favorites-heart{
+                                    display: flex;
+                                    align-items: center;
+                                    
+                                    .heart-products-div{
+                                        display: flex;
+                                        
+                                        .heart-products{
+                                            color: black;
+                                            opacity: 0.6;
+                                            font-size: 1.5rem;
+
+                                            &:hover{
+                                                color: rgb(218, 68, 68);
+                                            }
+                                        }
+
+                                    }
+
+                                    .heart-broken-div{
+                                        display: flex;
+
+                                        .icon-broken{
+                                            display: none;
+                                        }
+                                        
+                                        .heart-broken{
+                                            font-size: 1.5rem;
+                                            color: rgb(218, 68, 68);
+                                        }
+
+                                        &:hover{
+                                            .heart-broken{
+                                                display: none;
+                                            }
+
+                                            .icon-broken{
+                                                display: block;
+                                                font-size: 1.5rem;
+                                                color: rgb(218, 68, 68);
+                                            }
+                                        }
+                                    }
+                                  
+
+                                    &:hover{
+                                        .heart-favorites-profile{
+                                            opacity: 1;
+                                        }
+
+                                       
+                                    }
+
+                                    
+                                }
+
+                                .div-favorites-cart{
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    
+                                    opacity: 0.7;
+                                    
+                                    .cart-favorites-profile{
+                                        font-size: 1.8rem;
+                                    }
+
+                                    &:hover{
+                                        opacity: 1;
+                                    }
+
+                                    .arrow-cart{
+                                        height: 100%;
+                                        display: flex;
+                                        justify-content: center;
+                                    }
+                                }
+
+                                &:hover{
+                                    
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.favorites-alt{
+    align-items: flex-start;
+    margin-top: 15px;
+
+    .main-alt{
+        justify-content: flex-start;
+    }
+}
