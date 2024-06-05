@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import productService from "../services/product";
-import userService from "../services/user";
 
 export const initialState = {
     userInfo: localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem
