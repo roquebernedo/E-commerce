@@ -23,6 +23,7 @@ import Publications from "./pages/Publications.jsx";
 import Details from "./pages/Details.jsx";
 import Favorites from "./pages/Favorites.jsx";
 import Notifications from "./pages/Notifications.jsx";
+import SingleNotification from "./pages/SingleNotification.jsx";
 
 function App() {
   const { userInfo } = useSelector((state) => state.auth)
@@ -93,6 +94,7 @@ function App() {
           <Route path="publications" element={userInfo ? <Publications/> : <Navigate replace to="/login" />} />
           <Route path="favorites" element={userInfo ? <Favorites/> : <Navigate replace to="/login" />} />
           <Route path="notifications" element={userInfo ? <Notifications/> : <Navigate replace to="/login" />} />
+          <Route path="notifications/:id" element={userInfo ? <SingleNotification/> : <Navigate replace to="/login" />} />
         </Route> 
         <Route path="/add" element={<Add />} />
         <Route path="/cart" element={<ShoppingCart />} />

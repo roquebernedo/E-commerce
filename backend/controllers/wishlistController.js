@@ -43,7 +43,7 @@ const getUserList = async (req, res, next) => {
 
 const addToList = async (req, res, next) => {
     const user = req.user
-    //const product = await Product.findById(req.params.id)
+    const product = await Product.findById(req.params.id)
     //console.log(product)
 
     console.log("addtolist")
@@ -69,11 +69,13 @@ const addToList = async (req, res, next) => {
             return res.json({ message: "El producto ya se encuentra en Favoritos" })
         }else{
             const newList = new Wishlist({
-                products: [req.params.id],
+                products: [product],
                 user: user._id
             })
 
+            user.wishlist = user.wishlist.concat(newList)
             await newList.save()
+            await user.save()
             return res.send({ 
                 message: "Producto agregado a Favoritos",
                 list: newList

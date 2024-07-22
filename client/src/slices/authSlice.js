@@ -6,8 +6,7 @@ export const initialState = {
         ('userInfo')) : null
 }
 console.log(initialState)
-// const ids = initialState.userInfo.productsOnCart.map(pro => pro.id)
-// console.log(ids)
+
 const authSlice = createSlice({
     name: 'auth',
     initialState,
@@ -17,11 +16,13 @@ const authSlice = createSlice({
             state.userInfo = action.payload
             console.log(state.userInfo)
             localStorage.setItem('userInfo', JSON.stringify(action.payload))
-            if(state.userInfo){
-              console.log("entro al userinfo")
-              //productService.setToken(state.userInfo.token); // Establece el token aquí
-              localStorage.setItem('userInfo', JSON.stringify(state.userInfo));
-            }
+            
+            // localStorage.setItem('userInfo', JSON.stringify(action.payload))
+            // if(state.userInfo){
+            //   console.log("entro al userinfo")
+            //   //productService.setToken(state.userInfo.token); // Establece el token aquí
+            //   localStorage.setItem('userInfo', JSON.stringify(state.userInfo));
+            // }
             //localStorage.setItem('userInfo', JSON.stringify(state.userInfo));
         },
         logout: (state, action) => {
@@ -115,7 +116,16 @@ const authSlice = createSlice({
             const item = state.userInfo.wishlist.find(item => item._id === action.payload.list._id)
             console.log(item)
             if(item){
+              console.log(action.payload)
               item.products.push(action.payload.product)
+              localStorage.setItem('userInfo', JSON.stringify(state.userInfo))
+            }else{
+              console.log("no existe el wishlist")
+              console.log(action.payload)
+              if(!state.userInfo.wishlist){
+                state.userInfo.wishlist = []
+              } 
+              state.userInfo.wishlist.push(action.payload.list)
               localStorage.setItem('userInfo', JSON.stringify(state.userInfo))
             }
           }else{
@@ -131,6 +141,7 @@ const authSlice = createSlice({
           // }
           //state.userInfo.wishlist[0].products = state.userInfo.wishlist[0].products.push(action.payload)
         },
+
         removeFavoriteProduct: (state, action) => {
           console.log("entra al authslice aqui p")
           console.log(action)
@@ -142,7 +153,62 @@ const authSlice = createSlice({
           }else{
             console.log("producto no estaba en favoritos")
           }
+        },
+
+        setEntryNoty: (state, action) => {
+          console.log(action)
+          console.log(action.payload)
+          const item = state.userInfo.notifications.find(item => item._id === action.payload._id)
+          console.log("acaba de entrar")
+          if(!item){
+            console.log("entro al item")
+            if(!state.userInfo.notifications){
+              console.log("entra aca")
+              state.userInfo.notifications = []
+              
+            }
+            console.log("haciendo el push")
+            state.userInfo.notifications.push(action.payload)
+            localStorage.setItem('userInfo', JSON.stringify(state.userInfo))
+          }
+        },
+
+        getOnlyNoti: (state, action) => {
+          console.log(action)
+          console.log(action.payload)
+          // return (state = {
+          //   ...state.userInfo.notifications
+          // })
+        },
+
+        removeNoti: (state, action) => {
+          console.log(action)
+          console.log(action.payload)
+          const item = state.userInfo.notifications.find(item => item._id === action.payload.notification._id)
+          console.log("ya entro ya")
+          if(item){
+            console.log("entro mrd")
+            item.notif_list = action.payload.notif_list
+            localStorage.setItem('userInfo', JSON.stringify(state.userInfo))
+          }
+          localStorage.setItem('userInfo', JSON.stringify(state.userInfo))
         }
+        // setUserNoti: (state, action) => {
+        //   // const item = state.userInfo.notifications.find(item => item._id === action.payload._id)
+        //   // if(!item){
+        //   //   console.log("entro a setUserNoti")
+        //   //   if(state.userInfo.notifications){
+        //       console.log(action)
+        //       console.log(action.payload)
+        //       console.log(action.payload)
+        //   //     state.userInfo.notifications.push(action.payload)
+        //   //     localStorage.setItem('userInfo', JSON.stringify(state.userInfo))
+        //   //   }
+        //   // }
+          
+           
+          
+        // }
     }
 })
 
@@ -259,7 +325,9 @@ export const updatingUserInfo = (content) => {
 
 export const initializeUsers = () => {
   return async dispatch => {
+    console.log("initilize")
     const anecdotes = await productService.getAllList()
+    console.log(anecdotes)
     dispatch(setNotes(anecdotes))
   }
 }
@@ -294,6 +362,40 @@ export const loginUser = (content) => {
   }
 }
 
+export const getNotification = () => {
+  return async dispatch => {
+    const anecdotes = await productService.getEntryNoty()
+    dispatch(setEntryNoty(anecdotes))
+  }
+}
+
+// export const showNotifications = () => {
+//   return async dispatch => {
+//     const anecdotes = await productService.setNotifications()
+//     dispatch(setUserNoti(anecdotes))
+//   }
+// }
+
+export const getUniqueNotification = (id) => {
+  return async dispatch => {
+    console.log("aca va el id de unique notifi ", id)
+    const anecdotes = await productService.getUniqueNoti(id)
+    dispatch(getOnlyNoti(anecdotes))
+  }
+}
+
+export const removeNotification = (id) => {
+  console.log("aca esta desde el authSlice para el removeNoti")
+  console.log(id)
+ 
+  return async dispatch => {
+    //console.log("aca entra")
+    const deleting = await productService.deleteUniqueNoti(id)
+    //console.log(deleting)
+    dispatch(removeNoti(deleting))
+  }
+}
+
 export const { 
   appendProduct, 
   addToCart, 
@@ -306,7 +408,10 @@ export const {
   removeSingleProduct,
   setNotes,
   addToListUser,
-  removeFavoriteProduct
+  removeFavoriteProduct,
+  setEntryNoty,
+  getOnlyNoti,
+  removeNoti
 } = authSlice.actions
 
 export default authSlice.reducer        

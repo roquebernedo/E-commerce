@@ -181,6 +181,49 @@ const getAllWishList = () => {
   return request.then(response => response.data)
 }
 
+// notifications 
+
+const getEntryNoty = () => {
+  const config = {
+    headers: { Authorization: token },
+  }
+
+  const request = axios.get(`${baseUrl}/api/noti`, config)
+  return request.then(response => response.data)
+}
+
+const setNotifications = () => {
+  const request = axios.get(`${baseUrl}/api/noti/setNotis/notification`)
+  console.log(request)
+  return request.then(response => response.data)
+}
+
+const getUniqueNoti = (id) => {
+  const config = {
+    headers: { Authorization: token },
+  }
+  console.log("aca esta el uniqueNoti")
+  console.log(config)
+
+  console.log(id)
+  const request = axios.get(`${baseUrl}/api/noti/unique/${id}`, config)
+  console.log(request)
+  return request.then(response => response.data)
+}
+
+const deleteUniqueNoti = async (id) => {
+  const config = {
+    headers: { Authorization: token },
+  }
+  console.log("aca esta el delete uniqueNoti")
+  console.log(config)
+
+  console.log(id)
+  const request = await axios.delete(`${baseUrl}/api/noti/${id}`, config)
+  console.log(request)
+  return request.data
+}
+
 const productService = {
   create, 
   setToken, 
@@ -197,7 +240,11 @@ const productService = {
   addToList,
   removeFavorite,
   login,
-  getAllWishList
+  getAllWishList,
+  getEntryNoty,
+  setNotifications,
+  getUniqueNoti,
+  deleteUniqueNoti
 }
 
 export default productService

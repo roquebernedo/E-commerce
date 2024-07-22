@@ -2,13 +2,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 500px;
+    min-height: 600px;
+    max-width: 1150px;
     height: auto;
 
     .main-notifications{
         display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: center;
         width: 100%;
         
         height: 100%;
@@ -19,7 +21,7 @@
             align-items: center;
             justify-content: center;
             width: 100%;
-
+            
             margin: 15px 0;
 
             .title-notifications{
@@ -44,49 +46,123 @@
             
             margin: 15px 0;
             text-decoration: none;
-            width: 100%;
-
+            width: 80%;
+            
             display: flex;
+            flex-direction: column;
             justify-content: center;
+            background-color: #ffffff;
 
             .products-main-profile-notifications{
                 display: flex;
                 align-items: center;
+                position: relative;
                 background-color: #ffffff;
-                width: 70%;
+                width: 100%;
                 height: 55px;
                 color: black;
+                cursor: pointer;
 
-                .product-info-profile-notifications{
+                .notification-elements{
                     display: flex;
-                    gap: 10px;
                     align-items: center;
-                    justify-content: center;
-                    margin-left: 10px;
+                    justify-content: space-between;
+                    margin: 0 10px;
+                    width: 100%;
 
-                    .div-point-noti{
+                    .product-info-profile-notifications{
                         display: flex;
-                        
-                        .point-noti{
-                            color: green;
+                        align-items: center;
+                        justify-content: center;
+    
+                        .div-point-noti{
+                            display: flex;
+                            
+                            .point-noti{
+                                color: green;
+                            }
+                        }
+    
+                        .welcome-dirstore{
+                            font-size: 1.2rem;
                         }
                     }
 
-                    .welcome-dirstore{
-                        font-size: 1.2rem;
+                    .welcome-date{
+                        display: flex;
+                        color: #858080;
                     }
                 }
+
+                .line{
+                    width: 100%;
+                    height: 1px;
+                    background: linear-gradient(-90deg, #858080, #00000000 100%);
+                    bottom: 0;
+                    position: absolute;
+                }
+            }
+
+            .notification-description{
+                padding: 0;
+                display: none;
+                flex-direction: column;
+                margin: 8px 10px;
+                gap: 10px;
+
+                .notification-info-description{
+                    display: flex;
+                  
+                    .noti-desc{
+                        
+                    }
+                }
+
+                .notification-trash-can{
+                    display: flex;
+                    justify-content: flex-end;
+
+                    .container-trash{
+                        display: flex;
                 
+                        .spancito{
+                            display: flex;
+                            justify-content: center;
+                            
+                            @keyframes animate{
+                                0%{
+                                    background-position: 0%;
+                                }
+                                100%{
+                                    background-position: 400%;
+                                }
+                            }
+
+                            .trash-can{
+                                cursor: pointer;
+                                font-size: 1.2rem;                
+                            }
+                        }
+
+                        .spancito:hover{
+                            color: crimson;
+                        }
+                    }
+                }
+            }
+
+            .noti-open{
+                display: flex;
             }
         }
     }
 }
 
-.favorites-alt{
+.notifications-alt{
     align-items: flex-start;
     margin-top: 15px;
 
-    .main-alt{
+    .main-notifications-alt{
         justify-content: flex-start;
     }
 }

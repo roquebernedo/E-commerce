@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import ContentHome from '../components/ContentHome';
 // import wishlistService from '../services/wishlist';
 // import productService from '../services/product';
-import { initializeUsers } from '../slices/authSlice';
+import { getNotification, initializeUsers } from '../slices/authSlice';
 
 const Products = ({ buttonsFromHome, setButtonsFromHome }) => {
   // eslint-disable-next-line no-unused-vars
@@ -32,13 +32,17 @@ const Products = ({ buttonsFromHome, setButtonsFromHome }) => {
   }, [])
   
   useEffect(() => {
-    
-          dispatch(initializeUsers());  // Suponiendo que devuelve una Promise
+    if(userInfo){
+      console.log("entro a este console")
+      dispatch(getNotification())
+    }
+    dispatch(initializeUsers());
+            // Suponiendo que devuelve una Promise
           // Recargar la página solo después de que el dispatch se resuelva
          
       
     
-  }, [dispatch])
+  }, [userInfo, dispatch])
 
   console.log(wishlist)
 

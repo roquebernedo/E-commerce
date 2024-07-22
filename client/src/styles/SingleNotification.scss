@@ -1,0 +1,125 @@
+.notifications-section{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+    min-height: 450px;
+
+    .notifications-primary{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+
+        .notifications-single{
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            margin: 15px 0;
+
+            .title-single{
+                font-size: 2rem;
+            }
+        }
+
+        .loader{
+          
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .main-noti{
+            margin: 15px 0;
+            text-decoration: none;
+            width: 80%;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            background-color: #ffffff;
+            
+            .notification-information{
+                display: flex;
+                align-items: center;
+                background-color: #ffffff;
+                width: 100%;
+                position: relative;
+                height: 55px;
+                color: black;
+                cursor: pointer;
+
+                .line{
+                    width: 100%;
+                    height: 1px;
+                    background: linear-gradient(-90deg, #858080, #00000000 100%);
+                    bottom: 0;
+                    position: absolute;
+                }
+
+                .notification-elements{
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    margin: 0 10px;
+                    width: 100%;
+
+                    .div-main-noti{
+                        display: flex;
+                        justify-content: center;
+                        flex-direction: row;
+                        align-items: center;
+
+                        .div-point-green-noti{
+                            display: flex;
+    
+                            .point-green-noti{
+                                color: green;
+                            }
+                        }
+                        
+                        .welcome-unite{
+                            font-size: 1.2rem;
+                            color: #000000;
+                        }
+                    }
+
+                    .welcome-date{
+                        display: flex;
+                        color: #858080;
+                    }
+                }
+            }
+
+            
+
+            .notification-description{
+                padding: 0;
+                display: none;
+                flex-direction: column;
+                margin: 8px 10px;
+                gap: 10px;
+
+                .notification-info-description{
+                    display: flex;
+                  
+                    .noti-desc{
+                        
+                    }
+                }
+
+                .notification-trash-can{
+                    display: flex;
+                    justify-content: flex-end;
+                }
+            }
+
+            .noti-open{
+                display: flex;
+            }
+        }
+    }
+}
+

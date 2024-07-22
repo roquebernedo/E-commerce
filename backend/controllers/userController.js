@@ -16,6 +16,7 @@ const authUser = async (req, res) => {
     const { email, password } = req.body
     const user = await User.findOne({ email })
         .populate('products')
+        .populate('notifications')
         .populate({
             path: 'wishlist',
             populate: {
@@ -50,7 +51,7 @@ const authUser = async (req, res) => {
 
   const decodedToken = jwt.decode(token);
   const expirationTimeMilliseconds = decodedToken.exp * 1000
-
+  console.log(user.notifications)
   res
     .status(200)
     .send({ token, 
@@ -60,7 +61,8 @@ const authUser = async (req, res) => {
             productsOnCart: user.productsOnCart, 
             products: user.products,
             id: user._id,
-            wishlist: user.wishlist
+            wishlist: user.wishlist,
+            notifications: user.notifications
         })
   console.log(token)
 }

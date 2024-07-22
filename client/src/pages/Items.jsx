@@ -77,7 +77,7 @@ const Items = ({ filterProducts, buttonsMain }) => {
         }
         fetchAllProducts()
     }, [])
-
+    console.log(products)
     useEffect(() => {
         const fetchAllProducts = async () => {
             try{
@@ -107,6 +107,8 @@ const Items = ({ filterProducts, buttonsMain }) => {
             // } else {
             //     console.log('Usuario no encontrado');
             // }
+        }else{
+            console.log("salio error")
         }
     }, [userInfo])
     console.log(userWishList)

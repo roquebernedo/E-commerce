@@ -14,6 +14,8 @@ import Menu from '../components/Menu';
 import { CiHeart } from "react-icons/ci";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import { TbPointFilled } from "react-icons/tb";
+import productService from '../services/product';
+
 
 const Navbar = ({ filter, setFilter }) => {
   // const [filter, setFilter] = useState([])
@@ -21,8 +23,11 @@ const Navbar = ({ filter, setFilter }) => {
   const [rates, setRates] = useState({})
   const { userInfo } = useSelector((state) => state.auth)
   const [products, setProducts] = useState([])
+  const [noti, setNoti] = useState([])
   const [productUserList, setProductUserList] = useState([])
   const [productsUserInfo, setProductsUserInfo] = useState([])
+  const [notiListUserInfo, setNotiListUserInfo] = useState([])
+  const [notifications, setNotifications] = useState([])
   //console.log(userInfo)
   const [totalProducts, setTotalProducts] = useState()
   //const totProducts = userInfo.productsOnCart.reduce((a,b) => a + b.quantity, 0)
@@ -41,7 +46,7 @@ const Navbar = ({ filter, setFilter }) => {
   const [open, setOpen] = useState(false)
   const [openMenu, setOpenMenu] = useState(false)
   const navigate = useNavigate()
-
+  console.log(userInfo)
   useEffect(() => {
     if(userInfo){
       if(userInfo.productsOnCart){
@@ -101,34 +106,73 @@ const Navbar = ({ filter, setFilter }) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/wishlist/list") // https://ecommerce-moez.onrender.com/
+      .get("https://e-commerce-f1fr.onrender.com/api/wishlist/list") // https://ecommerce-moez.onrender.com/
       .then(response => {
         setProducts(response.data)
       })
   
-}, [])
+  }, [])
+  //console.log(products)
+
+  useEffect(() => {
+    if(userInfo){
+      productService.setNotifications().then(blogs =>
+        setNoti(blogs)
+      )  
+    }
+    
+    
+  }, [userInfo])
+  console.log(noti)
+  //console.log(userInfo)
+  
+  // useEffect(() => {
+    
+  //   productService.getUniqueNoti().then(blogs =>
+  //     setUnitFromList(blogs)
+  //   )  
+    
+  // }, [])
+  // console.log(unitFromList)
+  
 
   useEffect(() => {
     if(userInfo){
         const productsUser = products.find(products => products.user.find(u => u.id === userInfo.id))
+        
         setProductsUserInfo(productsUser)
+        const notiListUser = noti.find(noti => noti.user.find(user => user.id === userInfo.id))
+        
+        setNotiListUserInfo(notiListUser)
     }
     
-  }, [products, setProductsUserInfo, userInfo])
+  }, [products, setProductsUserInfo, userInfo, setNotiListUserInfo, noti])
+
+  console.log(productsUserInfo)
+  console.log(notiListUserInfo)
 
   useEffect(() => {
       if(userInfo){
           if(productsUserInfo){
-              console.log(productsUserInfo)
-              //console.log(productUserList)
-              const productUserWishList = userInfo.wishlist?.find(list => list._id === productsUserInfo._id)
-              console.log(productUserWishList)
-              setProductUserList(productUserWishList)
+            console.log(productsUserInfo)
+            //console.log(productUserList)
+            const productUserWishList = userInfo.wishlist && userInfo.wishlist?.find(list => list._id === productsUserInfo._id)
+            console.log(productUserWishList)
+            setProductUserList(productUserWishList)
+          }
+          if(notiListUserInfo){
+            console.log(notiListUserInfo)
+            const notiListUser = userInfo.notifications && userInfo.notifications?.find(list => list._id === notiListUserInfo._id)
+            console.log(notiListUser)
+            setNotifications(notiListUser)
           }
       }
       
-  }, [products, productsUserInfo, userInfo])
+  }, [products, productsUserInfo, userInfo, notiListUserInfo])
+
+  
   console.log(productUserList)
+  console.log(notifications)
 
   return (
     <header className='navbar'>
@@ -182,7 +226,6 @@ const Navbar = ({ filter, setFilter }) => {
               <CiHeart className="sign-heart" />
               <div className='sign-favorites-menu'>
                 <div className='div-products-favorites-menu'>
-                  
                         <div className='title-favorites-menu'>Favoritos</div>
                         <div className='section-favorites'>
                           {productUserList && productUserList.products && productUserList.products.length > 0
@@ -202,8 +245,6 @@ const Navbar = ({ filter, setFilter }) => {
                           }
                         </div>
                         <div className='title-footer-menu'><Link to="/profile/favorites" className='link-favorites'>Ver todos los productos deseados</Link></div>
-                      
-                  
                 </div>
               </div>
             </Link>
@@ -214,12 +255,16 @@ const Navbar = ({ filter, setFilter }) => {
                   <>
                     <div className='title-noti-menu'>Notificaciones</div>
                     <div className='section-notifications'>
-                      <Link to={`/product/${products._id}`} className='items-noti-menu'>
-                        <div className='div-noti-items'>
-                          <TbPointFilled className='point-noti' />
-                          <div className='welcome'>Dirstore te da la bienvenida!</div>
-                        </div>
-                      </Link>
+                      {userInfo && notiListUserInfo && notiListUserInfo.notif_list && notiListUserInfo.notif_list.length > 0 && notiListUserInfo.notif_list
+                            ? notiListUserInfo.notif_list?.map(notis =>
+                                <Link to={`/profile/notifications/${notis._id}`} className='items-noti-menu'>
+                                  <div className='div-noti-items'>
+                                    <TbPointFilled className='point-noti' />
+                                    <div className='welcome'>{notis.title}</div>
+                                  </div>
+                                </Link>)
+                            : <div className='no-exist'>Aun no existe ninguna notificacion</div>
+                      }
                     </div>
                     <div className='title-footer-noti-menu'>
                       <Link to="/profile/notifications" className='link-noti'>Ver todas las notificaciones</Link>
