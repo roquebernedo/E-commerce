@@ -427,7 +427,7 @@ export const updatingCart = () => {
       console.log("Intentando actualizar el carrito...");
       const anecdotes = await productService.updateCart();
       console.log("Anecdotes recibidos:", anecdotes);
-      dispatch(updatingUserCart(anecdotes));
+      dispatch(updateProductsOnCart(anecdotes));
     } catch (error) {
       console.error("Error al actualizar el carrito:", error);
     }
