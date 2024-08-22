@@ -27,6 +27,7 @@ const Navbar = ({ filter, setFilter }) => {
   const [productUserList, setProductUserList] = useState([])
   const [productsUserInfo, setProductsUserInfo] = useState([])
   const [notiListUserInfo, setNotiListUserInfo] = useState([])
+  // eslint-disable-next-line no-unused-vars
   const [notifications, setNotifications] = useState([])
   //console.log(userInfo)
   const [totalProducts, setTotalProducts] = useState()
