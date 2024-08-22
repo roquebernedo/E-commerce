@@ -12,8 +12,13 @@ const Success = () => {
 
   useEffect(() => {
     const update = async () => {
-      await dispatch(updatingCart());
-      setLoading(false);
+        try {
+            await dispatch(updatingCart());
+            setLoading(false);
+        } catch (error) {
+            console.error(error);
+            // Manejo de errores
+        }
     };
     update();
 
