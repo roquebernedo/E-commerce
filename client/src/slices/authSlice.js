@@ -423,11 +423,15 @@ export const updatingCart = () => {
   console.log("aca esta el Stripe denuevo")
  
   return async dispatch => {
-    console.log("aca va Stripe doo")
-    const anecdotes = await productService.updateCart()
-    console.log(anecdotes)
-    dispatch(updatingUserCart(anecdotes))
-  }
+    try {
+      console.log("Intentando actualizar el carrito...");
+      const anecdotes = await productService.updateCart();
+      console.log("Anecdotes recibidos:", anecdotes);
+      dispatch(updatingUserCart(anecdotes));
+    } catch (error) {
+      console.error("Error al actualizar el carrito:", error);
+    }
+  };
 }
 
 export const getAllProducts = () => {
