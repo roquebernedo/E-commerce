@@ -13,9 +13,11 @@ const Success = () => {
   useEffect(() => {
     const update = async () => {
         try {
+            console.log("entro al update de success")
             await dispatch(updatingCart());
             setLoading(false);
         } catch (error) {
+            console.log("entro al error")
             console.error(error);
             // Manejo de errores
         }
@@ -23,6 +25,7 @@ const Success = () => {
     update();
 
     const timer = setTimeout(() => {
+    console.log("estamos en el settimout")
       navigate('/');
     }, 5000);
 
