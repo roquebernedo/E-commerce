@@ -44,7 +44,7 @@ const Products = ({ buttonsFromHome, setButtonsFromHome }) => {
     
   }, [userInfo, dispatch])
 
-  console.log(wishlist)
+  //console.log(wishlist)
 
   return (
     <>

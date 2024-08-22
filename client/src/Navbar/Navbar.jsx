@@ -46,7 +46,7 @@ const Navbar = ({ filter, setFilter }) => {
   const [open, setOpen] = useState(false)
   const [openMenu, setOpenMenu] = useState(false)
   const navigate = useNavigate()
-  console.log(userInfo)
+  //console.log(userInfo)
   useEffect(() => {
     if(userInfo){
       if(userInfo.productsOnCart){
@@ -123,7 +123,7 @@ const Navbar = ({ filter, setFilter }) => {
     
     
   }, [userInfo])
-  console.log(noti)
+  //console.log(noti)
   //console.log(userInfo)
   
   // useEffect(() => {
@@ -148,22 +148,22 @@ const Navbar = ({ filter, setFilter }) => {
     
   }, [products, setProductsUserInfo, userInfo, setNotiListUserInfo, noti])
 
-  console.log(productsUserInfo)
-  console.log(notiListUserInfo)
+  //console.log(productsUserInfo)
+  //console.log(notiListUserInfo)
 
   useEffect(() => {
       if(userInfo){
           if(productsUserInfo){
-            console.log(productsUserInfo)
+            //console.log(productsUserInfo)
             //console.log(productUserList)
             const productUserWishList = userInfo.wishlist && userInfo.wishlist?.find(list => list._id === productsUserInfo._id)
-            console.log(productUserWishList)
+            //console.log(productUserWishList)
             setProductUserList(productUserWishList)
           }
           if(notiListUserInfo){
-            console.log(notiListUserInfo)
+            //console.log(notiListUserInfo)
             const notiListUser = userInfo.notifications && userInfo.notifications?.find(list => list._id === notiListUserInfo._id)
-            console.log(notiListUser)
+            //console.log(notiListUser)
             setNotifications(notiListUser)
           }
       }
@@ -171,8 +171,8 @@ const Navbar = ({ filter, setFilter }) => {
   }, [products, productsUserInfo, userInfo, notiListUserInfo])
 
   
-  console.log(productUserList)
-  console.log(notifications)
+  //console.log(productUserList)
+  //console.log(notifications)
 
   return (
     <header className='navbar'>
@@ -190,7 +190,7 @@ const Navbar = ({ filter, setFilter }) => {
         </div>
         { userInfo ? (
           <div className='log-reg'>
-            <Link className='sign profile-navbar'>
+            <div className='sign profile-navbar'>
               <svg className='svg' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="18" role="presentation" alt="" data-testid="UserIcon" size="18" color="currentColor"><path d="M16.22 19.41A9.71 9.71 0 1 1 26 9.7a9.74 9.74 0 0 1-9.8 9.71M1.84 32a10.88 10.88 0 0 1 10.94-10.74h6.57A10.88 10.88 0 0 1 30.29 32H1.84" fill="currentColor"></path></svg>
               <div className='userinfo'>{userInfo.name}</div>
               <div className='div-menu-profile'>
@@ -221,8 +221,8 @@ const Navbar = ({ filter, setFilter }) => {
                   </Link>
                 </div>
               </div>
-            </Link>
-            <Link className='sign log sign-favorites-heart'>
+            </div>
+            <div className='sign log sign-favorites-heart'>
               <CiHeart className="sign-heart" />
               <div className='sign-favorites-menu'>
                 <div className='div-products-favorites-menu'>
@@ -230,7 +230,7 @@ const Navbar = ({ filter, setFilter }) => {
                         <div className='section-favorites'>
                           {productUserList && productUserList.products && productUserList.products.length > 0
                             ? productUserList.products.map(products =>
-                                <Link to={`/product/${products._id}`} className='products-favorites-menu'>
+                                <Link key={products._id} to={`/product/${products._id}`} className='products-favorites-menu'>
                                   <div className='div-products-items'>
                                     <div className='div-img-product-item'>
                                       <img src={products.image} alt='favoriteProduct' className='img-favorite-product-item'/>
@@ -247,8 +247,8 @@ const Navbar = ({ filter, setFilter }) => {
                         <div className='title-footer-menu'><Link to="/profile/favorites" className='link-favorites'>Ver todos los productos deseados</Link></div>
                 </div>
               </div>
-            </Link>
-            <Link className='sign log noti'>
+            </div>
+            <div className='sign log noti'>
               <IoIosNotificationsOutline className='icon-noti' />
               <div className='sign-noti-menu'>
                 <div className='div-noti-menu'>
@@ -272,7 +272,7 @@ const Navbar = ({ filter, setFilter }) => {
                   </>
                 </div>
               </div>
-            </Link>
+            </div>
             <div className='cartIcon' onClick={() => setOpen(!open)}>
               <AiOutlineShoppingCart className='car'/>
               <span className='number'>{totalProducts && totalProducts}</span>
