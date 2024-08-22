@@ -224,6 +224,18 @@ const deleteUniqueNoti = async (id) => {
   return request.data
 }
 
+const updateCart = async () => {
+  const config = {
+    headers: { Authorization: token },
+  }
+  console.log("aca es Stripe")
+  console.log(config)
+  const response = await axios.put(`${baseUrl}/api/stripe/checkout-success`, {}, config)
+  console.log(response)
+  console.log("entro a este response")
+  return response.data
+}
+
 const productService = {
   create, 
   setToken, 
@@ -244,7 +256,8 @@ const productService = {
   getEntryNoty,
   setNotifications,
   getUniqueNoti,
-  deleteUniqueNoti
+  deleteUniqueNoti,
+  updateCart
 }
 
 export default productService

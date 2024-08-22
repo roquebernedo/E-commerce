@@ -24,6 +24,7 @@ import Details from "./pages/Details.jsx";
 import Favorites from "./pages/Favorites.jsx";
 import Notifications from "./pages/Notifications.jsx";
 import SingleNotification from "./pages/SingleNotification.jsx";
+import Success from "./components/Success.jsx";
 
 function App() {
   const { userInfo } = useSelector((state) => state.auth)
@@ -100,6 +101,7 @@ function App() {
         <Route path="/cart" element={<ShoppingCart />} />
         <Route path="/product/:id" element={<Product />} />
         <Route path="/update/:id" element={<Update />} />
+        <Route path="/success" element={<Success />} />
       </Routes>
       <Footer />
     </div>

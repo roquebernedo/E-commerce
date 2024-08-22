@@ -3,7 +3,8 @@ import productService from "../services/product";
 
 export const initialState = {
     userInfo: localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem
-        ('userInfo')) : null
+        ('userInfo')) : null,
+    products: []
 }
 console.log(initialState)
 
@@ -192,7 +193,7 @@ const authSlice = createSlice({
             localStorage.setItem('userInfo', JSON.stringify(state.userInfo))
           }
           localStorage.setItem('userInfo', JSON.stringify(state.userInfo))
-        }
+        },
         // setUserNoti: (state, action) => {
         //   // const item = state.userInfo.notifications.find(item => item._id === action.payload._id)
         //   // if(!item){
@@ -205,8 +206,30 @@ const authSlice = createSlice({
         //   //     localStorage.setItem('userInfo', JSON.stringify(state.userInfo))
         //   //   }
         //   // }
-          
-           
+        updatingUserCart: (state, action) => {
+          console.log("entra al redux a updatingUserCart")
+          console.log(action)
+          console.log(action.payload)
+          state.products = action.payload
+         
+          if(state.userInfo.productsOnCart){
+            state.userInfo.productsOnCart = []
+            localStorage.setItem('userInfo', JSON.stringify(state.userInfo))
+          }
+        },
+
+        updateProductsOnCart: (state, action) => {
+          console.log("esta en el redoxon")
+        },
+
+        gettingAllProducts: (state, action) => {
+          console.log(action)
+          console.log("hola")
+          state.products = action.payload
+          console.log(state.userInfo)
+          console.log(state.products)
+          console.log(initialState)
+        }
           
         // }
     }
@@ -396,6 +419,27 @@ export const removeNotification = (id) => {
   }
 }
 
+export const updatingCart = () => {
+  console.log("aca esta el Stripe denuevo")
+ 
+  return async dispatch => {
+    console.log("aca va Stripe doo")
+    const anecdotes = await productService.updateCart()
+    console.log(anecdotes)
+    dispatch(updatingUserCart(anecdotes))
+  }
+}
+
+export const getAllProducts = () => {
+  console.log("getting everything")
+
+  return async dispatch => {
+    console.log("aca esta el getting todo")
+    const anecdotes = await productService.getAll()
+    dispatch(gettingAllProducts(anecdotes))
+  }
+}
+
 export const { 
   appendProduct, 
   addToCart, 
@@ -411,7 +455,10 @@ export const {
   removeFavoriteProduct,
   setEntryNoty,
   getOnlyNoti,
-  removeNoti
+  removeNoti,
+  updatingUserCart,
+  updateProductsOnCart,
+  gettingAllProducts
 } = authSlice.actions
 
 export default authSlice.reducer        

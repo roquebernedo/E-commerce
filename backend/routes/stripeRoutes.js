@@ -1,6 +1,9 @@
 import express from "express";
 import Stripe from "stripe";
 import dotenv from "dotenv";
+import { userExtractor } from "../middleware/authMiddleware.js";
+import Product from "../models/productModel.js";
+import User from "../models/userModel.js";
 
 dotenv.config();
 
@@ -8,6 +11,8 @@ const stripe = new Stripe(process.env.STRIPE_KEY)
 
 const router = express.Router()
 
+// router.get("/success", (req, res) => res.send("success"))
+// router.get("/cancel", (req, res) => res.send("cancel"))
 router.post('/create-checkout-session', async (req, res) => {
   const line_items = req.body.cartItems.map(item => {
     //console.log(item)
@@ -81,11 +86,87 @@ router.post('/create-checkout-session', async (req, res) => {
     },
     line_items,
     mode: 'payment',
-    success_url: `${process.env.CLIENT_URL}/checkout-success`,
-    cancel_url: `${process.env.CLIENT_URL}/cart`,
+    success_url: `https://ecommercerq.netlify.app/success`,
+    //success_url: `http://localhost:3000/success`,
+    cancel_url: `${process.env.CLIENT_URL}/api/stripe/cart`,
   });
 
   res.send({ url: session.url });
 });
+
+//router.get('/checkout-success', (req, res) => res.send("success"))
+
+router.put('/checkout-success', userExtractor, async (req, res) => {
+  try {
+    const user = req.user
+    console.log("hola") 
+    console.log(user)
+
+    if (!user.productsOnCart) {
+      return res.status(404).send('Order not found');
+    }
+    console.log("si existen")
+    // // Actualiza el stock y vacía el carrito
+    for (const item of user.productsOnCart) {
+      console.log("entro al for")
+      console.log(item._id.toString())
+      const product = await Product.findById(item.id);
+      console.log(product)
+      if (product) {
+        product.stock -= item.quantity; // Reduce el stock
+        await product.save();
+        console.log(product)
+      }
+    }
+    const product = await Product.find({})
+    console.log("este es el producto")
+    console.log(product)
+
+    user.productsOnCart = []
+    await user.save()
+    console.log(user)
+
+    return res.json({ products: product, message: 'Order successfully processed'});
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Server error');
+  }
+});
+
+// Endpoint de cancelación
+router.get('/cancel', (req, res) => {
+  res.send('Payment canceled');
+});
+
+// router.get(`${process.env.CLIENT_URL}/checkout-success`, userExtractor, async (req, res) => {
+//   try {
+//     const user = req.user // Obtén el ID de la sesión de la query
+//     console.log("hola sabado")
+//     console.log(user)
+//     // Encuentra la orden asociada con la sesión
+//     //const order = await User.findOne({ payment_intent: session_id });
+//     http://localhost:8000
+//     if (!user) {
+//       return res.status(404).send('Order not found');
+//     }
+
+//     // Actualiza el stock y vacía el carrito
+//     // for (const item of order.products) {
+//     //   const product = await Product.findById(item.product_id);
+//     //   if (product) {
+//     //     product.stock -= item.quantity; // Reduce el stock
+//     //     await product.save();
+//     //   }
+//     // }
+
+//     // Borra la orden (opcional, si quieres eliminarla)
+//     // await Order.findByIdAndDelete(order._id);
+
+//     res.send('Order successfully processed');
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).send('Server error');
+//   }
+// });
 
 export default router
