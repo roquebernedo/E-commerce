@@ -3,7 +3,7 @@ import Stripe from "stripe";
 import dotenv from "dotenv";
 import Product from "../models/productModel.js";
 import User from "../models/userModel.js";
-import { cancelando, updateProductsHere } from "../controllers/stripeController.js";
+// import { cancelando, updateProductsHere } from "../controllers/stripeController.js";
 import { userExtractor } from "../middleware/authMiddleware.js";
 
 dotenv.config();
@@ -135,7 +135,7 @@ router.put('/checkout-success', userExtractor, async (req, res) => {
 });
 
 //router.put('/checkout-success', userExtractor, updateProductsHere)
-router.put('/cancelito', userExtractor, cancelando)
+// router.put('/cancelito', userExtractor, cancelando)
 // Endpoint de cancelación
 // router.put('/cancelito', (req, res) => {
 //   console.log("tongo")

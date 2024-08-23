@@ -273,6 +273,13 @@ const updateProduct = async (req, res) => {
     }
 };
 
+const cancelando = (async (req, res) => {
+    console.log("tongo")
+    console.log("estamos bien")
+    return res.json({ message: 'Payment canceled' });
+})
+
+
 export { 
     gettingProducts,
     addingProducts,
@@ -284,5 +291,6 @@ export {
     deletingCart,
     removeSingleProduct,
     increasingQuantityProduct,
-    decreasingQuantityProduct
+    decreasingQuantityProduct,
+    cancelando
 }

@@ -257,7 +257,7 @@ const cancelito = async () => {
 
   console.log("aca llego tu hype")
   console.log(config)
-  const response = await axios.put(`${baseUrl}/api/stripe/cancelito`, {}, config)
+  const response = await axios.put(`${baseUrl}/cancelito`, {}, config)
   console.log(response)
   console.log("entro a este response clean")
   return response.data
