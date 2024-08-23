@@ -5,22 +5,26 @@ import '../styles/Success.scss'
 import { useNavigate } from 'react-router-dom'
 
 const Success = () => {
-  // eslint-disable-next-line no-unused-vars
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
   //const { userInfo } = useSelector((state) => state.auth);
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(cancelando())
+    const update = async () => {
+        console.log("entro al update de success")
+        await dispatch(cancelando())
+        setLoading(false);
+    };
+    update();
     console.log("bota tu gaaa")
 
-    // const timer = setTimeout(() => {
-    // console.log("estamos en el settimout")
-    //   navigate('/');
-    // }, 5000);
+    const timer = setTimeout(() => {
+    console.log("estamos en el settimout")
+      navigate('/');
+    }, 5000);
 
-    // return () => clearTimeout(timer);
+    return () => clearTimeout(timer);
 }, [dispatch, navigate]);
 
   return (
