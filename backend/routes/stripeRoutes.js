@@ -134,7 +134,7 @@ router.post('/create-checkout-session', async (req, res) => {
 //   }
 // });
 
-router.put('/checkout-success', userExtractor, updateProductsHere)
+router.post('/checkout-success', userExtractor, updateProductsHere)
 
 // Endpoint de cancelación
 router.get('/cancel', (req, res) => {
