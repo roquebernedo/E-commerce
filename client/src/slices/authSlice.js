@@ -192,30 +192,19 @@ const authSlice = createSlice({
             item.notif_list = action.payload.notif_list
             localStorage.setItem('userInfo', JSON.stringify(state.userInfo))
           }
-          localStorage.setItem('userInfo', JSON.stringify(state.userInfo))
+          localStorage.setItem('userInfo', JSON.stringify( state.userInfo))
         },
-        // setUserNoti: (state, action) => {
-        //   // const item = state.userInfo.notifications.find(item => item._id === action.payload._id)
-        //   // if(!item){
-        //   //   console.log("entro a setUserNoti")
-        //   //   if(state.userInfo.notifications){
-        //       console.log(action)
-        //       console.log(action.payload)
-        //       console.log(action.payload)
-        //   //     state.userInfo.notifications.push(action.payload)
-        //   //     localStorage.setItem('userInfo', JSON.stringify(state.userInfo))
-        //   //   }
-        //   // }
+
         updatingUserCart: (state, action) => {
           console.log("entra al redux a updatingUserCart")
           console.log(action)
           console.log(action.payload)
-          state.products = action.payload
+          // state.products = action.payload
          
-          if(state.userInfo.productsOnCart){
-            state.userInfo.productsOnCart = []
-            localStorage.setItem('userInfo', JSON.stringify(state.userInfo))
-          }
+          // if(state.userInfo.productsOnCart){
+          //   state.userInfo.productsOnCart = []
+          //   localStorage.setItem('userInfo', JSON.stringify(state.userInfo))
+          // }
         },
 
         updateProductsOnCart: (state, action) => {
