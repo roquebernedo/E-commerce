@@ -17,6 +17,7 @@ const Success = () => {
         setLoading(false);
     };
     update();
+    console.log("bota tu gaaa")
 
     const timer = setTimeout(() => {
     console.log("estamos en el settimout")
