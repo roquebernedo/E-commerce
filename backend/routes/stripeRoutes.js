@@ -1,10 +1,10 @@
 import express from "express";
 import Stripe from "stripe";
 import dotenv from "dotenv";
-import { userExtractor } from "../middleware/authMiddleware.js";
 import Product from "../models/productModel.js";
 import User from "../models/userModel.js";
-import { updateProductsHere } from "../controllers/stripeController.js";
+import { cancelando, updateProductsHere } from "../controllers/stripeController.js";
+import { userExtractor } from "../middleware/authMiddleware.js";
 
 dotenv.config();
 
@@ -135,48 +135,17 @@ router.put('/checkout-success', userExtractor, async (req, res) => {
 });
 
 //router.put('/checkout-success', userExtractor, updateProductsHere)
-
+router.put('/cancelito', userExtractor, cancelando)
 // Endpoint de cancelación
-router.put('/cancelito', (req, res) => {
-  console.log("tongo")
-  console.log("estamos bien")
-  return res.json({ message: 'Payment canceled' });
-});
+// router.put('/cancelito', (req, res) => {
+//   console.log("tongo")
+//   console.log("estamos bien")
+//   return res.json({ message: 'Payment canceled' });
+// });
 
 // router.put('/cancelito', (req, res) => {
 //   console.log("estamos bien")
 //   res.send('Payment canceled');
-// });
-
-// router.get(`${process.env.CLIENT_URL}/checkout-success`, userExtractor, async (req, res) => {
-//   try {
-//     const user = req.user // Obtén el ID de la sesión de la query
-//     console.log("hola sabado")
-//     console.log(user)
-//     // Encuentra la orden asociada con la sesión
-//     //const order = await User.findOne({ payment_intent: session_id });
-//     http://localhost:8000
-//     if (!user) {
-//       return res.status(404).send('Order not found');
-//     }
-
-//     // Actualiza el stock y vacía el carrito
-//     // for (const item of order.products) {
-//     //   const product = await Product.findById(item.product_id);
-//     //   if (product) {
-//     //     product.stock -= item.quantity; // Reduce el stock
-//     //     await product.save();
-//     //   }
-//     // }
-
-//     // Borra la orden (opcional, si quieres eliminarla)
-//     // await Order.findByIdAndDelete(order._id);
-
-//     res.send('Order successfully processed');
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).send('Server error');
-//   }
 // });
 
 export default router

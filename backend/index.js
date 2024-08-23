@@ -38,11 +38,11 @@ app.use(express.urlencoded({ extended: true }))
 
 app.use(tokenExtractor)
 app.use(cookieParser())
-app.use('/api/stripe', stripeRoutes)
 app.use('/api/users', userRoutes)
 app.use('/', productRoutes)
 app.use('/api/wishlist', wishlistRoutes)
 app.use('/api/noti', notificationRoutes)
+app.use('/api/stripe', stripeRoutes)
 
 app.use(errorHandler)
 

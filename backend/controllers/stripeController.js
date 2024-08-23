@@ -37,6 +37,13 @@ const updateProductsHere = (async (request, response) => {
     }
 })
 
+const cancelando = (async (req, res) => {
+    console.log("tongo")
+    console.log("estamos bien")
+    return res.json({ message: 'Payment canceled' });
+})
+
 export { 
-    updateProductsHere
+    updateProductsHere,
+    cancelando
 }
