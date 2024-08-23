@@ -414,13 +414,26 @@ export const updatingCart = () => {
   return async dispatch => {
     try {
       console.log("Intentando actualizar el carrito...");
-      const anecdotes = await productService.updateCart();
+      const anecdotes = await productService.cleaningProducts();
       console.log("Anecdotes recibidos:", anecdotes);
       dispatch(updatingUserCart(anecdotes));
     } catch (error) {
       console.error("Error al actualizar el carrito:", error);
     }
   };
+}
+
+export const cleanCart = () => {
+  return async dispatch => {
+    try{
+      console.log("Intentando actualizar el carrito")
+      const anecdotes = await productService.cleaningProducts();
+      console.log(anecdotes)
+      dispatch(updatingUserCart(anecdotes))
+    } catch(error){
+      console.error("Error al actualziar el carrito:", error)
+    }
+  }
 }
 
 export const getAllProducts = () => {
