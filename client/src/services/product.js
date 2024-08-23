@@ -250,14 +250,14 @@ const cleaningProducts = async () => {
   return response.data
 }
 
-const cancelito = async () => {
+const cancelito = async (id) => {
   const config = {
     headers: { Authorization: token },
   }
 
   console.log("aca llego tu hype")
   console.log(config)
-  const response = await axios.put(`${baseUrl}/cancelito`, {}, config)
+  const response = await axios.put(`${baseUrl}/cancelito`, id, config)
   console.log(response)
   console.log("entro a este response clean")
   return response.data
