@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import ContentHome from '../components/ContentHome';
 // import wishlistService from '../services/wishlist';
 // import productService from '../services/product';
-import { getNotification, initializeUsers } from '../slices/authSlice';
+import { getAllProducts, getNotification, initializeUsers } from '../slices/authSlice';
 
 const Products = ({ buttonsFromHome, setButtonsFromHome }) => {
   // eslint-disable-next-line no-unused-vars
@@ -39,7 +39,7 @@ const Products = ({ buttonsFromHome, setButtonsFromHome }) => {
     dispatch(initializeUsers());
             // Suponiendo que devuelve una Promise
           // Recargar la página solo después de que el dispatch se resuelva
-         
+    dispatch(getAllProducts())
       
     
   }, [userInfo, dispatch])

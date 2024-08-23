@@ -230,7 +230,7 @@ const updateCart = async () => {
   }
   console.log("aca es Stripe")
   console.log(config)
-  const response = await axios.put(`${baseUrl}/api/stripe/checkout-success`, config)
+  const response = await axios.put(`${baseUrl}/api/stripe/checkout-success`, {}, config)
   console.log(response)
   console.log("entro a este response")
   return response.data
