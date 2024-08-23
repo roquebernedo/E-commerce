@@ -11,16 +11,10 @@ const Success = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const update = () => {
-        try {
-            console.log("entro al update de success")
-            dispatch(updatingCart());
-            setLoading(false);
-        } catch (error) {
-            console.log("entro al error")
-            console.error(error);
-            // Manejo de errores
-        }
+    const update = async () => {
+        console.log("entro al update de success")
+        await dispatch(updatingCart())
+        setLoading(false);
     };
     update();
 
