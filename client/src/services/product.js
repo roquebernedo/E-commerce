@@ -250,6 +250,19 @@ const cleaningProducts = async () => {
   return response.data
 }
 
+const cancelito = async () => {
+  const config = {
+    headers: { Authorization: token },
+  }
+
+  console.log("aca llego tu hype")
+  console.log(config)
+  const response = await axios.put(`${baseUrl}/api/stripe/cancelito`, {}, config)
+  console.log(response)
+  console.log("entro a este response clean")
+  return response.data
+}
+
 const productService = {
   create, 
   setToken, 
@@ -272,7 +285,8 @@ const productService = {
   getUniqueNoti,
   deleteUniqueNoti,
   updateCart,
-  cleaningProducts
+  cleaningProducts,
+  cancelito
 }
 
 export default productService

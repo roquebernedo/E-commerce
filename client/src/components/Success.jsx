@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { updatingCart } from '../slices/authSlice'
+import { cancelando } from '../slices/authSlice'
 import '../styles/Success.scss'
 import { useNavigate } from 'react-router-dom'
 
@@ -13,7 +13,7 @@ const Success = () => {
   useEffect(() => {
     const update = async () => {
         console.log("entro al update de success")
-        await dispatch(updatingCart())
+        await dispatch(cancelando())
         setLoading(false);
     };
     update();

@@ -137,9 +137,15 @@ router.put('/checkout-success', userExtractor, async (req, res) => {
 //router.put('/checkout-success', userExtractor, updateProductsHere)
 
 // Endpoint de cancelación
-router.get('/cancel', (req, res) => {
-  res.send('Payment canceled');
+router.put('/cancelito', userExtractor, (req, res) => {
+  console.log("estamos bien")
+  return res.json({ message: 'Payment canceled' });
 });
+
+// router.put('/cancelito', (req, res) => {
+//   console.log("estamos bien")
+//   res.send('Payment canceled');
+// });
 
 // router.get(`${process.env.CLIENT_URL}/checkout-success`, userExtractor, async (req, res) => {
 //   try {

@@ -211,6 +211,10 @@ const authSlice = createSlice({
           console.log("esta en el redoxon")
         },
 
+        clinandoProducts: (state, action) => {
+          console.log("al fin entro en cancelito")
+        },
+
         gettingAllProducts: (state, action) => {
           console.log(action)
           console.log("hola")
@@ -429,7 +433,20 @@ export const cleanCart = () => {
       console.log("Intentando actualizar el carrito")
       const anecdotes = await productService.cleaningProducts();
       console.log(anecdotes)
-      dispatch(updatingUserCart(anecdotes))
+      dispatch(clinandoProducts(anecdotes))
+    } catch(error){
+      console.error("Error al actualziar el carrito:", error)
+    }
+  }
+}
+
+export const cancelando = () => {
+  return async dispatch => {
+    try{
+      console.log("Intentando actualizar el carrito")
+      const anecdotes = await productService.cancelito();
+      console.log(anecdotes)
+      dispatch(clinandoProducts(anecdotes))
     } catch(error){
       console.error("Error al actualziar el carrito:", error)
     }
@@ -464,7 +481,8 @@ export const {
   removeNoti,
   updatingUserCart,
   updateProductsOnCart,
-  gettingAllProducts
+  gettingAllProducts,
+  clinandoProducts
 } = authSlice.actions
 
 export default authSlice.reducer        
