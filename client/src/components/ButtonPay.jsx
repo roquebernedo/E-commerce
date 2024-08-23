@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 const ButtonPay = ({ cartItems }) => {
     console.log(cartItems)
     //https://e-commerce-f1fr.onrender.com  
-    // http://localhost:8000
+    //http://localhost:8000
     const url = 'https://e-commerce-f1fr.onrender.com'
     const handlecheckout = () => {
         console.log("entro al axios")
