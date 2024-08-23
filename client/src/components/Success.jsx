@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { cancelando } from '../slices/authSlice'
+import { cleanCart } from '../slices/authSlice'
 import '../styles/Success.scss'
 //import { useNavigate } from 'react-router-dom'
 
@@ -29,7 +29,7 @@ const Success = () => {
 
 const update = () => {
   console.log("entro al update de success")
-  dispatch(cancelando())
+  dispatch(cleanCart())
   console.log("ojala entre ctmre")
   //setLoading(false);
 };

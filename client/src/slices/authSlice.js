@@ -48,9 +48,9 @@ const authSlice = createSlice({
           }   
         },
         addToCartt: (state, action) => {
-          //console.log("hola")
+          console.log("hola")
           const existingItemIndex = state.userInfo.productsOnCart.findIndex(item => item.id === action.payload.id)
-          //console.log(action)
+          console.log(action)
           //console.log(existingItemIndex)
           //console.log(item)
             
@@ -433,7 +433,7 @@ export const cleanCart = () => {
       console.log("Intentando actualizar el carrito")
       const anecdotes = await productService.cleaningProducts();
       console.log(anecdotes)
-      dispatch(clinandoProducts(anecdotes))
+      dispatch(updatingUserCart(anecdotes))
     } catch(error){
       console.error("Error al actualziar el carrito:", error)
     }
