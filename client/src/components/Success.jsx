@@ -11,9 +11,9 @@ const Success = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const update = async () => {
+    const update =  () => {
         console.log("entro al update de success")
-        await dispatch(cancelando())
+        dispatch(cancelando())
         setLoading(false);
     };
     update();
