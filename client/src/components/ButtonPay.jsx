@@ -6,7 +6,7 @@ const ButtonPay = ({ cartItems }) => {
     //https://e-commerce-f1fr.onrender.com  
     //http://localhost:8000
     const url = 'https://e-commerce-f1fr.onrender.com'
-    const handlecheckout = () => {  
+    const handlecheckout = () => {
         console.log("entro al axios")
         axios.post(`${url}/api/stripe/create-checkout-session`, {
             cartItems
