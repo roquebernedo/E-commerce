@@ -203,6 +203,7 @@ const authSlice = createSlice({
          
           if(state.userInfo.productsOnCart){
             state.userInfo.productsOnCart = []
+            console.log("entra repetidamente")
             localStorage.setItem('userInfo', JSON.stringify(state.userInfo))
           }
         },
