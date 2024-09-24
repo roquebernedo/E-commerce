@@ -8,6 +8,7 @@ import userRoutes from './routes/userRoutes.js'
 import productRoutes from './routes/productRoutes.js'
 import wishlistRoutes from './routes/wishlistRoutes.js'
 import notificationRoutes from './routes/notificationRoutes.js'
+import addressRoutes from './routes/addressRoutes.js'
 import cors from 'cors'
 import stripeRoutes from "./routes/stripeRoutes.js"
 import cookieParser from 'cookie-parser'
@@ -43,6 +44,7 @@ app.use('/', productRoutes)
 app.use('/api/wishlist', wishlistRoutes)
 app.use('/api/noti', notificationRoutes)
 app.use('/api/stripe', stripeRoutes)
+app.use('/api/address', addressRoutes)
 
 app.use(errorHandler)
 

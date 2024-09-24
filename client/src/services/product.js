@@ -132,13 +132,13 @@ const updatingUser = async content => {
 
 // Wishlist - tiene que ir en wishlist.js pero el token no se reconoce
 
-const getAllList = () => {
+const getAllList = async () => {
   const config = {
     headers: { Authorization: token },
   }
   console.log("entra al getalllist")
   console.log(config)
-  const request = axios.get(`${baseUrl}/api/wishlist`, config)
+  const request = await axios.get(`${baseUrl}/api/wishlist`, config)
   return request.then(response => response.data)
 }
 

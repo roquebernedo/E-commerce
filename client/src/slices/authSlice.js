@@ -106,6 +106,7 @@ const authSlice = createSlice({
           if(!state.userInfo.wishlist){
             state.userInfo.wishlist = []
           }  
+          console.log(action.payload)
           state.userInfo.wishlist.push(action.payload)
           localStorage.setItem('userInfo', JSON.stringify(state.userInfo))
         },

@@ -23,7 +23,7 @@ const Profile = () => {
             <div className='icon-text'>Detalles</div>
           </Link>
           <Link to="/profile/notifications" className='profile-options'><IoIosNotificationsOutline className='profile-icon'/><div className='icon-text'>Notificaciones</div></Link> 
-          <div className='profile-options'><PiMapPinLight className='profile-icon'/><div className='icon-text'>Direcciones</div></div>
+          <Link to="/profile/address" className='profile-options'><PiMapPinLight className='profile-icon'/><div className='icon-text'>Direcciones</div></Link>
           <div className='profile-options'><IoBagOutline className='profile-icon'/><div className='icon-text'>Compras</div></div>
           <Link to="/profile/publications" className='profile-options'><GoTag className='profile-icon'/><div className='icon-text'>Publicaciones</div></Link>
           <div className='profile-options'><PiMoneyDuotone className='profile-icon'/><div className='icon-text'>Ventas</div></div>

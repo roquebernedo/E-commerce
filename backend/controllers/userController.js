@@ -52,6 +52,7 @@ const authUser = async (req, res) => {
   const decodedToken = jwt.decode(token);
   const expirationTimeMilliseconds = decodedToken.exp * 1000
   console.log(user.notifications)
+  console.log(user.addresses)
   res
     .status(200)
     .send({ token, 
@@ -62,7 +63,8 @@ const authUser = async (req, res) => {
             products: user.products,
             id: user._id,
             wishlist: user.wishlist,
-            notifications: user.notifications
+            notifications: user.notifications,
+            address: user.addresses
         })
   console.log(token)
 }

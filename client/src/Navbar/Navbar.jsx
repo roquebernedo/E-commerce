@@ -175,6 +175,11 @@ const Navbar = ({ filter, setFilter }) => {
   //console.log(productUserList)
   //console.log(notifications)
 
+  //const indx = random(30, 6);
+  //console.log(indx)
+  // let num = Math.floor(Math.random() * 6);
+  // console.log(num)
+
   return (
     <header className='navbar'>
       <div className='menu'>
@@ -258,7 +263,7 @@ const Navbar = ({ filter, setFilter }) => {
                     <div className='section-notifications'>
                       {userInfo && notiListUserInfo && notiListUserInfo.notif_list && notiListUserInfo.notif_list.length > 0 && notiListUserInfo.notif_list
                             ? notiListUserInfo.notif_list?.map(notis =>
-                                <Link to={`/profile/notifications/${notis._id}`} className='items-noti-menu'>
+                                <Link to={`/profile/notifications/${notis._id}`} className='items-noti-menu' key={notis._id}>
                                   <div className='div-noti-items'>
                                     <TbPointFilled className='point-noti' />
                                     <div className='welcome'>{notis.title}</div>

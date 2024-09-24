@@ -25,6 +25,7 @@ import Favorites from "./pages/Favorites.jsx";
 import Notifications from "./pages/Notifications.jsx";
 import SingleNotification from "./pages/SingleNotification.jsx";
 import Success from "./components/Success.jsx";
+import Address from "./pages/Address.jsx";
 
 function App() {
   const { userInfo } = useSelector((state) => state.auth)
@@ -93,6 +94,7 @@ function App() {
           <Route index element={<Navigate replace to="/details" />} />
           <Route path="details" element={userInfo ? <Details /> : <Navigate replace to="/login" />} />
           <Route path="publications" element={userInfo ? <Publications/> : <Navigate replace to="/login" />} />
+          <Route path="address" element={userInfo ? <Address/> : <Navigate replace to="/login" />} />
           <Route path="favorites" element={userInfo ? <Favorites/> : <Navigate replace to="/login" />} />
           <Route path="notifications" element={userInfo ? <Notifications/> : <Navigate replace to="/login" />} />
           <Route path="notifications/:id" element={userInfo ? <SingleNotification/> : <Navigate replace to="/login" />} />

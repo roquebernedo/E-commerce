@@ -38,7 +38,11 @@ const userSchema = new mongoose.Schema({
     notifications: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Notification"
-    }]
+    }],
+    addresses: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Address"
+    },
 }, {
     timestamps: true
 })
