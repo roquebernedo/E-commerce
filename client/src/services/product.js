@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = 'https://e-commerce-f1fr.onrender.com' //http://localhost:8000
+const baseUrl = 'http://localhost:8000' //http://localhost:8000
 // https://e-commerce-f1fr.onrender.com
 
 let token = null
@@ -263,6 +263,61 @@ const cancelito = async (id) => {
   return response.data
 }
 
+const setDefaultAddress = async (id) => {
+  const config = {
+    headers: { Authorization: token },
+  }
+  
+  console.log(id)
+  console.log("aca llego tu hype de address")
+  console.log(config)
+
+  const response = await axios.put(`${baseUrl}/api/address/default/${id}`, {}, config)
+  console.log(response)
+  console.log("entro a este response del addresito")
+  return response.data
+}
+
+const removeAddress = async (id) => {
+  const config = {
+    headers: { Authorization: token },
+  }
+  console.log("aca esta el delete addresito")
+  console.log(config)
+
+  console.log(id)
+  const request = await axios.delete(`${baseUrl}/api/address/${id}`, config)
+  console.log(request)
+  return request.data
+}
+
+const addAddress = async (content) => {
+  const config = {
+    headers: { Authorization: token },
+  }
+  console.log(config)
+  console.log(content)
+  const response = await axios.post(`${baseUrl}/api/address`, content, config)
+  console.log(response)
+  return response.data
+}
+
+const updateAddress = async (id, content) => {
+  const config = {
+    headers: { Authorization: token },
+  }
+  
+  console.log(id)
+  console.log("acasito noma")
+  console.log(config)
+
+
+  const response = await axios.put(`${baseUrl}/api/address/${id}`, content, config)
+  console.log(response)
+  console.log("entro a este response del addresito")
+  return response.data
+}
+
 const productService = {
   create, 
   setToken, 
@@ -286,7 +341,11 @@ const productService = {
   deleteUniqueNoti,
   updateCart,
   cleaningProducts,
-  cancelito
+  cancelito,
+  setDefaultAddress,
+  removeAddress,
+  addAddress,
+  updateAddress
 }
 
 export default productService

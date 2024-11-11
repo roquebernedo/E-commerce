@@ -5,6 +5,7 @@ import Product from "../models/productModel.js";
 import User from "../models/userModel.js";
 // import { cancelando, updateProductsHere } from "../controllers/stripeController.js";
 import { userExtractor } from "../middleware/authMiddleware.js";
+import Order from "../models/orderModel.js";
 
 dotenv.config();
 
@@ -87,15 +88,15 @@ router.post('/create-checkout-session', async (req, res) => {
     },
     line_items,
     mode: 'payment',
-    success_url: `https://ecommercerq.netlify.app/success`,
-    //success_url: `http://localhost:3000/success`,
+    //success_url: `https://ecommercerq.netlify.app/success`,
+    success_url: `http://localhost:3000/success`,
     cancel_url: `${process.env.CLIENT_URL}/api/stripe/cart`,
   });
 
   return res.json(session);
 });
 
-//router.get('/checkout-success', (req, res) => res.send("success"))
+// router.get('/checkout-success', (req, res) => res.send("success"))
 
 router.put('/checkout-success', userExtractor, async (req, res) => {
   try {
@@ -123,11 +124,42 @@ router.put('/checkout-success', userExtractor, async (req, res) => {
     console.log("este es el producto")
     console.log(product)
 
-    user.productsOnCart = []
-    await user.save()
-    console.log(user)
+    const order = await Order.find()
+    console.log(order)
+    if(!order){
+      const userFound = await User.findById(user._id)
+      //const isDefault = userFound.addresses.find(item => item.isDefault === true)
+      const newOrder = new Order({
+        products: user.productsOnCart,
+        user: user._id,
+        
+      })
+      userFound.orders = newOrder
+      userFound.productsOnCart = []
+      await newOrder.save()
+      await userFound.save()
+    }else{
+      const userFound = await User.findById(user._id)
+      //const isDefault = userFound.addresses.find(item => item.isDefault === true)
+      const newOrder = new Order({
+        products: user.productsOnCart,
+        user: user._id,
+        
+      })
+      userFound.orders.push(newOrder)
+      userFound.productsOnCart = []
+      await newOrder.save()
+      await userFound.save()
+    }
+    const newOrder = await Order.find({ user: user._id })
+    
+    // console.log("llego la orden")  
+    // console.log(user.orders)
+    // user.productsOnCart = []
+    // await user.save()
+    // console.log(user)
 
-    return res.json({ products: product, message: 'Order successfully processed'});
+    return res.json({ products: product, message: 'Order successfully processed', orders: newOrder});
   } catch (error) {
     console.error(error);
     res.status(500).send('Server error');

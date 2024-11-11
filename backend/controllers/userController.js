@@ -24,6 +24,8 @@ const authUser = async (req, res) => {
                 model: 'Product'
             }
         })
+        .populate('addresses')
+        .populate('orders')
     console.log(user)
     console.log(user.passwordHash)
     console.log(password)
@@ -64,7 +66,8 @@ const authUser = async (req, res) => {
             id: user._id,
             wishlist: user.wishlist,
             notifications: user.notifications,
-            address: user.addresses
+            address: user.addresses,
+            orders: user.orders
         })
   console.log(token)
 }

@@ -36,6 +36,7 @@ import User from '../models/userModel.js'
     console.log("este es el token, siguiente")
     const decodedToken = jwt.verify(request.token, process.env.SECRET)
     console.log("aqui va el token")
+    console.log("aquisito")
     console.log(decodedToken)
     if (!decodedToken.id) {
       return response.status(401).json({ error: 'token missing or invalid' })

@@ -1,12 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 //import { useSelector } from 'react-redux'
-import '../styles/Notifications.scss'
+import '../styles/Address.scss'
 import { TbPointFilled } from "react-icons/tb";
 import productService from '../services/product';
 import { css } from '@emotion/react';
 import { CircleLoader } from 'react-spinners';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { FaRegTrashCan } from "react-icons/fa6";
+import { TiPin } from "react-icons/ti";
+import { addingAddress, removeAddress, setAddress, updatingAddress } from '../slices/authSlice';
+import { MdEdit } from "react-icons/md";
+import Modal from '../components/Modal';
+import EditModal from '../components/EditModal';
 
 const override = css`
   display: flex;
@@ -24,6 +29,64 @@ const Address = () => {
     const [notifications, setNotifications] = useState([])
     const [loading, setLoading] = useState(true)
     const [open, setOpen] = useState(false)
+    const dispatch = useDispatch()
+    const [modalDisplay, setModalDisplay] = useState(false);
+    const [modalDisplay2, setModalDisplay2] = useState(false);
+    const modalRef = useRef(null);
+    const [address, setAddresss] = useState({
+        street_name:"",
+        street_number:"",
+        city:"",
+        zip_code:"",
+        state: ""
+    })
+    const [selectedAddress, setSelectedAddress] = useState()
+    const [formData, setFormData] = useState({
+        street_name: '',
+        street_number: '',
+        city: '',
+        zip_code: '',
+        state: ''
+    });
+    console.log(address)
+
+    const openModal = () => {
+        setModalDisplay(true);
+    };
+    
+    const openModal2 = (addressFound) => {
+        console.log(addressFound)
+        setSelectedAddress(addressFound);
+        console.log(selectedAddress)
+        setModalDisplay2(true);
+    };
+    console.log(selectedAddress)
+
+    const closeModal = () => {
+        setModalDisplay(false);
+        
+    };
+
+    const closeModal2 = () => {
+        console.log("modal2")
+        setModalDisplay2(false);
+    };
+
+    const closeOnOutsideClick = (event) => {
+        if (event.target === modalRef.current || event.target === event.currentTarget) {
+            closeModal();
+            
+        }
+        console.log(event.target)
+    };
+
+    const closeOnOutsideClick2 = (event) => {
+        if (event.target === modalRef.current || event.target === event.currentTarget) {
+            closeModal2();
+        }
+        console.log(event.target)
+    };
+    
 
     const containerStyles = css`
         display: flex;
@@ -35,59 +98,57 @@ const Address = () => {
     useEffect(() => {
         setLoading(true)
         if(userInfo){
-            productService.setNotifications().then(blogs => {
-                setNoti(blogs)
-                setLoading(false)
-            })  
+            setLoading(false)
         }
     }, [userInfo])
-    console.log(noti)
 
-    useEffect(() => {
-        productService.deleteUniqueNoti().then(blogs => blogs)
-    },[])
-
-    useEffect(() => {
+    const settingDefaultAddress = (id) => {
+        console.log(id)
         if(userInfo){
-            const notiListUser = noti.find(noti => noti.user.find(user => user.id === userInfo.id))
-            setNotiListUserInfo(notiListUser)
-        }
-        
-    }, [userInfo, setNotiListUserInfo, noti])
-    console.log(notiListUserInfo)
-
-    useEffect(() => {
-        if(userInfo){
-            if(notiListUserInfo){
-              console.log(notiListUserInfo)
-              const notiListUser = userInfo.notifications && userInfo.notifications?.find(list => list._id === notiListUserInfo._id)
-              console.log(notiListUser)
-              setNotifications(notiListUser)
-            }
-        }
-        
-    }, [userInfo, notiListUserInfo])
-    console.log(notifications)
-
-    const openBar = () => {
-        if(open === false){
-            setOpen(true)
-            console.log("aca va open true", open)
-        }else{
-            console.log("aca va open false", open)
-            setOpen(false)
+            dispatch(setAddress(id))
         }
     }
 
-    const transformDateTime = (dateTimeString) => {
-        return dateTimeString.replace(",", " |");
+    const removing = (id) => {
+        console.log(id)
+        if(userInfo){
+            dispatch(removeAddress(id))
+        }
+    }
+
+    const addAddress = async (e) => {
+        console.log("hola entro a addAddress")
+        e.preventDefault()
+        dispatch(addingAddress(address))
+        closeModal()
+    }
+
+    const updateAddress = async (e) => {
+        console.log("entro al update")
+        e.preventDefault()
+        dispatch(updatingAddress(selectedAddress._id, formData))
+        closeModal2()
+    }
+
+    const handleChange = (e) => {
+        e.preventDefault()
+        setAddresss(prev => ({...prev, [e.target.name]: e.target.value}))
+        // console.log(address)
+    }
+
+    const handleChange2 = (e) => {
+        e.preventDefault()
+        setFormData((prevData) => ({ ...prevData, [e.target.name]: e.target.value}));
+        
     };
+    console.log(formData)
+    console.log(userInfo)
 
     return (
-        <div className={notiListUserInfo && notiListUserInfo.notif_list && notiListUserInfo.notif_list.length > 0 ? 'notifications notifcations-alt' : 'notifications'}>
-            <div className={notiListUserInfo && notiListUserInfo.notif_list && notiListUserInfo.notif_list.length > 0 ? 'main-notifications main-notifications-alt' : 'main-notifications'}>
-                <div className='notifications-options'>
-                    <div className='title-notifications'>Direcciones</div>
+        <div className={userInfo && userInfo.address && userInfo.address.address.length > 0 && userInfo.address.address ? 'addresses addresses-alt' : 'addresses'}>
+            <div className={userInfo && userInfo.address && userInfo.address.address.length > 0 && userInfo.address.address ? 'main-addresses main-addresses-alt' : 'main-addresses'}>
+                <div className='addresses-options'>
+                    <div className='title-addresses'>Direcciones</div>
                 </div>
                 {loading 
                     ? (
@@ -95,38 +156,51 @@ const Address = () => {
                             <CircleLoader color={'#157dc2'} loading={true} css={override} size={75} />
                         </div>
                       )
-                    :   userInfo && notiListUserInfo && notiListUserInfo.notif_list && notiListUserInfo.notif_list.length > 0
+                    :   userInfo && userInfo.address && userInfo.address.address.length > 0 && userInfo.address.address 
                         ?   <>
-                                {notiListUserInfo.notif_list.map(notification => 
-                                        <div className='products-notifications-profile'>
-                                            <div className='products-main-profile-notifications' onClick={openBar}>
-                                                <div className='notification-elements'>
-                                                    <div className='product-info-profile-notifications'>
-                                                        <div className='div-point-noti'><TbPointFilled className='point-noti' /></div>
-                                                        <div className='welcome-dirstore'>{notification.title}</div>
+                                {userInfo && userInfo.address.address.length > 0 && userInfo.address.address.map(addresses => 
+                                        <div className='products-addresses-profile' key={addresses._id}>
+                                            <div className='products-main-profile-addresses'>
+                                                <div className='addresses-elements'>
+                                                    <div className='product-info-profile-addresses'>
+                                                        <div className='div-point-addresses'>
+                                                            <TiPin onClick={() => settingDefaultAddress(addresses._id)} className={addresses.isDefault ? 'point-addresses' : 'point-addresses-false'}/>
+                                                        </div>
+                                                        <div className='welcome-dirstore'>
+                                                            {`${addresses.street_name} ${addresses.street_number}, ${addresses.zip_code}, ${addresses.city}, ${addresses.state}`}
+                                                        </div>
                                                     </div>
-                                                    <div className='welcome-date'>{transformDateTime(notification.date)}</div>
-                                                </div>
-                                                <div className='line'></div>
-                                            </div>
-                                            
-                                            <div className={!open ? 'notification-description' : 'notification-description noti-open'}>
-                                                <div className='notification-info-description'>
-                                                    <div className='noti-desc'>{notification.description}</div>
-                                                </div>
-                                                <div className='notification-trash-can'>
-                                                    <div className='container-trash'>
-                                                        
-                                                        <span className='spancito'><FaRegTrashCan onClick={() => console.log("hola")} className='trash-can'/></span>
+                                                    <div className='welcome-date'>
+                                                        <MdEdit onClick={() => openModal2(addresses)} className='edit'/>
+                                                        <EditModal
+                                                            closeModal={closeModal2}
+                                                            modalDisplay={modalDisplay2}
+                                                            closeOnOutsideClick={closeOnOutsideClick2}
+                                                            handleChange={handleChange2}
+                                                            submit={updateAddress}
+                                                            formData={formData}
+                                                            setFormData={setFormData}
+                                                            address={selectedAddress}
+                                                        />
+                                                        <FaRegTrashCan onClick={() => removing(addresses._id)} className='trashcan'/>
                                                     </div>
-                                                    
                                                 </div>
-                                            </div>
+                                                
+                                            </div> 
                                         </div> 
                                 )}
                             </>      
-                        :   <div className='no-favorites-publications'>Aun no tienes ninguna notificacion</div>
+                        :   <div className='no-favorites-addresses'>Aun no tienes ninguna notificacion</div>
                 }
+                <div onClick={() => openModal()} className='addDirection'>Agregar direccion</div>
+                <Modal
+                    closeModal={closeModal}
+                    modalDisplay={modalDisplay}
+                    closeOnOutsideClick={closeOnOutsideClick}
+                    handle={handleChange}
+                    submit={addAddress}
+                />
+                
             </div>
         </div>
     )

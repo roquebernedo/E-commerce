@@ -204,6 +204,8 @@ const authSlice = createSlice({
          
           if(state.userInfo.productsOnCart){
             state.userInfo.productsOnCart = []
+            state.userInfo.orders = action.payload.orders
+            //state.userInfo.orders.push(action.payload.orders)
             console.log("entra repetidamente")
             localStorage.setItem('userInfo', JSON.stringify(state.userInfo))
           }
@@ -224,6 +226,69 @@ const authSlice = createSlice({
           console.log(state.userInfo)
           console.log(state.products)
           console.log(initialState)
+        },
+
+        setAddressSlice: (state, action) => {
+          console.log(action)
+          console.log("holiwi gasito")
+          const foundDefault = state.userInfo.address.address.find(item => item.isDefault === true)
+          console.log(foundDefault)
+          
+          const foundNewDefault = state.userInfo.address.address.find(item => item._id === action.payload.address._id)
+          console.log(foundNewDefault)
+          if(foundNewDefault.isDefault === false){
+            console.log("entro aca")
+            foundDefault.isDefault = false
+            foundNewDefault.isDefault = true
+            localStorage.setItem('userInfo', JSON.stringify(state.userInfo))
+          }else{
+            console.log("no hara nadin")
+          }
+        },
+
+        setRemoveAddress: (state, action) => {
+          console.log("entro al removin")
+          state.userInfo.address.address = action.payload.address
+          if(!state.userInfo.address.address.some(e => e.isDefault) && state.userInfo.address.address.length > 0){
+            state.userInfo.address.address[0].isDefault = true
+            localStorage.setItem('userInfo', JSON.stringify(state.userInfo))
+          }
+        },
+
+        addAddress: (state, action) => {
+          console.log("aca esta el agregado")
+          console.log(action)
+          if(state.userInfo.address){
+            console.log("entro al address existente")
+            if(state.userInfo.address.address.length > 0){
+              console.log("entro al mayor a 0")
+              state.userInfo.address.address = action.payload.address.address
+              localStorage.setItem('userInfo', JSON.stringify(state.userInfo))
+            }else{
+              console.log("entro al menor a 0")
+              state.userInfo.address.address = action.payload.address.address
+              localStorage.setItem('userInfo', JSON.stringify(state.userInfo))
+            }
+          }else{
+            console.log("entro al que no existe")
+            state.userInfo.address = action.payload.address
+            localStorage.setItem('userInfo', JSON.stringify(state.userInfo))
+          }
+        },
+
+        putAddress: (state, action) => {
+          console.log("aca es el put address")
+          console.log(action)
+          const foundAddress = state.userInfo.address.address.find(item => item._id === action.payload.address._id)
+          if(foundAddress){
+            console.log("entro aca en el found add")
+            foundAddress.street_name = action.payload.address.street_name;
+            foundAddress.street_number = action.payload.address.street_number;
+            foundAddress.city = action.payload.address.city;
+            foundAddress.zip_code = action.payload.address.zip_code;
+            foundAddress.state = action.payload.address.state;
+            localStorage.setItem('userInfo', JSON.stringify(state.userInfo))
+          }
         }
           
         // }
@@ -465,6 +530,48 @@ export const getAllProducts = () => {
   }
 }
 
+export const setAddress = (id) => {
+  console.log("aquisito es andres")
+  console.log(id)
+  return async dispatch => {
+    console.log("aca esta el addresin pe")
+    const anecdotes = await productService.setDefaultAddress(id)
+    console.log(anecdotes)
+    dispatch(setAddressSlice(anecdotes))
+  }
+}
+
+export const removeAddress = (id) => {
+  console.log("aquisito es andresito removing")
+  console.log(id)
+  return async dispatch => {
+    console.log("aca esta el addresin papeto")
+    const anecdotes = await productService.removeAddress(id)
+    console.log(anecdotes)
+    dispatch(setRemoveAddress(anecdotes))
+  }
+}
+
+export const addingAddress = (content) => {
+  return async dispatch => {
+    console.log("aca esta el addresin agregadito")
+    console.log(content)
+    const anecdotes = await productService.addAddress(content)
+    console.log(anecdotes)
+    dispatch(addAddress(anecdotes))
+  }
+}
+
+export const updatingAddress = (id, content) => {
+  return async dispatch => {
+    console.log("aca esta el addresin agregadito")
+    console.log(content)
+    const anecdotes = await productService.updateAddress(id, content)
+    console.log(anecdotes)
+    dispatch(putAddress(anecdotes))
+  }
+}
+
 export const { 
   appendProduct, 
   addToCart, 
@@ -484,7 +591,11 @@ export const {
   updatingUserCart,
   updateProductsOnCart,
   gettingAllProducts,
-  clinandoProducts
+  clinandoProducts,
+  setAddressSlice,
+  setRemoveAddress,
+  addAddress,
+  putAddress
 } = authSlice.actions
 
 export default authSlice.reducer        

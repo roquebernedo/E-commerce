@@ -1,24 +1,24 @@
-.publications{
+.purchases{
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 600px;
 
-    .main-publications{
+    .main-purchases{
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         gap: 30px;
 
-        .publications-options{
+        .purchases-options{
             position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
             width: 100%;
 
-            .title-publications{
+            .title-purchases{
                 font-size: 2rem;
                 @media (max-width: 775px) {
                     font-size: 1.7rem;
@@ -32,16 +32,9 @@
             }
         }
 
-        .no-publications{
-            
-        }
-
         .create-product{
-            
             background-color: #2879fe;
             padding: 10px 40px;
-            
-            
             text-decoration: none;
             color: #ffffff;
             @media (max-width: 775px) {
@@ -73,13 +66,13 @@
             }
         }
 
-        .products-profile{
+        .products-profile-purchases{
             background-color: #ffffff;
 
-            .products-main-profile{
+            .products-main-profile-purchases{
                 display: flex;
                 width: 1000px;
-                height: 215px;
+                height: 170px;
                 @media (max-width: 1280px) {
                     width: 950px;
                 }
@@ -139,8 +132,8 @@
                         background-color: #ffffff;
 
                         .image-item{
-                            width: 90%;
-                            height: 145px;
+                            width: 70%;
+                            height: 115px;
                             @media (max-width: 475px) {
                                 height: 110px;
                                 
@@ -168,7 +161,7 @@
                             width: 350px;
                             display: flex;
                             flex-direction: column;
-                            justify-content: space-between;
+                            justify-content: center;
                             
                             .product-info-left-top{
                                 .product-info-name{
@@ -209,7 +202,8 @@
                         .product-info-right{
                             height: 100%;
                             display: flex;
-                            margin-right: 10px;
+                            margin-right: 15px;
+                            align-items: center;
                             @media (max-width: 475px) {
                                 display: none;
                             }
@@ -289,7 +283,7 @@
     }
 }
 
-.publications-alt{
+.purchases-alt{
     align-items: flex-start;
     margin-top: 15px;
 

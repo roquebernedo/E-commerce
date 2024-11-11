@@ -9,20 +9,22 @@ import '../styles/Profile.scss'
 const Details = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
+    const [address, setAddress] = useState('')
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const dispatch = useDispatch()
     const { userInfo } = useSelector((state) => state.auth)
     // eslint-disable-next-line no-unused-vars
     const [isLoading, setIsLoading] = useState(true)
-
+    //const findAddress = userInfo.address.address.find(item => item.isDefault === true)
 
     useEffect(() => {
         setName(userInfo.name)
         setEmail(userInfo.email)
+        if(address) setAddress(userInfo && userInfo.address.address.find(item => item.isDefault === true))
         // eslint-disable-next-line react-hooks/exhaustive-deps
-      }, [userInfo.setName, userInfo.setEmail])
-    
+    }, [address, userInfo.setName, userInfo.setEmail])
+    //console.log(userInfo.address.address.find(item => item.isDefault === true))
       // const logoutHanlder =  () => {
       //   window.localStorage.clear()
       //   window.location.reload();
@@ -87,7 +89,7 @@ const Details = () => {
                 className='input-profile'
                 type='text'
                 placeholder='Direccion'
-                value={confirmPassword}
+                value={`${address.street_name} ${address.street_number}, ${address.city}`}
                 onChange={(e) => console.log("hola")}
               />
             </div>

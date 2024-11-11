@@ -60,7 +60,7 @@ const addAddress = async(req, res, next) => {
             console.log("este fue el usercito")
             return res.json({
                 message: "New Address registered",
-                address: newAddress.address
+                address: newAddress
             })
         }
     } catch (err){
@@ -91,9 +91,11 @@ const updateAddress = async(req, res, next) => {
         )
         
         console.log(updateAddress)
+        const updatedAddress = updateAddress.address.find(item => item._id.toString() === req.params.id)
+        console.log(updatedAddress)
         return res.json({
             message: "Address updated",
-            address: updateAddress.address
+            address: updatedAddress
         })
 
     } catch(err){
@@ -162,11 +164,13 @@ const setDefault = async(req, res, next) => {
             },
             { new: true }
         )
-        console.log("entro hasta aca gaaa")
+        const updatedAddress = address.address.find(item => item._id.toString() === req.params.id)
+        console.log(updatedAddress)
+        console.log("entro hasta aca gaaa") 
         await address.save()
         return res.json({
             message: "Address selected",
-            address
+            address: updatedAddress
         })
     } catch(err){
         next(err)

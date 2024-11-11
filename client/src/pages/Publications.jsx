@@ -40,7 +40,7 @@ const Publications = () => {
             <div className={userInfo.products.length > 0 ? 'main-publications main-alt' : 'main-publications'}>
                 <div className='publications-options'>
                     <div className='title-publications'>Publicaciones</div>
-                    <Link className='create-product'>Publicar</Link>
+                    
                 </div>
                 {userInfo.products.length > 0
                     ?   <>
@@ -87,7 +87,11 @@ const Publications = () => {
                                 </div>
                             )}
                         </>
-                    :   <div className='no-publications'>Aun no has publicado ningun producto</div>
+                    :   <>
+                            <div className='no-publications'>Aun no has publicado ningun producto</div>
+                            <Link className='create-product'>Publicar</Link>
+                        </>
+                    
                 }
             </div>
         </div>

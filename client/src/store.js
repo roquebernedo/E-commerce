@@ -2,6 +2,7 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit"
 import authReducer from './slices/authSlice'
 import { apiSlice } from "./slices/apiSlice"
 import cartReducer from "./redux/cartReducer"
+
 import {
     persistStore,
     persistReducer,

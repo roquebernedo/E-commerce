@@ -49,7 +49,7 @@ const Product = () => {
     
     fetchProduct()
   }, [productID]);
-  //console.log(product)
+  console.log(product)
   const containerStyles = css`
   display: flex;
   justify-content: center;

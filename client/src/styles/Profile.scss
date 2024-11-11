@@ -2,10 +2,18 @@
     display: flex;
     font-family: "Nunito Sans", sans-serif;
     background-color: #eee7e7;
+    min-height: 100vh;
 
     .profile-left{
-        width: 15%;
+        display: flex;
+        width: 185px;
+        position: relative;
+        
+        align-items: center;
         border-right: 1px solid black;
+        @media (max-width: 1708px) {
+            
+        }
         @media (max-width: 1100px) {
             width: 4.5%;
             display: flex;
@@ -17,6 +25,9 @@
 
         .profile-menu{
             display: flex;
+            bottom: 400px;
+            width: 185px;
+            position: fixed;
             flex-direction: column;
             @media (max-width: 1100px) {
                 align-items: center;
@@ -25,12 +36,17 @@
 
             .profile-options{
                 display: flex;
+                width: 185px;
                 align-items: center;
                 padding: 10px 0;
                 font-size: 1rem;
                 text-decoration: none;
                 gap: 15px;
                 color: black;
+                @media (max-width: 1708px) {
+                   
+                    
+                }
                 @media (max-width: 1100px) {
                     width: 100%;
                     justify-content: center;
@@ -91,6 +107,7 @@
         .profile-details{
             display: flex;
             justify-content: center;
+            margin-top: 60px;
 
             .details{
                 display: flex;
