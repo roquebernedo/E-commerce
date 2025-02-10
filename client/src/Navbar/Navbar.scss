@@ -129,8 +129,8 @@ body{
             justify-content: center;
             width: 30%;
             gap: 10px;
+            padding: 2.5px 0;
 
-            
             @media (max-width: 768px) {
                 width: 35%;
                 justify-content: flex-end;
@@ -154,6 +154,8 @@ body{
                 text-decoration: none;
                 color: #ffffff; 
                 align-items: center;
+                justify-content: center;
+                padding: 2px 0;
                
                 .userinfo{
                     @media (max-width: 1076px) {
@@ -164,40 +166,43 @@ body{
                 .div-menu-profile{
                     position: absolute;
                     background-color: #ffffff;
+                    width: fit-content;
+                    
+                 
                     top: 40px;
                     z-index: 9999;
-                    right: 300px;
+                   
                     display: none;
                     border: 1px solid black;
-                    @media (max-width: 1280px) {
-                        right: 270px;
-                    }
-                    @media (max-width: 1200px) {
-                        right: 260px;
-                    }
-                    @media (max-width: 1140px) {
-                        right: 250px;
-                    }
-                    @media (max-width: 1076px) {
-                        right: 260px;
-                    }
-                    @media (max-width: 1028px) {
-                        right: 250px;
-                    }
-                    @media (max-width: 950px) {
-                        right: 240px;
-                    }
-                    @media (max-width: 880px) {
-                        right: 230px;
-                    }
-                    @media (max-width: 800px) {
-                        right: 210px;
-                    }
-                    @media (max-width: 648px) {
-                        right: 190px;
-                    }
+                    // @media (max-width: 1280px) {
+                    //     right: 270px;
+                    // }
+                    // @media (max-width: 1200px) {
+                    //     right: 260px;
+                    // }
+                    // @media (max-width: 1140px) {
+                    //     right: 250px;
+                    // }
+                    // @media (max-width: 1076px) {
+                    //     right: 260px;
+                    // }
+                    // @media (max-width: 1028px) {
+                    //     right: 250px;
+                    // }
+                    // @media (max-width: 950px) {
+                    //     right: 240px;
+                    // }
+                    // @media (max-width: 880px) {
+                    //     right: 230px;
+                    // }
+                    // @media (max-width: 800px) {
+                    //     right: 210px;
+                    // }
+                    // @media (max-width: 648px) {
+                    //     right: 190px;
+                    // }
                     @media (max-width: 475px) {
-                        right: 80px;
+                        right: 0;
                     }
 
                     .buttonsResponsive-profile{
@@ -287,12 +292,16 @@ body{
                
                     border: 1px solid #ffffff;
                     background-color: #131212;
-                    top: 45px;
+                    top: 40px;
                     z-index: 9999;
-                    right: 150px;
+                    
                     display: none;
                     overflow-y: scroll;
                     scrollbar-width: none;
+                    @media (max-width: 800px) {
+                    
+                        right: 0;
+                    }
                     
                     .div-products-favorites-menu{
                         width: 100%;
@@ -381,12 +390,14 @@ body{
                     max-height: 350px;
                     border: 1px solid #ffffff;
                     background-color: #131212;
-                    top: 45px;
+                    top: 40px;
                     z-index: 9999;
-                    right: 150px;
                     overflow-y: scroll;
                     scrollbar-width: none;
                     display: none;
+                    @media (max-width: 1000px) {
+                        right: 0;
+                    }
 
                     .div-noti-menu{
                         width: 100%;
