@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import '../styles/Purchases.scss'
-import { IoIosArrowDown } from "react-icons/io";
-import { MdOutlineRocketLaunch } from "react-icons/md";
 
 const Purchases = () => {
-    const { userInfo } = useSelector((state) => state.auth)
+    const { userInfo } = useSelector((state) => state.authReducer)
     console.log(userInfo)
 
     return (
@@ -27,15 +25,15 @@ const Purchases = () => {
                                             </div>
                                         </div>
                                         <div className='product-info-profile'>
-                                            <div className='product-info-profile-item'>
+                                            <div className='product-purch-profile-item'>
                                                 <div className='product-info-left'>
                                                     <div className='product-info-left-top'>
                                                         <div className='product-info-name'>{product.title}</div>
                                                     </div>
                                                     
                                                 </div>
-                                                <div className='product-info-right'>
-                                                    <div className='product-info-right-main'>
+                                                <div className='product-purch-right'>
+                                                    <div className='product-purch-right-main'>
                                                         <div className='div-heart'>
                                                             <div>${product.price}.00</div>
                                                         </div>
@@ -44,6 +42,9 @@ const Purchases = () => {
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div className='delivered'>
+                                        ¡Entregado!
                                     </div>
                                 </div>
                             ))}

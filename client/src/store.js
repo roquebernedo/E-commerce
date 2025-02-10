@@ -1,66 +1,35 @@
-import { combineReducers, configureStore } from "@reduxjs/toolkit"
-import authReducer from './slices/authSlice'
-import { apiSlice } from "./slices/apiSlice"
-import cartReducer from "./redux/cartReducer"
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import authReducer from "./slices/authSlice";
+import { apiSlice } from "./slices/apiSlice";
 
-import {
-    persistStore,
-    persistReducer,
-    FLUSH,
-    REHYDRATE,
-    PAUSE,
-    PERSIST,
-    PURGE,
-    REGISTER,
-  } from 'redux-persist'
-  import storage from 'redux-persist/lib/storage'
+import storage from "redux-persist/lib/storage"; // Almacenamiento local
+import { persistReducer, persistStore } from "redux-persist";
 
+// Configuración del persist
 const persistConfig = {
-    key: 'root',
-    version: 1,
-    storage,
-}
+  key: "root", // Clave base para el almacenamiento
+  storage,     // Define el tipo de almacenamiento (localStorage)
+};
 
-//const persistedReducer = persistReducer(persistConfig, cartReducer)
-const persistedReducer = persistReducer(persistConfig, combineReducers({
-  auth: authReducer, 
+// Combinar reducers
+const rootReducer = combineReducers({
+  authReducer: authReducer,
   [apiSlice.reducerPath]: apiSlice.reducer,
-  cart: cartReducer
-}))
+});
 
-export const store = configureStore({
+// Reducer persistente
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+
+// Configurar el store
+const store = configureStore({
   reducer: persistedReducer,
-  middlewaree: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiSlice.middleware),
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
-    }),
-  devTools: true,
-})
-// export const store = configureStore({
-//     reducer: {
-//         auth: authReducer, 
-//         [apiSlice.reducerPath]: apiSlice.reducer,
-//         cart: cartReducer
-//     },
-//     //middlewaree: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiSlice.middleware),
-//     // middleware: (getDefaultMiddleware) =>
-//     // getDefaultMiddleware({
-//     //   serializableCheck: {
-//     //     ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-//     //   },
-//     // }),
-//     // devTools: true,
-    
-// })
+      serializableCheck: false, // Desactiva chequeo de serialización para persistencia
+    }).concat(apiSlice.middleware),
+});
 
-export let persistor = persistStore(store)
+// Persistor para manejar el almacenamiento
+export const persistor = persistStore(store);
 
-export default store
-
-
-
-
-
+export default store;

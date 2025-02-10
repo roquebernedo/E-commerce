@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = 'http://localhost:8000' //http://localhost:8000
+const baseUrl = 'https://e-commerce-f1fr.onrender.com' //http://localhost:8000
 // https://e-commerce-f1fr.onrender.com
 
 let token = null
@@ -7,10 +7,13 @@ let token = null
 
 const setToken = newToken => {
   token = `Bearer ${newToken}`
-}  
-
+}    
+console.log(token)
 const getAll = () => {
-  const request = axios.get(baseUrl)
+  const config = {
+    headers: { Authorization: token },
+  }
+  const request = axios.get(baseUrl, config)
   return request.then(response => response.data)
 }
 
@@ -31,10 +34,25 @@ const productsOnCart = async newObject => {
     headers: { Authorization: token },
   }
   //console.log("este es el objeto nuevo")
+  console.log(token)
   console.log(config)
 
   const response = await axios.post(`${baseUrl}/adding`, newObject, config)
   return response.data
+}
+
+const changePassword = async (info) => {
+  const config = {
+    headers: { Authorization: token },
+  }
+  //const newObject = { quantity }
+  console.log(config)
+  console.log("aqui va el change")
+  console.log(info)
+  //console.log(newObject)
+  const request = await axios.put(`${baseUrl}/api/users/profile`, info, config)
+  console.log(request)
+  return request.data
 }
 
 const updateQuantityProduct = async (id, quantity) => {
@@ -133,13 +151,25 @@ const updatingUser = async content => {
 // Wishlist - tiene que ir en wishlist.js pero el token no se reconoce
 
 const getAllList = async () => {
-  const config = {
-    headers: { Authorization: token },
+  try{
+    const config = {
+      headers: { Authorization: token },
+    }
+    console.log("entra al getalllist")
+    console.log(config)
+    const response = await axios.get(`${baseUrl}/api/wishlist`, config)
+    console.log(response)
+    return response.data
+  } catch(error){
+    if (error.response) {
+      console.error('Error en el servidor:', error.response.data);
+    } else if (error.request) {
+      console.error('No se recibió respuesta del servidor.');
+    } else {
+      console.error('Error desconocido:', error.message);
+    }
+    throw error; // Opcional, para manejarlo en otro lugar
   }
-  console.log("entra al getalllist")
-  console.log(config)
-  const request = await axios.get(`${baseUrl}/api/wishlist`, config)
-  return request.then(response => response.data)
 }
 
 const addToList = async (id, content) => {
@@ -149,6 +179,8 @@ const addToList = async (id, content) => {
   console.log(config)
   console.log(content)
   const response = await axios.post(`${baseUrl}/api/wishlist/${id}`, content, config)
+  console.log("agregado")
+  console.log(response)
   return response.data
 }
 
@@ -170,9 +202,11 @@ const removeFavorite = async (id) => {
 const login = async credentials => {
   console.log(credentials)
   const response = await axios.post(`${baseUrl}/api/users/auth`, credentials)
+  console.log(response.data)
   setToken(response.data.token);
   console.log(token)
-  console.log(setToken.token)
+  console.log(setToken)
+  console.log(setToken())
   return response.data
 }
 
@@ -183,13 +217,13 @@ const getAllWishList = () => {
 
 // notifications 
 
-const getEntryNoty = () => {
+const getEntryNoty = async () => {
   const config = {
     headers: { Authorization: token },
   }
-
-  const request = axios.get(`${baseUrl}/api/noti`, config)
-  return request.then(response => response.data)
+  console.log(config)
+  const response = await axios.get(`${baseUrl}/api/noti`, config)
+  return response.data
 }
 
 const setNotifications = () => {
@@ -345,7 +379,8 @@ const productService = {
   setDefaultAddress,
   removeAddress,
   addAddress,
-  updateAddress
+  updateAddress,
+  changePassword
 }
 
 export default productService

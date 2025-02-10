@@ -1,22 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 import productService from "../services/product";
 
-export const initialState = {
-    userInfo: localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem
-        ('userInfo')) : null,
-    products: []
-}
-console.log(initialState)
-
 const authSlice = createSlice({
     name: 'auth',
-    initialState,
+    initialState: {
+      userInfo: null,
+      products: []
+    },
     reducers: {
         setCredentials: (state, action) => {
             console.log(action)
             state.userInfo = action.payload
             console.log(state.userInfo)
-            localStorage.setItem('userInfo', JSON.stringify(action.payload))
+            
             
             // localStorage.setItem('userInfo', JSON.stringify(action.payload))
             // if(state.userInfo){
@@ -28,7 +24,7 @@ const authSlice = createSlice({
         },
         logout: (state, action) => {
             state.userInfo = null;
-            localStorage.removeItem('userInfo')
+            
         },
         addToCart: (state, action) => {
           //console.log("hola")
@@ -39,12 +35,12 @@ const authSlice = createSlice({
           if(existingItemIndex >= 0){
             //console.log("entra al item existente")
             state.userInfo.productsOnCart[existingItemIndex].quantity += 1;
-            localStorage.setItem('userInfo', JSON.stringify(state.userInfo));  
+          
           }else{
             //console.log(action.payload)
             state.userInfo.productsOnCart.push(action.payload)
             //console.log("no entra al item existente")
-            localStorage.setItem('userInfo', JSON.stringify(state.userInfo));
+           
           }   
         },
         addToCartt: (state, action) => {
@@ -57,12 +53,10 @@ const authSlice = createSlice({
           if(existingItemIndex >= 0){
             //console.log("entra al item existente")
             state.userInfo.productsOnCart[existingItemIndex].quantity += action.payload.quantity;
-            localStorage.setItem('userInfo', JSON.stringify(state.userInfo));  
           }else{
             //console.log(action.payload)
             state.userInfo.productsOnCart.push(action.payload)
             //console.log("no entra al item existente")
-            localStorage.setItem('userInfo', JSON.stringify(state.userInfo));
           }   
         },
         appendProduct(state, action) {
@@ -70,7 +64,6 @@ const authSlice = createSlice({
             //console.log(action)
             //console.log(JSON.parse(JSON.stringify(state)))
             state.userInfo.products.push(action.payload)
-            localStorage.setItem('userInfo', JSON.stringify(state.userInfo));
             //console.log(state)
         },
         increaseItem: (state, action) => {
@@ -78,7 +71,6 @@ const authSlice = createSlice({
             //console.log(action)
             if(item){
               item.quantity += 1
-              localStorage.setItem('userInfo', JSON.stringify(state.userInfo));
             }
           },
         decreaseItem: (state, action) => {
@@ -86,7 +78,6 @@ const authSlice = createSlice({
       
             if(item){
               item.quantity -= 1
-              localStorage.setItem('userInfo', JSON.stringify(state.userInfo));
             }
         },
         resetCart: (state, action) => {
@@ -108,7 +99,6 @@ const authSlice = createSlice({
           }  
           console.log(action.payload)
           state.userInfo.wishlist.push(action.payload)
-          localStorage.setItem('userInfo', JSON.stringify(state.userInfo))
         },
         addToListUser: (state, action) => {
           console.log(action)
@@ -120,7 +110,6 @@ const authSlice = createSlice({
             if(item){
               console.log(action.payload)
               item.products.push(action.payload.product)
-              localStorage.setItem('userInfo', JSON.stringify(state.userInfo))
             }else{
               console.log("no existe el wishlist")
               console.log(action.payload)
@@ -128,20 +117,10 @@ const authSlice = createSlice({
                 state.userInfo.wishlist = []
               } 
               state.userInfo.wishlist.push(action.payload.list)
-              localStorage.setItem('userInfo', JSON.stringify(state.userInfo))
             }
           }else{
             console.log(action.payload.message)
           }
-          // const item = state.userInfo.wishlist.find(item => item._id === action.payload.list._id)
-          // console.log(item)
-          // if(item){
-          //   item.products.push(action.payload.product)
-          //   localStorage.setItem('userInfo', JSON.stringify(state.userInfo))
-          // }else{
-          //   console.log("item no existe")
-          // }
-          //state.userInfo.wishlist[0].products = state.userInfo.wishlist[0].products.push(action.payload)
         },
 
         removeFavoriteProduct: (state, action) => {
@@ -151,7 +130,6 @@ const authSlice = createSlice({
           console.log(item)
           if(item){
             item.products = item.products.filter(item => item._id !== action.payload.product._id)
-            localStorage.setItem('userInfo', JSON.stringify(state.userInfo))
           }else{
             console.log("producto no estaba en favoritos")
           }
@@ -171,7 +149,6 @@ const authSlice = createSlice({
             }
             console.log("haciendo el push")
             state.userInfo.notifications.push(action.payload)
-            localStorage.setItem('userInfo', JSON.stringify(state.userInfo))
           }
         },
 
@@ -191,23 +168,20 @@ const authSlice = createSlice({
           if(item){
             console.log("entro mrd")
             item.notif_list = action.payload.notif_list
-            localStorage.setItem('userInfo', JSON.stringify(state.userInfo))
           }
-          localStorage.setItem('userInfo', JSON.stringify(state.userInfo))
         },
        
         updatingUserCart: (state, action) => {
           console.log("entra al redux a updatingUserCart")
           console.log(action)
           console.log(action.payload)
-          state.products = action.payload
+          //state.products = action.payload
          
           if(state.userInfo.productsOnCart){
             state.userInfo.productsOnCart = []
             state.userInfo.orders = action.payload.orders
             //state.userInfo.orders.push(action.payload.orders)
             console.log("entra repetidamente")
-            localStorage.setItem('userInfo', JSON.stringify(state.userInfo))
           }
         },
 
@@ -223,9 +197,9 @@ const authSlice = createSlice({
           console.log(action)
           console.log("hola")
           state.products = action.payload
-          console.log(state.userInfo)
-          console.log(state.products)
-          console.log(initialState)
+          //console.log(state.userInfo)
+          //console.log(state.products)
+          
         },
 
         setAddressSlice: (state, action) => {
@@ -240,7 +214,6 @@ const authSlice = createSlice({
             console.log("entro aca")
             foundDefault.isDefault = false
             foundNewDefault.isDefault = true
-            localStorage.setItem('userInfo', JSON.stringify(state.userInfo))
           }else{
             console.log("no hara nadin")
           }
@@ -251,7 +224,6 @@ const authSlice = createSlice({
           state.userInfo.address.address = action.payload.address
           if(!state.userInfo.address.address.some(e => e.isDefault) && state.userInfo.address.address.length > 0){
             state.userInfo.address.address[0].isDefault = true
-            localStorage.setItem('userInfo', JSON.stringify(state.userInfo))
           }
         },
 
@@ -263,16 +235,13 @@ const authSlice = createSlice({
             if(state.userInfo.address.address.length > 0){
               console.log("entro al mayor a 0")
               state.userInfo.address.address = action.payload.address.address
-              localStorage.setItem('userInfo', JSON.stringify(state.userInfo))
             }else{
               console.log("entro al menor a 0")
               state.userInfo.address.address = action.payload.address.address
-              localStorage.setItem('userInfo', JSON.stringify(state.userInfo))
             }
           }else{
             console.log("entro al que no existe")
             state.userInfo.address = action.payload.address
-            localStorage.setItem('userInfo', JSON.stringify(state.userInfo))
           }
         },
 
@@ -287,9 +256,15 @@ const authSlice = createSlice({
             foundAddress.city = action.payload.address.city;
             foundAddress.zip_code = action.payload.address.zip_code;
             foundAddress.state = action.payload.address.state;
-            localStorage.setItem('userInfo', JSON.stringify(state.userInfo))
           }
+        },
+        updateInfo: (state, action) => {
+          console.log("entro a este update")
+          console.log(action)
+          state.userInfo.name = action.payload.name || state.userInfo.name
+          state.userInfo.username = action.payload.username || state.userInfo.username
         }
+        
           
         // }
     }
@@ -595,7 +570,8 @@ export const {
   setAddressSlice,
   setRemoveAddress,
   addAddress,
-  putAddress
+  putAddress,
+  updateInfo
 } = authSlice.actions
 
 export default authSlice.reducer        

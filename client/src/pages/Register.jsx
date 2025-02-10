@@ -23,7 +23,7 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const navigate = useNavigate()
 // eslint-disable-next-line no-unused-vars
-  const { userInfo } = useSelector((state) => state.auth)
+  const { userInfo } = useSelector((state) => state.authReducer)
   // eslint-disable-next-line no-unused-vars
   const [register, { isLoading }] = useRegisterMutation()
   const [users, setUsers] = useState([])

@@ -1,4 +1,4 @@
-import mongoose from "mongoose"
+    import mongoose from "mongoose"
 
 const productSchema = mongoose.Schema({
     title: {
@@ -42,12 +42,11 @@ const productSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    user: [
+    user:
         {
           type: mongoose.Schema.Types.ObjectId,
           ref: 'User'
         }
-    ]
 }, {
     timestamps: true
 })

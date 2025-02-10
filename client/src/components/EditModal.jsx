@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import '../styles/Modal.scss'
 
 const EditModal = ({ closeModal, modalDisplay, closeOnOutsideClick, setFormData, formData, handle, key, handleOutsideClick, submit, address, handleChange }) => {

@@ -18,7 +18,7 @@ const Footer = () => {
             <div className='left'>
                 <h2 className='name-footer'>About us</h2>
                 <p className='text'>
-                  Somos un E-comemrce enfocados en la venta de productos tecnologicos, aunque nuestra especializacion son los videojuegos.
+                  Somos un E-commerce enfocado en la venta de productos tecnologicos y nuestra especializacion son los videojuegos.
                   Es decir, somos gamers.
                 </p>
             </div>

@@ -19,67 +19,28 @@ import Footer from "./Footer/Footer.jsx";
 import Navbar from "./Navbar/Navbar.jsx";
 import { useSelector } from "react-redux";
 import productService from "./services/product.js";
-import Publications from "./pages/Publications.jsx";
-import Details from "./pages/Details.jsx";
-import Favorites from "./pages/Favorites.jsx";
-import Notifications from "./pages/Notifications.jsx";
-import SingleNotification from "./pages/SingleNotification.jsx";
+
 import Success from "./components/Success.jsx";
-import Address from "./pages/Address.jsx";
-import Purchases from "./pages/Purchases.jsx";
+
 
 function App() {
-  const { userInfo } = useSelector((state) => state.auth)
+  const { userInfo } = useSelector((state) => state.authReducer)
   const [filter, setFilter] = useState([])
   const [buttonsFromHome, setButtonsFromHome] = useState([])
-  const [user, setUser] = useState(null)
+  // const [user, setUser] = useState(null)
+  // const dispatch = useDispatch()
   // eslint-disable-next-line no-unused-vars
-
+  
   useEffect(() => {
-    const loggedUserJSON = window.localStorage.getItem('userInfo')
+    const loggedUserJSON = window.localStorage.getItem('loggedTokenEcommerce')
+    console.log(loggedUserJSON)
     //console.log(loggedUserJSON)
     if(loggedUserJSON){
-      const user = JSON.parse(loggedUserJSON)
-      setUser(user)
-      productService.setToken(user.token)
+      console.log(loggedUserJSON)
+      productService.setToken(loggedUserJSON)
     }
   }, [])
  
-  useEffect(() => {
-    // const token = localStorage.getItem('loggedBlogappUser');
-    // console.log(token)
-    // const parseredToken = JSON.parse(token)
-    if(user){
-      const token = localStorage.getItem('userInfo');
-      //console.log(token)
-      const parseredToken = JSON.parse(token)
-      const expirationTime = parseredToken.expirationTimeMilliseconds
-    
-      if (token && expirationTime) {
-        const currentTime = new Date().getTime();
-        const timeRemaining = parseInt(expirationTime) - currentTime;
-        
-        if (timeRemaining > 0) {
-          // El token aún no ha expirado
-          const expirationTimer = setTimeout(() => {
-            // Token expirado, actualiza el estado del usuario
-            window.localStorage.clear()
-            setUser(null);
-            window.location.reload();
-          }, timeRemaining);
-  
-          // Limpia el temporizador cuando el componente se desmonta o cuando el token se renueva
-          return () => clearTimeout(expirationTimer);
-        } else {
-          // El token ha expirado, actualiza el estado del usuario
-          window.localStorage.clear()
-          setUser(null);
-          window.location.reload();
-        }
-      }
-    }
-  }, [user])
-
   return (
     <div>
       <Navbar filter={filter} setFilter={setFilter} />
@@ -91,16 +52,19 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         {/* <Route path="/profile/detalles" element={userInfo ? <Profile /> : <Navigate replace to='/login' /> } /> */}
-        <Route path="/profile" element={<Profile />}>
-          <Route index element={<Navigate replace to="/details" />} />
-          <Route path="details" element={userInfo ? <Details /> : <Navigate replace to="/login" />} />
-          <Route path="publications" element={userInfo ? <Publications/> : <Navigate replace to="/login" />} />
+        <Route path="/profile" element={userInfo ? <Profile /> : <Navigate replace to="/login" />}>
+          {/* <Route index element={<Navigate replace to="/details" />} />
+          <Route path="details" element={userInfo ? <Details /> : <Navigate replace to="/login" />} /> */}
+          {/* <Route path="details/:section" element={userInfo ? <Details /> : <Navigate replace to="/login" />} /> */}
+          {/* <Route path="publications" element={userInfo ? <Publications/> : <Navigate replace to="/login" />} />
           <Route path="address" element={userInfo ? <Address/> : <Navigate replace to="/login" />} />
           <Route path="purchases" element={userInfo ? <Purchases/> : <Navigate replace to="/login" />} />
           <Route path="favorites" element={userInfo ? <Favorites/> : <Navigate replace to="/login" />} />
           <Route path="notifications" element={userInfo ? <Notifications/> : <Navigate replace to="/login" />} />
-          <Route path="notifications/:id" element={userInfo ? <SingleNotification/> : <Navigate replace to="/login" />} />
+          <Route path="sales" element={userInfo ? <Sales/> : <Navigate replace to="/login" />} />
+          <Route path="notifications/:id" element={userInfo ? <SingleNotification/> : <Navigate replace to="/login" />} /> */}
         </Route> 
+        <Route path="/profile/:section" element={userInfo ? <Profile /> : <Navigate replace to="/login" />} ></Route>
         <Route path="/add" element={<Add />} />
         <Route path="/cart" element={<ShoppingCart />} />
         <Route path="/product/:id" element={<Product />} />

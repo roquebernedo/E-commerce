@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import '../styles/Products.scss'
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import ContentHome from '../components/ContentHome';
 // import wishlistService from '../services/wishlist';
 // import productService from '../services/product';
-import { getAllProducts, getNotification, initializeUsers } from '../slices/authSlice';
 
 const Products = ({ buttonsFromHome, setButtonsFromHome }) => {
   // eslint-disable-next-line no-unused-vars
@@ -15,8 +14,8 @@ const Products = ({ buttonsFromHome, setButtonsFromHome }) => {
   // eslint-disable-next-line no-unused-vars
   const [users, setUsers] = useState([])
   // eslint-disable-next-line no-unused-vars
-  const { userInfo } = useSelector((state) => state.auth)
-  const dispatch = useDispatch()
+  const { userInfo } = useSelector((state) => state.authReducer)
+  // const dispatch = useDispatch()
   
   // https://ecommerce-moez.onrender.com/ -> ESTE ES EL SERVER
   useEffect(() => {
@@ -31,18 +30,19 @@ const Products = ({ buttonsFromHome, setButtonsFromHome }) => {
     fetchAllProducts()
   }, [])
   
-  useEffect(() => {
-    if(userInfo){
-      console.log("entro a este console")
-      dispatch(getNotification())
-    }
-    dispatch(initializeUsers());
-            // Suponiendo que devuelve una Promise
-          // Recargar la página solo después de que el dispatch se resuelva
-    dispatch(getAllProducts())
+  // useEffect(() => {
+  //   if(userInfo){
+  //     console.log("entro a este console")
+  //     dispatch(getNotification())
+  //     dispatch(initializeUsers());
+  //   }
+  //   //dispatch(initializeUsers());
+  //           // Suponiendo que devuelve una Promise
+  //         // Recargar la página solo después de que el dispatch se resuelva
+  //   dispatch(getAllProducts())
       
     
-  }, [userInfo, dispatch])
+  // }, [userInfo, dispatch, getNotification, initializeUsers])
 
   //console.log(wishlist)
 

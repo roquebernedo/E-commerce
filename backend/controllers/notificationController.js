@@ -168,6 +168,7 @@ const gettingNotifications = async (req, res) => {
         console.log("hola")
         const response = await Notification.find({})
             .populate('user')
+        //console.log(response)
         res.json(response)
     } catch (err){
         res.json(err)

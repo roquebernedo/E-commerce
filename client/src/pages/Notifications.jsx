@@ -18,7 +18,7 @@ const override = css`
 `;
 
 const Notifications = () => {
-    const { userInfo } = useSelector((state) => state.auth)
+    const { userInfo } = useSelector((state) => state.authReducer)
     const [noti, setNoti] = useState([])
     const [notiListUserInfo, setNotiListUserInfo] = useState([])
     const [notifications, setNotifications] = useState([])
@@ -26,10 +26,11 @@ const Notifications = () => {
     const [open, setOpen] = useState(false)
 
     const containerStyles = css`
+        position: relative;
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 600px;
+        height: 100%;
     `;
 
     useEffect(() => {
@@ -39,13 +40,14 @@ const Notifications = () => {
                 setNoti(blogs)
                 setLoading(false)
             })  
+            // productService.deleteUniqueNoti().then(blogs => blogs)
         }
     }, [userInfo])
     console.log(noti)
 
-    useEffect(() => {
-        productService.deleteUniqueNoti().then(blogs => blogs)
-    },[])
+    // useEffect(() => {
+    //     productService.deleteUniqueNoti().then(blogs => blogs)
+    // },[])
 
     useEffect(() => {
         if(userInfo){
@@ -98,7 +100,7 @@ const Notifications = () => {
                     :   userInfo && notiListUserInfo && notiListUserInfo.notif_list && notiListUserInfo.notif_list.length > 0
                         ?   <>
                                 {notiListUserInfo.notif_list.map(notification => 
-                                        <div className='products-notifications-profile'>
+                                        <div key={notification._id} className='products-notifications-profile'>
                                             <div className='products-main-profile-notifications' onClick={openBar}>
                                                 <div className='notification-elements'>
                                                     <div className='product-info-profile-notifications'>

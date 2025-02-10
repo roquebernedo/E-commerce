@@ -5,8 +5,8 @@ import { useSelector } from 'react-redux'
 
 const Menu = ({ handle }) => {
 
-    const { userInfo } = useSelector((state) => state.auth)
-
+    const { userInfo } = useSelector((state) => state.authReducer)
+    console.log(userInfo)
     const logoutHanlder =  () => {
         window.localStorage.clear()
         window.location.reload();

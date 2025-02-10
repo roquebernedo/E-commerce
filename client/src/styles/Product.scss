@@ -6,6 +6,7 @@
     align-items: center;
     font-family: "Nunito Sans", sans-serif;
     width: 100%;
+    min-height: 80vh;
     @media (max-width: 375px) {
         height: 980px;
     }
@@ -13,7 +14,7 @@
     .loader{
         display: flex;
         align-items: center;
-        height: 521px;
+        min-height: 80vh;
     }
     
     .top-product{

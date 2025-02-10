@@ -56,7 +56,7 @@ const Items = ({ filterProducts, buttonsMain }) => {
     const [nameMain, setNameMain] = useState()
     const [filter, setFilter] = useState([])
     const [filterMain, setFilterMain] = useState([])
-    const { userInfo } = useSelector((state) => state.auth)
+    const { userInfo } = useSelector((state) => state.authReducer)
     const [filterBar, setFilterBar] = useState(filterProducts)
     // color eslint cuando antes, pendiente *****
     // eslint-disable-next-line no-unused-vars

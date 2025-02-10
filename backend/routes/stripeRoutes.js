@@ -6,6 +6,7 @@ import User from "../models/userModel.js";
 // import { cancelando, updateProductsHere } from "../controllers/stripeController.js";
 import { userExtractor } from "../middleware/authMiddleware.js";
 import Order from "../models/orderModel.js";
+import Sales from "../models/salesModel.js";
 
 dotenv.config();
 
@@ -102,8 +103,21 @@ router.put('/checkout-success', userExtractor, async (req, res) => {
   try {
     const user = req.user
     console.log("hola") 
+    console.log("Ya estamos aca ps")
     console.log(user)
-
+    console.log("llego acasito p papeto")
+    const product = await Product.find({})
+    console.log("este es el producto")
+    // if(item.id){
+    //   console.log("primer holita")
+    //   const productFound = await Product.find(item.id)
+    //   if(productFound.user){
+    //     console.log("aca esta el usuario del sales")
+    //     console.log(productFound.user)
+    //     const userFound = await User.find(productFound.user._id)
+    //     userFound.sales.push(item)
+    //   }
+    // }
     if (!user.productsOnCart) {
       return res.status(404).send('Order not found');
     }
@@ -111,18 +125,53 @@ router.put('/checkout-success', userExtractor, async (req, res) => {
     // // Actualiza el stock y vacía el carrito
     for (const item of user.productsOnCart) {
       console.log("entro al for")
+      console.log(item.id)
+      if(item.id){
+        console.log("primer holita")
+        const productFound = await Product.findById(item.id)
+        if(productFound.user){
+          console.log("aca esta el usuario del sales")
+          console.log(productFound.user)
+          const userFound = await User.findById(productFound.user._id)
+          //userFound.sales.push(item)
+          const salesUser = await Sales.findOne({
+            user: userFound._id,
+          })
+          if(!salesUser){
+            console.log("entro aca solo 1")
+            const createSales = new Sales({
+              products: [],
+              user: userFound._id,
+            })
+            createSales.products.push(item)
+            userFound.sales = createSales._id
+            console.log(userFound)
+            await userFound.save()
+            await createSales.save()
+          }else{
+            console.log("entra aca en el sales")
+            console.log(userFound)
+            salesUser.products.push(item)
+            await salesUser.save()
+          }
+        }
+      }
       console.log(item._id.toString())
       const product = await Product.findById(item.id);
+      console.log("entro aca tambien")
       console.log(product)
       if (product) {
+        console.log("aca si")
         product.stock -= item.quantity; // Reduce el stock
+        console.log("aca no")
         await product.save();
+        console.log("llegamos al pro")
         console.log(product)
+        console.log("si entra aca esto esta bien")
       }
     }
-    const product = await Product.find({})
-    console.log("este es el producto")
-    console.log(product)
+    
+    //console.log(product)
 
     const order = await Order.find()
     console.log(order)

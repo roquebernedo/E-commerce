@@ -8,7 +8,7 @@ import { deletingCart, removeSingleProductUser } from '../slices/authSlice';
 
 function Cart({ setOpen, open }) {
   //const products = useSelector(state => state.cart.products) igual aca, igual que en el Product.jsx
-  const { userInfo } = useSelector((state) => state.auth)
+  const { userInfo } = useSelector((state) => state.authReducer)
   console.log(userInfo.productsOnCart)
   const totalPrice = () => {
     let total = 0

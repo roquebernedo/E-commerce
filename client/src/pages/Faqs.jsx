@@ -30,6 +30,7 @@ const Ourservices = () => {
                             <li>Busqueda basada en las <span>categorias</span> principales. Estas muestran una combinacion entre productos propios y productos de Mercadolibre.</li>
                             <li><span>Publicaciones</span>: Los usuarios registrados tiene la opcion de crear publicaciones para vender productos. Estos tambien apareceran en las busquedas junto a los demas productos.</li>
                             <li>Esta en desarrollo las <span>Notificaciones</span> que recibiras cada vez que hagas una accion con tu cuenta. Como tambien <span>Reseñas</span> que podras hacer sobre los productos. Como tambien poder ver tu <span>Perfil</span> y editar tu cuenta.</li>
+                            
                         </ul>
                     </div>
                 </div>

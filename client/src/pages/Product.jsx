@@ -31,7 +31,7 @@ const Product = () => {
   const [savedProducts, setSavedProducts] = useState([])
   // eslint-disable-next-line no-unused-vars
   const [cookies, _] = useCookies(["access_token"])
-  const { userInfo } = useSelector((state) => state.auth)
+  const { userInfo } = useSelector((state) => state.authReducer)
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -85,7 +85,7 @@ const Product = () => {
   const addingOrIncreasingg = (product) => {
     //console.log(product)
     const userUpdate = userInfo.productsOnCart.find(find => find.id === product._id)
-   
+    
     if(userUpdate){
       dispatch(updateQuantityy({
         id: product._id,
@@ -154,7 +154,7 @@ const Product = () => {
                 <div className='right-bottom'>
                   <div className='details'>
                     <div className='title-details'>Caracteristicas Principales</div>
-                    <div className='title-desc'>{product.main_features.map(product => product)}</div>
+                    <div className='title-desc'>{product ? product.main_features?.map(product => product) : ''}</div>
                   </div>
                   <div className='list'>
                     <div className='material'><strong>Categoria: </strong>{product.category}</div>

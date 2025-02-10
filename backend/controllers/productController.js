@@ -24,6 +24,7 @@ const addingProducts = (async (request, response) => {
   // } catch (err){
   //     res.json(err)
   // }
+  
   console.log("aqui esta el error")
   const body = request.body
   const user = request.user
@@ -49,6 +50,41 @@ const addingProducts = (async (request, response) => {
 
   user.products = user.products.concat(savedProduct._id)
   await user.save()
+  
+  response.status(201).json(savedProduct)
+})
+
+const addingProductsDirstore = (async (request, response) => {
+  // const recipe = new Product(req.body)
+  // try{
+  //     const response = await recipe.save()
+  //     res.json(response)
+  // } catch (err){
+  //     res.json(err)
+  // }
+  
+  console.log("aqui esta el error")
+  const body = request.body
+  const user = request.user
+  console.log("user aqui")
+  console.log(user)
+  const product = new Product({
+    title: body.title,
+    description: body.description,
+    brand: body.brand,
+    category: body.category,
+    mainCategory: body.mainCategory,
+    stock: body.stock,
+    main_features: body.main_features,
+    price: body.price,
+    discount: body.discount,
+    date: body.date,
+    image: body.image,
+    quantity: body.quantity,
+    user: user.id
+  })
+
+  const savedProduct = await product.save()
   
   response.status(201).json(savedProduct)
 })
@@ -292,5 +328,6 @@ export {
     removeSingleProduct,
     increasingQuantityProduct,
     decreasingQuantityProduct,
-    cancelando
+    cancelando,
+    addingProductsDirstore
 }

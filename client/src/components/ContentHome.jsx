@@ -11,6 +11,7 @@ import axios from 'axios';
 import { css } from '@emotion/react';
 import { CircleLoader } from 'react-spinners';
 import { useSelector } from 'react-redux';
+import productService from '../services/product';
 
 const override = css`
   display: block;
@@ -53,9 +54,16 @@ const ContentHome = ({ buttonsFromHome, setButtonsFromHome }) => {
     const [rates, setRates] = useState([])
     const [featured, setFeatured] = useState([])
     const [portal, setPortal] = useState([])
-    const { userInfo } = useSelector((state) => state.auth)
+    const { userInfo } = useSelector((state) => state.authReducer)
     //console.log(userInfo)
     let timeout = null
+
+    if(window.localStorage.getItem("loggedTokenEcommerce")){
+        const loggedUserJSON = window.localStorage.getItem('loggedTokenEcommerce')
+        if(loggedUserJSON){
+            productService.setToken(loggedUserJSON)
+        }
+    }
 
     useEffect(() => {
         if (userInfo && userInfo.token) {

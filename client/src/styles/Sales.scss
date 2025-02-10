@@ -1,4 +1,4 @@
-.purchases{
+.sales{
     display: flex;
     align-items: center;
     justify-content: center;
@@ -6,7 +6,7 @@
     margin-bottom: 30px;
     width: 100%;
 
-    .main-purchases{
+    .main-sales{
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -14,14 +14,14 @@
         gap: 30px;
         width: 100%;
 
-        .purchases-options{
+        .sales-options{
             position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
             width: 100%;
 
-            .title-purchases{
+            .title-sales{
                 font-size: 2rem;
             }
         }
@@ -41,16 +41,16 @@
             }
         }
 
-        .products-profile-purchases{
+        .products-profile-sales{
             background-color: #282727;
             max-width: 900px;
             min-width: 250px;
             width: 85%;
 
-            .products-main-profile-purchases{
+            .products-main-profile-sales{
                 display: flex;
                 width: 100%;
-                padding-top: 20px;
+                padding: 20px 0;
                 
                 @media (max-width: 700px) {
                     flex-direction: column;
@@ -94,7 +94,7 @@
                     }
                 }
 
-                .product-info-profile{
+                .product-sales-profile{
                     width: 70%;
                     display: flex;
                     align-items: center;
@@ -107,7 +107,7 @@
                        
                     }
 
-                    .product-purch-profile-item{
+                    .product-sales-profile-item{
                         display: flex;
                         width: 100%;
                         justify-content: space-between;
@@ -119,51 +119,22 @@
                             flex-direction: column;
                         }
 
-                        .product-info-left{
+                        .product-sales-left{
                             height: 100%;
-                            width: 350px;
+                           
                             display: flex;
                             flex-direction: column;
                             justify-content: center;
                             
-                            .product-info-left-top{
-                                .product-info-name{
+                            .product-sales-left-top{
+                                .product-sales-name{
                                     color: #ffffff;
-                                    font-size: 1.2rem;
-                                }
-                            }
-
-                            .product-info-left-center{
-                                .not-price{
-                                    font-size: 0.9rem;
-                                    text-decoration: line-through;
-                                }
-
-                                .product-priceoff{
-                                    display: flex;
-                                    gap: 10px;
-                                    align-items: center;
-
-                                    .real-price{
-                                        font-size: 1.2rem;
-                                    }
-
-                                    .off{
-                                        color: #c06011;
-                                        font-weight: 600;
-                                    }
-                                }
-                            }
-
-                            .product-info-left-bottom{
-                                .product-delivery{
-                                    font-weight: 600;
-                                    color: #238b34;
+                                    font-size: 1.2rem;                                 
                                 }
                             }
                         }
 
-                        .product-purch-right{
+                        .product-sales-right{
                             
                             display: flex;
                             margin-right: 15px;
@@ -175,7 +146,7 @@
                                 
                             }
 
-                            .product-purch-right-main{
+                            .product-sales-right-main{
                                 display: flex;
                                 flex-direction: column;
                                 align-items: flex-end;
@@ -246,7 +217,7 @@
     }
 }
 
-.purchases-alt{
+.sales-alt{
     align-items: flex-start;
     margin-top: 15px;
 

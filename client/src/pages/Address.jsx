@@ -1,8 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-//import { useSelector } from 'react-redux'
 import '../styles/Address.scss'
-import { TbPointFilled } from "react-icons/tb";
-import productService from '../services/product';
 import { css } from '@emotion/react';
 import { CircleLoader } from 'react-spinners';
 import { useDispatch, useSelector } from 'react-redux';
@@ -23,12 +20,12 @@ const override = css`
 `;
 
 const Address = () => {
-    const { userInfo } = useSelector((state) => state.auth)
-    const [noti, setNoti] = useState([])
-    const [notiListUserInfo, setNotiListUserInfo] = useState([])
-    const [notifications, setNotifications] = useState([])
+    const { userInfo } = useSelector((state) => state.authReducer)
+    // const [noti, setNoti] = useState([])
+    // const [notiListUserInfo, setNotiListUserInfo] = useState([])
+    // const [notifications, setNotifications] = useState([])
     const [loading, setLoading] = useState(true)
-    const [open, setOpen] = useState(false)
+    // const [open, setOpen] = useState(false)
     const dispatch = useDispatch()
     const [modalDisplay, setModalDisplay] = useState(false);
     const [modalDisplay2, setModalDisplay2] = useState(false);
@@ -189,17 +186,28 @@ const Address = () => {
                                             </div> 
                                         </div> 
                                 )}
+                                <div onClick={() => openModal()} className='addDirection'>Agregar direccion</div>
+                                <Modal
+                                    closeModal={closeModal}
+                                    modalDisplay={modalDisplay}
+                                    closeOnOutsideClick={closeOnOutsideClick}
+                                    handle={handleChange}
+                                    submit={addAddress}
+                                />
                             </>      
-                        :   <div className='no-favorites-addresses'>Aun no tienes ninguna notificacion</div>
+                        :   <>
+                                <div className='no-favorites-addresses'>Aun no tienes ninguna direccion</div>
+                                <div onClick={() => openModal()} className='addDirection'>Agregar direccion</div>
+                                <Modal
+                                    closeModal={closeModal}
+                                    modalDisplay={modalDisplay}
+                                    closeOnOutsideClick={closeOnOutsideClick}
+                                    handle={handleChange}
+                                    submit={addAddress}
+                                />
+                            </>
                 }
-                <div onClick={() => openModal()} className='addDirection'>Agregar direccion</div>
-                <Modal
-                    closeModal={closeModal}
-                    modalDisplay={modalDisplay}
-                    closeOnOutsideClick={closeOnOutsideClick}
-                    handle={handleChange}
-                    submit={addAddress}
-                />
+                
                 
             </div>
         </div>

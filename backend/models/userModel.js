@@ -1,4 +1,5 @@
 import mongoose from "mongoose"
+import bcryptjs from 'bcryptjs'
 
 const userSchema = new mongoose.Schema({
     // user: {
@@ -7,6 +8,10 @@ const userSchema = new mongoose.Schema({
     //     unique: true
     // },
     name: {
+        type: String,
+        min: 3
+    },
+    username: {
         type: String,
         min: 3
     },
@@ -47,10 +52,23 @@ const userSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Order",
     }],
+    sales: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Sales",
+    }
 }, {
     timestamps: true
 })
 
+userSchema.methods.comparePassword = async function (candidatePassword) {
+    console.log("aca esta el comparito")
+    console.log(candidatePassword)
+    const user = this;
+    console.log("aca")
+    const compare = await bcryptjs.compare(candidatePassword, user.passwordHash);
+    console.log(compare)
+    return compare;
+  };
 
 userSchema.set('toJSON', {
     transform: (document, returnedObject) => {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import './Navbar.scss'
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios'
@@ -15,13 +15,14 @@ import { CiHeart } from "react-icons/ci";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import { TbPointFilled } from "react-icons/tb";
 import productService from '../services/product';
+import { getAllProducts, getNotification, initializeUsers, logout } from '../slices/authSlice';
 
 
 const Navbar = ({ filter, setFilter }) => {
   // const [filter, setFilter] = useState([])
   const [value, setValue] = useState('')
   const [rates, setRates] = useState({})
-  const { userInfo } = useSelector((state) => state.auth)
+  const { userInfo } = useSelector((state) => state.authReducer)
   const [products, setProducts] = useState([])
   const [noti, setNoti] = useState([])
   const [productUserList, setProductUserList] = useState([])
@@ -42,10 +43,12 @@ const Navbar = ({ filter, setFilter }) => {
   //     }
   //   })
 
-  // console.log(products)
+  console.log(userInfo)
+  
   //const totalProducts = products.reduce((a,b) => a + b.quantity, 0)
   const [open, setOpen] = useState(false)
   const [openMenu, setOpenMenu] = useState(false)
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   //console.log(userInfo)
   useEffect(() => {
@@ -59,6 +62,20 @@ const Navbar = ({ filter, setFilter }) => {
     }
     
   }, [userInfo])
+
+  useEffect(() => {
+    if(userInfo){
+      console.log("entro a este console")
+      console.log(userInfo.wishlist.length)
+      if(userInfo.wishlist.length <= 0){
+        dispatch(initializeUsers());
+      }
+      if(userInfo.notifications.length <= 0){
+        dispatch(getNotification())
+      }
+    }
+    dispatch(getAllProducts())
+  }, [userInfo, dispatch])
   //console.log(totalProducts)
   const logoutHanlder =  () => {
       window.localStorage.clear()
@@ -179,6 +196,31 @@ const Navbar = ({ filter, setFilter }) => {
   //console.log(indx)
   // let num = Math.floor(Math.random() * 6);
   // console.log(num)
+  useEffect(() => {
+    if(userInfo){
+      console.log(userInfo.expirationTimeMilliseconds)
+      const remainingTime = userInfo.expirationTimeMilliseconds - Date.now(); // 10 segundos en milisegundos
+      
+      if (remainingTime > 0) {
+        // Configurando un temporizador para desloguear
+        const timer = setTimeout(() => {
+          console.log('El token ha expirado, deslogueando usuario.');
+          logoutHanlder();
+          localStorage.removeItem('loggedTokenEcommerce');
+          dispatch(logout());
+        }, remainingTime);
+  
+        // Limpia el temporizador si el componente es null
+        return () => clearTimeout(timer);
+      } else {
+        // Si ya expiró, desloguear de inmediato
+        console.log('El token ya ha expirado, deslogueando usuario inmediatamente.');
+        logoutHanlder();
+        localStorage.removeItem('loggedTokenEcommerce');
+        dispatch(logout());
+      }
+    }
+  }, [userInfo, dispatch])
 
   return (
     <header className='navbar'>
@@ -190,7 +232,7 @@ const Navbar = ({ filter, setFilter }) => {
           <div className='button-icon-container'>
             <form className='form' onSubmit={filtering}>
               <input type='text' className='button-input' placeholder='Buscar un producto' value={value} onChange={(event) => setValue(event.target.value)}/>
-             <button className='button-submit' type='submit'><FaSearch /></button>
+              <button className='button-submit' type='submit'><FaSearch /></button>
             </form>
           </div>
         </div>
@@ -213,14 +255,14 @@ const Navbar = ({ filter, setFilter }) => {
                   <Link className='buttonResponsive-profile' to='/profile/publications'>
                     <div>Publicaciones</div>
                   </Link>
-                  <Link className='buttonResponsive-profile'>
+                  <Link className='buttonResponsive-profile' to='/profile/sales'>
                     <div>Ventas</div>
                   </Link>
-                  <Link className='buttonResponsive-profile'>
+                  <Link className='buttonResponsive-profile' to='/profile/publications'>
                     <div>Publicar</div>
                   </Link>
-                  <Link className='buttonResponsive-profile'>
-                    <div>Compras</div>
+                  <Link className='buttonResponsive-profile' to='/profile/address'>
+                    <div>Direcciones</div>
                   </Link>
                   <Link onClick={logoutHanlder} className='buttonResponsive-profile'>
                     <div>Salir</div>
@@ -279,11 +321,11 @@ const Navbar = ({ filter, setFilter }) => {
                 </div>
               </div>
             </div>
-            <div className='cartIcon' onClick={() => setOpen(!open)}>
+            <div className='cartIcon sign' onClick={() => setOpen(!open)}>
               <AiOutlineShoppingCart className='car'/>
               <span className='number'>{totalProducts && totalProducts}</span>
             </div>
-            <div className='buttons' onClick={handleMenu}>
+            <div className='buttons' onClick={() => handleMenu()}>
               <AiOutlineMenu className='menu-responsive' />
             </div>
           </div>

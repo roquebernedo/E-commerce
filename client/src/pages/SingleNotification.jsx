@@ -19,7 +19,7 @@ const override = css`
 `;
 
 const SingleNotification = () => {
-    const { userInfo } = useSelector((state) => state.auth)
+    const { userInfo } = useSelector((state) => state.authReducer)
     const [unitFromList, setUnitFromList] = useState()
     const location = useLocation();
     const [loading, setLoading] = useState(true)

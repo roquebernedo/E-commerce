@@ -2,7 +2,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 600px;
+    min-height: 850px;
+    width: 100%;
     height: auto;
 
     .main-notifications{
@@ -11,8 +12,7 @@
         align-items: center;
         justify-content: center;
         width: 100%;
-        
-        height: 100%;
+        gap: 30px;
 
         .notifications-options{
             position: relative;
@@ -20,11 +20,12 @@
             align-items: center;
             justify-content: center;
             width: 100%;
-            
-            margin: 15px 0;
 
             .title-notifications{
                 font-size: 2rem;
+                @media (max-width: 375px) {
+                    
+                }
             }
 
             .create-product{
@@ -41,22 +42,30 @@
             }
         }
 
+        .loader{
+           
+        }
+
         .products-notifications-profile{
             
             margin: 15px 0;
             text-decoration: none;
-            width: 80%;
-            
+            width: 80%; 
+                
             display: flex;
             flex-direction: column;
             justify-content: center;
-            background-color: #ffffff;
+            background-color: #282727;
+            @media (max-width: 680px) {
+                width: 100%;
+                
+            }
 
             .products-main-profile-notifications{
                 display: flex;
                 align-items: center;
                 position: relative;
-                background-color: #ffffff;
+              
                 width: 100%;
                 height: 55px;
                 color: black;
@@ -68,6 +77,9 @@
                     justify-content: space-between;
                     margin: 0 10px;
                     width: 100%;
+                    @media (max-width: 680px) {
+                        margin: 0 15px;
+                    }
 
                     .product-info-profile-notifications{
                         display: flex;
@@ -84,12 +96,29 @@
     
                         .welcome-dirstore{
                             font-size: 1.2rem;
+                            color: #ffffff;
+                            opacity: 0.6;
+                            
+                            @media (max-width: 375px) {
+                                font-size: 1rem;
+                            }
                         }
                     }
 
                     .welcome-date{
                         display: flex;
+               
                         color: #858080;
+                        @media (max-width: 680px) {
+                            width: 80px;
+                            margin: 0 15px;
+                        }
+                        
+                        @media (max-width: 475px) {
+                            display: none;
+                            
+                        }
+
                     }
                 }
 
@@ -113,7 +142,7 @@
                     display: flex;
                   
                     .noti-desc{
-                        
+                        color: #ffffff;
                     }
                 }
 
@@ -127,6 +156,7 @@
                         .spancito{
                             display: flex;
                             justify-content: center;
+                            color: #ffffff;
                             
                             @keyframes animate{
                                 0%{

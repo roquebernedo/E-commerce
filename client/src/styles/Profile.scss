@@ -1,34 +1,51 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 .profile{
     display: flex;
     font-family: "Nunito Sans", sans-serif;
-    background-color: #eee7e7;
     min-height: 100vh;
+    flex-grow: 1;
+    height: fit-content;
+    overflow: hidden;
 
     .profile-left{
+        top: 0;
         display: flex;
         width: 185px;
-        position: relative;
-        
+        height: 100vh;
+        overflow: hidden;
         align-items: center;
         border-right: 1px solid black;
+        position: fixed;
+        z-index: 40;
+ 
         @media (max-width: 1708px) {
             
         }
         @media (max-width: 1100px) {
-            width: 4.5%;
+            width: 45px;
             display: flex;
             justify-content: center;
         }
-        @media (max-width: 628px) {
-            width: 7.5%;
-        }
+        // @media (max-width: 628px) {
+        //     width: 45px;
+        // }
+        // @media (max-width: 475px) {
+        //     width: 10%;
+        // }
 
         .profile-menu{
             display: flex;
-            bottom: 400px;
-            width: 185px;
-            position: fixed;
+           
+            width: 100%;
+            
+            
             flex-direction: column;
+            z-index: 1;
             @media (max-width: 1100px) {
                 align-items: center;
                 width: 100%;
@@ -36,16 +53,27 @@
 
             .profile-options{
                 display: flex;
-                width: 185px;
+                z-index: 1;
                 align-items: center;
+                position: relative;
                 padding: 10px 0;
                 font-size: 1rem;
                 text-decoration: none;
                 gap: 15px;
                 color: black;
+          
                 @media (max-width: 1708px) {
                    
                     
+                }
+                @media (max-width: 1275px) {
+                    gap: 10px;
+                }
+                @media (max-width: 1220px) {
+                    gap: 8px;
+                }
+                @media (max-width: 1175px) {
+                    gap: 5px;
                 }
                 @media (max-width: 1100px) {
                     width: 100%;
@@ -58,21 +86,19 @@
                     @media (max-width: 1100px) {
                         margin-left: 0;
                     }
-                    @media (max-width: 425px) {
-                        font-size: 22px;
-                    }
-                    @media (max-width: 375px) {
-                        font-size: 20px;
-                    }
-                    @media (max-width: 320px) {
-                        font-size: 18px;
-                    }
+                    
                 }
 
                 .icon-text{ 
                     transition: transform 0.1s ease;
-                    @media (max-width: 1200px) {
+                    @media (max-width: 1400px) {
+                        font-size: 0.95rem;
+                    }
+                    @media (max-width: 1300px) {
                         font-size: 0.85rem;
+                    }
+                    @media (max-width: 1220px) {
+                        font-size: 0.80rem;
                     }
                     @media (max-width: 1100px) {
                         display: none;
@@ -81,12 +107,22 @@
             }
 
             .profile-options:hover{
+                width: 100%;
+                
                 background-color: #dfcdcd;
                 cursor: pointer;
 
                 .icon-text{
+                    position: relative;
+                    z-index: 5;
                     transform: translateX(10px);
                     transition: transform 0.1s ease;
+                    @media (max-width: 1275px) {
+                        transform: translateX(8px);
+                    }
+                    @media (max-width: 1175px) {
+                        transform: translateX(6px);
+                    }
                 }
             }
         }
@@ -95,19 +131,32 @@
     .profile-right{
         display: flex;
         flex-direction: column;
-        width: 85%;
+        align-items: center;
+        width: calc(100% - 185px);
+        left: 185px;
+        position: relative;
+       
         // border-left: 1px black solid;
         @media (max-width: 1100px) {
-            width: 95.5%;
+            width: calc(100% - 45px);
+            left: 45px;
         }
-        @media (max-width: 628px) {
-            width: 92.5%;
-        }
+        
+        // @media (max-width: 628px) {
+        //     width: 92.5%;
+        //     left: 7.5%;
+        // }
+        // @media (max-width: 475px) {
+        //     width: 90%;
+        //     left: 10%;
+        // }
 
-        .profile-details{
+        .profile-details{   
             display: flex;
             justify-content: center;
-            margin-top: 60px;
+            margin-top: 120px;
+            max-width: 900px;
+            min-width: 350px;
 
             .details{
                 display: flex;
@@ -161,35 +210,63 @@
                     @media (max-width: 510px) {
                         width: 370px;
                     }
-                    @media (max-width: 475px) {
-                        width: 350px;
-                    }
+                    
                     @media (max-width: 425px) {
-                        width: 300px;
+                        width: 320px;
                     }
                     @media (max-width: 375px) {
-                        width: 275px;
+                        width: 100%;
                     }
-                    @media (max-width: 320px) {
-                        width: 250px;
-                    }
+                   
                     
                     .div-input{
                         @media (max-width: 425px) {
                             font-size: 12px;
                         }
-                        @media (max-width: 375px) {
-                            font-size: 12px;
-                            width: 50%;
-                        }
                     }
 
+                    .box-input-pen{
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        position: relative;
+                        cursor: pointer;
+                        gap: 5px;
+                        
+                        .name-user{
+                            
+                            background-color: #404040;
+                            border: none;
+                            text-align: right;
+                            color: #ffffff;
+                            font-size: 16px;
+                            @media (max-width: 375px) {
+                                font-size: 14px;
+                            }
+                        }
+
+                        .name-user:focus{
+                            outline: none;
+                        }
+
+                       .profile-edit-svg{
+                            display: flex;
+                            
+                            svg{
+                                color: rgb(160, 149, 149);
+                            }
+                       } 
+                    }
+                    
+                    
                     .input-profile{
                         display: flex;
                         align-items: center;
                         text-align: right;
                         border: none;
+                        cursor: pointer;
                         background-color: #404040;
+                        width: 300px;
                         color: #ffffff;
                         @media (max-width: 425px) {
                             font-size: 12px;
@@ -202,6 +279,29 @@
 
                     .input-profile:focus{
                         outline: none;
+                    }
+
+                    .password-change{
+                        padding: 10px;
+                        font-size: 13px;
+                        border: 1px solid white;
+                        cursor: pointer;
+                    }
+
+                    .password-change:hover{
+                        background-color: black;
+                    }
+
+                    .name-user{
+                            
+                        background-color: #404040;
+                        border: none;
+                        text-align: right;
+                        color: #ffffff;
+                        font-size: 16px;
+                        @media (max-width: 375px) {
+                            font-size: 14px;
+                        }
                     }
                 }
         

@@ -4,6 +4,8 @@
     background-color: #131212;
     font-family: "Nunito Sans", sans-serif;
     padding: 25px 0;
+    position: relative;
+    z-index: 40;
     
     .box-footer{
         display: flex;
