@@ -137,6 +137,7 @@ router.put('/checkout-success', userExtractor, async (req, res) => {
           const salesUser = await Sales.findOne({
             user: userFound._id,
           })
+          // sales del usuario
           if(!salesUser){
             console.log("entro aca solo 1")
             const createSales = new Sales({
@@ -146,12 +147,18 @@ router.put('/checkout-success', userExtractor, async (req, res) => {
             createSales.products.push(item)
             userFound.sales = createSales._id
             console.log(userFound)
+            console.log(productsOnCart)
+            console.log("separacion")
+            console.log(item)
             await userFound.save()
             await createSales.save()
           }else{
             console.log("entra aca en el sales")
             console.log(userFound)
             salesUser.products.push(item)
+            //console.log(productsOnCart)
+            console.log("separacion")
+            console.log(item)
             await salesUser.save()
           }
         }
@@ -163,6 +170,7 @@ router.put('/checkout-success', userExtractor, async (req, res) => {
       if (product) {
         console.log("aca si")
         product.stock -= item.quantity; // Reduce el stock
+        console.log(product)
         console.log("aca no")
         await product.save();
         console.log("llegamos al pro")

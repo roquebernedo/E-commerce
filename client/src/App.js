@@ -21,6 +21,7 @@ import { useSelector } from "react-redux";
 import productService from "./services/product.js";
 
 import Success from "./components/Success.jsx";
+import VerifyEmail from "./components/VerifyEmail.jsx";
 
 
 function App() {
@@ -33,10 +34,10 @@ function App() {
   
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedTokenEcommerce')
-    console.log(loggedUserJSON)
+    //console.log(loggedUserJSON)
     //console.log(loggedUserJSON)
     if(loggedUserJSON){
-      console.log(loggedUserJSON)
+      //console.log(loggedUserJSON)
       productService.setToken(loggedUserJSON)
     }
   }, [])
@@ -70,6 +71,7 @@ function App() {
         <Route path="/product/:id" element={<Product />} />
         <Route path="/update/:id" element={<Update />} />
         <Route path="/success" element={<Success />} />
+        <Route path="/verify/:verifyToken" element={<VerifyEmail />} />
       </Routes>
       <Footer />
     </div>

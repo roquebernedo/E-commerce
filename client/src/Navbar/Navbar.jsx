@@ -43,8 +43,6 @@ const Navbar = ({ filter, setFilter }) => {
   //     }
   //   })
 
-  console.log(userInfo)
-  
   //const totalProducts = products.reduce((a,b) => a + b.quantity, 0)
   const [open, setOpen] = useState(false)
   const [openMenu, setOpenMenu] = useState(false)
@@ -58,15 +56,15 @@ const Navbar = ({ filter, setFilter }) => {
         setTotalProducts(totProducts)
         //console.log(totalProducts)
       }
-
+      console.log(userInfo)
     }
     
   }, [userInfo])
 
   useEffect(() => {
     if(userInfo){
-      console.log("entro a este console")
-      console.log(userInfo.wishlist.length)
+      //console.log("entro a este console")
+      //console.log(userInfo.wishlist.length)
       if(userInfo.wishlist.length <= 0){
         dispatch(initializeUsers());
       }
@@ -198,7 +196,7 @@ const Navbar = ({ filter, setFilter }) => {
   // console.log(num)
   useEffect(() => {
     if(userInfo){
-      console.log(userInfo.expirationTimeMilliseconds)
+      //console.log(userInfo.expirationTimeMilliseconds)
       const remainingTime = userInfo.expirationTimeMilliseconds - Date.now(); // 10 segundos en milisegundos
       
       if (remainingTime > 0) {

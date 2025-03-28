@@ -43,35 +43,32 @@ const Login = () => {
         method: 'post',
         url: 'https://e-commerce-f1fr.onrender.com/api/users/auth',
         data: { email, password },
-        validateStatus: () => true,
       })
+      //https://e-commerce-f1fr.onrender.com/api/users/auth
       const data = response.data
       window.localStorage.setItem("loggedTokenEcommerce", data.token)
       //dispatch(initializeUsers());
       console.log(data)
-      if (response.status === 401) {
-        // Manejar el error aquí mismo
-        console.log("Aca entro")
-        toast.error(response.data.error);
-        return;
-    }
-     
+      // if (response.status === 401) {
+      //   // Manejar el error aquí mismo
+      //   console.log("Aca entro")
+      //   toast.error(response.data.error);
+      //   return;
+      // }
       // const user = await loginService({
       //   email, password,
       // })
       dispatch(loginUser({ email, password}))
       //console.log(user)
       navigate('/')
-      // setTimeout(() => {
-      //   window.location.reload()
-      // }, 1000);
       toast.success('Logeado exitosamente!')
-      // if(data.email){
-      //   window.localStorage.setItem("loggedTokenEcommerce", data.token)
-      // }
     } catch (error) {
+      console.log(".")
       if(error.response && error.response.data){
         console.log("Fue aca")
+        console.log(error.response)
+        console.log(error.response.data)
+        console.log(error.response.data.error)
         toast.error(error.response.data.error)
       }else{
         toast.error('Algo salio mal.')

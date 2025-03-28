@@ -1,0 +1,40 @@
+.main-verify{
+    display: flex;
+    flex-direction: column;
+    min-height: 700px;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+
+    .update{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 150px;
+        height: 35px;
+        border: none;
+        background-color: #2879fe;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+        @media (max-width: 425px) {
+            width: 200px;
+        }
+        @media (max-width: 320px) {
+            width: 175px;
+        }
+    }
+
+    .update:hover{
+        background-color: #1960d1;
+    }
+
+    .loader{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 90%;
+    }
+}

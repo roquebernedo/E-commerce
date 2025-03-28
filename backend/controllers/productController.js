@@ -103,17 +103,21 @@ const addingProductsToCart = (async (request, response) => {
     description: body.description,
     price: body.price,
     image: body.image,
+    buyer: user.id.toString(),
     quantity: body.quantity
   }
+
+  console.log(user.id.toString())
   //const usercito = await User.findById("6614620e031f441b99c1c6dd")
   //console.log(usercito.productsOnCart)
   //const product = await Product.findById("660d8c7561262c6c32988ed9")
   console.log("aca esta el producto del carrito")
   console.log(product)
   //const savedProduct = await product.save()
-  console.log(saveProducts)
+  //console.log(saveProducts)
 
   user.productsOnCart = user.productsOnCart.concat(product)
+  console.log(user)
   await user.save()
   
   response.status(201).json(product)

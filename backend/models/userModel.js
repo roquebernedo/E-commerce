@@ -24,6 +24,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         min: 3
     },
+    emailVerified: {
+        type: Boolean,
+        default: false,
+    },
     products: [{ 
         type: mongoose.Schema.Types.ObjectId, 
         ref: "Product"
@@ -34,6 +38,7 @@ const userSchema = new mongoose.Schema({
         description: String,
         image: String,
         price: Number,
+        buyer: String,
         quantity: Number,
     }],
     wishlist: [{

@@ -225,14 +225,32 @@
                         }
                     }
 
+                    .email-user{
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+
+                        .verify{
+                            padding: 2px 5px 2px 5px;
+                            font-size: 13px;
+                            cursor: pointer;
+                            border: 1px solid white;
+                        }
+
+                        .verify:hover{
+                            background-color: black;
+                        }
+                    }
+
                     .box-input-pen{
                         display: flex;
                         justify-content: center;
                         align-items: center;
+                        width: fit-content;
                         position: relative;
                         cursor: pointer;
                         gap: 5px;
-                        
+
                         .name-user{
                             
                             background-color: #404040;
@@ -257,7 +275,6 @@
                             }
                        } 
                     }
-                    
                     
                     .input-profile{
                         display: flex;
@@ -303,6 +320,9 @@
                             font-size: 14px;
                         }
                     }
+
+                    
+                    
                 }
         
                 .update{

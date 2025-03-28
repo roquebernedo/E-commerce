@@ -77,7 +77,7 @@ const ContentHome = ({ buttonsFromHome, setButtonsFromHome }) => {
           .then(response => {
             setRates(response.data)
           })
-      
+      //http://localhost:8000
       }, [])
 
     useEffect(() => {
@@ -136,7 +136,7 @@ const ContentHome = ({ buttonsFromHome, setButtonsFromHome }) => {
             );
             setButtonsFromHome(filtered);
             navigate('/results')
-      }
+    }
 
   return (
     <>

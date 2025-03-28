@@ -8,6 +8,7 @@ const salesSchema = mongoose.Schema({
             description: String,
             image: String,
             price: Number,
+            buyer: String,
             quantity: Number,
         }
     ],

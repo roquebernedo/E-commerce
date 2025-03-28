@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import { CircleLoader } from 'react-spinners';
 import { css } from '@emotion/react';
@@ -30,6 +30,7 @@ const Publications = () => {
     // eslint-disable-next-line no-unused-vars
     const [productsUserInfo, setProductsUserInfo] = useState()
     const [selected, setSelected] = useState(null)
+    const navigate = useNavigate()
 
     useEffect(() => {
         axios
@@ -39,11 +40,17 @@ const Publications = () => {
           })
       
     }, [])
-
-    useEffect(() => {
-        const productsUser = products.filter(products => products.user.some(u => u.name === userInfo.name))
-        setProductsUserInfo(productsUser)
-    }, [products, userInfo])
+    //https://e-commerce-f1fr.onrender.com
+    // useEffect(() => {
+    //     if(products.length > 0){
+           console.log(products)
+    //         console.log(products.filter(products => products.user.map(u => u.name === userInfo.name)))
+    //         const productsUser = products && products.filter(products => products.user.find(u => u.name === userInfo.name))
+    //         console.log(productsUser)
+    //         setProductsUserInfo(productsUser)
+    //     }
+       
+    // }, [products, userInfo])
     //console.log(products)
     console.log(userInfo)
     //console.log(productsUserInfo)
@@ -121,8 +128,8 @@ const Publications = () => {
                                                                         <div className='nostock'>Sin stock</div>
                                                                     </div>
                                                                 </div>
-                                                                <div className='div-cart'>
-                                                                    <div className='mas-informacion' onClick={() => handleInfo(products._id)}>Mas informacion</div>
+                                                                <div className='div-cart' onClick={() => handleInfo(products._id)}>
+                                                                    <div className='mas-informacion'>Mas informacion</div>
                                                                     <IoIosArrowDown className={selected === products._id ? 'arrow-cart-vanish' : 'arrow-cart'} />
                                                                     <IoIosArrowUp className={selected === products._id ? 'arrow-up-cart' : 'arrow-up-vanish'} />
                                                                 </div>
@@ -165,7 +172,7 @@ const Publications = () => {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div className='publication-store'>Ver en la tienda</div>
+                                                <div onClick={() => navigate("/results")} className='publication-store'>Ver en la tienda</div>
                                                 <div className='moreinfo'>
                                                     <div className='text'>Ganancias Totales: </div>
                                                     <div className='moreinfo-results'>0</div>

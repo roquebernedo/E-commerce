@@ -325,7 +325,7 @@
 
                                     .products-favorites-profile:hover{
                                         background-color: #b7bdc6;
-                                        transition: background-color 0.3s ease 0.1s
+                                       
                                     }
 
                                     &:hover{
@@ -428,6 +428,7 @@
                             position: relative;
                             .icons-pen{
                                 opacity: 0.6;
+                                cursor: pointer;
                             }
     
                             &:hover{
@@ -463,6 +464,7 @@
                             .icons-disc{
                                 font-size: 22px;
                                 opacity: 0.6;
+                                cursor: pointer;
                             }
         
                             &:hover{
@@ -498,6 +500,7 @@
                             .icons-play{
                                 font-size: 22px;
                                 opacity: 0.6;
+                                cursor: pointer;
                             }
         
                             &:hover{

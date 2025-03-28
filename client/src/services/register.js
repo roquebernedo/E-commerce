@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = 'https://e-commerce-f1fr.onrender.com/api/users'  // https://ecommerce-moez.onrender.com - le quite esto porque trabajare desde mi entorno local
+const baseUrl = 'http://localhost:8000/api/users'  // https://ecommerce-moez.onrender.com - le quite esto porque trabajare desde mi entorno local
 //http://localhost:8000
 //https://e-commerce-f1fr.onrender.com/api/users
 // const register = async (newObject) => {

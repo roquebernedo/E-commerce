@@ -1,8 +1,10 @@
 import asyncHandler from "express-async-handler"
-import generateToken from "../utils/generateToken.js"
 import User from "../models/userModel.js"
 import jwt from 'jsonwebtoken'
 import bcryptjs from 'bcryptjs'
+import { sendEmail } from "../utils/sendEmail.js"
+import dotenv from 'dotenv'
+dotenv.config() 
 
 //route POST /api/users
 const getUser = async (req, res) => {
@@ -27,16 +29,23 @@ const authUser = async (req, res, next) => {
             .populate('addresses')
             .populate('orders')
             .populate('sales')
+        console.log("no llega")
         console.log(user)
-        console.log(user.passwordHash)
+        // console.log(user.passwordHash)
         console.log(password)
         console.log(email)
+
+        if(!user){
+            return res.status(401).json({
+                error: 'this user doesnt exist'
+            })
+        }
         const passwordCorrect = user === null   
             ? false
             : await bcryptjs.compare(password, user.passwordHash)
         if (!(user && passwordCorrect)) {
             return res.status(401).json({
-            error: 'invalid username or password'
+                error: 'invalid username or password'
             })
         }
         
@@ -71,6 +80,7 @@ const authUser = async (req, res, next) => {
                     address: user.addresses,
                     orders: user.orders,
                     sales: user.sales,
+                    emailVerified: user.emailVerified
                 })
         console.log(token)
     } catch(error){
@@ -94,7 +104,58 @@ const registerUser = async (req, res) => {
         username: body.email.split("@")[0]
     })
 
+    let id, email
+
+    id = user._id
+    email = user.email
+
+    const bodyToken = { id, email }
+    console.log("Esto es bodytoken: ", bodyToken)
+    console.log(user)
+    console.log("Aca esta el verifytoken")
+    const verifyToken = jwt.sign( bodyToken, process.env.SECRET)
+    console.log(verifyToken)
+    const link = `http://localhost:3000/verify/${verifyToken}`;
+    console.log(link)
+
+    await sendEmail(
+        body.email,
+        `${user ? "Bienvenida" : "Verificación de email"}`,
+        `./templates/${user ? "signup" : "verifyEmail"}.html`,
+        { link }
+    );
+
     console.log(user.password)
+    const savedUser = await user.save()
+    res.json(savedUser)
+}
+
+const sendVerifyEmail = async (req, res) => {
+    console.log("ba")
+    const user = req.user
+    console.log("sending")
+    let id, email
+
+    id = user._id
+    email = user.email
+
+    const bodyToken = { id, email }
+    console.log("Esto es bodytoken: ", bodyToken)
+    console.log(user)
+    console.log("Aca esta el verifytoken")
+    const verifyToken = jwt.sign(bodyToken, process.env.SECRET)
+    console.log(verifyToken)
+    const link = `http://localhost:3000/verify/${verifyToken}`;
+    console.log(link)
+
+    await sendEmail(
+        user.email,
+        `${user ? "Bienvenida" : "Verificación de email"}`,
+        `./templates/${user ? "signup" : "verifyEmail"}.html`,
+        { link }
+    );
+    console.log("entra")
+    //console.log(user.password)
     const savedUser = await user.save()
     res.json(savedUser)
 }
@@ -185,8 +246,29 @@ const updateUserProfile = async (req, res) => {
             email: user.email,
             passwordHash: user.passwordHash
         })
-    
 }
+
+const verifyEmail = async (req, res, next) => {
+    console.log("entonces aca 3ra XD")
+    const { _id } = req.user;
+    console.log(_id)
+    console.log(req.user)
+    if (!_id) return res.status(401).send({ message: "ID de cuenta no enviado" });
+  
+    try {
+      const userFound = await User.findById(_id);
+  
+      if (!userFound)
+        return res.status(404).json({ message: "Cuenta no encontrada" });
+  
+      userFound.emailVerified = true;
+      await userFound.save();
+        console.log(userFound)
+      return res.json({ message: "Email verificado con éxito" });
+    } catch (error) {
+      next(error);
+    }
+};
 
 export { 
     getUser,
@@ -194,5 +276,7 @@ export {
     registerUser,
     getUserProfile,
     updateUserProfile,
-    updateProfile
+    updateProfile,
+    verifyEmail,
+    sendVerifyEmail
 }

@@ -36,6 +36,7 @@ const productsOnCart = async newObject => {
   //console.log("este es el objeto nuevo")
   console.log(token)
   console.log(config)
+  console.log(newObject)
 
   const response = await axios.post(`${baseUrl}/adding`, newObject, config)
   return response.data

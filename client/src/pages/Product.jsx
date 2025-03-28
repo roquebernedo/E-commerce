@@ -32,11 +32,12 @@ const Product = () => {
   // eslint-disable-next-line no-unused-vars
   const [cookies, _] = useCookies(["access_token"])
   const { userInfo } = useSelector((state) => state.authReducer)
-
+  console.log(userInfo)
   useEffect(() => {
     const fetchProduct = async () => {
         try {
             const response = await axios.get(`https://e-commerce-f1fr.onrender.com/product/${productID}`);
+            //https://e-commerce-f1fr.onrender.com
             setProduct(response.data)
         } catch (error) {
             console.log(error);
@@ -85,7 +86,7 @@ const Product = () => {
   const addingOrIncreasingg = (product) => {
     //console.log(product)
     const userUpdate = userInfo.productsOnCart.find(find => find.id === product._id)
-    
+    console.log(userUpdate)
     if(userUpdate){
       dispatch(updateQuantityy({
         id: product._id,
@@ -93,6 +94,7 @@ const Product = () => {
         description: product.description,
         price: product.price,
         image: product.image,
+        buyer: userInfo.id,
         quantity
       }))
     }else{
@@ -102,6 +104,7 @@ const Product = () => {
         description: product.description,
         price: product.price,
         image: product.image,
+        buyer: userInfo.id,
         quantity
       }))
     }

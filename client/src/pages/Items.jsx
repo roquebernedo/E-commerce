@@ -339,6 +339,7 @@ const Items = ({ filterProducts, buttonsMain }) => {
                                                         <div className='brand-blank'></div>
                                                         <div className='brand-main'>{product.brand}</div>
                                                     </div>
+                                                    
                                                 </div>
                                             </div>
                                         </Link> 
@@ -399,9 +400,19 @@ const Items = ({ filterProducts, buttonsMain }) => {
                                                     <div className='price'>
                                                         <div className='price-main'>$ {parseFloat(product.price).toFixed(2)}</div>
                                                     </div>
-                                                    <div className='brand'>
-                                                        <div className='brand-blank'></div>
-                                                        <div className='brand-main'>{product.brand}</div>
+                                                    <div className='brand'> 
+                                                        <div className='brand-left-blankmain'>
+                                                            <div className='brand-blank'></div>
+                                                            <div className='brand-main'>{product.brand}</div>
+                                                        </div>
+                                                        {userInfo && 
+                                                            <div className='heart-pick'>
+                                                                {userWishList.includes(product._id) 
+                                                                    ?   <div onClick={(e) => removeFavoritee(e, product._id, product)} className='heart-broken-div'><FaHeartBroken className='icon-broken'/><FaHeart className='heart-broken'/></div>
+                                                                    :   <div onClick={(e) => favorites(e, product._id, product)} className='heart-products-div'><FaRegHeart className='heart-products' /></div>
+                                                                }
+                                                            </div>
+                                                        }                                                     
                                                     </div>
                                                 </div>
                                             </div>
@@ -424,10 +435,20 @@ const Items = ({ filterProducts, buttonsMain }) => {
                                                     <div className='price'>
                                                         <div className='price-main'>$ {parseFloat(product.price).toFixed(2)}</div>
                                                     </div>
-                                                    <div className='brand'>
-                                                        <div className='brand-blank'></div>
-                                                        <div className='brand-main'>{product.brand}</div>
-                                                    </div>
+                                                    <div className='brand'> 
+                                                        <div className='brand-left-blankmain'>
+                                                            <div className='brand-blank'></div>
+                                                            <div className='brand-main'>{product.brand}</div>
+                                                        </div>
+                                                        {userInfo && 
+                                                            <div className='heart-pick'>
+                                                                {userWishList.includes(product._id) 
+                                                                    ?   <div onClick={(e) => removeFavoritee(e, product._id, product)} className='heart-broken-div'><FaHeartBroken className='icon-broken'/><FaHeart className='heart-broken'/></div>
+                                                                    :   <div onClick={(e) => favorites(e, product._id, product)} className='heart-products-div'><FaRegHeart className='heart-products' /></div>
+                                                                }
+                                                            </div>
+                                                        }                                                     
+                                                    </div> 
                                                 </div>
                                             </div>
                                         </Link> 

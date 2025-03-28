@@ -194,8 +194,8 @@ const authSlice = createSlice({
         },
 
         gettingAllProducts: (state, action) => {
-          console.log(action)
-          console.log("hola")
+          //console.log(action)
+          //console.log("hola")
           state.products = action.payload
           //console.log(state.userInfo)
           //console.log(state.products)
@@ -263,9 +263,13 @@ const authSlice = createSlice({
           console.log(action)
           state.userInfo.name = action.payload.name || state.userInfo.name
           state.userInfo.username = action.payload.username || state.userInfo.username
-        }
+        },
         
-          
+        emailVerified: (state, action) => {
+          console.log("entro en este email verificando")
+          console.log(action)
+          state.userInfo.emailVerified = true
+        }
         // }
     }
 })
@@ -496,10 +500,10 @@ export const cancelando = () => {
 }
 
 export const getAllProducts = () => {
-  console.log("getting everything")
+  //console.log("getting everything")
 
   return async dispatch => {
-    console.log("aca esta el getting todo")
+    //console.log("aca esta el getting todo")
     const anecdotes = await productService.getAll()
     dispatch(gettingAllProducts(anecdotes))
   }
@@ -571,7 +575,8 @@ export const {
   setRemoveAddress,
   addAddress,
   putAddress,
-  updateInfo
+  updateInfo,
+  emailVerified
 } = authSlice.actions
 
 export default authSlice.reducer        
