@@ -30,7 +30,7 @@ const authUser = async (req, res, next) => {
             .populate('orders')
             .populate('sales')
         console.log("no llega")
-        console.log(user)
+        //console.log(user)
         // console.log(user.passwordHash)
         console.log(password)
         console.log(email)
