@@ -14,6 +14,7 @@ import UpdateInfoModal from '../components/UpdateInfoModal';
 const Details = () => {
     const [name, setName] = useState('');
     const [username, setUsername] = useState('');
+    const [firstName, setFirstName] = useState('')
     const [email, setEmail] = useState('')
     const [address, setAddress] = useState('')
     const [modalDisplay, setModalDisplay] = useState(false);
@@ -31,9 +32,14 @@ const Details = () => {
     const modalRef = useRef(null);
     const [selectedAddress, setSelectedAddress] = useState()
     const [formData, setFormData] = useState({
-      name: '',
+      [!userInfo.isGoogleUser ? 'name' : 'firstName']: '',
       username: '',
     });
+    console.log(userInfo.isGoogleUser)
+    // const [formGoogleData, setFormGoogleData] = useState({
+    //   firstName: '',
+    //   username: '',
+    // })
     // const handleClick = (ref) => {
     //   ref.current.focus(); // Mueve el cursor al input
     // };
@@ -46,7 +52,8 @@ const Details = () => {
     //console.log(userInfo)
     useEffect(() => {
       if(userInfo){
-        setName(userInfo.name)
+        setName(!userInfo.isGoogleUser ? userInfo.name : userInfo.firstName)
+        setFirstName(userInfo.isGoogleUser && userInfo.firstName)
         setUsername(userInfo.username)
         setEmail(userInfo.email)
         if(address) setAddress(userInfo && userInfo.address.address.find(item => item.isDefault === true))
@@ -63,17 +70,26 @@ const Details = () => {
     //console.log(addressTrue)
       const submitHandler = async (e) => {
         e.preventDefault();
+        const loggedUserJSON = window.localStorage.getItem('loggedTokenEcommerce')
+        const updatedUserInfo = { ...userInfo, token: loggedUserJSON }
+        console.log(updatedUserInfo)
+   
         console.log("hola")
         console.log(name)
         console.log(username)
+        const userInfoDetailsGoogle = {
+          firstName: formData.firstName,
+          username: formData.username
+        }
         const userInfoDetails = {
           name: formData.name,
           username: formData.username
         };
         console.log(userInfo)
+        console.log(userInfoDetailsGoogle)
         console.log(userInfoDetails)
         //const user_data = await productService.changePassword(userInfoDetails)
-        const { data } = await axios.put(`https://e-commerce-f1fr.onrender.com/api/users/update`, userInfoDetails, {
+        const { data } = await axios.put(`https://e-commerce-f1fr.onrender.com/api/users/update`, !userInfo.isGoogleUser ? userInfoDetails : userInfoDetailsGoogle, {
           headers: {
             Authorization: `Bearer ${userInfo.token}`,
             'Content-Type': 'application/json',
@@ -83,7 +99,11 @@ const Details = () => {
         
         if(data){
           console.log(data)
-          dispatch(updateInfo(userInfoDetails))
+          if(userInfo.isGoogleUser){
+            dispatch(updateInfo({ userInfoDetailsGoogle, isGoogleUser: true }))
+          }else{
+            dispatch(updateInfo(userInfoDetails))
+          }
         }
        
       };
@@ -151,9 +171,14 @@ const Details = () => {
       };
 
       const changePassword = () => {
-        userInfo.emailVerified 
-          ? navigate("/profile/password")
-          : toast.warn('Verifica tu email para poder editar tu contraseña')
+        // if(userInfo.isGoogleUser){
+        //   return toast.warn('No puedes cambiar tu contraseña con una cuenta gmail')
+        // }
+        userInfo.isGoogleUser 
+          ? toast.warn('No esta permitido con Gmail')
+          : userInfo.emailVerified 
+            ? navigate("/profile/password")
+            : toast.warn('Verifica tu email para poder editar tu contraseña')
       }
   return (
     <>
@@ -165,7 +190,7 @@ const Details = () => {
             <div className='log-profile'>
               <div className='div-input'>Nombre</div>
               <div className='box-input-pen' onClick={() => openModal(userInfo)}>
-                <div className='name-user'>{name}</div>
+                <div className='name-user'>{!userInfo.isGoogleUser ? name : firstName}</div>
                 <div className='profile-edit-svg'>
                   <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" color="#000"><path d="M0 0h24v24H0z" fill="none"></path><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a.996.996 0 000-1.41l-2.34-2.34a.996.996 0 00-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"></path></svg>
                 </div>
@@ -196,7 +221,7 @@ const Details = () => {
             <div className='log-profile'>
               <div className='div-input'>Email</div>
               <div className='email-user'>
-                {email}
+                {!userInfo.isGoogleUser ? email : userInfo.googleEmail}
                 {!userInfo.emailVerified && <div className='verify' onClick={() => handleVerifyEmail()}>Verificar Email</div>}
               </div>
             </div>

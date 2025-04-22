@@ -8,13 +8,15 @@ import {
     updateUserProfile,
     updateProfile,
     verifyEmail,
-    sendVerifyEmail
+    sendVerifyEmail,
+    signinGoogle
 } from '../controllers/userController.js'
 import { userExtractor } from '../middleware/authMiddleware.js'
 
 router.get('/', getUser)
 router.post('/', registerUser)
 router.post('/auth', authUser)
+router.post("/signinGoogle", signinGoogle);
 //router.post('/logout', logoutUser)
 router.put('/update', userExtractor, updateProfile)
 router.put('/profile', userExtractor, updateUserProfile)

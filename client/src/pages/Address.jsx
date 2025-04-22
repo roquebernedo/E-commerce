@@ -142,8 +142,8 @@ const Address = () => {
     console.log(userInfo)
 
     return (
-        <div className={userInfo && userInfo.address && userInfo.address.address.length > 0 && userInfo.address.address ? 'addresses addresses-alt' : 'addresses'}>
-            <div className={userInfo && userInfo.address && userInfo.address.address.length > 0 && userInfo.address.address ? 'main-addresses main-addresses-alt' : 'main-addresses'}>
+        <div className={userInfo && userInfo.addresses && userInfo.addresses.address.length > 0 && userInfo.addresses.address ? 'addresses addresses-alt' : 'addresses'}>
+            <div className={userInfo && userInfo.addresses && userInfo.addresses.address.length > 0 && userInfo.addresses.address ? 'main-addresses main-addresses-alt' : 'main-addresses'}>
                 <div className='addresses-options'>
                     <div className='title-addresses'>Direcciones</div>
                 </div>
@@ -153,9 +153,9 @@ const Address = () => {
                             <CircleLoader color={'#157dc2'} loading={true} css={override} size={75} />
                         </div>
                       )
-                    :   userInfo && userInfo.address && userInfo.address.address.length > 0 && userInfo.address.address 
+                    :   userInfo && userInfo.addresses && userInfo.addresses.address.length > 0 && userInfo.addresses.address 
                         ?   <>
-                                {userInfo && userInfo.address.address.length > 0 && userInfo.address.address.map(addresses => 
+                                {userInfo && userInfo.addresses.address.length > 0 && userInfo.addresses.address.map(addresses => 
                                         <div className='products-addresses-profile' key={addresses._id}>
                                             <div className='products-main-profile-addresses'>
                                                 <div className='addresses-elements'>

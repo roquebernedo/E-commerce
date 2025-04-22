@@ -77,7 +77,7 @@ const authUser = async (req, res, next) => {
                     id: user._id,
                     wishlist: user.wishlist,
                     notifications: user.notifications,
-                    address: user.addresses,
+                    addresses: user.addresses,
                     orders: user.orders,
                     sales: user.sales,
                     emailVerified: user.emailVerified
@@ -87,6 +87,86 @@ const authUser = async (req, res, next) => {
         next(error)
     }
 }
+
+const signinGoogle = async (req, res, next) => {   
+    console.log("Esta es la vencida :v")
+    const { sub, email, firstName, lastName } = req.body;
+    //const body = req.body
+    console.log(sub)
+    console.log(email)
+    try {
+      const userFound = await User.findOne({ email: sub })
+            .populate('products')
+            .populate('notifications')
+            .populate({
+                path: 'wishlist',
+                populate: {
+                    path: 'products',
+                    model: 'Product'
+                }
+            })
+            .populate('addresses')
+            .populate('orders')
+            .populate('sales')
+      console.log(userFound)
+      console.log("entro aca")
+      
+      if (!userFound) {
+        const newGoogleUser = await User.create({
+          email: sub,
+          password: sub,
+          googleEmail: email,
+          emailVerified: true,
+          firstName,
+          lastName,
+          username: firstName || email.split("@")[0],
+          isGoogleUser: true,
+        });
+        console.log(newGoogleUser)
+        console.log("entre is")
+        const userForToken = {
+            name: newGoogleUser.firstName,
+            id: newGoogleUser._id,
+        }
+        console.log("paso?")
+        // token expires in 60*60 seconds, that is, in one hour
+        const token = jwt.sign(
+            userForToken, 
+            process.env.SECRET,
+            { expiresIn: 60*60 }
+        )
+        console.log(token)
+        const tokenGoogleUser = newGoogleUser.toObject()
+        tokenGoogleUser.token = token
+        console.log("aca pe el tokensito")
+        console.log(tokenGoogleUser)
+        console.log(newGoogleUser)
+        return res.json(tokenGoogleUser);
+      } else {
+        // if (userFound.role === "banned")
+        //   return res.json({ message: "Cuenta suspendida", error: true });
+        const userForToken = {
+            name: userFound.firstName,
+            id: userFound._id,
+        }
+        console.log("paso?")
+        // token expires in 60*60 seconds, that is, in one hour
+        const token = jwt.sign(
+            userForToken, 
+            process.env.SECRET,
+            { expiresIn: 60*60 }
+        )
+        console.log(token)
+        const tokenGoogleUser = userFound.toObject()
+        tokenGoogleUser.token = token
+        return res.json(tokenGoogleUser);
+        console.log("entra aca x2")
+      }
+    } catch (error) {
+      console.log("aca tamos p")
+      next(error);
+    }
+};
 
 //route POST /api/users
 
@@ -101,7 +181,8 @@ const registerUser = async (req, res) => {
         email: body.email,
         name: body.name,
         passwordHash,
-        username: body.email.split("@")[0]
+        username: body.email.split("@")[0],
+        isGoogleUser: false
     })
 
     let id, email
@@ -124,7 +205,7 @@ const registerUser = async (req, res) => {
         `./templates/${user ? "signup" : "verifyEmail"}.html`,
         { link }
     );
-
+    console.log("se llego aca al user.pas")
     console.log(user.password)
     const savedUser = await user.save()
     res.json(savedUser)
@@ -181,25 +262,46 @@ const getUserProfile = asyncHandler(async (req, res) => {
 
 const updateProfile = async(req, res, next) => {
     try{
+        console.log("usercin")
         const user = req.user
-        const { name, username } = req.body
-        console.log("1er console")
-        console.log(user)
-        const userFound = await User.findById(user._id)
-        console.log(userFound)
+        if(user.isGoogleUser){
+            const { firstName, username } = req.body
+            const userFound = await User.findById(user._id)
+            userFound.firstName = firstName || userFound.firstName
+            userFound.username = username || userFound.username
 
-        userFound.name = name || userFound.name
-        userFound.username = username || userFound.username
-        await userFound.save()
+            console.log("hola")
+            await userFound.save()
+            console.log("holax3")
+            return res.json({
+                message: "Editado con exito",
+                user: {
+                    firstName: userFound.firstName,
+                    username: userFound.username
+                }
+            })
+        }else{
+            const { name, username } = req.body
 
-        return res.json({
-            message: "Editado con exito",
-            user: {
-                name: userFound.name,
-                username: userFound.username
-            }
-        })
+            console.log("1er console")
+            console.log(user)
+            const userFound = await User.findById(user._id)
+            console.log(userFound)
 
+            userFound.name = name || userFound.name
+            userFound.username = username || userFound.username
+
+            console.log("hola")
+            await userFound.save()
+            console.log("holax3")
+            return res.json({
+                message: "Editado con exito",
+                user: {
+                    name: userFound.name,
+                    username: userFound.username
+                }
+            })
+        }
     } catch(error){
         next(error)
     }
@@ -278,5 +380,6 @@ export {
     updateUserProfile,
     updateProfile,
     verifyEmail,
-    sendVerifyEmail
+    sendVerifyEmail,
+    signinGoogle
 }

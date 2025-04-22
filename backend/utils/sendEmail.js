@@ -63,17 +63,18 @@ const sendEmail = async (email, subject, templateUrl, variables) => {
   try {
     const filePath = path.join(process.cwd(), "files", templateUrl);
     console.log("ya esta en el filepath")
-    
+    console.log(REFRESH_TOKEN)
     const source = fs.readFileSync(filePath, "utf-8").toString();
   
     console.log("Esta en el sendEmail")
+    console.log(oAuth2Client)
  
     const template = Handlebars.compile(source);
     const html = template(variables);
     
     console.log("entro al accsestoken del mail")
     const accessToken = await oAuth2Client.getAccessToken();
-    console.log(accessToken)
+    //console.log(accessToken)
     //console.log(await oAuth2Client.getAccessToken)
     const transport = nodemailer.createTransport({
       service: "gmail",
@@ -86,7 +87,7 @@ const sendEmail = async (email, subject, templateUrl, variables) => {
         accessToken: accessToken,
       },
     });
-    console.log(transport)
+    //console.log(transport)
     const mailOptions = {
       from: `Dirstore <${EMAIL_DIRSTORE}>`,
       to: email,
@@ -95,6 +96,7 @@ const sendEmail = async (email, subject, templateUrl, variables) => {
     };
     //console.log(mailOptions)
     console.log("llegamos")
+    console.log(mailOptions)
     const result = await transport.sendMail(mailOptions);
     //console.log(result)
     return result;

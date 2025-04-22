@@ -56,7 +56,7 @@ const Favorites = () => {
     console.log(products)
     useEffect(() => {
         if(userInfo){
-            const productsUser = products.find(products => products.user.find(u => u.id === userInfo.id))
+            const productsUser = products.find(products => products.user.find(u => u.id === (!userInfo.isGoogleUser ? userInfo.id : userInfo._id)))
             setProductsUserInfo(productsUser)
         }
         

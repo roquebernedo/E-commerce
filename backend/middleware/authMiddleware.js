@@ -38,6 +38,7 @@ import User from '../models/userModel.js'
     
     console.log(request.token)
     const decodedToken = jwt.verify(request.token, process.env.SECRET)
+    console.log(decodedToken)
     console.log("aqui va el token")
     console.log("aquisito")
     console.log(decodedToken)

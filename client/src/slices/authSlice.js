@@ -221,27 +221,28 @@ const authSlice = createSlice({
 
         setRemoveAddress: (state, action) => {
           console.log("entro al removin")
-          state.userInfo.address.address = action.payload.address
-          if(!state.userInfo.address.address.some(e => e.isDefault) && state.userInfo.address.address.length > 0){
-            state.userInfo.address.address[0].isDefault = true
+          console.log(action)
+          state.userInfo.addresses.address = action.payload.address
+          if(!state.userInfo.addresses.address.some(e => e.isDefault) && state.userInfo.addresses.address.length > 0){
+            state.userInfo.addresses.address[0].isDefault = true
           }
         },
 
         addAddress: (state, action) => {
           console.log("aca esta el agregado")
           console.log(action)
-          if(state.userInfo.address){
+          if(state.userInfo.addresses){
             console.log("entro al address existente")
-            if(state.userInfo.address.address.length > 0){
+            if(state.userInfo.addresses.address.length > 0){
               console.log("entro al mayor a 0")
-              state.userInfo.address.address = action.payload.address.address
+              state.userInfo.addresses.address = action.payload.addresses.address
             }else{
               console.log("entro al menor a 0")
-              state.userInfo.address.address = action.payload.address.address
+              state.userInfo.addresses.address = action.payload.addresses.address
             }
           }else{
             console.log("entro al que no existe")
-            state.userInfo.address = action.payload.address
+            state.userInfo.addresses = action.payload.addresses
           }
         },
 
@@ -261,8 +262,14 @@ const authSlice = createSlice({
         updateInfo: (state, action) => {
           console.log("entro a este update")
           console.log(action)
-          state.userInfo.name = action.payload.name || state.userInfo.name
-          state.userInfo.username = action.payload.username || state.userInfo.username
+          if(action.payload.isGoogleUser){
+            state.userInfo.firstName = action.payload.userInfoDetailsGoogle.firstName || state.userInfo.firstName
+            state.userInfo.username = action.payload.userInfoDetailsGoogle.username || state.userInfo.username
+          }else{
+            state.userInfo.name = action.payload.name || state.userInfo.name
+            state.userInfo.username = action.payload.username || state.userInfo.username
+          }
+          
         },
         
         emailVerified: (state, action) => {
@@ -400,6 +407,7 @@ export const addingToList = (id, content) => {
     console.log("aca arriba esta el content de addingtolist")
     console.log(id)
     const anecdotes = await productService.addToList(id, content)
+    console.log(anecdotes)
     dispatch(addToListUser(anecdotes))
   }
 }

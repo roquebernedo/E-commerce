@@ -1,15 +1,18 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux'
 import { useLoginMutation } from '../slices/usersApiSlice.js';
 import { loginUser } from '../slices/authSlice.js';
+import { jwtDecode } from "jwt-decode";
 import { toast } from 'react-toastify';
 import '../styles/Login.scss'
 import FormInfo from '../components/FormInfo.jsx';
 import { css } from '@emotion/react';
 import { CircleLoader } from 'react-spinners';
 import axios from 'axios';
+import { useUserLogin } from '../hooks/useUserLogin.jsx';
 // import productService from '../services/product.js';
+const { REACT_APP_OAUTH_CLIENT_ID } = process.env;
 
 const override = css`
   display: block;
@@ -30,6 +33,7 @@ const Login = () => {
   const dispatch = useDispatch()
   // eslint-disable-next-line no-unused-vars
   const [login, { isLoading }] = useLoginMutation()
+  const { googleLogin } = useUserLogin()
 
   // const { userInfo } = useSelector((state) => state.authReducer)
 
@@ -76,6 +80,52 @@ const Login = () => {
     }
   }
 
+  const handleCallbackResponse = async (response) => {
+    try {
+      console.log("mi gugelsito") 
+      console.log(response)
+      //dispatch(loadingUserData(true));
+      //response.credential = Google user token
+      const userDecoded = jwtDecode(response.credential); 
+      console.log("no entro")
+      console.log(response.credential)
+      console.log(userDecoded)
+      const googleToken = "google" + response.credential;
+      console.log(response)
+      console.log(googleToken)
+      //? Login con el hook
+      googleLogin(googleToken, userDecoded, true);
+
+      //window.localStorage.setItem("loggedTokenEcommerce", googleToken);
+    } catch (error){
+      console.log(error);
+      //! VOLVER A VER manejo de errores
+    } finally {
+      console.log("entro aca tambien")
+      //dispatch(loadingUserData(false));
+    }
+  };
+
+  useEffect(() => {
+
+    /* global google */
+    google.accounts.id.initialize({
+      client_id: REACT_APP_OAUTH_CLIENT_ID,
+      callback: handleCallbackResponse,
+    });
+
+    google.accounts.id.renderButton(document.getElementById("signInDiv"), {
+      type: "standard",
+      size: "large",
+      width: 280,
+      text: "continue_with",
+      theme: "filled_black",
+      shape: "square",
+    });
+    //google.accounts.id.prompt();
+    // eslint-disable-next-line
+  }, []);
+
   return (
     <div className='login-in'>
       {isLoading ? (
@@ -83,12 +133,19 @@ const Login = () => {
             <CircleLoader color={'#157dc2'} loading={true} css={override} size={75} />
           </div>
         ):
-        <form className='form-login' onSubmit={handleLogin}>
-          <FormInfo 
-            setPassword={setPassword}
-            setEmail={setEmail}
-          />
-        </form>
+        <>
+          <form className='form-login' onSubmit={handleLogin}>
+            <FormInfo 
+              setPassword={setPassword}
+              setEmail={setEmail}
+            />
+            <div className="google-container">
+              <span>O ingresa con tu cuenta de Google</span>
+              <span className="google-signin-container" id="signInDiv"></span>
+            </div>
+          </form>
+          
+        </>
         }
     </div>
   );

@@ -73,7 +73,7 @@ const ContentHome = ({ buttonsFromHome, setButtonsFromHome }) => {
 
     useEffect(() => {
         axios
-          .get("https://e-commerce-f1fr.onrender.com") // https://ecommerce-moez.onrender.com/
+          .get("https://e-commerce-f1fr.onrender.com") 
           .then(response => {
             setRates(response.data)
           })
@@ -239,7 +239,7 @@ const ContentHome = ({ buttonsFromHome, setButtonsFromHome }) => {
             {portal ?
                 <div className='portatil'>
                     <Link to={`/product/${portal._id}`} key={portal._id} className='portatil-container'>
-                        <img className='portatil-img' alt='' src='https://i.ytimg.com/vi_webp/NmgOWKQj5-Y/maxresdefault.webp'/>
+                        <img className='portatil-img' alt='' src='https://i.blogs.es/d60b88/amazon/650_1200.jpeg'/>
                     </Link>
                     <div className='portatil-info'>
                         <div className='portatil-info-top'>

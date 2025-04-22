@@ -60,7 +60,7 @@ const Navbar = ({ filter, setFilter }) => {
     }
     
   }, [userInfo])
-
+  
   useEffect(() => {
     if(userInfo){
       //console.log("entro a este console")
@@ -78,6 +78,7 @@ const Navbar = ({ filter, setFilter }) => {
   const logoutHanlder =  () => {
       window.localStorage.clear()
       window.location.reload();
+      //dispatch(logout());
   }
 
   useEffect(() => {
@@ -154,10 +155,10 @@ const Navbar = ({ filter, setFilter }) => {
 
   useEffect(() => {
     if(userInfo){
-        const productsUser = products.find(products => products.user.find(u => u.id === userInfo.id))
-        
+        const productsUser = products.find(products => products.user.find(u => u.id === (!userInfo.isGoogleUser ? userInfo.id : userInfo._id)))
+        console.log(productsUser)
         setProductsUserInfo(productsUser)
-        const notiListUser = noti.find(noti => noti.user.find(user => user.id === userInfo.id))
+        const notiListUser = noti.find(noti => noti.user.find(user => user.id === (!userInfo.isGoogleUser ? userInfo.id : userInfo._id)))
         
         setNotiListUserInfo(notiListUser)
     }
@@ -174,6 +175,7 @@ const Navbar = ({ filter, setFilter }) => {
             //console.log(productUserList)
             const productUserWishList = userInfo.wishlist && userInfo.wishlist?.find(list => list._id === productsUserInfo._id)
             //console.log(productUserWishList)
+            console.log(productUserWishList)
             setProductUserList(productUserWishList)
           }
           if(notiListUserInfo){
@@ -197,25 +199,30 @@ const Navbar = ({ filter, setFilter }) => {
   useEffect(() => {
     if(userInfo){
       //console.log(userInfo.expirationTimeMilliseconds)
-      const remainingTime = userInfo.expirationTimeMilliseconds - Date.now(); // 10 segundos en milisegundos
-      
-      if (remainingTime > 0) {
-        // Configurando un temporizador para desloguear
-        const timer = setTimeout(() => {
-          console.log('El token ha expirado, deslogueando usuario.');
+      if(!userInfo.isGoogleUser){
+        const remainingTime = userInfo.expirationTimeMilliseconds - Date.now(); // 10 segundos en milisegundos
+        
+        if (remainingTime > 0) {
+          // Configurando un temporizador para desloguear
+          const timer = setTimeout(() => {
+            console.log('El token ha expirado, deslogueando usuario.');
+            logoutHanlder();
+            localStorage.removeItem('loggedTokenEcommerce');
+            dispatch(logout());
+          }, remainingTime);
+    
+          // Limpia el temporizador si el componente es null
+          return () => clearTimeout(timer);
+        } else {
+          // Si ya expiró, desloguear de inmediato
+          console.log('El token ya ha expirado, deslogueando usuario inmediatamente.');
           logoutHanlder();
           localStorage.removeItem('loggedTokenEcommerce');
           dispatch(logout());
-        }, remainingTime);
-  
-        // Limpia el temporizador si el componente es null
-        return () => clearTimeout(timer);
-      } else {
-        // Si ya expiró, desloguear de inmediato
-        console.log('El token ya ha expirado, deslogueando usuario inmediatamente.');
-        logoutHanlder();
-        localStorage.removeItem('loggedTokenEcommerce');
-        dispatch(logout());
+        }
+      }else{
+        console.log("olowo")
+        
       }
     }
   }, [userInfo, dispatch])
@@ -238,7 +245,7 @@ const Navbar = ({ filter, setFilter }) => {
           <div className='log-reg'>
             <div className='sign profile-navbar'>
               <svg className='svg' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="18" role="presentation" alt="" data-testid="UserIcon" size="18" color="currentColor"><path d="M16.22 19.41A9.71 9.71 0 1 1 26 9.7a9.74 9.74 0 0 1-9.8 9.71M1.84 32a10.88 10.88 0 0 1 10.94-10.74h6.57A10.88 10.88 0 0 1 30.29 32H1.84" fill="currentColor"></path></svg>
-              <div className='userinfo'>{userInfo.name}</div>
+              <div className='userinfo'>{!userInfo.isGoogleUser ? userInfo.name : userInfo.username}</div>
               <div className='div-menu-profile'>
                 <div className='buttonsResponsive-profile'>
                   <Link className='buttonResponsive-profile' to='/profile/details'>
@@ -250,14 +257,14 @@ const Navbar = ({ filter, setFilter }) => {
                   <Link className='buttonResponsive-profile' to='/profile/favorites'>
                     <div >Favoritos</div>
                   </Link>
-                  <Link className='buttonResponsive-profile' to='/profile/publications'>
-                    <div>Publicaciones</div>
+                  <Link className='buttonResponsive-profile' to='/profile/purchases'>
+                    <div>Compras</div>
                   </Link>
                   <Link className='buttonResponsive-profile' to='/profile/sales'>
                     <div>Ventas</div>
                   </Link>
                   <Link className='buttonResponsive-profile' to='/profile/publications'>
-                    <div>Publicar</div>
+                    <div>Publicaciones</div>
                   </Link>
                   <Link className='buttonResponsive-profile' to='/profile/address'>
                     <div>Direcciones</div>

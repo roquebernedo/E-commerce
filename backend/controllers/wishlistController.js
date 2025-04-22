@@ -43,6 +43,7 @@ const getUserList = async (req, res, next) => {
 
 const addToList = async (req, res, next) => {
     const user = req.user
+    console.log("estoy en addtolist")
     const product = await Product.findById(req.params.id)
     //console.log(product)
 

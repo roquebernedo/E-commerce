@@ -51,7 +51,7 @@ const Notifications = () => {
 
     useEffect(() => {
         if(userInfo){
-            const notiListUser = noti.find(noti => noti.user.find(user => user.id === userInfo.id))
+            const notiListUser = noti.find(noti => noti.user.find(user => user.id === (!userInfo.isGoogleUser ? userInfo.id : userInfo._id)))
             setNotiListUserInfo(notiListUser)
         }
         

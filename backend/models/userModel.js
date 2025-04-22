@@ -11,10 +11,6 @@ const userSchema = new mongoose.Schema({
         type: String,
         min: 3
     },
-    username: {
-        type: String,
-        min: 3
-    },
     email: {
         type: String,
         required: true,
@@ -28,6 +24,18 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
+    isGoogleUser: {
+        type: Boolean,
+        required: true,
+    },
+    googleEmail: {  
+        type: String,
+        lowercase: true,
+        unique: true,
+    },
+    firstName: String,
+    lastName: String,
+    username: String,
     products: [{ 
         type: mongoose.Schema.Types.ObjectId, 
         ref: "Product"

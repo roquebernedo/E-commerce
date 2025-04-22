@@ -9,7 +9,7 @@ import { decreaseQuantityProduct, increaseQuantityProduct, removeSingleProductUs
 
 const ShoppingCart = () => {
 
-  const { userInfo } = useSelector((state) => state.auth)
+  const { userInfo } = useSelector((state) => state.authReducer)
   //console.log(userInfo)
   
   const totalPrice = () => {

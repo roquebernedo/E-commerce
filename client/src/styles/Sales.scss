@@ -120,30 +120,28 @@
                         }
 
                         .product-sales-left{
-                            height: 100%;
-                           
                             display: flex;
-                            flex-direction: column;
                             justify-content: center;
+                            align-items: center;
                             
                             .product-sales-left-top{
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+
                                 .product-sales-name{
                                     color: #ffffff;
-                                    font-size: 1.2rem;                                 
+                                    font-size: 1    rem;                                 
                                 }
                             }
                         }
 
                         .product-sales-right{
-                            
                             display: flex;
                             margin-right: 15px;
                             align-items: center;
                             @media (max-width: 700px) {
                                 margin-right: 0;
-                            }
-                            @media (max-width: 475px) {
-                                
                             }
 
                             .product-sales-right-main{
@@ -158,48 +156,19 @@
 
                                 .div-heart{
                                     color: #ffffff; 
-                                  
-                                    .heart-profile{
-                                        font-size: 1.8rem;
-                                        opacity: 0.7;
-                                    }
-
-                                    &:hover{
-                                        .heart-profile{
-                                            opacity: 1;
-                                        }
-
-                                        .rocket{
-                                            display: flex;
-                                            align-items: center;
-                                            justify-content: center;
-                                        }
-                                    }
-
-                                    .rocket{
-                                        position: absolute;
-                                        background-color: #b8cae7;
-                                        top: -35px;
-                                        width: 180px;
-                                        padding: 5px;
-                                        right: -20px;
-                                        display: none;
-                                    }
+                                    font-weight: bold;
                                 }
+                            }
+                        }
 
-                                .div-cart{
-                                    display: flex;
-                                    align-items: center;
-                                    justify-content: center;
-                                    padding: 5px;
-                                    opacity: 0.7;
-                                    
-                                    
-                                }
-
-                                &:hover{
-                                    
-                                }
+                        .product-sales-mid{
+                            display: flex;
+                    
+                            .product-sales-mid-center{
+                                display: flex;
+                                flex-direction: column;
+                                align-items: center;
+                                color: #ffffff;
                             }
                         }
                     }

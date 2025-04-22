@@ -26,6 +26,7 @@ const Password = () => {
             toast.error('Passwords do not match')
         }else{
             //const user_data = await productService.changePassword(userInfoDetails)
+            console.log("ti")
             const { data } = await axios.put(`https://e-commerce-f1fr.onrender.com/api/users/profile`, userInfoDetails, {
                 headers: {
                 Authorization: `Bearer ${userInfo.token}`,

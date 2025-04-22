@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
 import '../styles/Sales.scss'
 import axios from 'axios'
 
@@ -24,14 +23,14 @@ const Sales = () => {
     useEffect(() => {
         if(products.length > 0){
             
-            const buyerIds = userInfo.sales.products.map(p => p.buyer);
+            const buyerIds = userInfo.sales ? userInfo.sales.products.map(p => p.buyer) : null
             console.log(buyerIds)
         // Encontrar los usuarios completos
-        const buyers = buyerIds.map(buyerId => products.find(user => user.id === buyerId));
+        const buyers = buyerIds ? buyerIds.map(buyerId => products.find(user => user.id === buyerId)) : null
         setBuyer(buyers)
         console.log(buyers);
         }
-    }, [products, userInfo.sales.products])
+    }, [products, userInfo])
     return (
         <div className={userInfo.sales ? 'sales sales-alt' : 'sales'}>
             <div className={userInfo.sales ? 'main-sales main-alt' : 'main-sales'}>
@@ -56,9 +55,15 @@ const Sales = () => {
                                             <div className='product-sales-profile-item'>
                                                 <div className='product-sales-left'>
                                                     <div className='product-sales-left-top'>
-                                                        <div className='product-sales-name'>{product.title} + {foundBuyer ? foundBuyer.email : 's'}</div>
+                                                        <div className='product-sales-name'>{product.title}</div>
                                                     </div>
-                                                    
+                                                </div>
+                                                <div className='product-sales-mid'>
+                                                    <div className='product-sales-mid-center'>
+                                                        <div>{foundBuyer ? foundBuyer.username : 's'}</div>
+                                                        <div>{foundBuyer ? foundBuyer.email : 's'}</div>
+                                                        <div>{foundBuyer ? foundBuyer.name : 's'}</div>
+                                                    </div>
                                                 </div>
                                                 <div className='product-sales-right'>
                                                     <div className='product-sales-right-main'>
@@ -77,7 +82,6 @@ const Sales = () => {
                         </>
                     :   <>
                             <div className='no-publications'>Aun no has vendido un producto</div>
-                            <Link className='create-product'>Publicar</Link>
                         </>
                     
                 }

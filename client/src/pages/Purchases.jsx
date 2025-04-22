@@ -1,6 +1,5 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
 import '../styles/Purchases.scss'
 
 const Purchases = () => {
@@ -51,7 +50,6 @@ const Purchases = () => {
                         </>
                     :   <>
                             <div className='no-publications'>Aun no has comprado un producto</div>
-                            <Link className='create-product'>Publicar</Link>
                         </>
                     
                 }

@@ -35,6 +35,7 @@ const Register = () => {
       email: email,
       passwordHash: password
     }
+    console.log("aca add")
     // console.log(noteObject)
     // registerService
     //   .register(noteObject)
@@ -46,6 +47,8 @@ const Register = () => {
     if(password !== confirmPassword){
       toast.error('Passwords do not match')
     }else{
+      console.log("tambien")
+      console.log(noteObject)
       try {
         const returnedBlog = await registerService(noteObject);
         console.log(returnedBlog);

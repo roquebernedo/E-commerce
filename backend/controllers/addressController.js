@@ -23,36 +23,45 @@ const addAddress = async(req, res, next) => {
     console.log("aca abajo salio la info del user")
     try{
         console.log("hola")
-        const address = await Address.findOne({
+        const addresses = await Address.findOne({
             user: user._id,
         })
 
-        if(address){
+        if(addresses){
             console.log("nadin")
-            console.log(address)
+            console.log(addresses)
             // const newAddress = {
             //     address: [{ ...req.body, isDefault: false}]  
             // }
             
-            if(address.address.length > 0){
-                address.address.push({...req.body, isDefault: false})
+            if(addresses.address.length > 0){
+                addresses.address.push({...req.body, isDefault: false})
             }else{
-                address.address.push({ ...req.body, isDefault: true })
+                addresses.address.push({ ...req.body, isDefault: true })
             }
             //const newAddress = {...req.body, isDefault: false}
             
             //address.address.push(newAddress)
-            await address.save()
-            console.log(address)
-            return res.json({ message: "New Address registered", address })
+            await addresses.save()
+            console.log(addresses)
+            return res.json({ message: "New Address registered", addresses })
 
         }else{
             const userFound = await User.findById(user._id)
+            console.log("yara mano")
+            console.log(user._id)
+            console.log(userFound)
             const newAddress = new Address({
                 address: [{ ...req.body, isDefault: true}],
                 user: user._id
             })
+            console.log("sera esto?")
+            console.log(req.body)
+            console.log(newAddress)
+            console.log("esto no se")
+            
             userFound.addresses = newAddress._id
+            console.log(userFound)
             await userFound.save()
             await newAddress.save()
 
@@ -60,7 +69,7 @@ const addAddress = async(req, res, next) => {
             console.log("este fue el usercito")
             return res.json({
                 message: "New Address registered",
-                address: newAddress
+                addresses: newAddress
             })
         }
     } catch (err){
