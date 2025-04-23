@@ -31,6 +31,7 @@ const getUserNotifications = async (req, res) => {
         const userNotifs = await Notification.findOne({ user: user._id })
         console.log("esto es el userNotifs")
         console.log(userNotifs)
+        console.log("quizas")
         if(!userNotifs){
             const newNotif = await Notification.create({
                 user: user._id,

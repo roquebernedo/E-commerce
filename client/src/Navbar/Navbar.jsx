@@ -48,6 +48,7 @@ const Navbar = ({ filter, setFilter }) => {
   const [openMenu, setOpenMenu] = useState(false)
   const dispatch = useDispatch()
   const navigate = useNavigate()
+ 
   //console.log(userInfo)
   useEffect(() => {
     if(userInfo){
