@@ -89,8 +89,8 @@ router.post('/create-checkout-session', async (req, res) => {
     },
     line_items,
     mode: 'payment',
-    //success_url: `https://ecommercerq.netlify.app/success`,
-    success_url: `http://localhost:3000/success`,
+    success_url: `https://ecommercerq.netlify.app/success`,
+    //success_url: `http://localhost:3000/success`,
     cancel_url: `${process.env.CLIENT_URL}/api/stripe/cart`,
   });
 
