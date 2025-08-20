@@ -62,6 +62,7 @@ const Notifications = () => {
         if(userInfo){
             if(notiListUserInfo){
               console.log(notiListUserInfo)
+              console.log(Array.isArray(userInfo.notifications))
               const notiListUser = userInfo.notifications && userInfo.notifications?.find(list => list._id === notiListUserInfo._id)
               console.log(notiListUser)
               setNotifications(notiListUser)

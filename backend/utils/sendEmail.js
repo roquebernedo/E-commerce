@@ -65,9 +65,10 @@ const sendEmail = async (email, subject, templateUrl, variables) => {
     console.log("ya esta en el filepath")
     console.log(REFRESH_TOKEN)
     const source = fs.readFileSync(filePath, "utf-8").toString();
+    
   
     console.log("Esta en el sendEmail")
-    console.log(oAuth2Client)
+    //console.log(oAuth2Client)
  
     const template = Handlebars.compile(source);
     const html = template(variables);

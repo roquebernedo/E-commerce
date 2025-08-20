@@ -148,7 +148,7 @@ const authSlice = createSlice({
               
             }
             console.log("haciendo el push")
-            state.userInfo.notifications.push(action.payload)
+            state.userInfo.notifications = [action.payload]
           }
         },
 
@@ -175,11 +175,21 @@ const authSlice = createSlice({
           console.log("entra al redux a updatingUserCart")
           console.log(action)
           console.log(action.payload)
+          console.log(action.payload.notifications)
           //state.products = action.payload
-         
+          //const item = state.userInfo.notifications.find(item => item._id === action.payload.notifications._id)
+          //console.log(item)
           if(state.userInfo.productsOnCart){
             state.userInfo.productsOnCart = []
-            state.userInfo.orders = action.payload.orders
+            if(action.payload.orders){
+              state.userInfo.orders.push(action.payload.orders) 
+            }
+            if(action.payload.notifications){
+              state.userInfo.notifications = [action.payload.notifications]   
+            }
+            // state.userInfo.orders = [action.payload.orders]
+            // state.userInfo.notifications = [action.payload.notifications]   
+            console.log("entro creo")
             //state.userInfo.orders.push(action.payload.orders)
             console.log("entra repetidamente")
           }
@@ -276,8 +286,46 @@ const authSlice = createSlice({
           console.log("entro en este email verificando")
           console.log(action)
           state.userInfo.emailVerified = true
+        },
+
+        setFreeShipping: (state, action) => {
+          console.log("entro aca")
+          console.log(action)
+          //console.log(action.id)
+          //console.log(state.userInfo.products.find(item => item._id === action.id))
+          const foundFree = state.userInfo.products.find(item => item._id === action.payload.id)
+          console.log(foundFree)
+          if(!foundFree.freeShipping){
+            console.log("Entro aca en el free")
+            foundFree.freeShipping = true
+          }else{
+            foundFree.freeShipping = false
+          }
+        },
+        
+        setActivePublication: (state, action) => {
+          console.log("aca llego")
+          console.log(action)
+          const foundActive = state.userInfo.products.find(item => item._id === action.payload.id)
+          console.log(foundActive)
+          if(!foundActive.active){
+            console.log("Entro aca en el free")
+            foundActive.active = true
+          }else{
+            foundActive.active = false
+          }
+        },
+
+        setAddingDiscountToProduct: (state, action) => {
+          console.log("entro al adding")
+          console.log(action)
+          const foundDiscount = state.userInfo.products.find(item => item._id === action.payload.id)
+          console.log(foundDiscount)
+          if(foundDiscount.discount){
+            console.log("Entro aca en el disc")
+            foundDiscount.discount = action.payload.discount
+          }
         }
-        // }
     }
 })
 
@@ -559,6 +607,36 @@ export const updatingAddress = (id, content) => {
   }
 }
 
+export const updatingShipping = (id, content) => {
+  return async dispatch => {
+    console.log("aca esta el free agregadito")
+    console.log(content)
+    const anecdotes = await productService.setFreeShipping(id)
+    console.log(anecdotes)
+    dispatch(setFreeShipping(anecdotes))
+  }
+}
+
+export const updatingActivePublication = (id, content) => {
+  return async dispatch => {
+    console.log("aca esta el active agregadito")
+    console.log(content)
+    const anecdotes = await productService.activePublication(id)
+    console.log(anecdotes)
+    dispatch(setActivePublication(anecdotes))
+  }
+}
+
+export const setAddingDiscount = (id, content) => {
+  return async dispatch => {
+    console.log("aca esta el active agregadito")
+    console.log(content)
+    const anecdotes = await productService.addingDiscount(id, content)
+    console.log(anecdotes)
+    dispatch(setAddingDiscountToProduct(anecdotes))
+  }
+}
+
 export const { 
   appendProduct, 
   addToCart, 
@@ -584,7 +662,10 @@ export const {
   addAddress,
   putAddress,
   updateInfo,
-  emailVerified
+  emailVerified,
+  setFreeShipping,
+  setActivePublication,
+  setAddingDiscountToProduct
 } = authSlice.actions
 
 export default authSlice.reducer        

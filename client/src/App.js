@@ -22,6 +22,9 @@ import productService from "./services/product.js";
 
 import Success from "./components/Success.jsx";
 import VerifyEmail from "./components/VerifyEmail.jsx";
+import RecoverPassword from "./components/RecoverPassword.jsx";
+import LinkRecoverPassword from "./components/LinkRecoverEmail.jsx";
+import UpdateDiscount from "./components/UpdateDiscount.jsx";
 
 
 function App() {
@@ -72,6 +75,9 @@ function App() {
         <Route path="/update/:id" element={<Update />} />
         <Route path="/success" element={<Success />} />
         <Route path="/verify/:verifyToken" element={<VerifyEmail />} />
+        <Route path="/recoverPassword/:verifyToken" element={<RecoverPassword />}></Route>
+        <Route path="/retrievePassword" element={<LinkRecoverPassword />}></Route>
+        <Route path="/updateDiscount/:id" element={<UpdateDiscount />}></Route>
       </Routes>
       <Footer />
     </div>

@@ -106,6 +106,19 @@
                         width: 90%;
                     }
 
+                    .error-input{
+                        width: 80%;
+                        height: 30%;
+                        letter-spacing: 0.2px;
+                        font-weight: 400;
+                        color: red;
+                        opacity: 0.8;
+                    }
+
+                    .lab{
+                        overflow: hidden;
+                    }
+
                     .email{
                         width: 80%;
                         height: 30%;
@@ -140,6 +153,15 @@
                     height: 20%;
                     @media (max-width: 375px) {
                         width: 90%;
+                    }
+
+                    .error-input{
+                        width: 80%;
+                        height: 30%;
+                        letter-spacing: 0.2px;
+                        font-weight: 400;
+                        color: red;
+                        opacity: 0.8;
                     }
 
                     .password{

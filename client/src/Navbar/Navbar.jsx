@@ -28,6 +28,7 @@ const Navbar = ({ filter, setFilter }) => {
   const [productUserList, setProductUserList] = useState([])
   const [productsUserInfo, setProductsUserInfo] = useState([])
   const [notiListUserInfo, setNotiListUserInfo] = useState([])
+  console.log(notiListUserInfo)
   // eslint-disable-next-line no-unused-vars
   const [notifications, setNotifications] = useState([])
   //console.log(userInfo)
@@ -57,7 +58,7 @@ const Navbar = ({ filter, setFilter }) => {
         setTotalProducts(totProducts)
         //console.log(totalProducts)
       }
-      console.log(userInfo)
+      //console.log(userInfo)
     }
     
   }, [userInfo])
@@ -84,7 +85,7 @@ const Navbar = ({ filter, setFilter }) => {
 
   useEffect(() => {
     axios
-      .get("https://e-commerce-f1fr.onrender.com")
+      .get("http://localhost:8000")
       .then(response => {
         setRates(response.data)
       })
@@ -124,13 +125,14 @@ const Navbar = ({ filter, setFilter }) => {
 
   useEffect(() => {
     axios
-      .get("https://e-commerce-f1fr.onrender.com/api/wishlist/list") // https://ecommerce-moez.onrender.com/
+      .get("http://localhost:8000/api/wishlist/list")
       .then(response => {
         setProducts(response.data)
+        console.log(response.data)
       })
   
   }, [])
-  //console.log(products)
+  console.log(products)
 
   useEffect(() => {
     if(userInfo){
@@ -153,14 +155,16 @@ const Navbar = ({ filter, setFilter }) => {
   // }, [])
   // console.log(unitFromList)
   
-
+console.log(userInfo)
   useEffect(() => {
     if(userInfo){
+        console.log(products)
         const productsUser = products.find(products => products.user.find(u => u.id === (!userInfo.isGoogleUser ? userInfo.id : userInfo._id)))
         console.log(productsUser)
+        //console.log(productsUser)
         setProductsUserInfo(productsUser)
         const notiListUser = noti.find(noti => noti.user.find(user => user.id === (!userInfo.isGoogleUser ? userInfo.id : userInfo._id)))
-        
+        console.log(notiListUser)
         setNotiListUserInfo(notiListUser)
     }
     
@@ -176,11 +180,14 @@ const Navbar = ({ filter, setFilter }) => {
             //console.log(productUserList)
             const productUserWishList = userInfo.wishlist && userInfo.wishlist?.find(list => list._id === productsUserInfo._id)
             //console.log(productUserWishList)
-            console.log(productUserWishList)
+            //console.log(productUserWishList)
             setProductUserList(productUserWishList)
           }
           if(notiListUserInfo){
             //console.log(notiListUserInfo)
+            console.log(notiListUserInfo)
+            console.log(userInfo.notifications)
+            console.log(Array.isArray(userInfo.notifications))
             const notiListUser = userInfo.notifications && userInfo.notifications?.find(list => list._id === notiListUserInfo._id)
             //console.log(notiListUser)
             setNotifications(notiListUser)
@@ -188,7 +195,7 @@ const Navbar = ({ filter, setFilter }) => {
       }
       
   }, [products, productsUserInfo, userInfo, notiListUserInfo])
-
+  console.log(notifications)
   
   //console.log(productUserList)
   //console.log(notifications)
@@ -224,10 +231,10 @@ const Navbar = ({ filter, setFilter }) => {
       }else{
         console.log("olowo")
         
-      }
+      } 
     }
   }, [userInfo, dispatch])
-
+ //dispatch(logout());
   return (
     <header className='navbar'>
       <div className='menu'>

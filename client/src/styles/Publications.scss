@@ -49,6 +49,7 @@
             display: flex;
             justify-content: center;
             flex-direction: column;
+            margin-bottom: 20px;
             @media (max-width: 550px) {
                 width: 100%;
             }
@@ -367,17 +368,10 @@
             .publication-details{
                 display: none;
                 opacity: 0;
-                
                 position: relative;
-                height: 12rem;
+                min-height: 12rem;
                 background-color: #181818;
                 color: #ffffff;
-                @media (max-width: 800px) {
-                    height: 14rem;
-                }
-                @media (max-width: 475px) {
-                    height: 17.5rem;
-                }
 
                 .publication-buttons{
                     display: flex;
@@ -413,6 +407,10 @@
                         
                         .check-button{
                             color: rgb(100, 213, 0);
+                            margin-right: 15px;
+                        }
+
+                        .check-button-white{
                             margin-right: 15px;
                         }
                     }
@@ -498,6 +496,12 @@
                             display: flex;
                             position: relative;
                             .icons-play{
+                                font-size: 22px;
+                                opacity: 0.6;
+                                cursor: pointer;
+                            }
+
+                            .icons-pause{
                                 font-size: 22px;
                                 opacity: 0.6;
                                 cursor: pointer;
@@ -608,6 +612,36 @@
                         margin-left: 25px;
                     }
                 }
+
+                .sales-metrics-graph{
+                    display: flex;
+                    width: 93%;
+                    margin-left: 25px;
+                    margin-bottom: 15px;
+                    .sales-metrics-graph-container{
+                        
+                        display: flex;
+                        align-items: flex-end;
+                        justify-content: flex-end;
+                        height: 20rem;
+                        width: 100%;
+                        padding: 4rem 4rem 0 4rem;
+                        overflow-y: visible;
+                        background-color: #181818;
+                        overflow-x: auto;
+                        
+                        
+                        span{
+                            position: absolute;
+                            top: 1.5rem;
+                            left: 0;
+                            margin: 0;
+                            padding: 0;
+                            color: #888888;
+                            pointer-events: none;
+                        }
+                    }
+                }
             }
 
             .publication-details-open{
@@ -617,6 +651,78 @@
                 @media (max-width: 475px) {
                     display: flex;
                     flex-direction: column;
+                }
+            }
+
+            .sales-metrics-graph {
+                position: relative;
+                display: flex;
+                align-items: flex-end;
+                justify-content: flex-end;
+                height: 20rem;
+                width: 100%;
+                padding: 4rem 4rem 0 4rem;
+                overflow-y: visible;
+                overflow-x: auto;
+                border-bottom: 1px solid #FFFFFF50;
+
+                .sales-metrics-graph span {
+                    position: absolute;
+                    top: 1.5rem;
+                    left: 0;
+                    margin: 0;
+                    padding: 0;
+                    color: #888888;
+                    pointer-events: none;
+                }
+
+                .sales-metrics-graph-bar {
+                    position: relative;
+                    width: 1rem;
+                    margin: 0 2px;
+                    border: 2px solid #101010;
+                    border-bottom: none;
+                    border-radius: .5rem .5rem 0 0;
+                }
+
+                .sales-metrics-graph-bar:hover {
+                border: 2px solid #ffffff;
+                border-bottom: none;
+                }
+
+                .metrics-tooltip {
+                position: absolute;
+                opacity: 0;
+                top: -4rem;
+                left: 50%;
+                translate: -50%;
+                z-index: 40;
+                height: fit-content;
+                white-space: nowrap;
+                padding: .5rem 1rem;
+                font-size: 1rem;
+                text-align: left;
+                pointer-events: none;
+                background-color: #101010;
+                color: #ffffff80;
+                font-family: HelveticaNeueLTPro-Th;
+                }
+
+                .sales-metrics-graph-bar:hover > .metrics-tooltip {
+                opacity: 1;
+                }
+
+                .metric-graph-indicator {
+                width: 100%;
+                height: 1px;
+                pointer-events: none;
+                border-top: #8888886a dashed 1px;
+                position: absolute;
+                left: 0;
+                top: calc(4rem + 1%);
+                color: #888888;
+                font-family: HelveticaNeueLTPro-Th;
+                font-size: 1rem;
                 }
             }
         }

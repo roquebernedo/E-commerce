@@ -16,6 +16,7 @@ const getUser = async (req, res) => {
 const authUser = async (req, res, next) => {
     try{
         const { email, password } = req.body
+        console.log("por aca")
         const user = await User.findOne({ email })
             .populate('products')
             .populate('notifications')
@@ -29,15 +30,31 @@ const authUser = async (req, res, next) => {
             .populate('addresses')
             .populate('orders')
             .populate('sales')
+            .populate({
+                path: 'publication',
+                populate: [
+                    {
+                        path: 'product',
+                        model: 'Product'
+                    },
+                    {
+                        path: 'user',
+                        model: 'User'
+                    }
+                ]
+            })
+            
         console.log("no llega")
         //console.log(user)
         // console.log(user.passwordHash)
         console.log(password)
         console.log(email)
+        console.log("abajo")
+        console.log(user)
 
         if(!user){
             return res.status(401).json({
-                error: 'this user doesnt exist'
+                error: 'este usuario no existe'
             })
         }
         const passwordCorrect = user === null   
@@ -45,7 +62,7 @@ const authUser = async (req, res, next) => {
             : await bcryptjs.compare(password, user.passwordHash)
         if (!(user && passwordCorrect)) {
             return res.status(401).json({
-                error: 'invalid username or password'
+                error: 'usuario o password invalido'
             })
         }
         
@@ -65,6 +82,7 @@ const authUser = async (req, res, next) => {
         const expirationTimeMilliseconds = decodedToken.exp * 1000
         console.log(user.notifications)
         console.log(user.addresses)
+        console.log(user.publication)
         res
             .status(200)
             .send({ token, 
@@ -80,10 +98,12 @@ const authUser = async (req, res, next) => {
                     addresses: user.addresses,
                     orders: user.orders,
                     sales: user.sales,
-                    emailVerified: user.emailVerified
+                    emailVerified: user.emailVerified,
+                    publication: user.publication
                 })
         console.log(token)
     } catch(error){
+        console.log("no entra")
         next(error)
     }
 }
@@ -372,6 +392,66 @@ const verifyEmail = async (req, res, next) => {
     }
 };
 
+const emailToRetrievePassword = async (req, res, next) => {
+    const { email } = req.body
+    console.log(email)
+    if(!email){ 
+        console.log("entro :c")
+        return res.json({ message : "Ingresa un email valido"})
+    }       
+    console.log("lleganding")
+    const user = await User.findOne({ email: email})
+    console.log(user)
+    if(!user){
+        return res.json({ message : "Usario no encontrado"})
+    }
+
+    let id, emailToGet
+
+    id = user._id
+    emailToGet = user.email
+
+    const bodyToken = { id, emailToGet }
+    console.log("Esto es bodytoken: ", bodyToken)
+    console.log(user)
+    console.log("Aca esta el verifytoken")
+    const verifyToken = jwt.sign(bodyToken, process.env.SECRET)
+    console.log(verifyToken)
+    const link = `http://localhost:3000/recoverPassword/${verifyToken}`;
+    console.log(link)
+    await sendEmail(
+        email,
+        `${user ? "Recuperar Contraseña" : "Verificación de email"}`,
+        `./templates/${user ? "retrievePassword" : "verifyEmail"}.html`,
+        { link }
+    );
+
+    console.log("tamos aca nomas")
+    return res.json({ message: "Link enviado con exito!", token: verifyToken });
+    //console.log(user)
+}
+
+const recoveringPassword = async (req, res, next) => {
+    const { newPassword } = req.body
+    console.log("gaseando")
+    const user = req.user
+    console.log(user)
+    console.log(newPassword)
+    console.log("aaaaaaaaaa")
+    
+    console.log(user)
+        
+    // const validity = await user.comparePassword(password)
+    // console.log(validity)
+    console.log("aca esta validity")
+    const passwordHash = await bcryptjs.hash(newPassword, 10)
+    console.log(passwordHash)
+    // if (!validity) return res.json({ message: "Contraseña incorrecta", error: true });
+    user.passwordHash = passwordHash
+    await user.save()
+    return res.json({ message: "Contraseña cambiada con exito!"});
+} 
+
 export { 
     getUser,
     authUser,
@@ -381,5 +461,7 @@ export {
     updateProfile,
     verifyEmail,
     sendVerifyEmail,
-    signinGoogle
+    signinGoogle,
+    emailToRetrievePassword,
+    recoveringPassword
 }

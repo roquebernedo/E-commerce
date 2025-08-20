@@ -36,6 +36,7 @@ const Details = () => {
       username: '',
     });
     console.log(userInfo.isGoogleUser)
+    console.log(userInfo)
     // const [formGoogleData, setFormGoogleData] = useState({
     //   firstName: '',
     //   username: '',
@@ -48,7 +49,8 @@ const Details = () => {
     // }, [section])
 
     //console.log(userInfo)
-    const addressTrue = userInfo ? userInfo.address && userInfo.address.address.find(item => item.isDefault === true) : ''
+    const addressTrue = userInfo ? userInfo.addresses && userInfo.addresses.address.find(item => item.isDefault === true) : 'nada'
+    console.log(addressTrue)
     //console.log(userInfo)
     useEffect(() => {
       if(userInfo){
@@ -147,6 +149,7 @@ const Details = () => {
       //   closeModal()
       // }
       console.log(formData)
+      console.log(userInfo)
 
       const handleVerifyEmail = async () => {
         console.log("hola entra")
@@ -154,12 +157,13 @@ const Details = () => {
         try {
           console.log("aca")
           // eslint-disable-next-line no-unused-vars
-          const { data } = await axios.post("https://e-commerce-f1fr.onrender.com/api/users/sendVerifyEmail", {}, {
+          const { data } = await axios.post("http://localhost:8000/api/users/sendVerifyEmail", {}, {
             headers: {
               Authorization: `Bearer ${userInfo.token}`,
               'Content-Type': 'application/json',
             }
           });
+          console.log(data)
           //notification("Revisa tu email para verificar tu cuenta", "", "");
           //setVerifyResponse(true);
           console.log("Y paso")

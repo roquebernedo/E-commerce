@@ -16,13 +16,16 @@ const orderSchema = mongoose.Schema({
           type: mongoose.Schema.Types.ObjectId,
           ref: 'User'
     },
-    // shipping_address: {
-    //     state: String,
-    //     city: String,
-    //     zip_code: String,
-    //     street_name: String,
-    //     street_number: Number,
-    // },
+    shipping_address: {
+        state: String,
+        city: String,
+        zip_code: String,
+        street_name: String,
+        street_number: Number,
+    },
+    payment_date: Number,
+    delivery_date: Number,
+    flash_shipping: Boolean
 }, {
     timestamps: true
 })

@@ -42,6 +42,11 @@ const productSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    freeShipping: Boolean,
+    active: {
+        type: Boolean,
+        default: true,
+    },
     user:
         {
           type: mongoose.Schema.Types.ObjectId,

@@ -31,6 +31,7 @@ const Sales = () => {
         console.log(buyers);
         }
     }, [products, userInfo])
+    console.log(userInfo.sales.products)
     return (
         <div className={userInfo.sales ? 'sales sales-alt' : 'sales'}>
             <div className={userInfo.sales ? 'main-sales main-alt' : 'main-sales'}>
@@ -62,7 +63,7 @@ const Sales = () => {
                                                     <div className='product-sales-mid-center'>
                                                         <div>{foundBuyer ? foundBuyer.username : 's'}</div>
                                                         <div>{foundBuyer ? foundBuyer.email : 's'}</div>
-                                                        <div>{foundBuyer ? foundBuyer.name : 's'}</div>
+                                                        <div>{product.shoppingDay ? product.shoppingDay.split(',').slice(0, 2).join(',') : 's'}</div>
                                                     </div>
                                                 </div>
                                                 <div className='product-sales-right'>

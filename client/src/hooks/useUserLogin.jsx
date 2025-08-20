@@ -31,7 +31,7 @@ export const useUserLogin = (token) => {
         console.log("token: ", token)
         console.log(email)
         try {
-          const { data } = await axios.post(`https://e-commerce-f1fr.onrender.com/api/users/signinGoogle`, {
+          const { data } = await axios.post(`http://localhost:8000/api/users/signinGoogle`, {
             sub,
             email,
             emailVerified,

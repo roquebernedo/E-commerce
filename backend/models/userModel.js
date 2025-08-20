@@ -68,7 +68,11 @@ const userSchema = new mongoose.Schema({
     sales: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Sales",
-    }
+    },
+    publication: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Publication",
+    }]
 }, {
     timestamps: true
 })

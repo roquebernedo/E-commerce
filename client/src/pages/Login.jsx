@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux'
 import { useLoginMutation } from '../slices/usersApiSlice.js';
 import { loginUser } from '../slices/authSlice.js';
 import { jwtDecode } from "jwt-decode";
 import { toast } from 'react-toastify';
+import { useForm } from "react-hook-form";
 import '../styles/Login.scss'
-import FormInfo from '../components/FormInfo.jsx';
 import { css } from '@emotion/react';
 import { CircleLoader } from 'react-spinners';
 import axios from 'axios';
@@ -21,38 +21,58 @@ const override = css`
 `;
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  //const [password, setPassword] = useState('');
   // eslint-disable-next-line no-unused-vars
-  const [username, setUsername] = useState('') 
+  const [email, setEmail] = useState('')
+  // eslint-disable-next-line no-unused-vars
   const [password, setPassword] = useState('') 
   // eslint-disable-next-line no-unused-vars
-  const [user, setUser] = useState(null)
-
   const navigate = useNavigate()
   const dispatch = useDispatch()
   // eslint-disable-next-line no-unused-vars
   const [login, { isLoading }] = useLoginMutation()
   const { googleLogin } = useUserLogin()
+  const {
+    register: registerSignin,
+    handleSubmit: handleSubmitSignin,
+    formState: { errors: errorsSignin },
+    // eslint-disable-next-line no-unused-vars
+    setValue: setValueSignin,
+    // eslint-disable-next-line no-unused-vars
+    watch: watchSignin,
+  } = useForm();
 
-  // const { userInfo } = useSelector((state) => state.authReducer)
+  const {
+    // eslint-disable-next-line no-unused-vars
+    register: registerSignup,
+    // eslint-disable-next-line no-unused-vars
+    handleSubmit: handleSubmitSignup, 
+    // eslint-disable-next-line no-unused-vars
+    formState: { errors: errorsSignup },
+    // eslint-disable-next-line no-unused-vars
+    setValue: setValueSignup,
+    // eslint-disable-next-line no-unused-vars
+    watch: watchSignup,
+  } = useForm();
 
-  const handleLogin = async (event) => {
-    event.preventDefault()
+  const handleLogin = async (signinData) => {
     console.log("entro al handle")
     console.log(email)
     try {
       console.log("tamos en try")
-      const response = await axios({
+      const response = await axios({  
         method: 'post',
         url: 'https://e-commerce-f1fr.onrender.com/api/users/auth',
-        data: { email, password },
+        data: signinData,
       })
+      console.log(signinData)
+      // const { response } = await axios.post(`http://localhost:8000/api/users/auth`, signinData);
       //https://e-commerce-f1fr.onrender.com/api/users/auth
-      const data = response.data
-      window.localStorage.setItem("loggedTokenEcommerce", data.token)
+      console.log(response)
+      // const data = response.data
+      
+      window.localStorage.setItem("loggedTokenEcommerce", response.data.token)
       //dispatch(initializeUsers());
-      console.log(data)
+      // console.log(data)
       // if (response.status === 401) {
       //   // Manejar el error aquí mismo
       //   console.log("Aca entro")
@@ -62,11 +82,12 @@ const Login = () => {
       // const user = await loginService({
       //   email, password,
       // })
-      dispatch(loginUser({ email, password}))
+      dispatch(loginUser( signinData ))
       //console.log(user)
       navigate('/')
       toast.success('Logeado exitosamente!')
     } catch (error) {
+      console.log(error)
       console.log(".")
       if(error.response && error.response.data){
         console.log("Fue aca")
@@ -134,11 +155,64 @@ const Login = () => {
           </div>
         ):
         <>
-          <form className='form-login' onSubmit={handleLogin}>
-            <FormInfo 
-              setPassword={setPassword}
-              setEmail={setEmail}
-            />
+          <form className='form-login' onSubmit={handleSubmitSignin(handleLogin)}>
+            <div className="login">
+              <section className='login-container'> 
+                <div className='login-title'>
+                  <h1 className='title'>Sign in</h1>
+                </div>
+                <div className='login-email'>
+                  {errorsSignin.email?.type === "required" && (
+                    <p className="error-input">Ingresa tu email</p>
+                  )}
+                  {errorsSignin.email?.type !== "required" && (
+                    <label className='email lab'></label>
+                  )}
+                 
+                  <input 
+                    type='text' 
+                    className='email-input'  
+                    placeholder='Email'
+                    // onChange={(e) => setEmail(e.target.value)} 
+                    {...registerSignin("email", {
+                      required: true,
+                    })} 
+                    // required
+                    // onInvalid={(e) => e.target.setCustomValidity('Ingresa tu email')}
+                    // onInput={(e) => e.target.setCustomValidity('')}  
+                  />
+                </div>
+                <div className='login-password'>
+                  {errorsSignin.password?.type === "required" && (
+                    <p className="error-input">Ingresa tu contraseña</p>
+                  )}
+                  {errorsSignin.password?.type !== "required" && (
+                    <label className='password lab'></label>
+                  )}
+                  
+                  <input 
+                    type='password' 
+                    className='password-input' 
+                    placeholder='Contraseña'
+                    // onChange={(e) => setPassword(e.target.value)} 
+                    {...registerSignin("password", {
+                      required: true,
+                    })}
+                    // required
+                    // onInvalid={(e) => e.target.setCustomValidity('Ingresa tu contraseña')}
+                    // onInput={(e) => e.target.setCustomValidity('')} 
+                  />
+                  <Link className='password-save' to='/retrievePassword'>Recuperar contraseña</Link>
+                </div>
+                <div className='login-button'>
+                  <button className='log-in' type='submit'>Log in</button>
+                </div>
+                <div className='login-recover'>
+                  <div className='login-ask'>¿Necesitas una cuenta?</div>
+                  <Link className='login-create' to='/register'>Crear cuenta</Link>
+                </div>
+              </section>
+            </div>
             <div className="google-container">
               <span>O ingresa con tu cuenta de Google</span>
               <span className="google-signin-container" id="signInDiv"></span>

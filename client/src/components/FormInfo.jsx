@@ -10,11 +10,25 @@ const FormInfo = ({ setEmail, setPassword }) => {
                 </div>
                 <div className='login-email'>
                     <label className='email'>Email o usuario</label>
-                    <input type='text' className='email-input' onChange={(e) => setEmail(e.target.value)} />
+                    <input 
+                        type='text' 
+                        className='email-input' 
+                        onChange={(e) => setEmail(e.target.value)} 
+                        required
+                        onInvalid={(e) => e.target.setCustomValidity('Ingresa tu email')}
+                        onInput={(e) => e.target.setCustomValidity('')}
+                    />
                 </div>
                 <div className='login-password'>
                     <label className='password'>Contraseña</label>
-                    <input type='password' className='password-input' onChange={(e) => setPassword(e.target.value)} />
+                    <input 
+                        type='password' 
+                        className='password-input' 
+                        onChange={(e) => setPassword(e.target.value)} 
+                        required
+                        onInvalid={(e) => e.target.setCustomValidity('Ingresa tu contraseña')}
+                        onInput={(e) => e.target.setCustomValidity('')} 
+                    />
                     <div className='password-save'>Recuperar contraseña</div>
                 </div>
                 <div className='login-button'>

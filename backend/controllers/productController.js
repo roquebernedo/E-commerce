@@ -4,6 +4,7 @@ import User from "../models/userModel.js"
 import jwt from "jsonwebtoken"
 import { userExtractor } from "../middleware/authMiddleware.js"
 import { response } from "express"
+import Publication from "../models/publicationModel.js"
 
 const gettingProducts = asyncHandler(async (req, res) => {
     try{
@@ -17,14 +18,6 @@ const gettingProducts = asyncHandler(async (req, res) => {
 })
 
 const addingProducts = (async (request, response) => {
-  // const recipe = new Product(req.body)
-  // try{
-  //     const response = await recipe.save()
-  //     res.json(response)
-  // } catch (err){
-  //     res.json(err)
-  // }
-  
   console.log("aqui esta el error")
   const body = request.body
   const user = request.user
@@ -43,26 +36,28 @@ const addingProducts = (async (request, response) => {
     date: body.date,
     image: body.image,
     quantity: body.quantity,
-    user: user.id
+    user: user.id,
+    active: true,
+    freeShipping: false,
   })
 
+  const publication = new Publication({
+    product: product,
+    user: user.id,
+    sales: []
+  })
+  console.log(publication)
+  await publication.save()
   const savedProduct = await product.save()
 
   user.products = user.products.concat(savedProduct._id)
+  user.publication = user.publication.concat(publication)
   await user.save()
   
   response.status(201).json(savedProduct)
 })
 
 const addingProductsDirstore = (async (request, response) => {
-  // const recipe = new Product(req.body)
-  // try{
-  //     const response = await recipe.save()
-  //     res.json(response)
-  // } catch (err){
-  //     res.json(err)
-  // }
-  
   console.log("aqui esta el error")
   const body = request.body
   const user = request.user
@@ -279,11 +274,10 @@ const updateProduct = async (req, res) => {
       title,
       description,
       image,
-      color,
-      size,
-      material,
-      instructions,
+      brand,
+      category,
       price,
+      discount
     } = req.body;
   
     try {
@@ -293,11 +287,10 @@ const updateProduct = async (req, res) => {
           title,
           description,
           image,
-          color,
-          size,
-          material,
-          instructions,
+          brand,
+          category,
           price,
+          discount
         },
         { new: true }
       );
@@ -319,6 +312,66 @@ const cancelando = (async (req, res) => {
     return res.json({ message: 'Payment canceled' });
 })
 
+const updatingFreeShipping = async (req, res, next) => {
+  console.log("1")
+  const user = req.user
+  console.log(user)
+  console.log("Aca esta pes")
+  console.log(req.params.id)
+  const product = await Product.findById(req.params.id)
+  console.log(product)
+  product.freeShipping = !product.freeShipping
+  await product.save()
+  
+
+  return res.json({
+            message: "product updated",
+            id: req.params.id
+        })
+}
+
+const activePublication = async (req, res, next) => {
+  const user = req.user
+  console.log(user)
+  console.log(req.params.id)
+  const product = await Product.findById(req.params.id)
+  console.log(product)
+  product.active = !product.active
+  await product.save()
+
+  return res.json({ message: "product updated", id: req.params.id })
+}
+
+const addingDiscount = async (req, res, next) => {
+  const user = req.user
+  console.log(user)
+  const productId = req.params.id;
+  console.log("Estoy en el addingdiscount")
+  console.log(productId)
+  const {
+      discount
+  } = req.body;
+  console.log(discount)
+  try {
+    console.log("entro aca")
+      const updatedProduct = await Product.findByIdAndUpdate(
+        productId,
+        {
+          discount
+        },
+        { new: true }
+      );
+      console.log(updateProduct)
+      if (!updatedProduct) {
+        return res.status(404).json({ error: 'Product not found' });
+      }
+      console.log("llego acasito")
+      res.json({ message: "product updated", id: req.params.id, discount: discount });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
 
 export { 
     gettingProducts,
@@ -333,5 +386,8 @@ export {
     increasingQuantityProduct,
     decreasingQuantityProduct,
     cancelando,
-    addingProductsDirstore
+    addingProductsDirstore,
+    updatingFreeShipping,
+    activePublication,
+    addingDiscount
 }

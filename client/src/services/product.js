@@ -207,7 +207,7 @@ const login = async credentials => {
   setToken(response.data.token);
   console.log(token)
   console.log(setToken)
-  console.log(setToken())
+  //console.log(setToken())
   return response.data
 }
 
@@ -353,6 +353,51 @@ const updateAddress = async (id, content) => {
   return response.data
 }
 
+const setFreeShipping = async (id) => {
+  const config = {
+    headers: { Authorization: token },
+  }
+  
+  console.log(id)
+  console.log("aca llego tu free p")
+  console.log(config)
+
+  const response = await axios.put(`${baseUrl}/freeShipping/${id}`, {}, config)
+  console.log(response)
+  console.log("entro a este response del free")
+  return response.data
+}
+
+const activePublication = async (id) => {
+  const config = {
+    headers: { Authorization: token },
+  }
+  
+  console.log(id)
+  console.log("aca llego al active")
+  console.log(config)
+
+  const response = await axios.put(`${baseUrl}/activePublication/${id}`, {}, config)
+  console.log(response)
+  console.log("entro a este response del activepub")
+  return response.data
+}
+
+const addingDiscount = async (id, discount) => {
+  const config = {
+    headers: { Authorization: token },
+  }
+  
+  console.log(id)
+  console.log("aca llego al discount")
+  console.log(config)
+
+  const response = await axios.put(`${baseUrl}/addingDiscount/${id}`, {discount}, config)
+  console.log(response)
+  console.log("entro a este response del discount")
+  return response.data
+}
+
 const productService = {
   create, 
   setToken, 
@@ -381,7 +426,10 @@ const productService = {
   removeAddress,
   addAddress,
   updateAddress,
-  changePassword
+  changePassword,
+  setFreeShipping,
+  activePublication,
+  addingDiscount
 }
 
 export default productService

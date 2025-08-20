@@ -10,6 +10,7 @@ const salesSchema = mongoose.Schema({
             price: Number,
             buyer: String,
             quantity: Number,
+            shoppingDay: String,
         }
     ],
     user: {

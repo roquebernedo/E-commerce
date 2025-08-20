@@ -176,10 +176,21 @@ const gettingNotifications = async (req, res) => {
     }
 }
 
+const sendNotification = (userId, message) => {
+  // Lógica para guardar la notificación en la base de datos, por ejemplo
+  console.log(`Notificación para ${userId}: ${message}`);
+    
+  // Si usas MongoDB:
+  // await Notification.create({ user: userId, message, date: new Date() });
+
+  return { success: true, message: "Notificación enviada" };
+};
+
 export { 
     getUserNotifications,
     deleteNotification,
     markAsSeen,
     gettingUniqueNotification,
-    gettingNotifications
+    gettingNotifications,
+    sendNotification
 }

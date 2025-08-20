@@ -1,5 +1,5 @@
 import express from 'express'
-import { addingProducts, addingProductsDirstore, addingProductsToCart, cancelando, decreasingQuantityProduct, deletingCart, gettingProducts, gettingUniqueProducts, increasingQuantityProduct, removeSingleProduct, saveProducts, updateProduct, updatingProductsToCart } from '../controllers/productController.js'
+import { activePublication, addingDiscount, addingProducts, addingProductsDirstore, addingProductsToCart, cancelando, decreasingQuantityProduct, deletingCart, gettingProducts, gettingUniqueProducts, increasingQuantityProduct, removeSingleProduct, saveProducts, updateProduct, updatingFreeShipping, updatingProductsToCart } from '../controllers/productController.js'
 import { tokenExtractor, userExtractor } from '../middleware/authMiddleware.js'
 
 const router = express.Router()
@@ -17,5 +17,8 @@ router.put('/remove/:id', userExtractor, removeSingleProduct)
 router.put('/increaseProduct/:id', userExtractor, increasingQuantityProduct)
 router.put('/decreaseProduct/:id', userExtractor, decreasingQuantityProduct)
 router.put('/cancelito', userExtractor, cancelando)
+router.put('/freeShipping/:id', userExtractor, updatingFreeShipping)
+router.put('/activePublication/:id', userExtractor, activePublication)
+router.put('/addingDiscount/:id', userExtractor, addingDiscount)
 
 export default router

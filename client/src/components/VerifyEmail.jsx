@@ -51,10 +51,17 @@ const VerifyEmail = () => {
         <div className='main-verify'>
             {response   ?
                         <>
-                            {response}
-                            <button onClick={() => navigate("/login")} className='update log'>
-                                Ir a iniciar sesion
-                            </button>
+                            {userInfo 
+                                ? 
+                                    response
+                                :   
+                                    <>
+                                        {response}
+                                        <button onClick={() => navigate("/login")} className='update log'>
+                                            Ir a iniciar sesion
+                                        </button>
+                                    </>
+                            }
                         </>
                         :
                         <div className='loader'>

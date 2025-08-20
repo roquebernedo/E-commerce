@@ -46,11 +46,13 @@
             max-width: 900px;
             min-width: 250px;
             width: 85%;
+            
 
             .products-main-profile-purchases{
                 display: flex;
                 width: 100%;
                 padding-top: 20px;
+                padding-bottom: 20px;
                 
                 @media (max-width: 700px) {
                     flex-direction: column;
@@ -59,9 +61,8 @@
 
                 .product-img{
                     display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    width: 30%;
+                    margin-left: 10px;
+                    width: 18%;
                     
                     @media (max-width: 700px) {
                         width: 90%;
@@ -76,7 +77,8 @@
                         display: flex;
                         align-items: center;
                         justify-content: center;
-                        width: 70%;
+                        width: 100%;
+                      
                         height: 170px;  
                         background-color: #ffffff;
                         @media (max-width: 700px) {
@@ -86,18 +88,15 @@
                         .image-item{
                             width: 70%;
                             height: 115px;
-                            @media (max-width: 475px) {
-                                
-                                
-                            }
                         }
                     }
                 }
 
                 .product-info-profile{
-                    width: 70%;
+                    width: 82%;
                     display: flex;
                     align-items: center;
+                    padding-left: 10px;
                    
                     @media (max-width: 700px) {
                         width: 90%;
@@ -110,6 +109,7 @@
                     .product-purch-profile-item{
                         display: flex;
                         width: 100%;
+                        align-items: center;
                         justify-content: space-between;
                         @media (max-width: 700px) {
                             margin: 12.5px 0;
@@ -119,9 +119,13 @@
                             flex-direction: column;
                         }
 
+                        .delivery-progress-container{
+                            
+                        }
+
                         .product-info-left{
                             height: 100%;
-                            width: 350px;
+                            width: 185px;
                             display: flex;
                             flex-direction: column;
                             justify-content: center;
@@ -129,7 +133,7 @@
                             .product-info-left-top{
                                 .product-info-name{
                                     color: #ffffff;
-                                    font-size: 1.2rem;
+                                    font-size: 1rem;
                                 }
                             }
 
@@ -164,7 +168,6 @@
                         }
 
                         .product-purch-right{
-                            
                             display: flex;
                             margin-right: 15px;
                             align-items: center;
