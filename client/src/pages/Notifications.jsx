@@ -24,6 +24,14 @@ const Notifications = () => {
     const [notifications, setNotifications] = useState([])
     const [loading, setLoading] = useState(true)
     const [open, setOpen] = useState(false)
+    const [selected, setSelected] = useState(null)
+        
+    const toggle = (i) => {
+        if(selected === i){
+            return setSelected(null)
+        }
+        setSelected(i)
+    }
 
     const containerStyles = css`
         position: relative;
@@ -102,7 +110,7 @@ const Notifications = () => {
                         ?   <>
                                 {notiListUserInfo.notif_list.map(notification => 
                                         <div key={notification._id} className='products-notifications-profile'>
-                                            <div className='products-main-profile-notifications' onClick={openBar}>
+                                            <div className='products-main-profile-notifications' onClick={() => toggle(notification._id)}>
                                                 <div className='notification-elements'>
                                                     <div className='product-info-profile-notifications'>
                                                         <div className='div-point-noti'><TbPointFilled className='point-noti' /></div>
@@ -113,7 +121,7 @@ const Notifications = () => {
                                                 <div className='line'></div>
                                             </div>
                                             
-                                            <div className={!open ? 'notification-description' : 'notification-description noti-open'}>
+                                            <div className={selected === notification._id ? 'notification-description noti-open' : 'notification-description'}>
                                                 <div className='notification-info-description'>
                                                     <div className='noti-desc'>{notification.description}</div>
                                                 </div>
