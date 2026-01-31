@@ -346,6 +346,12 @@ const authSlice = createSlice({
           console.log(action)
           console.log(state)
           state.userInfo.phoneNumber = action.payload.phoneNumber
+        },
+
+        loadUserData: (state, action) => {
+          console.log("este es el loadUserData")
+          console.log(action)
+          state.userInfo.avatar = action.payload.avatar
         }
     }
 })
@@ -698,7 +704,8 @@ export const {
   setAddingDiscountToProduct,
   setChangingEmail,
   setNewAvatar,
-  addingNewPhone
+  addingNewPhone,
+  loadUserData
 } = authSlice.actions
 
 export default authSlice.reducer        

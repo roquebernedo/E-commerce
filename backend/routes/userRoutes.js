@@ -14,7 +14,8 @@ import {
     recoveringPassword,
     updateEmail,
     updateAvatar,
-    addAndEditPhoneNumber
+    addAndEditPhoneNumber,
+    setAvatar
 } from '../controllers/userController.js'
 import { userExtractor } from '../middleware/authMiddleware.js'
 import multer from "multer";
@@ -31,7 +32,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 console.log("Aca esta el upload")
-console.log(upload)
+// console.log(upload)
 
 router.get('/', getUser)
 router.post('/', registerUser)
@@ -47,6 +48,7 @@ router.put("/recoverPassword", userExtractor, recoveringPassword)
 router.put("/changingEmail", userExtractor, updateEmail)
 router.put("/updateAvatar", upload.single("newAvatar"), userExtractor, updateAvatar)
 router.put("/addPhoneNumber", userExtractor, addAndEditPhoneNumber)
+router.post("/avatar", userExtractor, setAvatar)
 //router.route('/profile').get(protect, getUserProfile).put(protect, updateUserProfile)
 
 export default router

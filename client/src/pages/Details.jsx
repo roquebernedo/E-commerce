@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 // import { toast } from 'react-toastify';
 import Loader from '../components/Loader';
-import { setNewAvatar, updateInfo } from '../slices/authSlice';
+import { loadUserData, setNewAvatar, updateInfo } from '../slices/authSlice';
 import '../styles/Modal.scss'
 // import productService from "../services/product";
 import { toast } from 'react-toastify';
@@ -26,6 +26,7 @@ const Details = () => {
     const [loadingAvatar, setLoadingAvatar] = useState(false);
     const [avatarError, setAvatarError] = useState(null);
     const [avatarFlag, setAvatarFlag] = useState(false);
+    const [newAvatar, setNewAvatar] = useState();
     // const [oldPassword, setPassword] = useState('');
     // const [newPassword, setConfirmPassword] = useState('');
     const dispatch = useDispatch()
@@ -293,26 +294,75 @@ const Details = () => {
       }
     }
 
-    const handleAvatar = (e) => {
-    if (userInfo.emailVerified === false)
+  const handleAvatar = (e) => {
+    console.log(userInfo)
+    console.log("entro al handleAvatar")
+    // if (userInfo.emailVerified === false){
+    //   console.log(userInfo.emailVerified)
+    //   return userInfo.avatar
+    // }
       // return notification(
       //   "Verifica tu email para poder editar tu perfil",
       //   "",
       //   "warning"
       // );
-
+    console.log(e.target.files.length)
     if (e.target.files.length === 0) return;
     setLoadingAvatar(true);
     const fileListArrayImg = Array.from(e.target.files);
+    console.log(fileListArrayImg)
 
     if (fileListArrayImg[0].size > 2405442) {
+      console.log("entro a filelist")
       setAvatarError("La imágen debe pesar 2mb como máximo");
       setTimeout(() => setAvatarError(null), 7000);
       return setLoadingAvatar(false);
     }
+    console.log("no entro al if")
     setNewAvatar(fileListArrayImg[0]);
     setAvatarFlag(true);
   }
+
+  useEffect(() => {
+    if (avatarFlag) {
+      uploadAvatar();
+      setAvatarFlag(false);
+    }
+    // eslint-disable-next-line
+  }, [avatarFlag]);
+
+  const uploadAvatar = async () => {
+    setAvatarError(null);
+    
+    try {
+      let formData = new FormData();
+      formData.append("file", newAvatar);
+      formData.append("upload_preset", REACT_APP_UPLOAD_PRESET);
+
+      const { data: newAvatarData } = await axios.post(
+        REACT_APP_CLOUDINARY_URL,
+        formData
+      );
+      console.log(newAvatarData)
+      const { data, statusText } = await axios.post("https://e-commerce-f1fr.onrender.com/api/users/avatar", {
+        url: newAvatarData.secure_url,
+      });
+
+      // notification(
+      //   data.message,
+      //   "",
+      //   `${statusText === "OK" ? "success" : "warning"}`
+      // );
+      console.log("llego aca")
+      dispatch(loadUserData({ avatar: data.avatar }));
+    } catch (error) {
+      console.log("error", error);
+      //! VOLVER A VER manejo de errores
+    } finally {
+      setLoadingAvatar(false);
+    }
+  };
+  console.log(userInfo) 
     
   return (
     <>
@@ -321,8 +371,8 @@ const Details = () => {
         </div>
         <div className='profile-photo-section'>
           <div className='photo-preview'>
-            <img className='photo' src={userInfo.avatar ? `http://localhost:8000/uploads/${userInfo.avatar}` : 'https://m.media-amazon.com/images/G/01/IdentityAvatarService/Prod/DefaultAvatars/identity-avatar-head-n-shoulder-default-1878A1.png'} alt='Foto de perfil' />
-            <input ref={fileInputRef} type='file' accept="image/*" className='input-file' onChange={handleFileChange} />
+            <img className='photo' src={userInfo.avatar ? `${userInfo.avatar}` : 'https://m.media-amazon.com/images/G/01/IdentityAvatarService/Prod/DefaultAvatars/identity-avatar-head-n-shoulder-default-1878A1.png'} alt='Foto de perfil' />
+            <input ref={fileInputRef} type='file' name='image' accept="image/png, image/jpeg, image/gif" className='input-file' onChange={handleAvatar} />
             <BiSolidPencil className='icon-pencil' onClick={handleIconClick} />
           </div>
         </div>

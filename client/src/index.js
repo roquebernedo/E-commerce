@@ -15,7 +15,7 @@ axios.interceptors.request.use(function (config){
   console.log("entro al gaaaa")
   if (config.url !== "https://api.cloudinary.com/v1_1/dmzcu0io9/image/upload"){
     console.log("entro hasta aca")
-    config.baseURL = "http://localhost:8000";
+    config.baseURL = "https://e-commerce-f1fr.onrender.com";
     let token = localStorage.getItem("loggedTokenEcommerce");
     console.log(token)
     token &&

@@ -514,6 +514,22 @@ const addAndEditPhoneNumber = async (req, res, next) => {
     return res.json({ message: "ya estamos ya", phoneNumber: newPhone })
 }
 
+const setAvatar = async (req, res, next) => {
+  try {
+    console.log("setavatar yaa")
+    const user = req.user
+    const { avatar } = await User.findById(user._id);
+    avatar &&
+      cloudinary.api.delete_resources([avatar.split("/").pop().split(".")[0]]);
+
+    await User.findByIdAndUpdate(user._id, { avatar: req.body.url });
+
+    return res.json({ message: "Avatar actualizado", avatar: req.body.url });
+  } catch (error) {
+    next(error);
+  }
+};
+
 export { 
     getUser,
     authUser,
@@ -528,5 +544,6 @@ export {
     recoveringPassword,
     updateEmail,
     updateAvatar,
-    addAndEditPhoneNumber
+    addAndEditPhoneNumber,
+    setAvatar
 }
