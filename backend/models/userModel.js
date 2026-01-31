@@ -33,9 +33,11 @@ const userSchema = new mongoose.Schema({
         lowercase: true,
         unique: true,
     },
+    avatar: String,
     firstName: String,
     lastName: String,
     username: String,
+    phoneNumber: String,
     products: [{ 
         type: mongoose.Schema.Types.ObjectId, 
         ref: "Product"

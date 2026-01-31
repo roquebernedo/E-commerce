@@ -31,7 +31,8 @@ const Sales = () => {
         console.log(buyers);
         }
     }, [products, userInfo])
-    console.log(userInfo.sales.products)
+    // console.log(userInfo.sales)
+    // console.log(userInfo.sales.products)
     return (
         <div className={userInfo.sales ? 'sales sales-alt' : 'sales'}>
             <div className={userInfo.sales ? 'main-sales main-alt' : 'main-sales'}>

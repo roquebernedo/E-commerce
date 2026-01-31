@@ -325,6 +325,27 @@ const authSlice = createSlice({
             console.log("Entro aca en el disc")
             foundDiscount.discount = action.payload.discount
           }
+        },
+
+        setChangingEmail: (state, action) => {
+          console.log("entro al changingEmail")
+          console.log(action)
+          console.log(state)
+          state.userInfo.email = action.payload.data.newEmail
+        },
+
+        setNewAvatar: (state, action) => {
+          console.log("entro al setavatar")
+          console.log(action)
+          console.log(state)
+          state.userInfo.avatar = action.payload.newAvatar
+        },
+
+        addingNewPhone: (state, action) => {
+          console.log("entro al adding phone")
+          console.log(action)
+          console.log(state)
+          state.userInfo.phoneNumber = action.payload.phoneNumber
         }
     }
 })
@@ -637,6 +658,15 @@ export const setAddingDiscount = (id, content) => {
   }
 }
 
+export const changingEmailRedux = () => {
+  return async dispatch => {
+    console.log("aca esta el chaningEmail Redux")
+    const anecdotes = await productService.changingEmail()
+    console.log(anecdotes)
+    dispatch(setChangingEmail(anecdotes))
+  }
+}
+
 export const { 
   appendProduct, 
   addToCart, 
@@ -665,7 +695,10 @@ export const {
   emailVerified,
   setFreeShipping,
   setActivePublication,
-  setAddingDiscountToProduct
+  setAddingDiscountToProduct,
+  setChangingEmail,
+  setNewAvatar,
+  addingNewPhone
 } = authSlice.actions
 
 export default authSlice.reducer        

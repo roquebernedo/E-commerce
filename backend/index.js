@@ -13,6 +13,8 @@ import cors from 'cors'
 import stripeRoutes from "./routes/stripeRoutes.js"
 import cookieParser from 'cookie-parser'
 import connectDB from "./config/db.js"
+import { fileURLToPath } from 'url';
+import path from 'path';
 
 const port = process.env.PORT
 connectDB()
@@ -23,6 +25,11 @@ app.use(cors())
 
 app.use(express.json()) 
 app.use(express.urlencoded({ extended: true }))
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // app.use(function(req, res, next) {
 //     // res.header("Access-Control-Allow-Origin", "*");
@@ -35,7 +42,7 @@ app.use(express.urlencoded({ extended: true }))
 //     res.header("Access-Control-Allow-credentials", true);
 //     res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, UPDATE");
 //     next();
-//   });
+// });
 
 app.use(tokenExtractor)
 app.use(cookieParser())

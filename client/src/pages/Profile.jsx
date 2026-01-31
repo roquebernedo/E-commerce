@@ -15,6 +15,7 @@ import Publications from './Publications.jsx';
 import Sales from './Sales.jsx';
 import Favorites from './Favorites.jsx';
 import Password from './Password.jsx';
+import UpdateEmailModal from '../components/UpdateEmailModal.jsx';
 
 const Profile = () => {
 
@@ -85,6 +86,7 @@ const Profile = () => {
         {render === "password" && (
           <Password />
         )}
+        
       </div>
     </div>
   );

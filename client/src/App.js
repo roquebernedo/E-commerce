@@ -25,6 +25,10 @@ import VerifyEmail from "./components/VerifyEmail.jsx";
 import RecoverPassword from "./components/RecoverPassword.jsx";
 import LinkRecoverPassword from "./components/LinkRecoverEmail.jsx";
 import UpdateDiscount from "./components/UpdateDiscount.jsx";
+import UpdateEmailModal from "./components/UpdateEmailModal.jsx";
+import AddPhoneNumber from "./components/AddPhoneNumber.jsx";
+import UpdateName from "./components/UpdateName.jsx";
+import UpdateUserName from "./components/UpdateUserName.jsx";
 
 
 function App() {
@@ -69,6 +73,10 @@ function App() {
           <Route path="notifications/:id" element={userInfo ? <SingleNotification/> : <Navigate replace to="/login" />} /> */}
         </Route> 
         <Route path="/profile/:section" element={userInfo ? <Profile /> : <Navigate replace to="/login" />} ></Route>
+        <Route path="/modifyEmail" element={userInfo ? <UpdateEmailModal /> : <Navigate replace to="/login" />} ></Route>
+        <Route path="/addPhoneNumber" element={userInfo ? <AddPhoneNumber/> : <Navigate replace to="/login" />} ></Route>
+        <Route path="/updateName" element={userInfo ? <UpdateName/> : <Navigate replace to="/login" />} ></Route>
+        <Route path="/updateUserName" element={userInfo ? <UpdateUserName/> : <Navigate replace to="/login" />} ></Route>
         <Route path="/add" element={<Add />} />
         <Route path="/cart" element={<ShoppingCart />} />
         <Route path="/product/:id" element={<Product />} />

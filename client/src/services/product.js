@@ -398,6 +398,20 @@ const addingDiscount = async (id, discount) => {
   return response.data
 }
 
+const changingEmail = async () => {
+  const config = {
+    headers: { Authorization: token },
+  }
+
+  console.log("aca llego al changingEmail")
+  console.log(config)
+
+  const response = await axios.put(`${baseUrl}/api/users/changingEmail`, config)
+  console.log(response)
+  console.log("entro a este response del discount")
+  return response.data
+}
+
 const productService = {
   create, 
   setToken, 
@@ -429,7 +443,8 @@ const productService = {
   changePassword,
   setFreeShipping,
   activePublication,
-  addingDiscount
+  addingDiscount,
+  changingEmail
 }
 
 export default productService

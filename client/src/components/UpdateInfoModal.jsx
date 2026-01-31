@@ -22,6 +22,7 @@ const UpdateInfoModal = ({ closeModal, modalDisplay, closeOnOutsideClick, setFor
                     <div className='buttons' key={key}>
                         <input type='text' placeholder='name' name={!userInfo.isGoogleUser ? 'name' : 'firstName'} onChange={handleChange} value={userInfo && !userInfo.isGoogleUser ? formData.name : formData.firstName}/>
                         <input type='text' placeholder='username' name='username' onChange={handleChange} value={userInfo && formData.username} />
+                        {/* <input type='text' placeholder='email' onChange={handleChange} /> */}
                     </div>
                     <div className='buttons-add-pay'>
                         <button type='submit'>Actualizar</button>

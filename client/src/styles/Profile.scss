@@ -131,38 +131,70 @@
     .profile-right{
         display: flex;
         flex-direction: column;
-        align-items: center;
+        
         width: calc(100% - 185px);
         left: 185px;
         position: relative;
        
-        // border-left: 1px black solid;
         @media (max-width: 1100px) {
             width: calc(100% - 45px);
             left: 45px;
         }
-        
-        // @media (max-width: 628px) {
-        //     width: 92.5%;
-        //     left: 7.5%;
-        // }
-        // @media (max-width: 475px) {
-        //     width: 90%;
-        //     left: 10%;
-        // }
 
         .profile-details{   
             display: flex;
             justify-content: center;
-            margin-top: 120px;
-            max-width: 900px;
-            min-width: 350px;
+            padding-top: 50px;
+            align-items: center;
 
             .details{
                 display: flex;
+                justify-content: center;
                 margin: 15px 0;
-                align-items: center;
+                width: 800px;
                 font-size: 1.85rem;
+            }
+        }
+
+        .profile-photo-section{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px 0 20px 0;
+      
+            .photo-preview{
+                display: flex;
+                align-items: center;
+                position: relative;
+                padding: 4px;
+                justify-content: center;
+
+                .photo{
+                    width: 100px;
+                    height: 100px;
+                    border-radius: 50%;
+                }
+
+                .input-file{
+                    position: absolute;
+                    width: 20px;
+                    height: 20px;
+                    bottom: 0;
+                    right: 0;
+                    opacity: 0;  
+                }
+
+                .icon-pencil{
+                    position: absolute;
+                    bottom: 0px;
+                    right: 0px;
+                    width: 20px;
+                    height: 20px;
+                    opacity: 0.7;
+                    z-index: 5;
+                    cursor: pointer;
+                }
+                
             }
         }
 
@@ -173,19 +205,23 @@
 
             .profile-details-main{
                 display: flex;
-                margin: 20px 0;
                 flex-direction: column;
-                align-items: center;
-                gap: 12px;
-                .log-profile{
+                align-items: stretch;
+                // gap: 12px;
+                border-radius: 5px;
+                width: 800px;
+                border: 1px solid rgba(180, 178, 178, 0.6);
+                // background-color: #2879fe;
+                
+                .log-profile{   
                     display: flex;
                     align-items: center;
-                    width: 900px;
-                    padding: 0 7px;
+                    flex: 1;
+                    padding: 0 15px;
                     justify-content: space-between;
-                    background-color: #404040;
-                    color: #ffffff;
-                    height: 60px;
+                    color: #000000;
+                    min-height: 75px;
+                    
                     @media (max-width: 1280px) {
                         width: 800px;
                     }
@@ -220,8 +256,176 @@
                    
                     
                     .div-input{
+                        display: flex;
+                        flex-direction: column;
+                        min-height: 45px;
+                        height: auto;
+                        
                         @media (max-width: 425px) {
                             font-size: 12px;
+                        }
+
+                        .div-input-name{
+                            // background-color: aqua;
+                            font-weight: 600;
+                            margin-bottom: 4px;
+                            font-size: 15px;
+
+                        }
+
+                        .div-input-name-info{
+                            // background-color: #2879fe;
+                            font-size: 15px;
+                        }
+
+                        .div-input-user{
+                            // background-color: aqua;
+                            font-weight: 600;
+                            margin-bottom: 4px;
+                            font-size: 15px;
+
+                        }
+
+                        .div-input-user-info{
+                            // background-color: #2879fe;
+                            font-size: 15px;
+                        }
+
+                        .div-input-email{
+                            // background-color: aqua;
+                            font-weight: 600;
+                            margin-bottom: 4px;
+                            font-size: 15px;
+
+                        }
+
+                        .div-input-email-info{
+                            // background-color: #2879fe;
+                            font-size: 15px;
+                        }
+
+                        .div-input-address{
+                            // background-color: aqua;
+                            font-weight: 600;
+                            margin-bottom: 4px;
+                            font-size: 15px;
+
+                        }
+
+                        .div-input-address-info{
+                            display: flex;
+                            cursor: pointer;
+                            
+                            .profile-edit-svg{
+                                display: flex;
+                                svg{
+                                    
+                                    color: rgb(160, 149, 149);
+                                }
+
+                                .address{
+                                    padding-left: 5px;
+                                }
+                            }
+                        }
+
+                        .div-input-password{
+                            // background-color: aqua;
+                            font-weight: 600;
+                            margin-bottom: 4px;
+                            font-size: 15px;
+
+                        }
+
+                        .div-input-password-info{
+                            // background-color: #2879fe;
+                            font-size: 15px;
+                            
+                            .div-alert-icon{
+                                padding-right: 7px;
+
+                                .alert-icon{
+                                    height: 18px;
+                                    width: 18px;
+                                    color: #FFD700;
+                                }
+                            }
+
+                            .verify-require{
+                                font-size: 15px;
+                            }
+                        }
+
+                        .div-input-phonenumber{
+                            font-weight: 600;
+                            margin-bottom: 4px;
+                            font-size: 15px;
+                        }
+
+                        .div-input-phonenumber-info{
+                            font-size: 15px;
+                            display: flex;
+                            
+                            .div-alert-icon{
+                                padding-right: 7px;
+
+                                .alert-icon{
+                                    height: 18px;
+                                    width: 18px;
+                                    color: #FFD700;
+                                }
+                            }
+
+                            .verify-require{
+                                font-size: 15px;
+                                min-height: 30px;
+                                width: 380px;
+                            }
+                        }
+
+                        .div-input-email-verify{
+                            font-weight: 600;
+                            margin-bottom: 4px;
+                            font-size: 15px;
+                        }
+
+                        .div-input-email-verify-info{
+                            font-size: 15px;
+                            display: flex;
+                        
+                            .div-alert-icon{
+                                padding-right: 7px;
+
+                                .alert-icon{
+                                    height: 18px;
+                                    width: 18px;
+                                    color: #FFD700;
+                                }
+                            }
+
+                            .verify-require{
+                                font-size: 15px;
+                            }
+                        }
+                    }
+
+                    .div-edit{
+                        min-width: 100px;
+                        // background-color: chocolate;
+                        height: 45px;
+                        cursor: pointer;
+                        
+                        .button-edit{
+                            width: 125px;
+                            text-align: center;
+                            border: 1px solid rgba(0, 0, 0, 0.6);
+                            border-radius: 10px;
+                            padding: 5px 20px;
+                            font-size: 14px;
+                        }
+
+                        .button-edit:hover{
+                            background-color: #eee7e7;
                         }
                     }
 
@@ -250,6 +454,7 @@
                         position: relative;
                         cursor: pointer;
                         gap: 5px;
+                        background-color: burlywood;
 
                         .name-user{
                             
@@ -324,6 +529,8 @@
                     
                     
                 }
+
+                
         
                 .update{
                     display: flex;
@@ -347,6 +554,10 @@
                 .update:hover{
                     background-color: #1960d1;
                 }
+            }
+
+            .profile-details-main > div:not(:last-child){
+                border-bottom: 1px solid rgba(180, 178, 178, 0.6);
             }
         }
 

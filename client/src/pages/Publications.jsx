@@ -54,13 +54,15 @@ const Publications = () => {
         
             let maxSale = 0;
             console.log(props[0])
-            let minSale = userInfo.publication[0].sales[0] && userInfo.publication[0].sales[0].price
+            console.log(userInfo.publication.length)
+            let minSale = userInfo.publication.length > 0 && userInfo.publication[0].sales[0] && userInfo.publication[0].sales[0].price
+            // let minSale = userInfo.publication > 0 && userInfo.publication[0].sales[0] && userInfo.publication[0].sales[0].price
             //console.log(props[0].price)
             ? userInfo.publication[0].sales[0].price * userInfo.publication[0].sales[0].quantity
             : 0;
             console.log(minSale)
             console.log(maxSale)
-            userInfo.publication[0].sales?.forEach((s) => {
+            userInfo.publication.length > 0 && userInfo.publication[0].sales?.forEach((s) => {
         
             maxSale < s.price * s.quantity && (maxSale = s.price * s.quantity);
             minSale > s.price * s.quantity && (minSale = s.price * s.quantity);

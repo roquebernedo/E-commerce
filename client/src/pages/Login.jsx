@@ -54,6 +54,12 @@ const Login = () => {
     watch: watchSignup,
   } = useForm();
 
+  const { REACT_APP_UPLOAD_PRESET, REACT_APP_CLOUDINARY_URL } = process.env;
+  console.log(REACT_APP_CLOUDINARY_URL)
+  console.log(REACT_APP_UPLOAD_PRESET)
+
+  const [loadingAvatar, setLoadingAvatar] = useState(false);
+
   const handleLogin = async (signinData) => {
     console.log("entro al handle")
     console.log(email)
@@ -146,6 +152,8 @@ const Login = () => {
     //google.accounts.id.prompt();
     // eslint-disable-next-line
   }, []);
+
+  
 
   return (
     <div className='login-in'>

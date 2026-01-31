@@ -3,8 +3,15 @@ import User from "../models/userModel.js"
 import jwt from 'jsonwebtoken'
 import bcryptjs from 'bcryptjs'
 import { sendEmail } from "../utils/sendEmail.js"
+import { v2 as cloudinary } from "cloudinary";
 import dotenv from 'dotenv'
 dotenv.config() 
+
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET   
+})
 
 //route POST /api/users
 const getUser = async (req, res) => {
@@ -90,6 +97,7 @@ const authUser = async (req, res, next) => {
                     name: user.name, 
                     email: user.email, 
                     username: user.username,
+                    avatar: user.avatar,
                     productsOnCart: user.productsOnCart, 
                     products: user.products,
                     id: user._id,
@@ -99,7 +107,8 @@ const authUser = async (req, res, next) => {
                     orders: user.orders,
                     sales: user.sales,
                     emailVerified: user.emailVerified,
-                    publication: user.publication
+                    publication: user.publication,
+                    phoneNumber: user.phoneNumber
                 })
         console.log(token)
     } catch(error){
@@ -452,6 +461,59 @@ const recoveringPassword = async (req, res, next) => {
     return res.json({ message: "Contraseña cambiada con exito!"});
 } 
 
+const updateEmail = async (req, res, next) => {
+    const { newEmail } = req.body
+    const user = req.user
+    console.log(newEmail)
+    console.log("aca comienza este updateEmail")
+    console.log(user)
+    console.log("esto es el updateEmail")
+    console.log(user.email)
+    user.email = newEmail
+    console.log(user.email)
+    console.log("aca esta el newEmail")
+    console.log(newEmail)
+    await user.save()
+    return res.json({ newEmail: newEmail, message: "este es el updateEmail" })
+}
+
+const updateAvatar = async (req, res, next) => {
+    //const { newAvatar } = req.body
+    console.log("entro aca")
+    console.log("Archivo recibido:", req.file);
+    console.log("Token del usuario:", req.headers.authorization);
+    const user = req.user
+    // console.log(newAvatar)
+    // console.log("aca comienza este updateEmail")
+    console.log(user)
+    console.log("esto es el updateEmail")
+    console.log(user.avatar)
+    //user.avatar = newAvatar   
+    //console.log(user.avatar)
+    console.log("aca esta el newEmail")
+    const imageURL = `${req.file.filename}`
+    user.avatar = req.file.filename
+    console.log(imageURL)
+    await user.save()
+    return res.json({ newAvatar: imageURL, message: "este es el updateAvatar" })
+}
+
+const addAndEditPhoneNumber = async (req, res, next) => {
+    console.log("entro al add and edit")
+    const { newPhone } = req.body
+    const user = req.user
+    console.log(user)
+    if(!user.phoneNumber){
+        user.phoneNumber = `+51 ${newPhone}`
+        await user.save()
+    }else{
+        user.phoneNumber = `+51 ${newPhone}`
+        await user.save()
+    }
+    console.log(user)
+    return res.json({ message: "ya estamos ya", phoneNumber: newPhone })
+}
+
 export { 
     getUser,
     authUser,
@@ -463,5 +525,8 @@ export {
     sendVerifyEmail,
     signinGoogle,
     emailToRetrievePassword,
-    recoveringPassword
+    recoveringPassword,
+    updateEmail,
+    updateAvatar,
+    addAndEditPhoneNumber
 }

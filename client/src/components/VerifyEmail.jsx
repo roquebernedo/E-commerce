@@ -32,7 +32,7 @@ const VerifyEmail = () => {
             },
             });
             console.log(data)   
-            setResponse(data.message);
+            setResponse(data.message);  
             if(userInfo){
                 dispatch(emailVerified(data.message))
             }
@@ -53,7 +53,12 @@ const VerifyEmail = () => {
                         <>
                             {userInfo 
                                 ? 
-                                    response
+                                    <div className='email-verify-success'>
+                                        <div>{response}</div>
+                                        <button onClick={() => navigate("/profile/details")} className='update log'>
+                                            Regresar
+                                        </button>
+                                    </div>
                                 :   
                                     <>
                                         {response}
