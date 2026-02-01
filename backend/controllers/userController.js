@@ -523,7 +523,7 @@ const setAvatar = async (req, res, next) => {
       cloudinary.api.delete_resources([avatar.split("/").pop().split(".")[0]]);
 
     await User.findByIdAndUpdate(user._id, { avatar: req.body.url });
-
+    console.log("llego aca")
     return res.json({ message: "Avatar actualizado", avatar: req.body.url });
   } catch (error) {
     next(error);

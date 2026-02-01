@@ -344,10 +344,14 @@ const Details = () => {
         formData
       );
       console.log(newAvatarData)
-      const { data, statusText } = await axios.post("https://e-commerce-f1fr.onrender.com/api/users/avatar", {
-        url: newAvatarData.secure_url,
-      });
-
+      const { data, statusText } = await axios.post("/api/users/avatar", {
+          url: newAvatarData.secure_url,
+        },
+        { withCredentials: true }
+      ) 
+      console.log("paso el most import")
+      console.log(statusText)
+      console.log(data)
       // notification(
       //   data.message,
       //   "",
@@ -359,7 +363,7 @@ const Details = () => {
       console.log("error", error);
       //! VOLVER A VER manejo de errores
     } finally {
-      setLoadingAvatar(false);
+      setLoadingAvatar(false);  
     }
   };
   console.log(userInfo) 
@@ -371,7 +375,7 @@ const Details = () => {
         </div>
         <div className='profile-photo-section'>
           <div className='photo-preview'>
-            <img className='photo' src={userInfo.avatar ? `${userInfo.avatar}` : 'https://m.media-amazon.com/images/G/01/IdentityAvatarService/Prod/DefaultAvatars/identity-avatar-head-n-shoulder-default-1878A1.png'} alt='Foto de perfil' />
+            <img className='photo' src={userInfo.avatar ? `${userInfo.avatar}?t=${Date.now()}` : 'https://m.media-amazon.com/images/G/01/IdentityAvatarService/Prod/DefaultAvatars/identity-avatar-head-n-shoulder-default-1878A1.png'} alt='Foto de perfil' />
             <input ref={fileInputRef} type='file' name='image' accept="image/png, image/jpeg, image/gif" className='input-file' onChange={handleAvatar} />
             <BiSolidPencil className='icon-pencil' onClick={handleIconClick} />
           </div>

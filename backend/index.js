@@ -21,9 +21,15 @@ connectDB()
 
 const app = express()
 
-app.use(cors())
-
 app.use(express.json()) 
+app.use(cors({
+    origin: [
+        "http://localhost:3000",
+        "https://ecommerce-rq.netlify.app"
+    ],
+    credentials: true
+}))
+
 app.use(express.urlencoded({ extended: true }))
 
 const __filename = fileURLToPath(import.meta.url);

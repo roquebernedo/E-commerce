@@ -9,20 +9,23 @@ import { PersistGate } from 'redux-persist/integration/react';
 import axios from "axios";
 
 //https://e-commerce-f1fr.onrender.com
+//http://localhost:8000
 console.log("gaa")
 axios.interceptors.request.use(function (config){
   console.log(config)
+  console.log(config.url)
   console.log("entro al gaaaa")
-  if (config.url !== "https://api.cloudinary.com/v1_1/dmzcu0io9/image/upload"){
+  if (!config.url.includes("cloudinary.com")){
     console.log("entro hasta aca")
     config.baseURL = "https://e-commerce-f1fr.onrender.com";
-    let token = localStorage.getItem("loggedTokenEcommerce");
+    console.log(config.baseURL)
+    let token = localStorage.getItem("loggedTokenEcommerce"); 
     console.log(token)
     token &&
         (config.headers.Authorization =
           config.headers.Authorization || `Bearer ${token}`)
   }
-
+  console.log("llego todo a config")
   return config
 })
 
